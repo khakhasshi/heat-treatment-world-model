@@ -1,10 +1,25 @@
 \chapter{温度场推演与分布外泛化}
 
-\section{多步训练的作用}
+\section{展开长度的受控比较}
 
-常物性初始实验用于检验递归训练机制。数据集含 100 条轨迹，其中 70 条训练、15 条验证、15 条测试。只用 5 条训练轨迹时，一步训练模型的完整轨迹 RMSE 为 \SI{72.62}{\degreeCelsius}。五步闭环展开将该值降至 \SI{10.84}{\degreeCelsius}。两种设置的一步误差都处于较低水平，但长时结果相差 6.7 倍。这说明局部监督精度无法代表 300 步闭环稳定性。
+为检验闭环展开的作用，在 C45 温变物性数据上比较 $K=1$ 与 $K=5$。两组使用相同的 70 条训练轨迹、网络容量、物理权重 $10^{-3}$、批量大小、120 轮训练和三个随机种子，检查点均由验证集 300 步滚动 RMSE 选择。结果见表\ref{tab:unroll_ablation}。
 
-同一少数据设置下，物理损失将滚动 RMSE 从 \SI{15.42}{\degreeCelsius} 降至 \SI{10.84}{\degreeCelsius}，离散物理残差从 \SI{526.85}{\degreeCelsius} 降至 \SI{136.02}{\degreeCelsius}。当 70 条精确数值轨迹全部用于训练时，普通模型 RMSE 为 \SI{0.612}{\degreeCelsius}，物理模型为 \SI{0.702}{\degreeCelsius}。物理正则的收益随数据覆盖和工况复杂度变化，所以后续实验使用验证集选择权重，并重点检查 OOD 与尾部指标。
+\begin{table}[H]
+  \centering
+  \caption{相同训练设置下的展开长度消融，均值$\pm$样本标准差}
+  \label{tab:unroll_ablation}
+  \small
+  \begin{tabular}{ccccc}
+    \toprule
+    $K$ & \shortstack{验证滚动\\RMSE} & \shortstack{ID 滚动\\RMSE} & \shortstack{控制 OOD\\滚动 RMSE} & \shortstack{ID 一步\\RMSE} \\
+    \midrule
+    1 & $2.063\pm0.187$ & $2.196\pm0.005$ & $\mathbf{5.046\pm0.469}$ & $0.02862\pm0.00029$ \\
+    5 & $\mathbf{2.035\pm0.244}$ & $\mathbf{2.103\pm0.123}$ & $5.589\pm0.789$ & $0.02848\pm0.00184$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+两种设置的一步误差接近，完整轨迹误差达到约 \SI{2}{\degreeCelsius}，说明模型选择仍需依据闭环轨迹。$K=5$ 的验证和 ID 滚动 RMSE 分别降低 $1.3\%$ 和 $4.2\%$，控制 OOD RMSE 比 $K=1$ 高 $10.8\%$。展开长度改变了训练输入分布，但没有形成对所有测试分布一致的优势。本文保留 $K=5$，因为其验证均值最低并与部署时递归输入一致。OOD 结论由独立的物理权重和边界参数化实验承担。
 
 \section{物理权重与控制曲线 OOD}
 
@@ -80,48 +95,8 @@ $\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为�
   \label{fig:dynamic_trajectory}
 \end{figure}
 
-\section{跨求解器验证与在线效率}
-
-独立 BDF 数据集包含 100 条动态边界轨迹。训练生成器与 BDF 的离散方法、空间网格和内部时间步均不同。表\ref{tab:cross_solver}列出 BDF 参考上的结果。
-
-\begin{table}[H]
-  \centering
-  \caption{独立 BDF 参考集上的动态边界推演结果}
-  \label{tab:cross_solver}
-  \begin{tabular}{lcc}
-    \toprule
-    模型 & 滚动 RMSE/\si{\degreeCelsius} & 最大绝对误差/\si{\degreeCelsius} \\
-    \midrule
-    $h,\varepsilon$ 数据模型 & $2.539\pm0.018$ & $25.56\pm0.43$ \\
-    $h,\varepsilon$ 物理模型 & $2.316\pm0.092$ & $21.87\pm2.71$ \\
-    $\Heff$ 数据模型 & $1.491\pm0.065$ & $14.27\pm4.05$ \\
-    $\Heff$ 物理模型 & $\mathbf{1.460\pm0.078}$ & $\mathbf{9.75\pm0.20}$ \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-$\Heff$ 物理模型相对双参数物理模型将滚动 RMSE 降低约 $36.9\%$，最大误差降低约 $55.4\%$。结果与训练生成器上的排序一致。可辨识参数化的收益没有依赖特定离散器。
-
-图\ref{fig:cross_solver_trajectory}进一步比较了中位求解器差异轨迹。41 节点数据生成器与 81 节点 BDF 参考之间存在小幅系统偏差。两种世界模型在完整轨迹上保持贴合，其中 $\Heff$ 模型降低了表面节点误差。中心节点误差仍控制在数摄氏度范围内。
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.96\textwidth]{cross_solver_trajectory_zh.png}
-  \caption{独立 BDF 参考下的代表性跨求解器推演轨迹}
-  \label{fig:cross_solver_trajectory}
-\end{figure}
-
-单条 BDF 轨迹平均耗时为 \SI{0.526}{\second}，$\Heff$ 世界模型中位耗时为 \SI{0.00834}{\second}，在线推演加速约 63 倍。该比较只统计已经训练完成后的轨迹计算。训练和数据生成属于离线成本。对一维问题，绝对耗时都很小；加速结果主要说明模型适合嵌入大量候选动作的滚动计算。
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.96\textwidth]{cross_solver_comparison.png}
-  \caption{训练生成器与独立 BDF 参考集上的模型比较}
-  \label{fig:cross_solver}
-\end{figure}
-
 \section{结果讨论}
 
-实验给出三个稳定判断。第一，五步闭环训练决定长时推演质量。第二，物理约束在控制和参数 OOD 中主要改善尾部误差及离散能量一致性。第三，动态边界表示的可辨识性比网络规模更关键。$\Heff$ 消除了输入中的等价方向，在两个数值求解器上都取得更低误差。
+实验给出两个稳定判断。物理约束在控制和参数 OOD 中主要改善尾部误差及离散能量一致性。动态边界的时间结构需要作为逐步输入，否则固定参数会形成约 \SI{19.4}{\degreeCelsius} 的主要误差。展开长度对不同分布呈现权衡，所以完整轨迹验证比单步指标更适合作为模型选择依据。
 
 物理损失的权重需要由验证轨迹决定。较大权重可以获得更小残差，但可能改变数据拟合目标。本文选用 $10^{-3}$，使场精度和物理一致性处于同一有效区间。该结论适用于本文的离散方程、数据覆盖和网络容量，后续几何扩展应重新标定。

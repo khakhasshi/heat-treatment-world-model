@@ -21,7 +21,8 @@
 | `outputs/c45_parameter_ood/parameter_ood_metrics.json` | `35441e6da0dae385f19480e9bccaa009e3d7fdb29d24649518ddaeacd4cb17bd` |
 | `outputs/c45_dynamic_boundary_ood/dynamic_boundary_ood_metrics.json` | `972dc7b0374d3b700a18a2ce8db37ede76e4d027c066d16504d710f9ac642b01` |
 | `outputs/c45_effective_boundary/effective_boundary_metrics.json` | `20854e45cec34e3425c93ca7b5b7881abd9963f1a5293c77368a6dfa7cf38fa0` |
-| `outputs/c45_cross_solver/cross_solver_metrics.json` | `1d6694edbf68655c0d471c3c11abd06041f6f5e42c89affa249eb6740232258b` |
+| `outputs/c45_cross_solver/cross_solver_metrics.json` | `338d6acd569856ba9de570c57e7e1eac40356657ce3a2a150eb8de44c4c119cd` |
+| `outputs/c45_cross_solver/reference_solver_diagnostics.json` | `38282acb28ca557e556a3b1fab0c6cc6b1d7d192ba51ca5ef39292a7d40a88c8` |
 | `outputs/c45_closed_loop_control/closed_loop_control_metrics.json` | `e9f19110ada1de574e89d35d2c65050e27694ae50ed86184628ea6779dfe7308` |
 | `outputs/c45_partial_observability/partial_observability_metrics.json` | `296ab9cc368b3b01e8d8fb7fc5bd42443414977b1e23d365bbe4351e611c8af5` |
 | `outputs/c45_ood_partial_observability/ood_partial_observability_metrics.json` | `21269ee624361e4b6d70261383a8ea00c1cb620e61f35e516074bd9f9559e347` |
@@ -46,10 +47,23 @@ uv run --no-sync evaluate-cross-solver --regenerate-reference
 uv run --no-sync evaluate-closed-loop-control
 uv run --no-sync evaluate-partial-observability
 uv run --no-sync evaluate-ood-partial-observability
+PYTHONPATH=src uv run --no-sync python scripts/analyze_thesis_supplement.py
 ```
 
 完整重算包含多组随机种子和闭环场景。单项实验的参数与对应结果文件共同构成复现记录。
 
 ## 5. 写作取数原则
 
-论文正文优先使用三随机种子汇总、独立 BDF 轨迹和闭环执行结果。探索性单次运行只用于说明现象，不承担核心结论。速度比较报告在线推演或规划时间，并单独说明离线训练和数据生成成本。所有结论限定在当前一维 C45 钢数值研究范围内。
+论文正文优先使用三随机种子汇总、独立 BDF 轨迹和闭环执行结果。探索性单次运行只用于说明现象，不承担核心结论。完整轨迹速度比较使用 BDF 与世界模型的中位时间，规划速度另按闭环回合统计。所有结论限定在当前一维 C45 钢数值研究范围内。
+
+## 6. 论文修订补充分析
+
+论文修订增加两项不改变基础实验版本的分析。第一项在相同数据、网络容量、训练轮数、优化器和三个随机种子下比较一步与五步展开。一步模型目录为 `outputs/c45_rollout_horizon_k1_seed42`、`outputs/c45_rollout_horizon_k1_seed7` 和 `outputs/c45_rollout_horizon_k1_seed123`；五步模型沿用物理权重实验中的三个对应种子。第二项先在每个严格参数 OOD 场景内平均三个模型种子，再计算风险分位控制相对后验均值控制的配对差，并对 10 个场景进行 100000 次 bootstrap 重采样。
+
+补充分析结果文件如下。
+
+| 结果文件 | SHA-256 |
+| --- | --- |
+| `outputs/thesis_supplement/thesis_supplement_metrics.json` | `17b5a4a023397fba660fb291ca35e921491906650d0dc2981319df98308a4ffa` |
+
+等预算展开步数实验表明，五步模型的验证集轨迹 RMSE 比一步模型低 $1.3\%$，ID 测试集低 $4.2\%$，控制 OOD 测试集高 $10.8\%$。论文据验证集选择五步模型，不把展开步数表述为普遍精度优势。风险控制的综合目标平均配对差为 $-1.737$，95\% bootstrap 区间为 $[-3.291,-0.226]$；中心误差区间跨越零，超温变化集中在一个场景。正文只将综合目标的配对改善作为统计结论。

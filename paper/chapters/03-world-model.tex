@@ -14,7 +14,7 @@
 \end{equation}
 增量形式保留了相邻状态的连续性，也使网络输出尺度与单步热响应一致。
 
-主模型采用三层残差多层感知机，每层 128 个隐藏单元。输入和输出均依据训练集统计量标准化。当前固定网格只有 41 个节点，MLP 可以直接处理完整状态，并适合在控制器内批量评价候选动作。卷积网络和神经算子更适合后续的高分辨率或跨几何扩展。
+主模型采用三隐藏层多层感知机，每层 128 个单元，激活函数为 SiLU。这里的“残差”指网络预测状态增量，网络内部没有残差块。$h,\varepsilon$ 参数化的输入维数为 $41+1+7=49$，$\Heff$ 参数化为 $41+1+6=48$。输入状态、动作和参数依据训练集统计量标准化，输出温度增量按节点标准化。当前固定网格只有 41 个节点，MLP 可以直接处理完整状态，并适合在控制器内批量评价候选动作。
 
 \begin{figure}[H]
   \centering
@@ -47,38 +47,58 @@
   \widehat{\bm{s}}_{n+j+1}=F_{\theta}(\widehat{\bm{s}}_{n+j},a_{n+j},\bm{p}_{n+j}),
   \quad j=0,\ldots,K-1,
 \end{equation}
-其中 $\widehat{\bm{s}}_n=\bm{s}_n$，本文取 $K=5$。多步数据损失为
+其中 $\widehat{\bm{s}}_n=\bm{s}_n$，本文取 $K=5$。令 $\sigma_{\Delta T,i}$ 为训练集中节点 $i$ 的单步温度增量标准差。多步数据损失为
 \begin{equation}
   \mathcal{L}_{\mathrm{data}}
-  =\frac{1}{KN}\sum_{j=1}^{K}\left\|
-  \widehat{\bm{s}}_{n+j}-\bm{s}_{n+j}
-  \right\|_2^2.
+  =\frac{1}{KN}\sum_{j=1}^{K}\sum_{i=1}^{N}
+  \left(
+    \frac{\widehat{T}_{i}^{n+j}-T_i^{n+j}}{\sigma_{\Delta T,i}}
+  \right)^2.
   \label{eq:data_loss}
 \end{equation}
 这项损失直接约束部署时会出现的模型生成状态。检查点依据验证集 300 步完整轨迹 RMSE 选择。该选择标准与工艺推演目标保持一致。
 
+\begin{table}[H]
+  \centering
+  \caption{世界模型的正式训练设置}
+  \label{tab:training_config}
+  \begin{tabular}{ll@{\hspace{1.8em}}ll}
+    \toprule
+    项目 & 设置 & 项目 & 设置 \\
+    \midrule
+    隐藏层 & $3\times128$ & 激活函数 & SiLU \\
+    优化器 & AdamW & 初始学习率 & $10^{-3}$ \\
+    权重衰减 & $10^{-6}$ & 批量大小 & 512 \\
+    训练轮数 & 120 & 展开长度 & $K=5$ \\
+    梯度范数上限 & 5 & 随机种子 & 42、7、123 \\
+    学习率调度 & 平台期减半 & 最低学习率 & $10^{-5}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{离散物理约束}
 
-内部节点物理残差由式\eqref{eq:discrete_balance}计算。对预测状态 $\widehat{\bm{s}}_{n+1}$，定义
+内部节点物理残差采用与数值生成器一致的温度增量形式。对预测状态 $\widehat{\bm{s}}_{n+1}$，定义
 \begin{equation}
-  r_i=\rho c_{p,i}^{n}\frac{\widehat{T}_i^{n+1}-T_i^n}{\Delta t}
-  -\frac{1}{\Delta x}\left(
-  k_{i+1/2}^{n}\frac{\widehat{T}_{i+1}^{n+1}-\widehat{T}_{i}^{n+1}}{\Delta x}
-  -k_{i-1/2}^{n}\frac{\widehat{T}_{i}^{n+1}-\widehat{T}_{i-1}^{n+1}}{\Delta x}
-  \right).
+  R_i=\widehat{T}_i^{n+1}-T_i^n
+  -\frac{\Delta t}{\rho c_{p,i}^{n}\Delta x^2}\left[
+  k_{i+1/2}^{n}(\widehat{T}_{i+1}^{n+1}-\widehat{T}_{i}^{n+1})
+  +k_{i-1/2}^{n}(\widehat{T}_{i-1}^{n+1}-\widehat{T}_{i}^{n+1})
+  \right].
+  \label{eq:temperature_residual}
 \end{equation}
-表面节点残差加入式\eqref{eq:mixed_boundary}的净热流。为避免量纲和幅值控制梯度，残差按训练集温度增量尺度归一化。多步物理损失写为
+$R_i$ 的量纲为温度。表面节点残差由式\eqref{eq:surface_discrete_balance}左、右两端之差构成，并使用对应的对流辐射热流。残差按 $\sigma_{\Delta T,i}$ 归一化，记为 $\widetilde{R}_i=R_i/\sigma_{\Delta T,i}$。多步物理损失写为
 \begin{equation}
   \mathcal{L}_{\mathrm{phy}}
   =\frac{1}{K}\sum_{j=1}^{K}
-  \frac{1}{N}\sum_{i=1}^{N}\widetilde{r}_{i,n+j}^{,2}.
+  \frac{1}{N}\sum_{i=1}^{N}\widetilde{R}_{i,n+j}^{2}.
 \end{equation}
 总损失为
 \begin{equation}
-  \mathcal{L}=\mathcal{L}_{\mathrm{data}}+lambda_{\mathrm{phy}}\mathcal{L}_{\mathrm{phy}}.
+  \mathcal{L}=\mathcal{L}_{\mathrm{data}}+\lambda_{\mathrm{phy}}\mathcal{L}_{\mathrm{phy}}.
   \label{eq:total_loss}
 \end{equation}
-权重扫描包含 $0$、$10^{-3}$、$10^{-2}$ 和 $10^{-1}$。三随机种子验证均值选择 $\lambda_{\mathrm{phy}}=10^{-3}$ 作为正式设置。
+单种子预扫描包含 $0$、$10^{-3}$、$10^{-2}$ 和 $10^{-1}$。$10^{-1}$ 的场误差已明显增大，所以三随机种子重复实验比较 $0$、$10^{-3}$ 和 $10^{-2}$。验证轨迹 RMSE 的均值选择 $\lambda_{\mathrm{phy}}=10^{-3}$ 作为正式设置。
 
 \section{动态边界的可辨识参数化}
 
@@ -93,11 +113,11 @@
   =(\Tinfty-T_s)\begin{bmatrix}1 & h_{\mathrm{rad}}\end{bmatrix}.
   \label{eq:sensitivity}
 \end{equation}
-该矩阵的秩为 1。温度响应只能确定一个标量组合。任取扰动 $\delta\varepsilon$，只要
+当 $\Tinfty\ne T_s$ 时，该行向量的秩为 1。温度响应只能确定一个标量组合。任取扰动 $\delta\varepsilon$，只要
 \begin{equation}
   \delta h=-h_{\mathrm{rad}}\delta\varepsilon,
 \end{equation}
-就能在当前状态保持相同热流。逐时自由变化的 $h(t)$ 和 $\varepsilon(t)$ 因而没有唯一分解。$\Heff$ 是当前边界转移的充分输入。
+就能在当前状态保持相同热流。逐时自由变化的 $h(t)$ 和 $\varepsilon(t)$ 因而没有唯一分解。该结论限定于本文的均匀灰体边界、已知表面温度和已知炉温。若参数在一段时间内保持常数，变化的 $h_{\mathrm{rad}}$ 可提供额外历史信息。对本文逐时变化的边界，$\Heff$ 是当前热流和单步状态转移的充分输入。
 
 基于该结论，本文构建第二类世界模型
 \begin{equation}
@@ -117,4 +137,4 @@
 \end{equation}
 同时报告逐轨迹 RMSE 的中位数和 95\% 分位数、最大绝对误差、最终状态 RMSE 与离散物理残差。最大值原理指标采用全局包络。下一状态若超出当前全场温度与环境温度共同确定的上下界，则记为一次违反。该定义允许节点因邻域导热合法升温或降温。
 
-所有正式结果至少使用三个训练种子。参数比较在相同测试轨迹上进行。模型选择只访问验证集。BDF 参考集和控制环境不参与训练。
+正式模型结果使用 42、7 和 123 三个训练种子。参数比较在相同测试轨迹上进行，表中的“均值$\pm$标准差”默认表示三个训练种子的均值与样本标准差。模型选择只访问验证集。BDF 参考集和控制环境不参与训练。闭环实验重复使用相同的 BDF 场景比较不同控制器，所以控制差异采用场景配对统计。

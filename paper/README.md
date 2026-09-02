@@ -5,7 +5,8 @@
 实验图由冻结数据和已有模型统一生成：
 
 ```bash
-uv run --no-sync python scripts/generate_paper_trajectory_figures.py
+PYTHONPATH=src uv run --no-sync python scripts/analyze_thesis_supplement.py
+PYTHONPATH=src uv run --no-sync python scripts/generate_paper_trajectory_figures.py
 ```
 
 ```bash

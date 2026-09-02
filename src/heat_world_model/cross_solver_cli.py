@@ -163,6 +163,8 @@ def generate_cross_solver_dataset(
         "trajectory_count": int(states.shape[0]),
         "reference_generation_seconds": float(np.sum(elapsed)),
         "mean_seconds_per_trajectory": float(np.mean(elapsed)),
+        "median_seconds_per_trajectory": float(np.median(elapsed)),
+        "p95_seconds_per_trajectory": float(np.quantile(elapsed, 0.95)),
         "mean_rhs_evaluations": float(np.mean(rhs_evaluations)),
         "mean_linear_decompositions": float(np.mean(linear_decompositions)),
         "convergence_indices": convergence_indices.tolist(),
@@ -644,7 +646,7 @@ def main() -> None:
         "effective_world_model_single_trajectory"
     ]["median_seconds"]
     result["speed_benchmark"]["reference_to_world_model_speedup"] = (
-        reference_diagnostics["mean_seconds_per_trajectory"]
+        reference_diagnostics["median_seconds_per_trajectory"]
         / world_model_seconds
     )
     metrics_path = args.output_dir / "cross_solver_metrics.json"
