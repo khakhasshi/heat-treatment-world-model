@@ -1,0 +1,135 @@
+\chapter{边界辨识、状态估计与闭环控制}
+
+\section{因果等效边界观测}
+
+式\eqref{eq:heff}表明，当前温度转移可以用单一等效换热系数描述。对表面控制体应用离散能量平衡，可由相邻两个时刻的表面及近表面温度估计净边界热流。进而得到
+\begin{equation}
+  \widehat{\Heff}_{n-1}
+  =\frac{\widehat{q}_{s,n-1}}{\Tinfty_{n-1}-T_{s,n-1}}.
+  \label{eq:heff_observer}
+\end{equation}
+该估计在状态 $n$ 到达后可用，并用于转移 $n$。初始转移采用训练范围中点先验。滑动后向窗口对式\eqref{eq:heff_observer}进行正则化，全部输入来自当前和历史观测。
+
+无噪声条件下，单步反演的 $\Heff$ RMSE 为 \SI{0.002}{\watt\per\square\metre\per\kelvin}。加入 \SI{0.5}{\degreeCelsius} 独立高斯测温噪声后，30 s 窗口的 RMSE 为 \SI{18.45}{\watt\per\square\metre\per\kelvin}。差分运算会放大测量噪声，较长窗口同时引入动态滞后。这与逆热传导问题中的噪声敏感性一致\cite{frankel2007loads,chen2019online}。
+
+动态边界保持集上的三随机种子结果见表\ref{tab:heff_results}。$h,\varepsilon$ 模型和 $\Heff$ 模型使用相同网络容量、训练轨迹和物理权重。
+
+\begin{table}[H]
+  \centering
+  \caption{不同动态边界表示的完整轨迹结果}
+  \label{tab:heff_results}
+  \begin{tabular}{lcc}
+    \toprule
+    边界输入与部署方式 & 滚动 RMSE/\si{\degreeCelsius} & 物理残差/\si{\degreeCelsius} \\
+    \midrule
+    $h,\varepsilon$，真实动态值 & $2.285\pm0.108$ & $17.79\pm1.59$ \\
+    $\Heff$，真实动态值 & $\mathbf{1.409\pm0.068}$ & $17.38\pm2.81$ \\
+    $\Heff$，无噪声因果观测 & $1.608\pm0.103$ & $17.37\pm2.78$ \\
+    $\Heff$，\SI{0.5}{\degreeCelsius} 噪声观测 & $10.018\pm0.112$ & $16.40\pm2.76$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+真实动态输入下，$\Heff$ 参数化将 RMSE 降低 $38.3\%$。无噪声因果观测仍保持 \SI{1.61}{\degreeCelsius} 的轨迹精度。温度噪声使直接差分观测器的误差明显增加，因此部分可观测部署采用集合滤波同步校正温度场和边界参数。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.92\textwidth]{deployment_comparison.png}
+  \caption{动态边界表示与因果观测方式的比较}
+  \label{fig:heff_deployment}
+\end{figure}
+
+\section{增广状态集合滤波}
+
+实际测温只能覆盖少量位置。本文采用确定性集合卡尔曼滤波\cite{evensen2009enkf,oka2020enkf}。滤波器的增广状态为
+\begin{equation}
+  \bm{z}_n=[T_1^n,\ldots,T_{41}^n,h_n,\varepsilon_n]^{\mathsf T}.
+\end{equation}
+64 个集合成员分别经过世界模型预报。测量更新使用节点 $\{0,1,20,39,40\}$ 的带噪温度，噪声标准差为 \SI{0.5}{\degreeCelsius}。滤波器采用对称约束、参数范围约束和空间协方差局部化。参数后验通过式\eqref{eq:heff}转换为各集合成员的有效边界输入。
+
+滤波参数由 10 条独立校准轨迹选择。正式 ID 评价使用另外 90 条 BDF 轨迹。近表面四点布局与增加中心测点的五点布局结果见表\ref{tab:sensor_layout}。
+
+\begin{table}[H]
+  \centering
+  \caption{稀疏测点布局的温度场重建结果}
+  \label{tab:sensor_layout}
+  \begin{tabular}{lccc}
+    \toprule
+    传感器布局 & 全场 RMSE & 中心 RMSE & 未测节点 90\% 覆盖率 \\
+    \midrule
+    近表面 4 点 & \SI{2.022}{\degreeCelsius} & \SI{2.854}{\degreeCelsius} & $81.5\%$ \\
+    表面与中心 5 点 & \SI{1.008}{\degreeCelsius} & \SI{0.231}{\degreeCelsius} & $90.8\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+中心测点使全场 RMSE 降低 $50.1\%$，中心 RMSE 降低 $91.9\%$。该位置直接约束热扩散最慢的区域，同时对应控制目标。有限测量温度场重建研究也表明，测点布局会显著影响内部状态可观测性\cite{liu2022reconstruction}。
+
+参数 OOD 下，若滤波器将后验限制在训练范围，全场 RMSE 为 \SI{5.247}{\degreeCelsius}。允许 $h\in[5,80]$~\si{\watt\per\square\metre\per\kelvin}、$\varepsilon\in[0.45,0.98]$ 后，全场 RMSE 降至 \SI{2.813}{\degreeCelsius}，中心 RMSE 降至 \SI{0.290}{\degreeCelsius}。$h$ 与 $\varepsilon$ 的 90\% 区间覆盖率分别提高到 $79.9\%$ 和 $76.5\%$。部署支持域因此是 OOD 状态估计的重要组成部分。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{open_loop_assimilation.png}
+  \caption{五点测温条件下的温度场与边界参数同化结果}
+  \label{fig:assimilation}
+\end{figure}
+
+\section{滚动时域控制}
+
+控制任务持续 300 s，每 20 s 决策一次。目标中心温度为 \SI{350}{\degreeCelsius}，候选炉温为 $\{300,400,500,600,700,800,900,950\}$~\si{\degreeCelsius}。每次决策将候选动作保持到剩余时域末端进行预测，只执行首个 20 s 区间。目标函数为
+\begin{equation}
+  J=w_T|T_c^{\mathrm{end}}-T^*|
+  +w_U\Delta T^{\mathrm{end}}
+  +w_O\max(0,T_s^{\max}-T_{\mathrm{lim}})
+  +w_E E+w_V V,
+  \label{eq:control_objective}
+\end{equation}
+其中 $\Delta T^{\mathrm{end}}$ 为终态截面不均匀度，$E$ 为归一化能耗，$V$ 为命令总变差。该离散 shooting 结构属于带 move blocking 的模型预测控制\cite{rawlings2017mpc}。
+
+在 10 条动态边界 BDF 场景中，$\Heff$ 世界模型使用真实边界参数时，终点中心绝对误差为 \SI{2.096}{\degreeCelsius}，成功率为 $100\%$，每回合规划时间为 \SI{0.099}{\second}。BDF 动力学 MPC 的对应数值为 \SI{2.120}{\degreeCelsius}、$100\%$ 和 \SI{6.258}{\second}。世界模型规划加速 63.4 倍。0.5~\si{\degreeCelsius} 噪声因果观测器取得 \SI{3.906}{\degreeCelsius} 终点误差和 $93.3\%$ 成功率。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{closed_loop_control_summary.png}
+  \caption{动态边界 BDF 环境中的闭环控制性能}
+  \label{fig:closed_loop}
+\end{figure}
+
+$\Heff$ 对当前动作的预测是充分的。候选炉温改变后，式\eqref{eq:hrad}中的辐射基函数随之变化，反事实边界仍需要 $h$ 与 $\varepsilon$ 的分解。集合滤波保留二者的后验成员，所以每个候选动作都能重新计算 $\Heff$。该处理把边界可辨识性和控制所需的反事实信息区分开来。
+
+\section{部分可观测风险控制}
+
+ID 闭环集包含 10 条未参与滤波校准的轨迹，三个模型种子共形成 120 个 BDF 回合。五点测温加后验均值控制的终点误差为 \SI{1.284}{\degreeCelsius}，综合目标为 16.227，成功率为 $100\%$。使用后验 90\% 分位目标后，终点误差为 \SI{1.244}{\degreeCelsius}，综合目标为 16.124，成功率保持 $100\%$。宽松约束下，两种方法多次选择相同动作。
+
+参数 OOD 压力测试将表面温度上限收紧到 \SI{360}{\degreeCelsius}。风险控制在每个决策时刻抽取 16 个后验成员，按候选动作代价的 90\% 分位排序\cite{moehle2021risk}。结果见表\ref{tab:ood_control}。
+
+\begin{table}[H]
+  \centering
+  \caption{严格参数 OOD 条件下的闭环控制结果}
+  \label{tab:ood_control}
+  \begin{tabular}{lcccc}
+    \toprule
+    控制器 & 中心误差/\si{\degreeCelsius} & 平均超温/\si{\degreeCelsius} & 综合目标 & 成功率 \\
+    \midrule
+    完整状态与真实边界 & 5.228 & 0.522 & 19.731 & $80\%$ \\
+    稀疏状态与真实边界 & 5.119 & 0.750 & 20.665 & $80\%$ \\
+    稀疏状态与后验均值 & 5.966 & 0.302 & 21.376 & $70\%$ \\
+    稀疏状态与风险分位 & 5.822 & \textbf{0.181} & \textbf{19.638} & $70\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+相对后验均值控制，风险感知策略将综合目标降低 $8.1\%$，平均超温降低 $40.0\%$，中心误差降低 $2.4\%$。每回合规划时间由 \SI{0.098}{\second} 增至 \SI{0.240}{\second}。候选后验传播在安全约束有压力时改变了动作排序，并以可接受的计算成本减少超温。
+
+完整状态与真实边界控制在该测试中的成功率为 $80\%$，说明材料物性范围外推已经影响预测动力学。边界后验可以描述换热不确定性，无法覆盖全部材料模型偏差。因此，本文将风险控制的结论限定为经验性 OOD 改善。二维工件和实际控制部署还需要适用域检测，并由高保真求解器复核高风险候选动作。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.88\textwidth]{ood_closed_loop_control.png}
+  \caption{收紧表面温度约束后的参数 OOD 闭环结果}
+  \label{fig:ood_control}
+\end{figure}
+
+\section{本章小结}
+
+$\Heff$ 参数化把动态边界转化为单一可观测热流强度，显著降低了动态轨迹误差。五点温度观测与增广集合滤波可在线恢复完整温度场，并为候选炉温提供边界参数后验。世界模型在 BDF 环境中实现约 63 倍规划加速。风险分位目标进一步降低了严格 OOD 场景中的超温和综合代价。由此形成了温度场推演、边界估计和工艺决策的闭环链路。

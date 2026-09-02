@@ -1,0 +1,120 @@
+\chapter{物理约束温度场世界模型}
+
+\section{状态转移表示}
+
+离散温度场定义为
+\begin{equation}
+  \bm{s}_n=[T_1^n,T_2^n,\ldots,T_N^n]^{\mathsf T},\qquad N=41.
+\end{equation}
+动作 $a_n$ 为下一时间步的环境温度。参数向量包含边界、物性尺度、厚度和时间步长。网络预测温度增量
+\begin{equation}
+  \Delta\widehat{\bm{T}}_n=f_{\theta}(\bm{s}_n,a_n,\bm{p}),\qquad
+  \widehat{\bm{s}}_{n+1}=\bm{s}_n+\Delta\widehat{\bm{T}}_n.
+  \label{eq:residual_wm}
+\end{equation}
+增量形式保留了相邻状态的连续性，也使网络输出尺度与单步热响应一致。
+
+主模型采用三层残差多层感知机，每层 128 个隐藏单元。输入和输出均依据训练集统计量标准化。当前固定网格只有 41 个节点，MLP 可以直接处理完整状态，并适合在控制器内批量评价候选动作。卷积网络和神经算子更适合后续的高分辨率或跨几何扩展。
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=9mm and 12mm,
+    box/.style={draw=accent,thick,rounded corners=2pt,minimum height=10mm,minimum width=29mm,align=center,fill=accent!5},
+    arrow/.style={-{Latex[length=2.2mm]},thick,draw=accent}
+  ]
+    \node[box] (state) {温度场 $\bm{s}_n$};
+    \node[box,below=of state] (action) {炉温动作 $a_n$};
+    \node[box,below=of action] (param) {物性与 $\Heff$};
+    \node[box,right=18mm of action,minimum width=39mm] (model) {残差世界模型\\$f_\theta$};
+    \node[box,right=18mm of model] (next) {预测场 $\widehat{\bm{s}}_{n+1}$};
+    \node[box,above=of next] (loss) {数据与物理损失};
+    \draw[arrow] (state.east) -- (model.west);
+    \draw[arrow] (action.east) -- (model.west);
+    \draw[arrow] (param.east) -- (model.west);
+    \draw[arrow] (model) -- (next);
+    \draw[arrow] (next) -- (loss);
+    \draw[arrow] (next.south) |- ++(0,-8mm) -| (state.south);
+  \end{tikzpicture}
+  \caption{受控递归温度场世界模型}
+  \label{fig:architecture}
+\end{figure}
+
+\section{闭环多步训练}
+
+训练样本以长度为 $K$ 的连续片段组织。第一步输入真实状态，后续输入采用网络上一时刻输出：
+\begin{equation}
+  \widehat{\bm{s}}_{n+j+1}=F_{\theta}(\widehat{\bm{s}}_{n+j},a_{n+j},\bm{p}_{n+j}),
+  \quad j=0,\ldots,K-1,
+\end{equation}
+其中 $\widehat{\bm{s}}_n=\bm{s}_n$，本文取 $K=5$。多步数据损失为
+\begin{equation}
+  \mathcal{L}_{\mathrm{data}}
+  =\frac{1}{KN}\sum_{j=1}^{K}\left\|
+  \widehat{\bm{s}}_{n+j}-\bm{s}_{n+j}
+  \right\|_2^2.
+  \label{eq:data_loss}
+\end{equation}
+这项损失直接约束部署时会出现的模型生成状态。检查点依据验证集 300 步完整轨迹 RMSE 选择。该选择标准与工艺推演目标保持一致。
+
+\section{离散物理约束}
+
+内部节点物理残差由式\eqref{eq:discrete_balance}计算。对预测状态 $\widehat{\bm{s}}_{n+1}$，定义
+\begin{equation}
+  r_i=\rho c_{p,i}^{n}\frac{\widehat{T}_i^{n+1}-T_i^n}{\Delta t}
+  -\frac{1}{\Delta x}\left(
+  k_{i+1/2}^{n}\frac{\widehat{T}_{i+1}^{n+1}-\widehat{T}_{i}^{n+1}}{\Delta x}
+  -k_{i-1/2}^{n}\frac{\widehat{T}_{i}^{n+1}-\widehat{T}_{i-1}^{n+1}}{\Delta x}
+  \right).
+\end{equation}
+表面节点残差加入式\eqref{eq:mixed_boundary}的净热流。为避免量纲和幅值控制梯度，残差按训练集温度增量尺度归一化。多步物理损失写为
+\begin{equation}
+  \mathcal{L}_{\mathrm{phy}}
+  =\frac{1}{K}\sum_{j=1}^{K}
+  \frac{1}{N}\sum_{i=1}^{N}\widetilde{r}_{i,n+j}^{,2}.
+\end{equation}
+总损失为
+\begin{equation}
+  \mathcal{L}=\mathcal{L}_{\mathrm{data}}+lambda_{\mathrm{phy}}\mathcal{L}_{\mathrm{phy}}.
+  \label{eq:total_loss}
+\end{equation}
+权重扫描包含 $0$、$10^{-3}$、$10^{-2}$ 和 $10^{-1}$。三随机种子验证均值选择 $\lambda_{\mathrm{phy}}=10^{-3}$ 作为正式设置。
+
+\section{动态边界的可辨识参数化}
+
+由式\eqref{eq:heff_flux}定义
+\begin{equation}
+  \Heff(t)=h(t)+\varepsilon(t)h_{\mathrm{rad}}(T_s(t),\Tinfty(t)).
+  \label{eq:heff}
+\end{equation}
+在给定 $T_s$ 和 $\Tinfty$ 的瞬时转移中，边界热流对两个参数的灵敏度为
+\begin{equation}
+  \frac{\partial q_s}{\partial(h,\varepsilon)}
+  =(\Tinfty-T_s)\begin{bmatrix}1 & h_{\mathrm{rad}}\end{bmatrix}.
+  \label{eq:sensitivity}
+\end{equation}
+该矩阵的秩为 1。温度响应只能确定一个标量组合。任取扰动 $\delta\varepsilon$，只要
+\begin{equation}
+  \delta h=-h_{\mathrm{rad}}\delta\varepsilon,
+\end{equation}
+就能在当前状态保持相同热流。逐时自由变化的 $h(t)$ 和 $\varepsilon(t)$ 因而没有唯一分解。$\Heff$ 是当前边界转移的充分输入。
+
+基于该结论，本文构建第二类世界模型
+\begin{equation}
+  \widehat{\bm{s}}_{n+1}
+  =F_{\theta}^{H}(\bm{s}_n,a_n,\Heff_n,s_k,s_c,L,\Delta t).
+  \label{eq:heff_model}
+\end{equation}
+该表示消除了训练输入中的等价方向。网络无需学习同一边界热流对应的多组参数组合。对反事实动作 $a'$，$h$ 与 $\varepsilon$ 的分解仍决定新的辐射贡献。因此，闭环规划阶段使用增广状态滤波器保持二者的后验集合，并由每个集合成员计算候选动作下的 $\Heff(a')$。
+
+\section{评价指标}
+
+完整轨迹滚动 RMSE 定义为
+\begin{equation}
+  \mathrm{RMSE}_{\mathrm{roll}}
+  =\sqrt{\frac{1}{MN\tau}\sum_{m=1}^{M}\sum_{n=1}^{\tau}
+  \left\|\widehat{\bm{s}}_{m,n}-\bm{s}_{m,n}\right\|_2^2}.
+\end{equation}
+同时报告逐轨迹 RMSE 的中位数和 95\% 分位数、最大绝对误差、最终状态 RMSE 与离散物理残差。最大值原理指标采用全局包络。下一状态若超出当前全场温度与环境温度共同确定的上下界，则记为一次违反。该定义允许节点因邻域导热合法升温或降温。
+
+所有正式结果至少使用三个训练种子。参数比较在相同测试轨迹上进行。模型选择只访问验证集。BDF 参考集和控制环境不参与训练。

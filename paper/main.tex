@@ -1,0 +1,115 @@
+\documentclass[UTF8,zihao=-4,openany,fontset=mac]{ctexrep}
+
+\usepackage[a4paper,top=2.7cm,bottom=2.5cm,left=3.0cm,right=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,tabularx,multirow}
+\usepackage{graphicx,float,subcaption}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[backend=biber,style=gb7714-2015,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\definecolor{accent}{HTML}{1F5A75}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  citecolor=accent,
+  urlcolor=accent,
+  pdftitle={基于物理约束世界模型的金属热处理温度场演化预测与闭环控制研究},
+  pdfauthor={江景哲}
+}
+\sisetup{detect-all,per-mode=symbol}
+\setstretch{1.45}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{13pt}
+\setlist{nosep,leftmargin=2em}
+\ctexset{
+  chapter={format=\centering\heiti\zihao{3},beforeskip=8pt,afterskip=22pt},
+  section={format=\heiti\zihao{4},beforeskip=14pt,afterskip=8pt},
+  subsection={format=\heiti\zihao{-4},beforeskip=10pt,afterskip=5pt}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small 基于物理约束世界模型的金属热处理温度场研究}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\arraystretch}{1.18}
+
+\newcommand{\Heff}{{H_{\mathrm{eff}}}}
+\newcommand{\Tinfty}{{T_{\infty}}}
+\newcommand{\wm}{World Model}
+\graphicspath{{figures/}}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \centering
+  \vspace*{2.0cm}
+  {\zihao{2}\heiti 本科毕业论文\par}
+  \vspace{2.2cm}
+  {\zihao{-1}\heiti 基于物理约束世界模型的金属热处理\par}
+  \vspace{0.35cm}
+  {\zihao{-1}\heiti 温度场演化预测与闭环控制研究\par}
+  \vspace{2.6cm}
+  \begin{tabular}{rl}
+    \zihao{4}\heiti 作者： & \zihao{4} 江景哲 \\
+    \zihao{4}\heiti 专业： & \zihao{4} 材料成型及其控制工程 \\
+    \zihao{4}\heiti 邮箱： & \zihao{4} \href{mailto:contact@jiangjingzhe.com}{\texttt{contact@jiangjingzhe.com}} \\
+  \end{tabular}
+  \vfill
+  {\zihao{4} 二〇二六年九月\par}
+\end{titlepage}
+
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\chapter*{摘\quad 要}
+\addcontentsline{toc}{chapter}{摘要}
+金属热处理过程需要同时掌握工件内部温度场、炉温控制和表面换热状态。传统数值求解能够提供可靠基准，但在大量候选工艺推演和在线滚动决策中计算开销随模型规模快速增长。固定工况的温度场拟合又难以直接回答控制量改变后的未来状态。本文将热处理温度场表述为受控动力学系统，构建显式接收当前温度场、炉温动作和热物性参数的递归世界模型。模型以残差多层感知机预测温度增量，采用五步闭环展开训练，并把温变热传导及对流辐射边界的离散能量残差加入损失函数。
+
+动态边界的可辨识性分析给出本文的关键参数化。单次温度转移对对流换热系数和表面发射率的灵敏度只有一个独立方向，可观测量为等效换热系数 $\Heff$。据此建立 $\Heff$ 驱动的状态转移模型，并配置因果边界观测器和增广状态集合卡尔曼滤波器。该结构把温度场预测、边界估计和滚动控制连接到同一状态空间中。
+
+数值实验采用 C45/AISI 1045 类中碳钢一维平板，考虑温变导热系数、温变比热和灰体辐射。三随机种子结果显示，物理约束模型在控制曲线 OOD 上将滚动 RMSE 降低 $6.8\%$，将物理残差降低 $44.8\%$。四参数组合 OOD 的最大误差由 \SI{121.76}{\degreeCelsius} 降至 \SI{61.69}{\degreeCelsius}。在动态边界测试中，$\Heff$ 参数化将滚动 RMSE 从 $2.285\pm0.108$~\si{\degreeCelsius} 降至 $1.409\pm0.068$~\si{\degreeCelsius}。独立自适应 BDF 求解器上的结果保持一致，单条轨迹推演获得约 $63$ 倍在线加速。部分可观测闭环实验进一步表明，五个测点配合集合滤波可将中心温度状态估计 RMSE 控制在 \SI{0.231}{\degreeCelsius}。严格参数 OOD 工况下，风险感知控制使综合目标降低 $8.1\%$，超温量降低 $40.0\%$。这些结果说明，可辨识边界表示和轨迹级物理约束能够提高热处理世界模型的分布外推演质量，并支持内部温度不可完全测量时的滚动工艺决策。
+
+\noindent\textbf{关键词：} 金属热处理；温度场；物理信息神经网络；世界模型；参数辨识；模型预测控制
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Accurate heat-treatment operation requires a joint description of the internal temperature field, furnace-temperature commands, and surface heat transfer. Conventional solvers provide reliable references, while repeated process screening and receding-horizon decisions become expensive as model fidelity grows. A fixed-condition field regressor also has no direct mechanism for evaluating unseen command sequences. This study formulates the thermal process as a controlled dynamical system and develops a recursive world model conditioned on the current temperature field, the furnace command, and thermophysical parameters. A residual multilayer perceptron predicts temperature increments. Five-step closed-loop unrolling and a discrete energy-balance loss encode temperature-dependent conduction and convective-radiative boundaries.
+
+The central methodological result is an identifiability-based boundary representation. The instantaneous sensitivities to convection coefficient and emissivity span only one independent direction. Their observable combination is the effective heat-transfer coefficient $\Heff$. An $\Heff$-conditioned transition model is therefore coupled with a causal observer and an augmented-state ensemble Kalman filter. This construction places field prediction, boundary estimation, and receding-horizon control in one state-space pipeline.
+
+Numerical experiments consider a one-dimensional C45/AISI 1045 steel slab with temperature-dependent conductivity and heat capacity. Across three random seeds, physics regularization reduces rollout RMSE by $6.8\%$ and discrete physical residual by $44.8\%$ under out-of-distribution control programs. Under combined parameter shift, maximum absolute error decreases from \SI{121.76}{\degreeCelsius} to \SI{61.69}{\degreeCelsius}. For time-varying boundaries, the identifiable representation reduces rollout RMSE from $2.285\pm0.108$ to $1.409\pm0.068$~\si{\degreeCelsius}. Validation with an independent adaptive BDF solver preserves this gain and yields an online rollout speedup of approximately $63\times$. With five temperature sensors, ensemble data assimilation estimates the center temperature with an RMSE of \SI{0.231}{\degreeCelsius}. Under a stringent parameter-shift control test, risk-aware planning reduces the aggregate objective by $8.1\%$ and overtemperature by $40.0\%$. The results support identifiable boundary modeling and trajectory-level physical regularization as practical ingredients for robust thermal-process world models.
+
+\noindent\textbf{Keywords:} metal heat treatment; temperature field; physics-informed neural network; world model; parameter identification; model predictive control
+
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\input{chapters/01-introduction}
+\input{chapters/02-physical-model}
+\input{chapters/03-world-model}
+\input{chapters/04-prediction-experiments}
+\input{chapters/05-identification-control}
+\input{chapters/06-conclusion}
+
+\begingroup
+\small
+\setstretch{1.12}
+\printbibliography[heading=bibintoc,title={参考文献}]
+\endgroup
+
+\appendix
+\chapter{复现信息}
+论文实验版本冻结于 Git 标签 \texttt{experiment-freeze-v1}。正式指标文件的 SHA-256 校验值、命令行入口和评价协议见项目中的 \texttt{docs/experiment-freeze.md}。全部训练集、验证集和测试集按完整轨迹划分。模型检查点依据验证集完整轨迹 RMSE 选择。
+
+\end{document}

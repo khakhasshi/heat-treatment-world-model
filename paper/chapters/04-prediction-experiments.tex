@@ -1,0 +1,109 @@
+\chapter{温度场推演与分布外泛化}
+
+\section{多步训练的作用}
+
+常物性初始实验用于检验递归训练机制。数据集含 100 条轨迹，其中 70 条训练、15 条验证、15 条测试。只用 5 条训练轨迹时，一步训练模型的完整轨迹 RMSE 为 \SI{72.62}{\degreeCelsius}。五步闭环展开将该值降至 \SI{10.84}{\degreeCelsius}。两种设置的一步误差都处于较低水平，但长时结果相差 6.7 倍。这说明局部监督精度无法代表 300 步闭环稳定性。
+
+同一少数据设置下，物理损失将滚动 RMSE 从 \SI{15.42}{\degreeCelsius} 降至 \SI{10.84}{\degreeCelsius}，离散物理残差从 \SI{526.85}{\degreeCelsius} 降至 \SI{136.02}{\degreeCelsius}。当 70 条精确数值轨迹全部用于训练时，普通模型 RMSE 为 \SI{0.612}{\degreeCelsius}，物理模型为 \SI{0.702}{\degreeCelsius}。物理正则的收益随数据覆盖和工况复杂度变化，所以后续实验使用验证集选择权重，并重点检查 OOD 与尾部指标。
+
+\section{物理权重与控制曲线 OOD}
+
+C45 温变物性数据集包含 120 条轨迹。训练、验证、ID 测试和控制 OOD 分别使用 70、15、15 和 20 条轨迹。三随机种子重复实验结果列于表\ref{tab:weight_results}。
+
+\begin{table}[H]
+  \centering
+  \caption{不同物理权重的三随机种子结果，均值$\pm$样本标准差}
+  \label{tab:weight_results}
+  \small
+  \begin{tabular}{ccccc}
+    \toprule
+    $\lambda_{\mathrm{phy}}$ & 验证 RMSE & ID RMSE & OOD RMSE & OOD 物理残差 \\
+    \midrule
+    0 & $2.282\pm0.109$ & $2.389\pm0.139$ & $5.994\pm0.430$ & $127.41\pm7.36$ \\
+    $10^{-3}$ & $\mathbf{2.035\pm0.244}$ & $\mathbf{2.103\pm0.123}$ & $\mathbf{5.589\pm0.789}$ & $70.35\pm4.24$ \\
+    $10^{-2}$ & $2.242\pm0.109$ & $2.739\pm0.107$ & $6.865\pm1.202$ & $\mathbf{60.29\pm10.42}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+$\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为正式模型。相对数据基线，其 ID RMSE 降低 $11.9\%$，控制 OOD RMSE 降低 $6.8\%$，OOD 物理残差降低 $44.8\%$。升温后冷却轨迹的 RMSE 降低 $10.1\%$。结果表明，适度物理约束改善了未见控制模式下的轨迹稳定性。更大的 $10^{-2}$ 权重继续降低残差，但场误差增加。模型选择因此以验证轨迹精度为主，物理残差用于描述一致性。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.86\textwidth]{physics_weight_replicates.png}
+  \caption{物理权重在 ID 与控制 OOD 条件下的重复实验结果}
+  \label{fig:weight_results}
+\end{figure}
+
+\section{参数分布外泛化}
+
+参数 OOD 集包含 100 条轨迹。换热系数、发射率、导热系数尺度和比热尺度各有 20 条单因素轨迹，另有 20 条四参数组合轨迹。控制曲线保持在训练类型内。表\ref{tab:param_ood}给出正式权重下的三随机种子结果。
+
+\begin{table}[H]
+  \centering
+  \caption{参数 OOD 的滚动 RMSE，单位：\si{\degreeCelsius}}
+  \label{tab:param_ood}
+  \begin{tabular}{lccc}
+    \toprule
+    OOD 类型 & 数据模型 & 物理模型 & 相对降低 \\
+    \midrule
+    对流换热系数 $h$ & $3.082\pm0.259$ & $2.693\pm0.613$ & $12.6\%$ \\
+    发射率 $\varepsilon$ & $3.239\pm0.290$ & $3.046\pm0.507$ & $6.0\%$ \\
+    导热系数尺度 $s_k$ & $7.369\pm0.702$ & $5.633\pm0.397$ & $23.6\%$ \\
+    比热尺度 $s_c$ & $5.802\pm0.445$ & $5.672\pm0.953$ & $2.2\%$ \\
+    四参数组合 & $16.991\pm2.893$ & $11.972\pm2.534$ & $29.5\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+物理模型在五类参数 OOD 的平均 RMSE 上均取得更低数值。导热系数和四参数组合的三个种子全部改善。组合 OOD 的最大绝对误差由 $121.76\pm30.94$~\si{\degreeCelsius} 降至 $61.69\pm16.41$~\si{\degreeCelsius}，离散物理残差由 $614.78\pm45.47$ 降至 $233.62\pm27.30$~\si{\degreeCelsius}。多参数同时偏移时，热扩散时间尺度和表面热流共同改变。离散能量约束在此条件下提供了最明显的稳定作用。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.84\textwidth]{parameter_ood_metrics.png}
+  \caption{不同参数 OOD 类别的温度场推演误差}
+  \label{fig:param_ood}
+\end{figure}
+
+\section{动态边界 OOD}
+
+动态边界测试包含 $h$ 平滑变化、$h$ 阶跃、$\varepsilon$ 增长、$\varepsilon$ 阶跃和联合变化五类，共 100 条轨迹。所有瞬时参数值位于训练范围内，训练数据中的边界参数在单条轨迹内保持常数。该实验检验时间结构外推。
+
+逐步提供真实 $h(t)$ 与 $\varepsilon(t)$ 时，数据模型滚动 RMSE 为 $4.795\pm0.289$~\si{\degreeCelsius}，物理模型为 $4.089\pm0.162$~\si{\degreeCelsius}，降低 $14.7\%$。物理残差降低 $57.3\%$，逐轨迹 RMSE 的 95\% 分位数降低 $13.0\%$。若整段推演固定使用首时刻参数，两类模型的 RMSE 均约为 \SI{19.4}{\degreeCelsius}。动态输入的缺失会形成主要误差源。该结果促使模型输入转向可在线估计的 $\Heff$。
+
+\section{跨求解器验证与在线效率}
+
+独立 BDF 数据集包含 100 条动态边界轨迹。训练生成器与 BDF 的离散方法、空间网格和内部时间步均不同。表\ref{tab:cross_solver}列出 BDF 参考上的结果。
+
+\begin{table}[H]
+  \centering
+  \caption{独立 BDF 参考集上的动态边界推演结果}
+  \label{tab:cross_solver}
+  \begin{tabular}{lcc}
+    \toprule
+    模型 & 滚动 RMSE/\si{\degreeCelsius} & 最大绝对误差/\si{\degreeCelsius} \\
+    \midrule
+    $h,\varepsilon$ 数据模型 & $2.539\pm0.018$ & $25.56\pm0.43$ \\
+    $h,\varepsilon$ 物理模型 & $2.316\pm0.092$ & $21.87\pm2.71$ \\
+    $\Heff$ 数据模型 & $1.491\pm0.065$ & $14.27\pm4.05$ \\
+    $\Heff$ 物理模型 & $\mathbf{1.460\pm0.078}$ & $\mathbf{9.75\pm0.20}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+$\Heff$ 物理模型相对双参数物理模型将滚动 RMSE 降低约 $36.9\%$，最大误差降低约 $55.4\%$。结果与训练生成器上的排序一致。可辨识参数化的收益没有依赖特定离散器。
+
+单条 BDF 轨迹平均耗时为 \SI{0.526}{\second}，$\Heff$ 世界模型中位耗时为 \SI{0.00834}{\second}，在线推演加速约 63 倍。该比较只统计已经训练完成后的轨迹计算。训练和数据生成属于离线成本。对一维问题，绝对耗时都很小；加速结果主要说明模型适合嵌入大量候选动作的滚动计算。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{cross_solver_comparison.png}
+  \caption{训练生成器与独立 BDF 参考集上的模型比较}
+  \label{fig:cross_solver}
+\end{figure}
+
+\section{结果讨论}
+
+实验给出三个稳定判断。第一，五步闭环训练决定长时推演质量。第二，物理约束在控制和参数 OOD 中主要改善尾部误差及离散能量一致性。第三，动态边界表示的可辨识性比网络规模更关键。$\Heff$ 消除了输入中的等价方向，在两个数值求解器上都取得更低误差。
+
+物理损失的权重需要由验证轨迹决定。较大权重可以获得更小残差，但可能改变数据拟合目标。本文选用 $10^{-3}$，使场精度和物理一致性处于同一有效区间。该结论适用于本文的离散方程、数据覆盖和网络容量，后续几何扩展应重新标定。
