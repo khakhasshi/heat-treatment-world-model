@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "physics-informed-heat-world-model"
+version = "0.1.0"
+description = "Physics-informed world model for metal heat-treatment temperature fields"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "matplotlib>=3.8,<4",
+  "numpy>=1.26,<3",
+  "torch>=2.2,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+heat-pinn-baseline = "heat_pinn.cli:main"
+generate-heat-trajectories = "heat_world_model.data_cli:main"
+compare-heat-world-models = "heat_world_model.experiment_cli:main"
+plan-heat-treatment = "heat_world_model.planning_cli:main"
+sweep-physics-weight = "heat_world_model.sweep_cli:main"
+aggregate-physics-sweeps = "heat_world_model.aggregate_sweeps_cli:main"
+sweep-training-size = "heat_world_model.data_size_cli:main"
+evaluate-parameter-ood = "heat_world_model.parameter_ood_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
