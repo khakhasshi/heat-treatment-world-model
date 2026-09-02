@@ -71,3 +71,9 @@ Carollo 等通过实验与逆问题方法同时估计了 AISI 1045 的温变导�
 - Duan et al., 2026, *Inverse identification of heat transfer parameters in a steel rolling reheating furnace using a full-process black-box temperature test*: 工业加热炉具有明显非均匀、时变扰动，换热系数、表面发射率与有效物性难以直接确定，支持将在线参数辨识作为 World Model 部署链的一部分。<https://doi.org/10.1016/j.ijthermalsci.2026.110821>
 - Shi et al., 2014, *Effect of surface oxidization on the spectral emissivity of steel 304 at the elevated temperature in air*: 实验显示发射率同时依赖温度与加热持续时间，氧化贡献主要发生在早期阶段。该材料并非 C45，因此只用于支持时间变化机制，不用于给定 C45 参数。<https://doi.org/10.1016/j.infrared.2014.05.001>
 - *Real-Time Detection and Monitoring of Oxide Layer Formation in 1045 Steel Using Infrared Thermography and Advanced Image Processing Algorithms*, 2025: 针对 1045 钢监测氧化层形成，支持把表面状态视为热辐射边界的潜在动态变量。<https://www.mdpi.com/1996-1944/18/5/954>
+
+## 10. 逆热传导与边界参数辨识
+
+- Frankel and Arimilli, 2007, *Inferring convective and radiative heating loads from transient surface temperature measurements in the half-space*: 从表面温度反演热流会放大白噪声，经过滤波和历史最小二乘可以估计平均换热系数与平均发射率。其常参数和半无限体假设与本课题不同，但直接支持可辨识性与正则化讨论。<https://doi.org/10.1080/17415970600795378>
+- Chen et al., 2019, *On-line heat flux estimation of a nonlinear heat conduction system with complex geometry using a sequential inverse method and artificial neural network*: 使用序贯 Tikhonov 正则化与 ANN 快速正向模型在线估计时变表面热流，支持“学习型正向模型加正则化逆问题”的后续架构。<https://doi.org/10.1016/j.ijheatmasstransfer.2019.118491>
+- Mohebbi and Sellier, 2021, *Estimation of Functional Form of Time-Dependent Heat Transfer Coefficient Using an Accurate and Robust Parameter Estimation Approach*: 使用灵敏度系数、最速下降和差异原则恢复时变换热系数，并显式研究测量误差。<https://doi.org/10.3390/en14165073>
