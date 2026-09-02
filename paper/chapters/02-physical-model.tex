@@ -46,7 +46,7 @@
 
 \section{温变物性与参数空间}
 
-高温物性采用公开 AISI 1045 数据表的分段线性插值\cite{sanchez2023splat}。Carollo 等的低温实验反演结果用于核对低温段变化趋势\cite{carollo2019properties}。表\ref{tab:properties}列出计算所用节点值。原始数据在 \SI{600}{\degreeCelsius} 至 \SI{800}{\degreeCelsius} 间给出明显的比热变化，本文按表值插值，并将其视为给定的等效热容曲线。该曲线没有进一步分解显热和相变潜热，所以本研究不据此解释组织转变。
+高温物性采用公开 AISI 1045 数据表的分段线性插值\cite{sanchez2023splat}。Carollo 等的低温实验反演结果用于核对低温段变化趋势\cite{carollo2019properties}。表\ref{tab:properties}列出计算所用节点值。原始数据在 \SI{600}{\degreeCelsius} 至 \SI{800}{\degreeCelsius} 间给出明显的比热变化，本文按表值插值，并将其作为经验等效热容曲线。相变附近的表观热容效应可能包含在经验数据中，但数据源未将其与显热、潜热分别标定。当前模型不建立显式相变动力学，也不据此解释组织转变。
 
 \begin{table}[H]
   \centering
@@ -90,7 +90,7 @@
 \end{equation}
 其中 $\Heff_1^n=h^n+\varepsilon^nh_{\mathrm{rad}}(T_1^n,\Tinfty^n)$，右侧表面采用镜像形式。该格式为数据生成和训练物理残差提供统一离散基础。
 
-独立验证使用 SciPy 自适应 BDF 积分器和 81 节点网格。相同连续方程在方法、步长控制和空间分辨率上与训练生成器不同。参考求解器采用相对容差 $10^{-6}$、绝对温度容差 $10^{-7}$~\si{\degreeCelsius}、最大内部步长 \SI{0.25}{\second}。161 节点与更小时间步的收敛检查分别得到平均 RMSE \SI{0.00248}{\degreeCelsius} 和 \SI{0.00425}{\degreeCelsius}。训练生成器与 BDF 参考轨迹的整体 RMSE 为 \SI{0.166}{\degreeCelsius}。该差异远小于神经模型的轨迹误差，可用于独立评价。
+交叉求解器数值验证使用 SciPy 自适应 BDF 积分器和 81 节点网格。相同连续方程在离散方法、步长控制和空间分辨率上与训练生成器不同。参考求解器采用相对容差 $10^{-6}$、绝对温度容差 $10^{-7}$~\si{\degreeCelsius}、最大内部步长 \SI{0.25}{\second}。161 节点与更小时间步的收敛检查分别得到平均 RMSE \SI{0.00248}{\degreeCelsius} 和 \SI{0.00425}{\degreeCelsius}。训练生成器与 BDF 参考轨迹的整体 RMSE 为 \SI{0.166}{\degreeCelsius}。该检验用于排除模型只适配单一离散格式的情形，不替代真实炉体实验。
 
 \section{受控数值数据集}
 

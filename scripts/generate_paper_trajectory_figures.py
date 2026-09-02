@@ -49,12 +49,12 @@ def configure_style() -> None:
         {
             "font.family": "sans-serif",
             "font.sans-serif": ["PingFang SC", "Arial Unicode MS", "DejaVu Sans"],
-            "font.size": 12.5,
-            "axes.titlesize": 13,
-            "axes.labelsize": 12,
-            "legend.fontsize": 10,
-            "xtick.labelsize": 10.5,
-            "ytick.labelsize": 10.5,
+            "font.size": 13,
+            "axes.titlesize": 13.5,
+            "axes.labelsize": 12.5,
+            "legend.fontsize": 11,
+            "xtick.labelsize": 11,
+            "ytick.labelsize": 11,
             "axes.unicode_minus": False,
             "figure.facecolor": "white",
             "axes.facecolor": "white",
@@ -295,8 +295,8 @@ def plot_control_metric_grid(
         entries = (
             ("fixed_750c", "固定\n750 °C"),
             ("proportional_feedback", "比例\n反馈"),
-            ("source_solver_mpc", "源求解器\nMPC"),
-            ("reference_solver_mpc", "BDF\nMPC"),
+            ("source_solver_mpc", "源求解器\n滚动搜索"),
+            ("reference_solver_mpc", "BDF\n滚动搜索"),
             ("legacy_world_model_oracle|weight=0.001", "原世界模型\n真实边界"),
             ("effective_world_model_oracle|weight=0.001", "$H_{\\mathrm{eff}}$ 模型\n真实边界"),
             ("effective_world_model_observer|weight=0.001|noise=0C", "$H_{\\mathrm{eff}}$ 观测\n无噪声"),
@@ -730,7 +730,7 @@ def plot_closed_loop_control(output_dir: Path) -> None:
     cases = (
         ("fixed_750c", "固定炉温", None, 0.0, 1),
         ("proportional_feedback", "比例反馈", None, 0.0, 1),
-        ("reference_solver_mpc", "BDF 模型预测控制", None, 0.0, 1),
+        ("reference_solver_mpc", "BDF 滚动动作搜索", None, 0.0, 1),
         (
             "effective_world_model_oracle",
             r"$H_{\mathrm{eff}}$ 世界模型（真实边界）",

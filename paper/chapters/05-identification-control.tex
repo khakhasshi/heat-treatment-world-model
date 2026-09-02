@@ -10,7 +10,7 @@
   =\frac{\widehat{q}_{s,n-1}}{\Tinfty_{n-1}-T_{s,n-1}}.
   \label{eq:heff_observer}
 \end{equation}
-状态 $n$ 到达后得到的估计用于下一次转移。初始转移采用训练范围中点先验。观测器只使用当前及历史测量，并通过滑动后向窗口抑制差分噪声。30~s 窗口由 10 条独立校准轨迹选定，未使用正式测试轨迹。
+状态 $n$ 到达后得到的估计用于下一次转移。初始转移采用训练范围中点先验。观测器只使用当前及历史测量，并通过滑动后向窗口抑制差分噪声。30~s 窗口由 10 条独立校准轨迹选定，未使用正式测试轨迹。窗口最小二乘的分母记为 $D_n=\sum x_j^2$，其中 $x_j$ 与 $\Tinfty-T_s$ 成正比。当 $D_n\leq10^{-12}$ 时，观测器停用该次比值更新并返回可行区间中点；其余估计截断到训练边界对应的 $\Heff$ 区间。正式测试中的低激励触发比例为 0。
 
 无噪声条件下，单步反演的 $\Heff$ RMSE 为 \SI{0.002}{\watt\per\square\metre\per\kelvin}。加入 \SI{0.5}{\degreeCelsius} 独立高斯测温噪声后，30~s 窗口的 RMSE 为 \SI{18.45}{\watt\per\square\metre\per\kelvin}。差分运算会放大测量噪声，较长窗口又会引入动态滞后。这种敏感性与逆热传导研究的结论一致\cite{frankel2007loads,chen2019online}。
 
@@ -32,7 +32,7 @@
   \end{tabular}
 \end{table}
 
-真实动态输入下，$\Heff$ 参数化将滚动 RMSE 降低 $38.3\%$。无噪声因果观测仍保持 \SI{1.61}{\degreeCelsius} 的轨迹精度。温度噪声增大了直接差分观测器的误差，所以后续部分可观测部署采用集合滤波，同步校正温度场和边界参数。
+真实动态输入下，$\Heff$ 参数化将滚动 RMSE 降低 $38.3\%$。无噪声因果观测仍保持 \SI{1.61}{\degreeCelsius} 的轨迹精度。温度噪声增大了直接差分观测器的误差。该观测器用于验证因果 $\Heff$ 接口和揭示噪声敏感性，最终的稀疏测温闭环采用集合滤波同步校正温度场和边界参数。
 
 \begin{figure}[H]
   \centering
@@ -52,11 +52,11 @@
 
 \section{跨求解器验证与在线效率}
 
-训练数据由固定时间步长有限体积求解器生成。为检验代理模型是否依赖该离散格式，本文另用 SciPy 自适应 BDF 积分器生成 100 条动态边界轨迹。BDF 求解器独立计算空间半离散系统，并采用不同的时间积分方法。表\ref{tab:cross_solver}给出三随机种子的完整轨迹结果。
+训练数据由固定时间步长有限体积求解器生成。为检验代理模型是否依赖该离散格式，本文另用 SciPy 自适应 BDF 积分器生成 100 条动态边界轨迹。BDF 求解器重新计算空间半离散系统，并采用不同的时间积分方法。表\ref{tab:cross_solver}给出三随机种子的完整轨迹结果。
 
 \begin{table}[H]
   \centering
-  \caption{独立 BDF 参考轨迹上的跨求解器验证}
+  \caption{BDF 参考轨迹上的跨求解器数值验证}
   \label{tab:cross_solver}
   \begin{tabular}{lcc}
     \toprule
@@ -70,12 +70,12 @@
   \end{tabular}
 \end{table}
 
-$\Heff$ 物理模型相对原始 $h,\varepsilon$ 物理模型将滚动 RMSE 降低 $36.9\%$，最大误差降低 $55.4\%$。这一排序与固定步长测试保持一致，说明可辨识边界表示带来的增益可以迁移到独立时间积分器。
+$\Heff$ 物理模型相对原始 $h,\varepsilon$ 物理模型将滚动 RMSE 降低 $36.9\%$，最大误差降低 $55.4\%$。这一排序与固定步长测试保持一致，说明可辨识边界表示带来的增益可以迁移到另一种时间积分器。
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.96\textwidth]{cross_solver_comparison.png}
-  \caption{独立 BDF 轨迹上的模型精度比较}
+  \caption{BDF 交叉求解器轨迹上的模型精度比较}
   \label{fig:cross_solver_summary}
 \end{figure}
 
@@ -88,7 +88,7 @@ $\Heff$ 物理模型相对原始 $h,\varepsilon$ 物理模型将滚动 RMSE 降�
   \label{fig:cross_solver_trajectory}
 \end{figure}
 
-速度测试在 Apple M5 CPU 上运行，PyTorch 使用 4 个 CPU 线程。对同一批完整轨迹计时，BDF 求解的中位时间为 \SI{0.424}{\second}，95 分位为 \SI{0.530}{\second}；世界模型的中位时间为 \SI{0.00764}{\second}，95 分位为 \SI{0.00805}{\second}。按中位时间计算，单条轨迹推演加速 55.4 倍。该速度衡量完整轨迹生成，后文的 63.4 倍则衡量滚动控制中候选动作规划，两者对应不同计算任务。
+速度测试在 Apple M5 CPU 上运行，PyTorch 使用 4 个 CPU 线程。对同一批完整轨迹计时，81 节点 BDF 求解的中位时间为 \SI{0.424}{\second}，95 分位为 \SI{0.530}{\second}；41 节点世界模型的中位时间为 \SI{0.00764}{\second}，95 分位为 \SI{0.00805}{\second}。按中位时间计算，部署配置下的单条轨迹推演加速 55.4 倍。该比较同时包含模型形式和空间分辨率的差异，衡量的是快速代理与高保真复核器的预定使用方式。后文的 63.4 倍衡量滚动控制中的候选动作规划，两者对应不同计算任务。一维 BDF 的绝对耗时已经较小，速度结果的主要意义是为二维、三维问题和大规模候选序列筛选提供依据。
 
 \section{增广状态集合滤波}
 
@@ -123,19 +123,20 @@ $\Heff$ 物理模型相对原始 $h,\varepsilon$ 物理模型将滚动 RMSE 降�
 
 \begin{table}[H]
   \centering
-  \caption{稀疏测点布局的温度场重建结果}
+  \caption{稀疏测点布局的温度场重建结果，RMSE 单位：\si{\degreeCelsius}}
   \label{tab:sensor_layout}
-  \begin{tabular}{lccc}
+  \small
+  \begin{tabular}{lcccc}
     \toprule
-    传感器布局 & 全场 RMSE & 中心 RMSE & 未测节点 90\% 覆盖率 \\
+    传感器布局 & \shortstack{全场\\RMSE} & \shortstack{未测节点\\RMSE} & \shortstack{中心\\RMSE} & \shortstack{未测节点\\90\% 覆盖率} \\
     \midrule
-    近表面 4 点 & \SI{2.022}{\degreeCelsius} & \SI{2.854}{\degreeCelsius} & $81.5\%$ \\
-    表面与中心 5 点 & \SI{1.008}{\degreeCelsius} & \SI{0.231}{\degreeCelsius} & $90.8\%$ \\
+    无中心测点的近表面 4 点 & 2.022 & 2.128 & 2.854 & $81.5\%$ \\
+    含中心热电偶的理想 5 点 & 1.008 & 1.073 & 0.231 & $90.8\%$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-中心测点使全场 RMSE 降低 $50.1\%$，中心 RMSE 降低 $91.9\%$。该位置直接约束热扩散最慢的区域，同时对应控制目标。有限测量温度场重建研究也显示，测点布局会显著影响内部状态可观测性\cite{liu2022reconstruction}。
+五测点方案包含对控制目标的直接测量，所以 \SI{0.231}{\degreeCelsius} 的中心 RMSE 表示带噪中心测量经滤波后的状态一致性，不代表由表面温度推断中心温度的精度。无中心测点的近表面方案是更困难的重建场景，其未测节点 RMSE 为 \SI{2.128}{\degreeCelsius}，中心 RMSE 为 \SI{2.854}{\degreeCelsius}。加入中心热电偶后，未测节点 RMSE 降低 $49.6\%$。内部热电偶适合仪器化试样、工艺标定和实验验证；许多连续生产零件不具备长期埋入条件。本文因此把五测点布局视为内部测温可用的理想场景，把近表面四测点结果作为无中心测量时的主要重建依据。有限测量温度场重建研究也显示，测点布局会显著影响内部状态可观测性\cite{liu2022reconstruction}。
 
 参数 OOD 下，若滤波器把后验限制在训练范围，全场 RMSE 为 \SI{5.247}{\degreeCelsius}。允许 $h\in[5,80]$~\si{\watt\per\square\metre\per\kelvin}、$\varepsilon\in[0.45,0.98]$ 后，全场 RMSE 降至 \SI{2.813}{\degreeCelsius}，中心 RMSE 降至 \SI{0.290}{\degreeCelsius}。$h$ 与 $\varepsilon$ 的 90\% 区间覆盖率分别为 $79.9\%$ 和 $76.5\%$。因此，滤波器支持域需要覆盖预期部署范围。
 
@@ -148,9 +149,9 @@ $\Heff$ 物理模型相对原始 $h,\varepsilon$ 物理模型将滚动 RMSE 降�
   \label{fig:assimilation}
 \end{figure}
 
-\section{滚动时域控制}
+\section{常值尾部滚动动作搜索}
 
-控制任务持续 300~s，每 20~s 决策一次。目标中心温度为 \SI{350}{\degreeCelsius}，候选炉温为 $\{300,400,500,600,700,800,900,950\}$~\si{\degreeCelsius}。该任务用于检验模型驱动的目标跟踪能力，不对应一套完整的 C45 工业热处理制度。每次决策将候选动作保持到剩余时域末端进行预测，只执行首个 20~s 区间。目标函数为
+控制任务持续 300~s，每 20~s 决策一次。目标中心温度为 \SI{350}{\degreeCelsius}，候选炉温为 $\{300,400,500,600,700,800,900,950\}$~\si{\degreeCelsius}。该任务用于检验模型驱动的目标跟踪能力，不对应一套完整的 C45 工业热处理制度。每次决策只搜索一个炉温值，并假设该值在剩余预测时域保持不变；系统只执行首个 20~s 区间。该控制器属于采用常值尾部假设的单移动阻塞模型预测控制，其优化变量少于通用多步控制序列 MPC。目标函数为
 \begin{equation}
   J=|T_c^{\mathrm{end}}-T^*|
   +0.25\Delta T^{\mathrm{end}}
@@ -158,14 +159,14 @@ $\Heff$ 物理模型相对原始 $h,\varepsilon$ 物理模型将滚动 RMSE 降�
   +5E+0.01V,
   \label{eq:control_objective}
 \end{equation}
-其中 $\Delta T^{\mathrm{end}}=\max_i T_i^{\mathrm{end}}-\min_i T_i^{\mathrm{end}}$，$T_s^{\max}$ 为预测时域内两侧表面温度的最大值，$E=(a-20)/(950-20)$，$V=|a-a_{\mathrm{prev}}|$。回合评价以执行炉温的平均归一化值计算能耗项，以完整命令序列的总变差计算平滑项。若终点中心误差不超过 \SI{10}{\degreeCelsius} 且无表面超温，则判定控制成功。该离散 shooting 结构属于带 move blocking 的模型预测控制\cite{rawlings2017mpc}。
+其中 $\Delta T^{\mathrm{end}}=\max_i T_i^{\mathrm{end}}-\min_i T_i^{\mathrm{end}}$，$T_s^{\max}$ 为预测时域内两侧表面温度的最大值，$E=(a-20)/(950-20)$，$V=|a-a_{\mathrm{prev}}|$。回合评价以执行炉温的平均归一化值计算能耗项，以完整命令序列的总变差计算平滑项。若终点中心误差不超过 \SI{10}{\degreeCelsius} 且无表面超温，则判定控制成功\cite{rawlings2017mpc}。
 
-在 10 条动态边界 BDF 场景中，$\Heff$ 世界模型使用真实边界参数时，终点中心绝对误差为 \SI{2.096}{\degreeCelsius}，成功率为 $100\%$，每回合规划时间为 \SI{0.099}{\second}。BDF 动力学 MPC 的对应数值为 \SI{2.120}{\degreeCelsius}、$100\%$ 和 \SI{6.258}{\second}。世界模型使候选动作规划加速 63.4 倍。采用 \SI{0.5}{\degreeCelsius} 噪声因果观测器时，终点误差为 \SI{3.906}{\degreeCelsius}，成功率为 $93.3\%$。
+世界模型与 BDF 对照使用相同的候选动作、剩余预测时域、常值尾部、目标函数和真实动态边界历史，并在每个决策时刻接收各自网格上的完整真实温度状态。两者只更换预测动力学及其对应网格。10 条动态边界场景上，三个世界模型种子共执行 30 个回合。$\Heff$ 世界模型使用真实边界参数时，终点中心绝对误差为 \SI{2.096}{\degreeCelsius}，30/30 个回合成功，95\% Wilson 区间为 $[88.6\%,100\%]$，每回合规划时间为 \SI{0.099}{\second}。BDF 动力学搜索在 10/10 个场景成功，Wilson 区间为 $[72.2\%,100\%]$，终点误差为 \SI{2.120}{\degreeCelsius}，规划时间为 \SI{6.258}{\second}。世界模型使候选动作规划加速 63.4 倍。采用 \SI{0.5}{\degreeCelsius} 噪声因果观测器时，终点误差为 \SI{3.906}{\degreeCelsius}，28/30 个回合成功，Wilson 区间为 $[78.7\%,98.2\%]$。
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.96\textwidth]{closed_loop_control_summary.png}
-  \caption{动态边界 BDF 环境中的闭环控制性能}
+  \caption{动态边界 BDF 环境中的滚动动作搜索性能}
   \label{fig:closed_loop}
 \end{figure}
 
@@ -180,24 +181,24 @@ $\Heff$ 足以描述当前已执行动作对应的温度转移。评估候选炉
   \label{fig:sparse_trajectory}
 \end{figure}
 
-图\ref{fig:closed_loop_trajectory}采用模型种子 42 和联合边界轨迹 12。固定炉温使中心温度越过目标，比例反馈在后段升温不足。BDF 模型预测控制与两种 $\Heff$ 世界模型控制在主要阶段选择相近动作，终点中心温度集中在目标附近，世界模型同时维持较小的终态截面温差。
+图\ref{fig:closed_loop_trajectory}采用模型种子 42 和联合边界轨迹 12。固定炉温使中心温度越过目标，比例反馈在后段升温不足。BDF 滚动动作搜索与两种 $\Heff$ 世界模型控制在主要阶段选择相近动作，终点中心温度集中在目标附近，世界模型同时维持较小的终态截面温差。
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.96\textwidth]{closed_loop_trajectory_zh.png}
-  \caption{动态边界 BDF 环境中的代表性闭环控制轨迹}
+  \caption{动态边界 BDF 环境中的代表性滚动控制轨迹}
   \label{fig:closed_loop_trajectory}
 \end{figure}
 
 \section{部分可观测风险控制}
 
-ID 闭环集包含 10 条未参与滤波校准的轨迹，三个模型种子共形成 120 个 BDF 回合。五点测温加后验均值控制的终点误差为 \SI{1.284}{\degreeCelsius}，综合目标为 16.227，成功率为 $100\%$。使用后验 90\% 分位目标后，终点误差为 \SI{1.244}{\degreeCelsius}，综合目标为 16.124，成功率保持 $100\%$。宽松约束下，两种方法多次选择相同动作。
+ID 闭环集包含 10 条未参与滤波校准的轨迹，四种控制器和三个模型种子共形成 120 个 BDF 回合。五点测温加后验均值控制的终点误差为 \SI{1.284}{\degreeCelsius}，综合目标为 16.227，30/30 个回合成功，95\% Wilson 区间为 $[88.6\%,100\%]$。使用后验 90\% 分位目标后，终点误差为 \SI{1.244}{\degreeCelsius}，综合目标为 16.124，成功数和区间保持不变。宽松约束下，两种方法多次选择相同动作。
 
 参数 OOD 压力测试将表面温度上限收紧到 \SI{360}{\degreeCelsius}。风险控制在每个决策时刻抽取 16 个后验成员，按候选动作代价的 90\% 分位排序\cite{moehle2021risk}。汇总结果见表\ref{tab:ood_control}。
 
 \begin{table}[H]
   \centering
-  \caption{严格参数 OOD 条件下的闭环控制结果}
+  \caption{严格参数 OOD 条件下的闭环控制结果，每种控制器 30 个回合}
   \label{tab:ood_control}
   \begin{tabular}{lcccc}
     \toprule
@@ -210,6 +211,8 @@ ID 闭环集包含 10 条未参与滤波校准的轨迹，三个模型种子共�
     \bottomrule
   \end{tabular}
 \end{table}
+
+表中的 $80\%$ 对应 24/30 个成功回合，95\% Wilson 区间为 $[62.7\%,90.5\%]$；$70\%$ 对应 21/30，区间为 $[52.1\%,83.3\%]$。相同参数场景会在三个模型种子下重复，因此这些区间用于描述已执行回合的比例不确定性，控制器差异仍以场景配对统计为主要依据。
 
 为避免把同一场景下的三个模型种子视为独立工况，本文先在每个 BDF 场景内对三个种子取均值，再计算风险分位控制与后验均值控制的配对差。随后对 10 个场景进行 100000 次 bootstrap 重采样。结果见表\ref{tab:risk_paired}。
 
@@ -236,7 +239,3 @@ ID 闭环集包含 10 条未参与滤波校准的轨迹，三个模型种子共�
   \caption{收紧表面温度约束后的参数 OOD 闭环结果}
   \label{fig:ood_control}
 \end{figure}
-
-\section{本章小结}
-
-$\Heff$ 参数化在动态边界保持集和独立 BDF 求解器上均降低了轨迹误差。五点测温与增广集合滤波实现了在线温度场重建，并为候选炉温保留受先验约束的边界后验。世界模型的完整轨迹推演速度为 BDF 求解的 55.4 倍，候选动作规划速度为 BDF 动力学 MPC 的 63.4 倍。严格参数 OOD 测试中，风险分位排序的综合目标平均配对差为 $-1.737$，95\% bootstrap 区间为 $[-3.291,-0.226]$。这些结果构成了温度场推演、状态估计和工艺决策的闭环验证链路。

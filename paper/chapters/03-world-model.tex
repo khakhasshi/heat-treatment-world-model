@@ -102,6 +102,9 @@ $R_i$ 的量纲为温度。表面节点残差由式\eqref{eq:surface_discrete_ba
 
 \section{动态边界的可辨识参数化}
 
+\noindent\textbf{命题 1（单步边界转移的局部不可辨识性）}
+在固定 $T_s$、$\Tinfty$ 且 $h,\varepsilon$ 均未知时，边界热流只依赖标量组合 $\Heff$，映射 $(h,\varepsilon)\mapsto q_s$ 非单射。
+
 由式\eqref{eq:heff_flux}定义
 \begin{equation}
   \Heff(t)=h(t)+\varepsilon(t)h_{\mathrm{rad}}(T_s(t),\Tinfty(t)).
@@ -117,7 +120,9 @@ $R_i$ 的量纲为温度。表面节点残差由式\eqref{eq:surface_discrete_ba
 \begin{equation}
   \delta h=-h_{\mathrm{rad}}\delta\varepsilon,
 \end{equation}
-就能在当前状态保持相同热流。逐时自由变化的 $h(t)$ 和 $\varepsilon(t)$ 因而没有唯一分解。该结论限定于本文的均匀灰体边界、已知表面温度和已知炉温。若参数在一段时间内保持常数，变化的 $h_{\mathrm{rad}}$ 可提供额外历史信息。对本文逐时变化的边界，$\Heff$ 是当前热流和单步状态转移的充分输入。
+就能在当前状态保持相同热流，命题得证。逐时自由变化的 $h(t)$ 和 $\varepsilon(t)$ 因而没有唯一分解。该结论限定于本文的均匀灰体边界、已知表面温度和已知炉温。若参数在一段时间内保持常数，变化的 $h_{\mathrm{rad}}$ 可提供额外历史信息。
+
+这里需要区分两种充分性。对已执行动作下的前向状态转移，$\Heff$ 是当前边界热流的充分输入。对候选炉温的反事实规划，$h_{\mathrm{rad}}$ 随炉温改变，当前 $\Heff$ 不能单独确定新动作下的边界热流。因此，$\Heff$ 不构成整个控制问题的充分统计量。
 
 基于该结论，本文构建第二类世界模型
 \begin{equation}
@@ -125,7 +130,7 @@ $R_i$ 的量纲为温度。表面节点残差由式\eqref{eq:surface_discrete_ba
   =F_{\theta}^{H}(\bm{s}_n,a_n,\Heff_n,s_k,s_c,L,\Delta t).
   \label{eq:heff_model}
 \end{equation}
-该表示消除了训练输入中的等价方向。网络无需学习同一边界热流对应的多组参数组合。对反事实动作 $a'$，$h$ 与 $\varepsilon$ 的分解仍决定新的辐射贡献。因此，闭环规划阶段使用增广状态滤波器保持二者的后验集合，并由每个集合成员计算候选动作下的 $\Heff(a')$。
+该表示消除了训练输入中的等价方向。网络无需学习同一边界热流对应的多组参数组合。闭环规划阶段使用增广状态滤波器保持 $h$ 与 $\varepsilon$ 的后验集合，并由每个集合成员计算候选动作下的 $\Heff(a')$。
 
 \section{评价指标}
 
