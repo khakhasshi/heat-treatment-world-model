@@ -30,6 +30,7 @@ evaluate-dynamic-boundary-ood = "heat_world_model.dynamic_boundary_ood_cli:main"
 analyze-boundary-observer = "heat_world_model.boundary_observer_cli:main"
 evaluate-effective-boundary = "heat_world_model.effective_boundary_cli:main"
 evaluate-cross-solver = "heat_world_model.cross_solver_cli:main"
+evaluate-closed-loop-control = "heat_world_model.closed_loop_control_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
