@@ -9,9 +9,11 @@ from heat_world_model.closed_loop_control_cli import (
 from heat_world_model.control import (
     ClosedLoopControlConfig,
     candidate_objective,
+    choose_posterior_world_model_action,
     outcome_metrics,
 )
 from heat_world_model.dynamic_boundary_ood_cli import CATEGORY_NAMES
+from heat_world_model.model import ModelConfig
 
 
 def _parameter_history(steps: int) -> np.ndarray:
@@ -68,6 +70,15 @@ def test_control_scenarios_select_equal_count_per_category() -> None:
     selected = select_control_scenarios(categories, per_category=2)
     counts = np.bincount(categories[selected])
     np.testing.assert_array_equal(counts, np.full(len(CATEGORY_NAMES), 2))
+
+
+def test_control_scenario_offset_reserves_calibration_cases() -> None:
+    categories = np.repeat(list(CATEGORY_NAMES), 4)
+    calibration = select_control_scenarios(categories, per_category=2)
+    evaluation = select_control_scenarios(
+        categories, per_category=2, start_per_category=2
+    )
+    assert not set(calibration) & set(evaluation)
 
 
 def test_boundary_observer_uses_finite_prior_before_first_transition() -> None:
@@ -131,3 +142,42 @@ def test_aggregate_separates_scenario_and_seed_variation() -> None:
     assert metric["mean"] == 4.0
     assert np.isclose(metric["scenario_sample_std"], np.sqrt(8.0))
     assert np.isclose(metric["seed_sample_std"], np.sqrt(2.0))
+
+
+class _ControlTestModel:
+    def __init__(self, nx: int) -> None:
+        self.config = ModelConfig(nx=nx)
+
+    def eval(self):
+        return self
+
+    def __call__(self, state, control, parameters):
+        del parameters
+        return state + (control[:, None] - state) * 0.001
+
+
+def test_posterior_controller_returns_risk_diagnostics() -> None:
+    config = ClosedLoopControlConfig(
+        episode_steps=2,
+        action_levels_c=(300.0, 700.0),
+    )
+    ensemble = np.column_stack(
+        [
+            np.full((6, 5), 300.0),
+            np.linspace(20.0, 50.0, 6),
+            np.linspace(0.7, 0.88, 6),
+        ]
+    )
+    action, elapsed, diagnostics = choose_posterior_world_model_action(
+        _ControlTestModel(5),
+        ensemble,
+        _parameter_history(2),
+        previous_action_c=300.0,
+        config=config,
+        risk_quantile=0.9,
+        max_ensemble_members=4,
+    )
+    assert action in config.action_levels_c
+    assert elapsed >= 0.0
+    assert diagnostics["risk_quantile"] == 0.9
+    assert diagnostics["posterior_members_used"] == 4.0

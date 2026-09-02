@@ -31,6 +31,8 @@ analyze-boundary-observer = "heat_world_model.boundary_observer_cli:main"
 evaluate-effective-boundary = "heat_world_model.effective_boundary_cli:main"
 evaluate-cross-solver = "heat_world_model.cross_solver_cli:main"
 evaluate-closed-loop-control = "heat_world_model.closed_loop_control_cli:main"
+evaluate-partial-observability = "heat_world_model.partial_observability_cli:main"
+evaluate-ood-partial-observability = "heat_world_model.ood_partial_observability_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

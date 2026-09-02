@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import time
+from dataclasses import dataclass
 
 import numpy as np
 import torch
@@ -47,9 +47,8 @@ def candidate_objective(
     overtemperature = np.maximum(
         0.0, surface_peak - config.maximum_surface_temperature_c
     )
-    energy_fraction = (
-        (candidate_actions_c - config.ambient_temperature_c)
-        / (max(config.action_levels_c) - config.ambient_temperature_c)
+    energy_fraction = (candidate_actions_c - config.ambient_temperature_c) / (
+        max(config.action_levels_c) - config.ambient_temperature_c
     )
     return (
         np.abs(center - config.desired_center_temperature_c)
@@ -82,9 +81,7 @@ def outcome_metrics(
         abs(controls_c[0] - config.action_levels_c[0])
         + np.sum(np.abs(np.diff(controls_c)))
     )
-    overtemperature = max(
-        0.0, peak_surface - config.maximum_surface_temperature_c
-    )
+    overtemperature = max(0.0, peak_surface - config.maximum_surface_temperature_c)
     score = (
         center_error
         + config.uniformity_weight * nonuniformity
@@ -122,12 +119,8 @@ def choose_legacy_world_model_action(
     previous_action_c: float,
     config: ClosedLoopControlConfig,
 ) -> tuple[float, float]:
-    controls = _constant_candidate_controls(
-        future_parameter_history.shape[0], config
-    )
-    parameters = np.repeat(
-        future_parameter_history[None], controls.shape[0], axis=0
-    )
+    controls = _constant_candidate_controls(future_parameter_history.shape[0], config)
+    parameters = np.repeat(future_parameter_history[None], controls.shape[0], axis=0)
     initial = np.repeat(current_state_c[None], controls.shape[0], axis=0)
     model.eval()
     current = torch.as_tensor(initial, dtype=torch.float32)
@@ -141,9 +134,7 @@ def choose_legacy_world_model_action(
     start = time.perf_counter()
     with torch.no_grad():
         for step in range(controls.shape[1]):
-            current = model(
-                current, control_tensor[:, step], parameter_tensor[:, step]
-            )
+            current = model(current, control_tensor[:, step], parameter_tensor[:, step])
             prediction[:, step + 1] = current.numpy()
     scores = candidate_objective(
         prediction,
@@ -163,28 +154,42 @@ def _effective_model_predictions(
     convection_w_m2k: np.ndarray,
     emissivity: np.ndarray,
 ) -> np.ndarray:
-    candidates, steps = controls_c.shape
-    current = torch.as_tensor(
-        np.repeat(current_state_c[None], candidates, axis=0),
-        dtype=torch.float32,
+    candidates = controls_c.shape[0]
+    initial = np.repeat(current_state_c[None], candidates, axis=0)
+    return _effective_model_predictions_from_initial(
+        model,
+        initial,
+        controls_c,
+        material_parameters,
+        convection_w_m2k,
+        emissivity,
     )
+
+
+def _effective_model_predictions_from_initial(
+    model: TemperatureWorldModel,
+    initial_states_c: np.ndarray,
+    controls_c: np.ndarray,
+    material_parameters: np.ndarray,
+    convection_w_m2k: np.ndarray,
+    emissivity: np.ndarray,
+) -> np.ndarray:
+    candidates, steps = controls_c.shape
+    if initial_states_c.shape[0] != candidates:
+        raise ValueError("initial states and controls must have equal batch size")
+    current = torch.as_tensor(initial_states_c, dtype=torch.float32)
     controls = torch.as_tensor(controls_c, dtype=torch.float32)
     material = np.repeat(material_parameters[None], candidates, axis=0)
     prediction = np.empty(
-        (candidates, steps + 1, current_state_c.size), dtype=np.float32
+        (candidates, steps + 1, initial_states_c.shape[1]), dtype=np.float32
     )
     prediction[:, 0] = current.numpy()
     model.eval()
     with torch.no_grad():
         for step in range(steps):
             surface = 0.5 * (current[:, 0].numpy() + current[:, -1].numpy())
-            basis = radiative_basis_numpy(
-                surface, controls_c[:, step]
-            )
-            effective = (
-                convection_w_m2k[:, step]
-                + emissivity[:, step] * basis
-            )
+            basis = radiative_basis_numpy(surface, controls_c[:, step])
+            effective = convection_w_m2k[:, step] + emissivity[:, step] * basis
             parameters = np.column_stack([effective, material]).astype(np.float32)
             current = model(
                 current,
@@ -193,6 +198,80 @@ def _effective_model_predictions(
             )
             prediction[:, step + 1] = current.numpy()
     return prediction
+
+
+def choose_posterior_world_model_action(
+    model: TemperatureWorldModel,
+    posterior_ensemble: np.ndarray,
+    future_material_history: np.ndarray,
+    previous_action_c: float,
+    config: ClosedLoopControlConfig,
+    *,
+    risk_quantile: float = 0.9,
+    max_ensemble_members: int = 16,
+) -> tuple[float, float, dict[str, float]]:
+    """Choose an action from a quantile of posterior-ensemble costs."""
+    if not 0.5 <= risk_quantile <= 1.0:
+        raise ValueError("risk_quantile must lie between 0.5 and 1.0")
+    ensemble = np.asarray(posterior_ensemble, dtype=np.float32)
+    nx = model.config.nx
+    if ensemble.ndim != 2 or ensemble.shape[1] != nx + 2:
+        raise ValueError("posterior ensemble must contain field, h, and emissivity")
+    if max_ensemble_members < 2:
+        raise ValueError("at least two posterior members are required")
+    if ensemble.shape[0] > max_ensemble_members:
+        indices = np.linspace(0, ensemble.shape[0] - 1, max_ensemble_members, dtype=int)
+        ensemble = ensemble[indices]
+
+    actions = np.asarray(config.action_levels_c, dtype=np.float32)
+    member_count = ensemble.shape[0]
+    remaining_steps = future_material_history.shape[0]
+    initial = np.repeat(ensemble[None, :, :nx], actions.size, axis=0).reshape(
+        actions.size * member_count, nx
+    )
+    controls = np.broadcast_to(
+        actions[:, None, None],
+        (actions.size, member_count, remaining_steps),
+    ).reshape(actions.size * member_count, remaining_steps)
+    convection = np.repeat(
+        np.tile(ensemble[:, nx], actions.size)[:, None], remaining_steps, axis=1
+    )
+    emissivity = np.repeat(
+        np.tile(ensemble[:, nx + 1], actions.size)[:, None],
+        remaining_steps,
+        axis=1,
+    )
+    start = time.perf_counter()
+    prediction = _effective_model_predictions_from_initial(
+        model,
+        initial,
+        controls,
+        future_material_history[0, 2:],
+        convection,
+        emissivity,
+    )
+    member_scores = candidate_objective(
+        prediction,
+        np.repeat(actions, member_count),
+        previous_action_c,
+        config,
+    ).reshape(actions.size, member_count)
+    risk_scores = np.quantile(member_scores, risk_quantile, axis=1)
+    selected = int(np.argmin(risk_scores))
+    elapsed = time.perf_counter() - start
+    return (
+        float(actions[selected]),
+        elapsed,
+        {
+            "risk_quantile": risk_quantile,
+            "posterior_members_used": float(member_count),
+            "selected_mean_predicted_objective": float(member_scores[selected].mean()),
+            "selected_risk_predicted_objective": float(risk_scores[selected]),
+            "selected_predicted_objective_std": float(
+                member_scores[selected].std(ddof=1)
+            ),
+        },
+    )
 
 
 def choose_effective_world_model_action(
@@ -204,10 +283,7 @@ def choose_effective_world_model_action(
     previous_action_c: float,
     config: ClosedLoopControlConfig,
 ) -> tuple[float, float]:
-    controls = _constant_candidate_controls(
-        future_material_history.shape[0], config
-    )
-    candidates = controls.shape[0]
+    controls = _constant_candidate_controls(future_material_history.shape[0], config)
     convection = np.broadcast_to(convection_w_m2k, controls.shape)
     surface_emissivity = np.broadcast_to(emissivity, controls.shape)
     material = future_material_history[0, 2:]
@@ -236,9 +312,7 @@ def choose_source_solver_action(
     previous_action_c: float,
     config: ClosedLoopControlConfig,
 ) -> tuple[float, float]:
-    controls = _constant_candidate_controls(
-        future_parameter_history.shape[0], config
-    )
+    controls = _constant_candidate_controls(future_parameter_history.shape[0], config)
     parameters = future_parameter_history[0]
     model = C45RadiativeSlabModel(
         length_m=float(parameters[5]),
@@ -279,9 +353,7 @@ def choose_reference_solver_action(
     previous_action_c: float,
     config: ClosedLoopControlConfig,
 ) -> tuple[float, float]:
-    controls = _constant_candidate_controls(
-        future_parameter_history.shape[0], config
-    )
+    controls = _constant_candidate_controls(future_parameter_history.shape[0], config)
     predictions = np.empty(
         (controls.shape[0], controls.shape[1] + 1, current_state_c.size),
         dtype=np.float64,

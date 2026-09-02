@@ -31,6 +31,8 @@
 - 已完成以唯一可辨识 `H_eff` 为边界输入的三种子重训和带噪因果闭环部署测试。
 - 已完成 81/161 节点自适应 BDF 参考解下的跨求解器、跨网格验证。
 - 已完成独立 BDF 工件中的 280 回合闭环控制、数值 MPC 对照和反事实边界诊断。
+- 已完成 5/41 稀疏测温、增广 EnKF 状态/边界联合估计和风险感知控制。
+- 已完成边界与材料参数分布外的 100 条 BDF 轨迹及 120 回合收紧约束压力测试。
 
 ## 快速开始
 
@@ -85,6 +87,12 @@ uv run --no-sync evaluate-cross-solver
 # 在 BDF 工件中比较固定工艺、数值 MPC 与 World Model MPC
 uv run --no-sync evaluate-closed-loop-control
 
+# 评估稀疏测温下的状态估计与后验风险控制
+uv run --no-sync evaluate-partial-observability
+
+# 在边界和材料参数 OOD 下执行 BDF 压力测试
+uv run --no-sync evaluate-ood-partial-observability
+
 # 用训练后的模型搜索炉温控制方案
 uv run --no-sync plan-heat-treatment --desired-center 400
 
@@ -104,4 +112,4 @@ tests/                  数值正确性和数据边界测试
 outputs/                实验数据、指标和图像
 ```
 
-研究主线见 [World Model 研究方案](docs/world-model-plan.md)，技术定义见 [模型架构](docs/world-model-architecture.md)，C45 参数与边界见 [材料模型](docs/material-model.md)，实验结论见 [World Model 实验结果](docs/world-model-results.md)，参数外推见 [参数 OOD 结果](docs/parameter-ood-results.md)，时间变化边界见 [动态边界 OOD 结果](docs/dynamic-boundary-ood-results.md)，边界反演见 [等效换热系数观测器结果](docs/boundary-observer-results.md)，结构重参数化见 [等效边界模型结果](docs/effective-boundary-model-results.md)，离散迁移见 [跨求解器验证结果](docs/cross-solver-results.md)，闭环决策见 [闭环控制结果](docs/closed-loop-control-results.md)，真实数据路线见 [实验验证计划](docs/experimental-validation-plan.md)。
+研究主线见 [World Model 研究方案](docs/world-model-plan.md)，技术定义见 [模型架构](docs/world-model-architecture.md)，C45 参数与边界见 [材料模型](docs/material-model.md)，实验结论见 [World Model 实验结果](docs/world-model-results.md)，参数外推见 [参数 OOD 结果](docs/parameter-ood-results.md)，时间变化边界见 [动态边界 OOD 结果](docs/dynamic-boundary-ood-results.md)，边界反演见 [等效换热系数观测器结果](docs/boundary-observer-results.md)，结构重参数化见 [等效边界模型结果](docs/effective-boundary-model-results.md)，离散迁移见 [跨求解器验证结果](docs/cross-solver-results.md)，闭环决策见 [闭环控制结果](docs/closed-loop-control-results.md)，稀疏测温与风险控制见 [部分可观测结果](docs/partial-observability-results.md)，真实数据路线见 [实验验证计划](docs/experimental-validation-plan.md)。

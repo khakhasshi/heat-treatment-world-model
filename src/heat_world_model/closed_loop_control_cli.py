@@ -1,15 +1,15 @@
 import argparse
-from dataclasses import asdict
 import json
-from pathlib import Path
 import time
+from dataclasses import asdict
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 from .boundary_observer_cli import (
-    EMISSIVITY_RANGE,
     CONVECTION_RANGE,
+    EMISSIVITY_RANGE,
     estimate_effective_coefficient,
     radiative_basis_numpy,
 )
@@ -26,21 +26,22 @@ from .model import load_world_model
 from .reference_solver import AdaptiveC45ReferenceSolver, project_reference_states
 from .sweep_cli import weight_label
 
-
 DEFAULT_SEEDS = (42, 7, 123)
 DEFAULT_WEIGHTS = (0.0, 0.001)
 SENSOR_NODES = (0, 1, -2, -1)
 
 
 def select_control_scenarios(
-    categories: np.ndarray, per_category: int
+    categories: np.ndarray, per_category: int, start_per_category: int = 0
 ) -> np.ndarray:
     selected = []
     for category_id in CATEGORY_NAMES:
         candidates = np.flatnonzero(categories == category_id)
-        if candidates.size < per_category:
+        if candidates.size < start_per_category + per_category:
             raise ValueError("not enough trajectories for every control category")
-        selected.extend(candidates[:per_category])
+        selected.extend(
+            candidates[start_per_category : start_per_category + per_category]
+        )
     return np.asarray(selected, dtype=np.int64)
 
 
@@ -68,10 +69,14 @@ def _estimated_boundary_pair(
 ) -> tuple[float, float, dict[str, float | None]]:
     nominal_emissivity = 0.5 * sum(EMISSIVITY_RANGE)
     if not controls:
-        return 0.5 * sum(CONVECTION_RANGE), nominal_emissivity, {
-            "effective_coefficient_w_m2k": None,
-            "clipped_fraction": 0.0,
-        }
+        return (
+            0.5 * sum(CONVECTION_RANGE),
+            nominal_emissivity,
+            {
+                "effective_coefficient_w_m2k": None,
+                "clipped_fraction": 0.0,
+            },
+        )
     state_array = np.asarray(measured_states, dtype=np.float64)[None]
     control_array = np.asarray(controls, dtype=np.float64)[None]
     history = parameter_history[: len(controls)][None]
@@ -79,13 +84,9 @@ def _estimated_boundary_pair(
         state_array, control_array, history, window=noise_window
     )
     effective = float(estimate[0, -1])
-    previous_surface = 0.5 * (
-        measured_states[-2][0] + measured_states[-2][-1]
-    )
+    previous_surface = 0.5 * (measured_states[-2][0] + measured_states[-2][-1])
     basis = float(
-        radiative_basis_numpy(
-            np.asarray(previous_surface), np.asarray(controls[-1])
-        )
+        radiative_basis_numpy(np.asarray(previous_surface), np.asarray(controls[-1]))
     )
     convection = float(
         np.clip(
@@ -94,10 +95,14 @@ def _estimated_boundary_pair(
             CONVECTION_RANGE[1],
         )
     )
-    return convection, nominal_emissivity, {
-        "effective_coefficient_w_m2k": effective,
-        "clipped_fraction": diagnostics["clipped_fraction"],
-    }
+    return (
+        convection,
+        nominal_emissivity,
+        {
+            "effective_coefficient_w_m2k": effective,
+            "clipped_fraction": diagnostics["clipped_fraction"],
+        },
+    )
 
 
 def _plant_solver(
@@ -131,17 +136,13 @@ def run_control_episode(
         raise ValueError("parameter history must match the control episode")
     plant = _plant_solver(parameter_history[0])
     high_state = np.full(plant.nx, initial_temperature_c, dtype=np.float64)
-    target_positions = np.linspace(
-        0.0, float(parameter_history[0, 5]), 41
-    )
+    target_positions = np.linspace(0.0, float(parameter_history[0, 5]), 41)
     projected_initial = project_reference_states(
         high_state[None], plant.positions_m, target_positions
     )[0]
     true_states = [projected_initial]
     rng = np.random.default_rng(noise_seed)
-    measured_states = [
-        _measured_state(projected_initial, observer_noise_std_c, rng)
-    ]
+    measured_states = [_measured_state(projected_initial, observer_noise_std_c, rng)]
     controls: list[float] = []
     decisions = []
     planning_seconds = 0.0
@@ -157,9 +158,7 @@ def run_control_episode(
             action = 750.0
         elif controller == "proportional_feedback":
             center = current_state[current_state.size // 2]
-            requested = center + 2.5 * (
-                config.desired_center_temperature_c - center
-            )
+            requested = center + 2.5 * (config.desired_center_temperature_c - center)
             action = _nearest_action(float(requested), config)
         elif controller == "source_solver_mpc":
             action, elapsed = choose_source_solver_action(
@@ -199,13 +198,11 @@ def run_control_episode(
             )
             planning_seconds += elapsed
         elif controller == "effective_world_model_observer":
-            convection, emissivity, boundary_diagnostics = (
-                _estimated_boundary_pair(
-                    measured_states,
-                    controls,
-                    parameter_history,
-                    observer_window,
-                )
+            convection, emissivity, boundary_diagnostics = _estimated_boundary_pair(
+                measured_states,
+                controls,
+                parameter_history,
+                observer_window,
             )
             action, elapsed = choose_effective_world_model_action(
                 model,
@@ -231,18 +228,13 @@ def run_control_episode(
                 np.full(candidate_actions.size, surface), candidate_actions
             )
             true_candidate_effective = (
-                future_history[0, 0]
-                + future_history[0, 1] * candidate_basis
+                future_history[0, 0] + future_history[0, 1] * candidate_basis
             )
-            assumed_candidate_effective = (
-                convection + emissivity * candidate_basis
-            )
+            assumed_candidate_effective = convection + emissivity * candidate_basis
             counterfactual_error = (
                 assumed_candidate_effective - true_candidate_effective
             )
-            selected_index = int(
-                np.flatnonzero(candidate_actions == action)[0]
-            )
+            selected_index = int(np.flatnonzero(candidate_actions == action)[0])
             boundary_diagnostics.update(
                 {
                     "counterfactual_h_rmse_w_m2k": float(
@@ -273,9 +265,7 @@ def run_control_episode(
         )
         for state in projected:
             true_states.append(state)
-            measured_states.append(
-                _measured_state(state, observer_noise_std_c, rng)
-            )
+            measured_states.append(_measured_state(state, observer_noise_std_c, rng))
         controls.extend([action] * block_steps)
         decisions.append(
             {
@@ -339,9 +329,7 @@ def _aggregate(records: list[dict[str, object]]) -> dict[str, object]:
             key += f"|noise={noise:g}C"
         group_result = {}
         for metric in numeric_metrics:
-            all_values = [
-                record["result"]["metrics"][metric] for record in selected
-            ]
+            all_values = [record["result"]["metrics"][metric] for record in selected]
             scenario_values = [
                 np.mean(
                     [
@@ -375,15 +363,11 @@ def _aggregate(records: list[dict[str, object]]) -> dict[str, object]:
                     else 0.0
                 ),
                 "seed_sample_std": (
-                    float(np.std(seed_means, ddof=1))
-                    if len(seed_means) > 1
-                    else 0.0
+                    float(np.std(seed_means, ddof=1)) if len(seed_means) > 1 else 0.0
                 ),
             }
         group_result["success_rate"] = float(
-            np.mean(
-                [record["result"]["metrics"]["success"] for record in selected]
-            )
+            np.mean([record["result"]["metrics"]["success"] for record in selected])
         )
         group_result["episode_count"] = len(selected)
         result[key] = group_result
@@ -461,7 +445,10 @@ def _pairwise_against_reference(
     )
     result = {}
     reference_planning = np.mean(
-        [record["result"]["metrics"]["planning_seconds"] for record in reference.values()]
+        [
+            record["result"]["metrics"]["planning_seconds"]
+            for record in reference.values()
+        ]
     )
     for controller, weight, noise in groups:
         selected = [
@@ -567,13 +554,9 @@ def _plot_control_summary(result: dict[str, object], output_path: Path) -> None:
         ("planning_seconds", "Planning time per episode (s)", True),
     )
     colors = plt.get_cmap("tab10").colors
-    for axis, (metric, ylabel, logarithmic) in zip(
-        axes.ravel(), panels, strict=True
-    ):
+    for axis, (metric, ylabel, logarithmic) in zip(axes.ravel(), panels, strict=True):
         means = [aggregate[key][metric]["mean"] for key in keys]
-        errors = [
-            aggregate[key][metric]["scenario_sample_std"] for key in keys
-        ]
+        errors = [aggregate[key][metric]["scenario_sample_std"] for key in keys]
         if logarithmic:
             errors = [min(error, 0.9 * mean) for mean, error in zip(means, errors)]
         x = np.arange(len(keys))
@@ -834,9 +817,7 @@ def main() -> None:
     (args.output_dir / "closed_loop_control_metrics.json").write_text(
         json.dumps(result, indent=2), encoding="utf-8"
     )
-    _plot_control_summary(
-        result, args.output_dir / "closed_loop_control_summary.png"
-    )
+    _plot_control_summary(result, args.output_dir / "closed_loop_control_summary.png")
     _plot_representative(
         representative_histories,
         config,
