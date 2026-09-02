@@ -9,6 +9,7 @@ from heat_world_model.dynamic_boundary_ood_cli import (
     DynamicBoundaryOODConfig,
     generate_dynamic_boundary_ood_dataset,
 )
+from heat_world_model.effective_boundary_cli import causal_observer_history
 from heat_world_model.simulator import C45RadiativeSlabModel
 
 
@@ -49,6 +50,29 @@ def test_noise_free_one_step_observer_recovers_effective_coefficient() -> None:
     )
     np.testing.assert_allclose(estimate, truth, rtol=1e-9, atol=1e-8)
     assert diagnostics["clipped_fraction"] == 0.0
+
+
+def test_causal_observer_delays_estimate_by_one_transition() -> None:
+    model = C45RadiativeSlabModel(nx=11, dt_s=1.0)
+    controls = np.linspace(200.0, 900.0, 20)
+    convection = np.linspace(15.0, 55.0, controls.size)
+    emissivity = np.linspace(0.67, 0.88, controls.size)
+    states = model.rollout(
+        25.0,
+        controls,
+        convection_w_m2k=convection,
+        emissivity=emissivity,
+    )[None]
+    parameters = _parameter_history(model, convection, emissivity)
+    instantaneous, _ = estimate_effective_coefficient(
+        states, controls[None], parameters, window=1
+    )
+    causal, diagnostics = causal_observer_history(
+        states, controls[None], parameters, window=1
+    )
+    np.testing.assert_allclose(causal[:, 1:], instantaneous[:, :-1])
+    assert not np.isclose(causal[0, 0], instantaneous[0, 0])
+    assert diagnostics["one_step_delay"] is True
 
 
 def test_equivalent_parameter_pairs_preserve_boundary_transition() -> None:

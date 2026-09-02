@@ -14,6 +14,8 @@ from heat_world_model.data_size_cli import (
     parse_training_sizes,
 )
 from heat_world_model.model import ModelConfig, build_model_from_training_data
+from heat_world_model.boundary_observer_cli import true_effective_coefficient
+from heat_world_model.effective_boundary_cli import effective_parameter_history
 from heat_world_model.physics import implicit_heat_residual
 from heat_world_model.simulator import C45RadiativeSlabModel, SlabThermalModel
 from heat_world_model.sweep_cli import parse_physics_weights, weight_label
@@ -154,6 +156,45 @@ def test_c45_dynamic_boundary_rollout_matches_step_residual() -> None:
         emissivity=np.full(controls.size, simulator.emissivity),
     )
     np.testing.assert_allclose(static_states, simulator.rollout(25.0, controls))
+
+
+def test_c45_effective_parameterization_matches_radiative_balance() -> None:
+    simulator = C45RadiativeSlabModel(nx=9, dt_s=2.0)
+    controls = np.linspace(200.0, 850.0, 8)
+    convection = np.linspace(15.0, 55.0, controls.size)
+    emissivity = np.linspace(0.67, 0.88, controls.size)
+    states = simulator.rollout(
+        25.0,
+        controls,
+        convection_w_m2k=convection,
+        emissivity=emissivity,
+    )
+    original = np.column_stack(
+        [
+            convection,
+            emissivity,
+            np.full(controls.size, simulator.conductivity_scale),
+            np.full(controls.size, simulator.density_kg_m3),
+            np.full(controls.size, simulator.heat_capacity_scale),
+            np.full(controls.size, simulator.length_m),
+            np.full(controls.size, simulator.dt_s),
+        ]
+    )[None]
+    effective = effective_parameter_history(
+        states[None], controls[None], original
+    )[0]
+    expected_coefficient = true_effective_coefficient(
+        states[None], controls[None], original
+    )[0]
+    np.testing.assert_allclose(effective[:, 0], expected_coefficient)
+    residual = implicit_heat_residual(
+        torch.as_tensor(states[:-1]),
+        torch.as_tensor(states[1:]),
+        torch.as_tensor(controls),
+        torch.as_tensor(effective, dtype=torch.float64),
+        parameterization="c45_effective",
+    )
+    assert float(torch.max(torch.abs(residual))) < 1e-6
 
 
 def test_maximum_principle_uses_global_field_bounds() -> None:

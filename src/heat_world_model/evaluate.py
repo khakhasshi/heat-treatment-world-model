@@ -61,6 +61,7 @@ def rollout_metrics(
     controls_c: np.ndarray,
     parameters: np.ndarray,
     physics_parameters: np.ndarray | None = None,
+    physics_parameterization: str = "auto",
 ) -> tuple[dict[str, float], np.ndarray]:
     prediction, elapsed_seconds = rollout_predictions(
         model, states_c[:, 0], controls_c, parameters
@@ -90,7 +91,11 @@ def rollout_metrics(
     repeated_parameters = torch.as_tensor(flattened_parameters)
     with torch.no_grad():
         physics_residual = implicit_heat_residual(
-            current, following, control, repeated_parameters
+            current,
+            following,
+            control,
+            repeated_parameters,
+            parameterization=physics_parameterization,
         ).numpy()
 
     metrics = {

@@ -65,6 +65,24 @@ def test_dataset_uses_disjoint_trajectory_splits() -> None:
     assert targets.shape == (12, 3, 9)
 
 
+def test_training_windows_preserve_time_varying_parameter_order() -> None:
+    dataset = generate_dataset(DatasetConfig(trajectories=10, steps=8, nx=9, seed=7))
+    parameter_history = np.repeat(dataset["parameters"][:, None, :], 8, axis=1)
+    parameter_history[:, :, 0] = np.arange(8)[None]
+    dataset["parameter_history"] = parameter_history
+    selected = dataset["split"] == 0
+
+    _, _, transition_parameters, _ = transitions_for_mask(dataset, selected)
+    np.testing.assert_array_equal(transition_parameters[:8, 0], np.arange(8))
+
+    _, _, window_parameters, _ = rollout_windows_for_mask(
+        dataset, selected, horizon=3
+    )
+    assert window_parameters.shape == (42, 3, 6)
+    np.testing.assert_array_equal(window_parameters[0, :, 0], [0, 1, 2])
+    np.testing.assert_array_equal(window_parameters[5, :, 0], [5, 6, 7])
+
+
 def test_c45_dataset_has_separate_ood_schedule_families() -> None:
     dataset = generate_c45_dataset(
         C45DatasetConfig(trajectories=12, steps=8, nx=7, seed=9)

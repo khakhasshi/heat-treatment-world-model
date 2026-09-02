@@ -27,6 +27,7 @@ sweep-training-size = "heat_world_model.data_size_cli:main"
 evaluate-parameter-ood = "heat_world_model.parameter_ood_cli:main"
 evaluate-dynamic-boundary-ood = "heat_world_model.dynamic_boundary_ood_cli:main"
 analyze-boundary-observer = "heat_world_model.boundary_observer_cli:main"
+evaluate-effective-boundary = "heat_world_model.effective_boundary_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

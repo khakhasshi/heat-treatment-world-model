@@ -27,6 +27,7 @@ class WorldModelTrainingConfig:
     max_train_trajectories: int | None = None
     seed: int = 42
     evaluate_every: int = 5
+    physics_parameterization: str = "auto"
 
 
 def set_seed(seed: int) -> None:
@@ -46,12 +47,17 @@ def transitions_for_mask(
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     states = dataset["states_c"][selected]
     controls = dataset["controls_c"][selected]
-    parameters = dataset["parameters"][selected]
+    parameter_source = dataset.get("parameter_history", dataset["parameters"])
+    parameters = parameter_source[selected]
     steps = controls.shape[1]
     current = states[:, :-1].reshape(-1, states.shape[-1])
     following = states[:, 1:].reshape(-1, states.shape[-1])
     flat_controls = controls.reshape(-1)
-    repeated_parameters = np.repeat(parameters, steps, axis=0)
+    repeated_parameters = (
+        np.repeat(parameters, steps, axis=0)
+        if parameters.ndim == 2
+        else parameters.reshape(-1, parameters.shape[-1])
+    )
     return current, flat_controls, repeated_parameters, following
 
 
@@ -60,7 +66,8 @@ def rollout_windows_for_mask(
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     states = dataset["states_c"][selected]
     controls = dataset["controls_c"][selected]
-    parameters = dataset["parameters"][selected]
+    parameter_source = dataset.get("parameter_history", dataset["parameters"])
+    parameters = parameter_source[selected]
     if horizon < 1 or horizon > controls.shape[1]:
         raise ValueError("rollout_horizon must be between 1 and the trajectory length")
     starts = controls.shape[1] - horizon + 1
@@ -73,7 +80,19 @@ def rollout_windows_for_mask(
         [states[:, offset + 1 : offset + 1 + starts] for offset in range(horizon)],
         axis=2,
     )
-    repeated_parameters = np.repeat(parameters, starts, axis=0)
+    if parameters.ndim == 2:
+        repeated_parameters = np.repeat(parameters, starts, axis=0)
+    else:
+        parameter_windows = np.stack(
+            [
+                parameters[:, offset : offset + starts]
+                for offset in range(horizon)
+            ],
+            axis=2,
+        )
+        repeated_parameters = parameter_windows.reshape(
+            -1, horizon, parameters.shape[-1]
+        )
     return (
         initial.reshape(-1, states.shape[-1]),
         control_windows.reshape(-1, horizon),
@@ -133,7 +152,9 @@ def train_world_model(
     validation_mask = dataset["split"] == 1
     validation_states = dataset["states_c"][validation_mask]
     validation_controls = dataset["controls_c"][validation_mask]
-    validation_parameters = dataset["parameters"][validation_mask]
+    validation_parameters = dataset.get(
+        "parameter_history", dataset["parameters"]
+    )[validation_mask]
     best_state: dict[str, torch.Tensor] | None = None
     best_epoch = 0
     best_validation_rollout = float("inf")
@@ -151,8 +172,13 @@ def train_world_model(
             data_loss = torch.zeros((), dtype=batch_current.dtype)
             physics_loss = torch.zeros((), dtype=batch_current.dtype)
             for step in range(config.rollout_horizon):
+                step_parameters = (
+                    batch_parameters
+                    if batch_parameters.ndim == 2
+                    else batch_parameters[:, step]
+                )
                 prediction = model(
-                    state, batch_controls[:, step], batch_parameters
+                    state, batch_controls[:, step], step_parameters
                 )
                 data_loss = data_loss + torch.mean(
                     (
@@ -165,8 +191,9 @@ def train_world_model(
                     state,
                     prediction,
                     batch_controls[:, step],
-                    batch_parameters,
+                    step_parameters,
                     model.delta_scale,
+                    parameterization=config.physics_parameterization,
                 )
                 state = prediction
             data_loss = data_loss / config.rollout_horizon
@@ -191,6 +218,7 @@ def train_world_model(
                 validation_states,
                 validation_controls,
                 validation_parameters,
+                physics_parameterization=config.physics_parameterization,
             )
             validation_one_step = one_step_rmse(
                 model,
