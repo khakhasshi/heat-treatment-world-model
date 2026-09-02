@@ -26,6 +26,7 @@
 - 已完成四档物理权重消融及三个训练随机种子的重复实验。
 - 已完成固定约 4920 次优化更新的 `5-70` 条嵌套数据量曲线。
 - 已完成换热系数、发射率、导热系数、比热及组合参数的三种子 OOD 评估。
+- 已完成换热系数与发射率时间变化的动态边界 OOD 及参数可观测性评估。
 
 ## 快速开始
 
@@ -65,6 +66,9 @@ uv run --no-sync sweep-training-size \
 # 在不重新训练的前提下评估参数分布外泛化
 uv run --no-sync evaluate-parameter-ood
 
+# 评估参数值不越界但时间结构未见的动态边界 OOD
+uv run --no-sync evaluate-dynamic-boundary-ood
+
 # 用训练后的模型搜索炉温控制方案
 uv run --no-sync plan-heat-treatment --desired-center 400
 
@@ -84,4 +88,4 @@ tests/                  数值正确性和数据边界测试
 outputs/                实验数据、指标和图像
 ```
 
-研究主线见 [World Model 研究方案](docs/world-model-plan.md)，技术定义见 [模型架构](docs/world-model-architecture.md)，C45 参数与边界见 [材料模型](docs/material-model.md)，实验结论见 [World Model 实验结果](docs/world-model-results.md)，参数外推见 [参数 OOD 结果](docs/parameter-ood-results.md)，真实数据路线见 [实验验证计划](docs/experimental-validation-plan.md)。
+研究主线见 [World Model 研究方案](docs/world-model-plan.md)，技术定义见 [模型架构](docs/world-model-architecture.md)，C45 参数与边界见 [材料模型](docs/material-model.md)，实验结论见 [World Model 实验结果](docs/world-model-results.md)，参数外推见 [参数 OOD 结果](docs/parameter-ood-results.md)，时间变化边界见 [动态边界 OOD 结果](docs/dynamic-boundary-ood-results.md)，真实数据路线见 [实验验证计划](docs/experimental-validation-plan.md)。

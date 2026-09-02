@@ -6,6 +6,12 @@ from heat_world_model.dataset import (
     generate_c45_dataset,
     generate_dataset,
 )
+from heat_world_model.dynamic_boundary_ood_cli import (
+    CATEGORY_NAMES as DYNAMIC_CATEGORY_NAMES,
+    DynamicBoundaryOODConfig,
+    TRAINING_RANGES,
+    generate_dynamic_boundary_ood_dataset,
+)
 from heat_world_model.simulator import SlabThermalModel
 from heat_world_model.parameter_ood_cli import (
     OOD_RANGES,
@@ -96,3 +102,45 @@ def test_parameter_ood_dataset_isolated_categories() -> None:
 
     combined = dataset["parameter_ood_type"] == 4
     assert np.all(dataset["parameter_directions"][combined] != 0)
+
+
+def test_dynamic_boundary_ood_stays_inside_instantaneous_training_ranges() -> None:
+    dataset = generate_dynamic_boundary_ood_dataset(
+        DynamicBoundaryOODConfig(
+            trajectories_per_category=4, steps=12, nx=7, seed=13
+        )
+    )
+    history = dataset["parameter_history"]
+    assert dataset["states_c"].shape == (20, 13, 7)
+    assert history.shape == (20, 12, 7)
+    assert set(dataset["dynamic_boundary_type"]) == set(DYNAMIC_CATEGORY_NAMES)
+    assert set(dataset["schedule_type"]) == {0, 1}
+    np.testing.assert_allclose(dataset["parameters"], history[:, 0])
+
+    convection_range = TRAINING_RANGES["convection_w_m2k"]
+    emissivity_range = TRAINING_RANGES["emissivity"]
+    assert np.all(
+        (history[:, :, 0] >= convection_range[0])
+        & (history[:, :, 0] <= convection_range[1])
+    )
+    assert np.all(
+        (history[:, :, 1] >= emissivity_range[0])
+        & (history[:, :, 1] <= emissivity_range[1])
+    )
+    np.testing.assert_allclose(np.ptp(history[:, :, 2:], axis=1), 0.0)
+    np.testing.assert_allclose(
+        dataset["states_c"], dataset["states_c"][:, :, ::-1]
+    )
+
+    for category_id, category_name in DYNAMIC_CATEGORY_NAMES.items():
+        selected = history[dataset["dynamic_boundary_type"] == category_id]
+        h_changes = np.ptp(selected[:, :, 0], axis=1) > 1e-6
+        epsilon_changes = np.ptp(selected[:, :, 1], axis=1) > 1e-6
+        expected_h = (
+            category_name.startswith("convection") or category_name == "combined"
+        )
+        expected_epsilon = (
+            category_name.startswith("emissivity") or category_name == "combined"
+        )
+        assert np.all(h_changes == expected_h)
+        assert np.all(epsilon_changes == expected_epsilon)

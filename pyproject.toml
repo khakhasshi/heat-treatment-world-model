@@ -25,6 +25,7 @@ sweep-physics-weight = "heat_world_model.sweep_cli:main"
 aggregate-physics-sweeps = "heat_world_model.aggregate_sweeps_cli:main"
 sweep-training-size = "heat_world_model.data_size_cli:main"
 evaluate-parameter-ood = "heat_world_model.parameter_ood_cli:main"
+evaluate-dynamic-boundary-ood = "heat_world_model.dynamic_boundary_ood_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

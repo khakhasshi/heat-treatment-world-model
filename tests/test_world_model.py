@@ -77,6 +77,14 @@ def test_world_model_and_rollout_shapes() -> None:
         parameters.numpy(),
     )
     assert predictions.shape == (4, 6, 9)
+    dynamic_parameters = np.repeat(parameters.numpy()[:, None, :], 5, axis=1)
+    dynamic_predictions, _ = rollout_predictions(
+        model,
+        np.full((4, 9), 20.0, dtype=np.float32),
+        np.full((4, 5), 800.0, dtype=np.float32),
+        dynamic_parameters,
+    )
+    np.testing.assert_allclose(dynamic_predictions, predictions)
 
 
 def test_c45_radiative_transition_has_small_residual() -> None:
@@ -104,6 +112,48 @@ def test_c45_radiative_transition_has_small_residual() -> None:
         parameters,
     )
     assert float(torch.max(torch.abs(residual))) < 1e-8
+
+
+def test_c45_dynamic_boundary_rollout_matches_step_residual() -> None:
+    simulator = C45RadiativeSlabModel(nx=9, dt_s=2.0)
+    controls = np.linspace(200.0, 850.0, 8)
+    convection = np.linspace(15.0, 55.0, controls.size)
+    emissivity = np.linspace(0.67, 0.88, controls.size)
+    states = simulator.rollout(
+        25.0,
+        controls,
+        convection_w_m2k=convection,
+        emissivity=emissivity,
+    )
+    parameters = torch.tensor(
+        np.column_stack(
+            [
+                convection,
+                emissivity,
+                np.full(controls.size, simulator.conductivity_scale),
+                np.full(controls.size, simulator.density_kg_m3),
+                np.full(controls.size, simulator.heat_capacity_scale),
+                np.full(controls.size, simulator.length_m),
+                np.full(controls.size, simulator.dt_s),
+            ]
+        ),
+        dtype=torch.float64,
+    )
+    residual = implicit_heat_residual(
+        torch.as_tensor(states[:-1]),
+        torch.as_tensor(states[1:]),
+        torch.as_tensor(controls),
+        parameters,
+    )
+    assert float(torch.max(torch.abs(residual))) < 1e-8
+
+    static_states = simulator.rollout(
+        25.0,
+        controls,
+        convection_w_m2k=np.full(controls.size, simulator.convection_w_m2k),
+        emissivity=np.full(controls.size, simulator.emissivity),
+    )
+    np.testing.assert_allclose(static_states, simulator.rollout(25.0, controls))
 
 
 def test_maximum_principle_uses_global_field_bounds() -> None:

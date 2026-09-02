@@ -65,3 +65,9 @@ Carollo 等通过实验与逆问题方法同时估计了 AISI 1045 的温变导�
 4. 金属热处理温度场、温变物性、辐射边界和传统有限差分/有限元方法。
 
 当前已经收窄到 C45/AISI 1045 类中碳钢平板的炉内加热与冷却，但下一轮仍需继续寻找 C45 奥氏体化区间的可靠实测物性、表面发射率以及可公开复现的热电偶温度曲线。没有这些实验依据前，结论属于数值验证，不能宣称已完成真实热处理工艺验证。
+
+## 9. 动态边界补充文献
+
+- Duan et al., 2026, *Inverse identification of heat transfer parameters in a steel rolling reheating furnace using a full-process black-box temperature test*: 工业加热炉具有明显非均匀、时变扰动，换热系数、表面发射率与有效物性难以直接确定，支持将在线参数辨识作为 World Model 部署链的一部分。<https://doi.org/10.1016/j.ijthermalsci.2026.110821>
+- Shi et al., 2014, *Effect of surface oxidization on the spectral emissivity of steel 304 at the elevated temperature in air*: 实验显示发射率同时依赖温度与加热持续时间，氧化贡献主要发生在早期阶段。该材料并非 C45，因此只用于支持时间变化机制，不用于给定 C45 参数。<https://doi.org/10.1016/j.infrared.2014.05.001>
+- *Real-Time Detection and Monitoring of Oxide Layer Formation in 1045 Steel Using Infrared Thermography and Advanced Image Processing Algorithms*, 2025: 针对 1045 钢监测氧化层形成，支持把表面状态视为热辐射边界的潜在动态变量。<https://www.mdpi.com/1996-1944/18/5/954>

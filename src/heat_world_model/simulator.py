@@ -138,23 +138,43 @@ class C45RadiativeSlabModel:
         return np.linspace(0.0, self.length_m, self.nx)
 
     def _radiative_coefficient(
-        self, surface_temperature_c: float, environment_temperature_c: float
+        self,
+        surface_temperature_c: float,
+        environment_temperature_c: float,
+        emissivity: float | None = None,
     ) -> float:
         surface_k = surface_temperature_c + 273.15
         environment_k = environment_temperature_c + 273.15
         return (
-            self.emissivity
+            (self.emissivity if emissivity is None else emissivity)
             * STEFAN_BOLTZMANN_W_M2K4
             * (surface_k + environment_k)
             * (surface_k**2 + environment_k**2)
         )
 
     def step(
-        self, current_temperature_c: np.ndarray, environment_temperature_c: float
+        self,
+        current_temperature_c: np.ndarray,
+        environment_temperature_c: float,
+        *,
+        convection_w_m2k: float | None = None,
+        emissivity: float | None = None,
     ) -> np.ndarray:
         current = np.asarray(current_temperature_c, dtype=np.float64)
         if current.shape != (self.nx,):
             raise ValueError(f"current temperature must have shape ({self.nx},)")
+        convection = (
+            self.convection_w_m2k
+            if convection_w_m2k is None
+            else float(convection_w_m2k)
+        )
+        surface_emissivity = (
+            self.emissivity if emissivity is None else float(emissivity)
+        )
+        if convection <= 0.0:
+            raise ValueError("convection_w_m2k must be positive")
+        if not 0.0 <= surface_emissivity <= 1.0:
+            raise ValueError("emissivity must be between zero and one")
         conductivity, heat_capacity = c45_properties_numpy(current)
         conductivity *= self.conductivity_scale
         heat_capacity *= self.heat_capacity_scale
@@ -173,9 +193,11 @@ class C45RadiativeSlabModel:
         boundary_forcing = np.zeros(self.nx, dtype=np.float64)
         for surface, neighbor, face_index in ((0, 1, 0), (-1, -2, -1)):
             radiation = self._radiative_coefficient(
-                float(current[surface]), environment_temperature_c
+                float(current[surface]),
+                environment_temperature_c,
+                surface_emissivity,
             )
-            exchange = self.convection_w_m2k + radiation
+            exchange = convection + radiation
             conduction_rate = 2.0 * face_conductivity[face_index] / (
                 mass_capacity[surface] * dx**2
             )
@@ -194,15 +216,50 @@ class C45RadiativeSlabModel:
         self,
         initial_temperature_c: float | np.ndarray,
         environment_temperatures_c: np.ndarray,
+        *,
+        convection_w_m2k: float | np.ndarray | None = None,
+        emissivity: float | np.ndarray | None = None,
     ) -> np.ndarray:
         controls = np.asarray(environment_temperatures_c, dtype=np.float64)
+        if controls.ndim != 1:
+            raise ValueError("environment_temperatures_c must be one-dimensional")
+
+        def history(
+            values: float | np.ndarray | None, default: float, name: str
+        ) -> np.ndarray:
+            if values is None:
+                return np.full(controls.size, default, dtype=np.float64)
+            array = np.asarray(values, dtype=np.float64)
+            if array.ndim == 0:
+                return np.full(controls.size, float(array), dtype=np.float64)
+            if array.shape != controls.shape:
+                raise ValueError(
+                    f"{name} must be scalar or have shape {controls.shape}"
+                )
+            return array
+
+        convection_history = history(
+            convection_w_m2k, self.convection_w_m2k, "convection_w_m2k"
+        )
+        emissivity_history = history(emissivity, self.emissivity, "emissivity")
+        if np.any(convection_history <= 0.0):
+            raise ValueError("convection_w_m2k must be positive")
+        if np.any((emissivity_history < 0.0) | (emissivity_history > 1.0)):
+            raise ValueError("emissivity must be between zero and one")
         if np.isscalar(initial_temperature_c):
             state = np.full(self.nx, float(initial_temperature_c), dtype=np.float64)
         else:
             state = np.asarray(initial_temperature_c, dtype=np.float64).copy()
+            if state.shape != (self.nx,):
+                raise ValueError(f"initial temperature must have shape ({self.nx},)")
         states = np.empty((controls.size + 1, self.nx), dtype=np.float64)
         states[0] = state
-        for step, environment_temperature in enumerate(controls, start=1):
-            state = self.step(state, float(environment_temperature))
-            states[step] = state
+        for step_index, environment_temperature in enumerate(controls):
+            state = self.step(
+                state,
+                float(environment_temperature),
+                convection_w_m2k=float(convection_history[step_index]),
+                emissivity=float(emissivity_history[step_index]),
+            )
+            states[step_index + 1] = state
         return states
