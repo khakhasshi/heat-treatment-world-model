@@ -34,9 +34,18 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{deployment_comparison.png}
+  \includegraphics[width=0.96\textwidth]{deployment_comparison.png}
   \caption{动态边界表示与因果观测方式的比较}
   \label{fig:heff_deployment}
+\end{figure}
+
+代表性联合边界轨迹见图\ref{fig:heff_trajectory}。因果观测受到测温噪声和窗口滞后的影响，但估计值能够跟随 $\Heff$ 的总体变化。采用真实 $\Heff$ 时，世界模型的中心温度曲线与数值参考基本重合。使用因果估计后仍能保持相近的升温趋势。固定初始边界参数的原模型则产生持续偏差。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{effective_boundary_trajectory_zh.png}
+  \caption{等效换热系数因果观测及其代表性温度推演结果}
+  \label{fig:heff_trajectory}
 \end{figure}
 
 \section{增广状态集合滤波}
@@ -69,9 +78,18 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.85\textwidth]{open_loop_assimilation.png}
+  \includegraphics[width=0.96\textwidth]{open_loop_assimilation.png}
   \caption{五点测温条件下的温度场与边界参数同化结果}
   \label{fig:assimilation}
+\end{figure}
+
+图\ref{fig:sparse_trajectory}展示了五点测温条件下的闭环状态估计过程。四种控制器给出的中心温度轨迹接近，并在终点到达控制目标附近。全场估计误差在升温后段逐步增加，整个过程保持连续。该结果表明，集合滤波能够为滚动控制提供稳定的在线温度场状态。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{sparse_observation_trajectory_zh.png}
+  \caption{五点测温条件下的代表性闭环状态估计轨迹}
+  \label{fig:sparse_trajectory}
 \end{figure}
 
 \section{滚动时域控制}
@@ -90,9 +108,18 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{closed_loop_control_summary.png}
+  \includegraphics[width=0.96\textwidth]{closed_loop_control_summary.png}
   \caption{动态边界 BDF 环境中的闭环控制性能}
   \label{fig:closed_loop}
+\end{figure}
+
+图\ref{fig:closed_loop_trajectory}给出联合动态边界场景中的控制过程。固定炉温使中心温度越过目标，比例反馈在后段升温不足。BDF 模型预测控制与两种 $\Heff$ 世界模型控制在主要阶段选择相近动作，终点中心温度集中在目标附近。世界模型同时维持了较小的终态截面温差。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{closed_loop_trajectory_zh.png}
+  \caption{动态边界 BDF 环境中的代表性闭环控制轨迹}
+  \label{fig:closed_loop_trajectory}
 \end{figure}
 
 $\Heff$ 对当前动作的预测是充分的。候选炉温改变后，式\eqref{eq:hrad}中的辐射基函数随之变化，反事实边界仍需要 $h$ 与 $\varepsilon$ 的分解。集合滤波保留二者的后验成员，所以每个候选动作都能重新计算 $\Heff$。该处理把边界可辨识性和控制所需的反事实信息区分开来。
@@ -125,7 +152,7 @@ ID 闭环集包含 10 条未参与滤波校准的轨迹，三个模型种子共�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.88\textwidth]{ood_closed_loop_control.png}
+  \includegraphics[width=0.96\textwidth]{ood_closed_loop_control.png}
   \caption{收紧表面温度约束后的参数 OOD 闭环结果}
   \label{fig:ood_control}
 \end{figure}

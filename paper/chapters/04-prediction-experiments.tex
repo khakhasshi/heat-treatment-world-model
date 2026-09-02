@@ -30,7 +30,7 @@ $\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.86\textwidth]{physics_weight_replicates.png}
+  \includegraphics[width=0.96\textwidth]{physics_weight_replicates.png}
   \caption{物理权重在 ID 与控制 OOD 条件下的重复实验结果}
   \label{fig:weight_results}
 \end{figure}
@@ -60,7 +60,7 @@ $\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.84\textwidth]{parameter_ood_metrics.png}
+  \includegraphics[width=0.96\textwidth]{parameter_ood_metrics.png}
   \caption{不同参数 OOD 类别的温度场推演误差}
   \label{fig:param_ood}
 \end{figure}
@@ -70,6 +70,15 @@ $\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为�
 动态边界测试包含 $h$ 平滑变化、$h$ 阶跃、$\varepsilon$ 增长、$\varepsilon$ 阶跃和联合变化五类，共 100 条轨迹。所有瞬时参数值位于训练范围内，训练数据中的边界参数在单条轨迹内保持常数。该实验检验时间结构外推。
 
 逐步提供真实 $h(t)$ 与 $\varepsilon(t)$ 时，数据模型滚动 RMSE 为 $4.795\pm0.289$~\si{\degreeCelsius}，物理模型为 $4.089\pm0.162$~\si{\degreeCelsius}，降低 $14.7\%$。物理残差降低 $57.3\%$，逐轨迹 RMSE 的 95\% 分位数降低 $13.0\%$。若整段推演固定使用首时刻参数，两类模型的 RMSE 均约为 \SI{19.4}{\degreeCelsius}。动态输入的缺失会形成主要误差源。该结果促使模型输入转向可在线估计的 $\Heff$。
+
+图\ref{fig:dynamic_trajectory}给出联合边界变化类别中的中位误差轨迹。对流与辐射条件在 300~s 内连续变化，物理模型在中心和表面位置均保持稳定跟踪。炉温远高于工件温度时，两条预测曲线仍能贴合数值参考，说明递归模型能够处理边界热流随状态持续变化的过程。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{dynamic_boundary_trajectory_zh.png}
+  \caption{联合动态边界下的代表性温度场推演轨迹}
+  \label{fig:dynamic_trajectory}
+\end{figure}
 
 \section{跨求解器验证与在线效率}
 
@@ -93,11 +102,20 @@ $\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为�
 
 $\Heff$ 物理模型相对双参数物理模型将滚动 RMSE 降低约 $36.9\%$，最大误差降低约 $55.4\%$。结果与训练生成器上的排序一致。可辨识参数化的收益没有依赖特定离散器。
 
+图\ref{fig:cross_solver_trajectory}进一步比较了中位求解器差异轨迹。41 节点数据生成器与 81 节点 BDF 参考之间存在小幅系统偏差。两种世界模型在完整轨迹上保持贴合，其中 $\Heff$ 模型降低了表面节点误差。中心节点误差仍控制在数摄氏度范围内。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{cross_solver_trajectory_zh.png}
+  \caption{独立 BDF 参考下的代表性跨求解器推演轨迹}
+  \label{fig:cross_solver_trajectory}
+\end{figure}
+
 单条 BDF 轨迹平均耗时为 \SI{0.526}{\second}，$\Heff$ 世界模型中位耗时为 \SI{0.00834}{\second}，在线推演加速约 63 倍。该比较只统计已经训练完成后的轨迹计算。训练和数据生成属于离线成本。对一维问题，绝对耗时都很小；加速结果主要说明模型适合嵌入大量候选动作的滚动计算。
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{cross_solver_comparison.png}
+  \includegraphics[width=0.96\textwidth]{cross_solver_comparison.png}
   \caption{训练生成器与独立 BDF 参考集上的模型比较}
   \label{fig:cross_solver}
 \end{figure}

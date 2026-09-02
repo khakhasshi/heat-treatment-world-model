@@ -2,6 +2,12 @@
 
 本文档是冻结实验版本 `experiment-freeze-v1` 对应的学术论文初稿。
 
+实验图由冻结数据和已有模型统一生成：
+
+```bash
+uv run --no-sync python scripts/generate_paper_trajectory_figures.py
+```
+
 ```bash
 cd paper
 make
