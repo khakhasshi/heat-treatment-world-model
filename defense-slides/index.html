@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>基于物理约束世界模型的金属热处理温度场演化预测与闭环控制研究</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stage" id="stage">
+    <main class="deck" id="deck" aria-live="polite">
+      <section class="slide title-slide active" data-title="封面" data-kind="main">
+        <div class="title-copy">
+          <p class="eyebrow">本科毕业论文答辩</p>
+          <h1>基于物理约束世界模型的<br>金属热处理温度场演化预测<br>与闭环控制研究</h1>
+          <p class="lead">把温度场建模为可递归、可观测、可用于反事实动作比较的受控动力学系统</p>
+          <div class="identity">
+            <span>答辩人：江景哲</span>
+            <span>专业：材料成型及其控制工程</span>
+            <span>contact@jiangjingzhe.com</span>
+          </div>
+        </div>
+        <figure class="title-visual">
+          <img src="assets/closed_loop_trajectory_zh.png" alt="动态边界下的代表性滚动控制轨迹">
+        </figure>
+        <aside class="speaker-note">开场先给出论文的一句话定位。本文研究的重点是受控热动力学、动态边界辨识和闭环应用，不是把神经网络用于单次温度拟合。</aside>
+      </section>
+
+      <section class="slide" data-title="答辩路线" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">01 · 路线</p>
+          <h2>四个问题串起全文</h2>
+        </header>
+        <div class="route">
+          <article>
+            <span class="route-no">01</span>
+            <h3>研究什么</h3>
+            <p>炉温动作驱动下，C45 钢内部温度场如何长期演化？</p>
+          </article>
+          <article>
+            <span class="route-no">02</span>
+            <h3>难点在哪</h3>
+            <p>动态对流与辐射边界存在局部不可辨识方向。</p>
+          </article>
+          <article>
+            <span class="route-no">03</span>
+            <h3>如何验证</h3>
+            <p>完整轨迹、三类 OOD、交叉求解器与配对统计。</p>
+          </article>
+          <article>
+            <span class="route-no">04</span>
+            <h3>能否闭环</h3>
+            <p>稀疏测温、集合滤波与滚动炉温动作搜索。</p>
+          </article>
+        </div>
+        <p class="takeaway">核心贡献集中在可辨识边界表示及其进入状态估计和控制后的完整链路。</p>
+        <aside class="speaker-note">这页给评委建立地图。后面所有实验都服务于这四个问题，不按项目开发顺序展开。</aside>
+      </section>
+
+      <section class="slide" data-title="研究问题" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">02 · 问题定义</p>
+          <h2>学习一个可被反复调用的热处理环境模型</h2>
+        </header>
+        <div class="hero-equation">
+          <span class="state">s<sub>t</sub></span>
+          <span class="operator">+</span>
+          <span class="action">a<sub>t</sub></span>
+          <span class="operator">+</span>
+          <span class="parameter">p<sub>t</sub></span>
+          <span class="arrow">→</span>
+          <span class="model">F<sub>θ</sub></span>
+          <span class="arrow">→</span>
+          <span class="state">s<sub>t+1</sub></span>
+        </div>
+        <div class="definition-grid">
+          <div><strong>s<sub>t</sub></strong><span>41 节点完整温度场</span></div>
+          <div><strong>a<sub>t</sub></strong><span>当前炉温动作</span></div>
+          <div><strong>p<sub>t</sub></strong><span>材料、几何与边界参数</span></div>
+        </div>
+        <blockquote>“若把炉温调到 700 ℃，未来几十秒工件内部会怎样变化？”</blockquote>
+        <p class="takeaway">动作条件化、递归推演和反事实规划，使模型具备世界模型的功能定义。</p>
+        <aside class="speaker-note">强调世界模型的判据是用途。温度场本身已经是物理状态，所以没有额外学习图像潜空间。</aside>
+      </section>
+
+      <section class="slide" data-title="物理对象" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">03 · 数值对象</p>
+          <h2>一维 C45 钢平板的受控热传导</h2>
+        </header>
+        <div class="two-col physical-layout">
+          <div>
+            <div class="slab-diagram" aria-label="一维平板与边界热流示意">
+              <span class="heat-arrow left">q<sub>s</sub></span>
+              <div class="slab">
+                <span class="surface">表面</span>
+                <span class="center">中心</span>
+                <span class="surface">表面</span>
+              </div>
+              <span class="heat-arrow right">q<sub>s</sub></span>
+            </div>
+            <div class="equation compact">
+              ρc<sub>p</sub>(T) ∂T/∂t = ∂/∂x [k(T) ∂T/∂x]
+            </div>
+            <div class="equation compact">
+              q<sub>s</sub> = h(T<sub>∞</sub>−T<sub>s</sub>) + εσ(T<sub>∞</sub><sup>4</sup>−T<sub>s</sub><sup>4</sup>)
+            </div>
+          </div>
+          <div class="fact-list">
+            <p><strong>材料</strong><span>C45 / AISI 1045 类中碳钢</span></p>
+            <p><strong>状态</strong><span>41 个空间节点，时间步长 1 s</span></p>
+            <p><strong>物性</strong><span>温变导热率与经验等效热容</span></p>
+            <p><strong>边界</strong><span>对流与灰体辐射共同作用</span></p>
+            <p><strong>基准</strong><span>固定步长有限体积与自适应 BDF</span></p>
+          </div>
+        </div>
+        <p class="scope-line">350 ℃、300 s 任务用于方法学验证，不对应完整工业热处理制度。</p>
+        <aside class="speaker-note">主动界定研究对象。模型只覆盖热动力学，不包含相变组织、残余应力和变形。</aside>
+      </section>
+
+      <section class="slide" data-title="为什么需要世界模型" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">04 · 研究缺口</p>
+          <h2>单次温度预测不足以支持工艺决策</h2>
+        </header>
+        <div class="comparison-table">
+          <div class="table-row table-head">
+            <span>方法</span><span>回答的问题</span><span>在本文任务中的缺口</span>
+          </div>
+          <div class="table-row">
+            <span>固定工况回归</span><span>某一工况下温度是多少</span><span>难以评价未执行炉温动作</span>
+          </div>
+          <div class="table-row">
+            <span>经典 PINN</span><span>满足 PDE 的连续温度解</span><span>通常面向单问题求解或反演</span>
+          </div>
+          <div class="table-row emphasis-row">
+            <span>本文模型</span><span>动作改变后状态如何递归演化</span><span>直接进入估计器与控制器</span>
+          </div>
+        </div>
+        <div class="three-points">
+          <p><b>长期性</b>一步误差小，仍可能在 300 步递推中累积。</p>
+          <p><b>分布变化</b>控制曲线、边界参数和物性会超出训练分布。</p>
+          <p><b>部分观测</b>内部温度不可完全测量，必须在线校正状态。</p>
+        </div>
+        <footer class="citation">相关概念：Ha &amp; Schmidhuber, 2018；Raissi et al., 2019；Rawlings et al., 2017</footer>
+        <aside class="speaker-note">把概念边界讲清楚。本文属于数值轨迹监督下的神经动力学模型，离散 PDE 残差作为正则项。</aside>
+      </section>
+
+      <section class="slide" data-title="总体框架" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">05 · 方法总览</p>
+          <h2>预测、状态估计与控制形成闭环</h2>
+        </header>
+        <div class="pipeline">
+          <div class="pipe-node sensor-node"><span>稀疏测温</span><small>表面 / 近表面 / 可选中心</small></div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-node estimator-node"><span>EnKF</span><small>温度场 + h, ε 后验</small></div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-node model-node"><span>世界模型 F<sub>θ</sub></span><small>递归推演候选未来</small></div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-node control-node"><span>动作搜索</span><small>选取下一段炉温</small></div>
+        </div>
+        <div class="feedback-loop">
+          <div class="plant-node"><strong>BDF 数值工件</strong><span>执行 20 s，返回新测量</span></div>
+          <div class="loop-arrow">↖──────────── 反馈 ────────────↙</div>
+        </div>
+        <div class="metric-strip">
+          <div><strong>1 s</strong><span>模型状态转移步长</span></div>
+          <div><strong>20 s</strong><span>滚动决策间隔</span></div>
+          <div><strong>300 s</strong><span>完整控制回合</span></div>
+          <div><strong>8</strong><span>候选炉温动作</span></div>
+        </div>
+        <p class="takeaway">世界模型在控制器内部反复回答候选动作的后果。</p>
+        <aside class="speaker-note">用这页把各模块的职责分开。世界模型负责预测，EnKF 负责估计，动作搜索负责决策，BDF 只作为数值环境和高保真对照。</aside>
+      </section>
+
+      <section class="slide" data-title="神经动力学模型" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">06 · 预测模型</p>
+          <h2>残差 MLP 学习温度增量，物理项约束轨迹</h2>
+        </header>
+        <div class="two-col model-layout">
+          <div>
+            <div class="network-strip">
+              <span>41 温度节点</span><i>+</i><span>炉温</span><i>+</i><span>热参数</span>
+              <b>→</b><span class="network-core">3 × 128<br>SiLU</span><b>→</b><span>41 温度增量</span>
+            </div>
+            <div class="equation">
+              T̂<sub>t+1</sub> = T̂<sub>t</sub> + ΔT<sub>θ</sub>(T̂<sub>t</sub>, a<sub>t</sub>, p<sub>t</sub>)
+            </div>
+            <div class="equation loss">
+              L = L<sub>data</sub> + λ<sub>phy</sub>L<sub>energy</sub>
+            </div>
+          </div>
+          <div class="method-steps">
+            <p><span>01</span><b>五步闭环展开</b>训练时把模型输出继续送回模型。</p>
+            <p><span>02</span><b>离散能量残差</b>内部节点与表面半控制体均纳入。</p>
+            <p><span>03</span><b>轨迹级选择</b>检查点由验证集 300 步 RMSE 决定。</p>
+            <p><span>04</span><b>三随机种子</b>正式结果报告均值与样本标准差。</p>
+          </div>
+        </div>
+        <p class="takeaway">物理损失服务于能量一致性和外推稳定性，模型选择仍以验证轨迹为准。</p>
+        <aside class="speaker-note">这里避免把方法称为经典配点 PINN。训练主体是监督神经动力学，物理残差是离散正则。</aside>
+      </section>
+
+      <section class="slide core-slide" data-title="核心贡献：可辨识边界" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">07 · 核心贡献</p>
+          <h2>瞬时温度响应只识别一个边界方向</h2>
+        </header>
+        <div class="identifiability">
+          <div class="heat-flux-box">
+            <p>表面热流</p>
+            <div class="equation">
+              q<sub>s</sub> = [h + εh<sub>rad</sub>(T<sub>s</sub>,T<sub>∞</sub>)](T<sub>∞</sub>−T<sub>s</sub>)
+            </div>
+          </div>
+          <div class="rank-box">
+            <p>对 h 与 ε 的瞬时灵敏度</p>
+            <div class="equation">
+              ∂q<sub>s</sub>/∂(h,ε) = (T<sub>∞</sub>−T<sub>s</sub>)[1, h<sub>rad</sub>]
+            </div>
+            <strong>Jacobian 秩为 1</strong>
+          </div>
+        </div>
+        <div class="heff-reveal">
+          <span>可观测组合</span>
+          <strong>H<sub>eff</sub> = h + εh<sub>rad</sub></strong>
+        </div>
+        <p class="scope-line">结论限定在本文单步、均匀灰体、h(t) 与 ε(t) 逐时自由变化的观测模型下。</p>
+        <p class="takeaway">网络直接接收 H<sub>eff</sub>，可消除训练输入中的等价方向。</p>
+        <aside class="speaker-note">这是论文最有辨识度的部分。强调“局部、瞬时、本文观测模型”，不要说 h 和 ε 在所有情况下永远不可辨识。</aside>
+      </section>
+
+      <section class="slide" data-title="前向预测与反事实控制" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">08 · 部署逻辑</p>
+          <h2>前向预测用 H<sub>eff</sub>，反事实控制保留参数后验</h2>
+        </header>
+        <div class="split-logic">
+          <article class="logic-forward">
+            <p class="logic-tag">已执行动作</p>
+            <h3>预测下一状态</h3>
+            <div class="equation">F<sub>θ</sub>(s<sub>t</sub>, a<sub>t</sub>, H<sub>eff,t</sub>)</div>
+            <p>当前热流由一个可辨识组合充分描述。</p>
+          </article>
+          <div class="logic-divider">≠</div>
+          <article class="logic-counterfactual">
+            <p class="logic-tag">候选动作 a′</p>
+            <h3>比较未来热流</h3>
+            <div class="equation">H<sub>eff</sub>(a′)=h+εh<sub>rad</sub>(T<sub>s</sub>,a′)</div>
+            <p>辐射项随候选炉温改变，需要 h、ε 的后验成员。</p>
+          </article>
+        </div>
+        <div class="posterior-flow">
+          <span>历史测温</span><b>→</b><span>EnKF 后验 {h<sup>(m)</sup>, ε<sup>(m)</sup>}</span><b>→</b><span>候选动作代价分布</span>
+        </div>
+        <p class="takeaway">H<sub>eff</sub> 是单步前向转移的充分输入，不是整个反事实控制问题的充分统计量。</p>
+        <aside class="speaker-note">这页回答评委可能追问的矛盾：既然不可分，控制时为什么还保留 h 和 ε。原因是新炉温会改变辐射基函数。</aside>
+      </section>
+
+      <section class="slide" data-title="实验设计" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">09 · 证据协议</p>
+          <h2>用完整轨迹和分布外压力测试评价模型</h2>
+        </header>
+        <div class="evidence-matrix">
+          <div class="matrix-head"></div>
+          <div class="matrix-head">数据规模</div>
+          <div class="matrix-head">正式评价</div>
+          <div class="matrix-head">核心问题</div>
+          <div class="matrix-label">控制曲线 OOD</div>
+          <div>20 条</div><div>300 步 rollout</div><div>未见炉温序列</div>
+          <div class="matrix-label">参数 OOD</div>
+          <div>100 条</div><div>RMSE / 最大误差</div><div>h、ε、k、c<sub>p</sub></div>
+          <div class="matrix-label">动态边界 OOD</div>
+          <div>100 条</div><div>逐时边界变化</div><div>时间结构外推</div>
+          <div class="matrix-label">闭环控制</div>
+          <div>30 回合 / 方法</div><div>BDF 数值工件</div><div>估计与反事实决策</div>
+        </div>
+        <div class="protocol-row">
+          <span>70 / 15 / 15</span><small>训练 / 验证 / ID 测试轨迹</small>
+          <span>3 seeds</span><small>正式模型重复训练</small>
+          <span>100 000</span><small>配对 bootstrap 重采样</small>
+          <span>BDF 81 点</span><small>交叉求解器数值验证</small>
+        </div>
+        <p class="takeaway">超参数只由验证集选择；测试集和 OOD 集只用于最终评价。</p>
+        <aside class="speaker-note">实验设计的重点是避免测试集选模型。说明相同场景下三个种子先平均，再做场景或轨迹配对统计。</aside>
+      </section>
+
+      <section class="slide figure-slide" data-title="物理约束的作用" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">10 · 结果一</p>
+          <h2>物理约束的稳定收益在一致性与尾部误差</h2>
+        </header>
+        <div class="figure-metrics-layout">
+          <figure class="paper-figure">
+            <img src="assets/physics_weight_replicates.png" alt="不同物理权重在 ID 与 OOD 条件下的重复实验">
+            <figcaption>不同物理权重的三随机种子结果</figcaption>
+          </figure>
+          <div class="vertical-metrics">
+            <div><strong>−44.8%</strong><span>控制 OOD 离散物理残差</span></div>
+            <div><strong>−49.3%</strong><span>四参数组合 OOD 最大误差</span></div>
+            <div><strong>10<sup>−3</sup></strong><span>验证集选出的物理权重</span></div>
+          </div>
+        </div>
+        <div class="stat-note"><b>口径校准</b> 控制 OOD 的总体 RMSE 均值降低 6.8%；逐轨迹配对区间为 [−0.588, 0.153] ℃，因此只视为样本趋势。</div>
+        <aside class="speaker-note">不要声称物理约束无条件提升精度。主结论落在物理残差、组合参数 OOD 和尾部误差。</aside>
+      </section>
+
+      <section class="slide figure-slide" data-title="动态边界结果" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">11 · 结果二</p>
+          <h2>可辨识边界表示显著改善动态工况推演</h2>
+        </header>
+        <div class="wide-figure-layout">
+          <figure class="paper-figure">
+            <img src="assets/deployment_comparison.png" alt="动态边界表示与因果观测方式比较">
+            <figcaption>动态边界保持集，三随机种子均值与样本标准差</figcaption>
+          </figure>
+          <div class="result-column">
+            <div class="primary-result">
+              <span>滚动 RMSE</span>
+              <strong>2.285 → 1.409 ℃</strong>
+              <em>降低 38.3%</em>
+            </div>
+            <p><b>1.608 ℃</b> 无噪声因果观测</p>
+            <p><b>≈19.4 ℃</b> 固定使用首时刻边界参数</p>
+            <p><b>10.018 ℃</b> 0.5 ℃ 噪声下的直接差分观测</p>
+          </div>
+        </div>
+        <p class="takeaway">表示选择解决了输入等价方向；噪声下仍需集合滤波同步校正状态与参数。</p>
+        <aside class="speaker-note">38.3% 是真实动态边界输入下 H_eff 相对 h、epsilon 的模型比较。噪声观测器的退化用于说明为什么需要 EnKF。</aside>
+      </section>
+
+      <section class="slide figure-slide" data-title="交叉求解器与效率" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">12 · 结果三</p>
+          <h2>增益迁移到 BDF 参考轨迹，并释放在线计算余量</h2>
+        </header>
+        <div class="figure-metrics-layout">
+          <figure class="paper-figure">
+            <img src="assets/cross_solver_comparison.png" alt="BDF 交叉求解器轨迹上的模型精度比较">
+            <figcaption>自适应 BDF、81 节点、100 条动态边界轨迹</figcaption>
+          </figure>
+          <div class="vertical-metrics">
+            <div><strong>1.460 ℃</strong><span>H<sub>eff</sub> 物理模型滚动 RMSE</span></div>
+            <div><strong>9.75 ℃</strong><span>最大绝对误差</span></div>
+            <div><strong>55.4×</strong><span>部署配置单轨迹推演加速</span></div>
+          </div>
+        </div>
+        <div class="stat-note"><b>比较边界</b> BDF 为 81 节点，世界模型为 41 节点。该结果衡量预定部署配置，不等同于同网格算法加速。</div>
+        <aside class="speaker-note">交叉求解器排除了只记住单一离散格式，但连续 PDE 和物性相同，所以不能称作真实实验验证。</aside>
+      </section>
+
+      <section class="slide figure-slide" data-title="稀疏测温状态估计" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">13 · 结果四</p>
+          <h2>集合滤波把少量测温转换为全场状态</h2>
+        </header>
+        <div class="assimilation-layout">
+          <figure class="paper-figure">
+            <img src="assets/open_loop_assimilation.png" alt="五点测温下温度场与边界参数同化结果">
+            <figcaption>64 成员增广状态 EnKF；测温噪声标准差 0.5 ℃</figcaption>
+          </figure>
+          <table class="academic-table">
+            <thead><tr><th>测点布局</th><th>未测节点 RMSE</th><th>中心 RMSE</th><th>90% 覆盖率</th></tr></thead>
+            <tbody>
+              <tr><td>近表面 4 点<br><small>无中心测点</small></td><td><b>2.128 ℃</b></td><td>2.854 ℃</td><td>81.5%</td></tr>
+              <tr><td>表面与中心 5 点<br><small>理想标定场景</small></td><td><b>1.073 ℃</b></td><td>0.231 ℃</td><td>90.8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="scope-line">0.231 ℃ 表示中心热电偶参与滤波后的状态一致性，不代表由表面测温推断中心温度。</p>
+        <aside class="speaker-note">无中心四点方案是主要困难场景。五点方案代表仪器化试样或工艺标定，中心温度被直接测量。</aside>
+      </section>
+
+      <section class="slide figure-slide" data-title="闭环滚动控制" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">14 · 结果五</p>
+          <h2>世界模型可直接用于滚动炉温动作搜索</h2>
+        </header>
+        <div class="control-layout">
+          <figure class="paper-figure">
+            <img src="assets/closed_loop_trajectory_zh.png" alt="动态边界 BDF 环境中的代表性滚动控制轨迹">
+            <figcaption>每 20 s 搜索一次炉温，剩余时域采用常值尾部假设</figcaption>
+          </figure>
+          <div class="control-results">
+            <div><strong>30 / 30</strong><span>真实边界世界模型成功回合</span></div>
+            <div><strong>2.096 ℃</strong><span>终点中心绝对误差</span></div>
+            <div><strong>0.099 s</strong><span>世界模型每回合规划</span></div>
+            <div><strong>63.4×</strong><span>相对 BDF 候选动作规划加速</span></div>
+          </div>
+        </div>
+        <p class="scope-line">控制器属于常值尾部、单移动阻塞的滚动动作搜索，优化变量少于通用多步序列 MPC。</p>
+        <aside class="speaker-note">公平性设置包括相同动作集、时域、目标函数和真实状态。两者只更换预测动力学及对应网格。</aside>
+      </section>
+
+      <section class="slide figure-slide" data-title="风险感知控制" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">15 · 结果六</p>
+          <h2>严格参数 OOD 下，风险排序降低综合控制代价</h2>
+        </header>
+        <div class="figure-metrics-layout">
+          <figure class="paper-figure">
+            <img src="assets/ood_closed_loop_control.png" alt="收紧表面温度约束后的参数 OOD 闭环结果">
+            <figcaption>表面温度上限收紧至 360 ℃；每种控制器 30 回合</figcaption>
+          </figure>
+          <div class="vertical-metrics">
+            <div><strong>21.376 → 19.638</strong><span>后验均值 → 风险分位综合目标</span></div>
+            <div><strong>−1.737</strong><span>10 场景平均配对差</span></div>
+            <div><strong>[−3.291, −0.226]</strong><span>95% bootstrap 区间</span></div>
+          </div>
+        </div>
+        <p class="takeaway">统计结论限定为综合目标的场景配对改善；中心误差区间跨越零。</p>
+        <aside class="speaker-note">风险分位方法按 16 个后验成员的 90% 分位代价排序。不要把平均超温或中心误差提升上升为主结论。</aside>
+      </section>
+
+      <section class="slide" data-title="主要结论" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">16 · 结论</p>
+          <h2>本文完成了三件可被证据支持的工作</h2>
+        </header>
+        <div class="conclusion-list">
+          <article>
+            <span>01</span>
+            <div><h3>受控温度场世界模型</h3><p>以完整温度场、炉温动作和热参数为条件，支持长时递归推演与候选动作比较。</p></div>
+          </article>
+          <article>
+            <span>02</span>
+            <div><h3>可辨识动态边界表示</h3><p>以 H<sub>eff</sub> 消除瞬时等价方向，并用参数后验连接反事实控制。</p></div>
+          </article>
+          <article>
+            <span>03</span>
+            <div><h3>部分观测闭环链路</h3><p>集合滤波、世界模型和风险动作搜索在 BDF 数值工件中形成闭环。</p></div>
+          </article>
+        </div>
+        <div class="headline-results">
+          <div><strong>38.3%</strong><span>动态边界 RMSE 降低</span></div>
+          <div><strong>55.4×</strong><span>单轨迹部署加速</span></div>
+          <div><strong>63.4×</strong><span>候选动作规划加速</span></div>
+        </div>
+        <aside class="speaker-note">总结时只重复三条贡献。世界模型架构本身不是创新重点，H_eff 表示与完整闭环证据才是主线。</aside>
+      </section>
+
+      <section class="slide" data-title="研究范围与展望" data-kind="main">
+        <header class="slide-head">
+          <p class="section-no">17 · 边界</p>
+          <h2>当前结论属于受控热动力学数值研究</h2>
+        </header>
+        <div class="scope-grid">
+          <div class="scope-now">
+            <h3>本文已经覆盖</h3>
+            <p>一维对称平板与温变物性</p>
+            <p>动态对流辐射边界</p>
+            <p>ID / OOD / 交叉求解器</p>
+            <p>稀疏测温状态估计与闭环控制</p>
+          </div>
+          <div class="scope-next">
+            <h3>后续研究方向</h3>
+            <p><b>真实测温</b> 热电偶响应与炉温非均匀性</p>
+            <p><b>材料过程</b> 相变、组织、应力与变形</p>
+            <p><b>复杂几何</b> 二维截面、三维零件与神经算子</p>
+            <p><b>混合规划</b> 世界模型筛选，高保真模型复核</p>
+          </div>
+        </div>
+        <p class="takeaway">交叉求解器验证保证数值证据更稳健，但不替代真实炉体实验。</p>
+        <aside class="speaker-note">研究范围要主动说明，但不要把它讲成自我否定。下一步路线直接承接当前贡献。</aside>
+      </section>
+
+      <section class="slide closing-slide" data-title="致谢" data-kind="main">
+        <div class="closing-copy">
+          <p class="eyebrow">答辩结束</p>
+          <h2>谢谢各位老师<br>请批评指正</h2>
+          <div class="closing-formula">H<sub>eff</sub> = h + εh<sub>rad</sub></div>
+          <p>江景哲 · contact@jiangjingzhe.com</p>
+        </div>
+        <div class="closing-numbers">
+          <div><span>动态边界</span><strong>−38.3%</strong></div>
+          <div><span>轨迹推演</span><strong>55.4×</strong></div>
+          <div><span>闭环规划</span><strong>63.4×</strong></div>
+        </div>
+        <aside class="speaker-note">停在这页进入提问。备用页从下一页开始，可通过目录按钮直接跳转。</aside>
+      </section>
+
+      <section class="slide backup-slide" data-title="备用：为什么称为世界模型" data-kind="backup">
+        <header class="slide-head">
+          <p class="section-no">备用 01 · 概念定位</p>
+          <h2>为什么称为“世界模型”</h2>
+        </header>
+        <div class="answer-block">
+          <p class="question">评委可能问：这与普通代理模型有什么区别？</p>
+          <p class="answer">本文所称世界模型，是一个以物理状态、控制输入和系统参数为条件，能够递归预测状态演化并支持反事实规划的可学习动力学模型。</p>
+        </div>
+        <div class="criteria-row">
+          <div><strong>物理状态</strong><span>直接使用温度场，无需图像潜空间</span></div>
+          <div><strong>动作条件</strong><span>炉温是显式控制输入</span></div>
+          <div><strong>递归调用</strong><span>完整 300 步闭环 rollout</span></div>
+          <div><strong>规划用途</strong><span>控制器反复评价未执行动作</span></div>
+        </div>
+        <p class="scope-line">若模型只执行一次前向预测，它可以归入代理动力学模型；本文强调的是闭环中的功能角色。</p>
+        <aside class="speaker-note">回答保持简洁。不要用模型规模、生成能力或潜空间来论证世界模型。</aside>
+      </section>
+
+      <section class="slide backup-slide" data-title="备用：不可辨识性证明" data-kind="backup">
+        <header class="slide-head">
+          <p class="section-no">备用 02 · 数学说明</p>
+          <h2>h 与 ε 的局部不可辨识性从何而来</h2>
+        </header>
+        <div class="proof">
+          <div class="proof-step"><span>1</span><p>固定 T<sub>s</sub> 与 T<sub>∞</sub>，表面热流可写为<br><b>q<sub>s</sub> = (h + εh<sub>rad</sub>)ΔT</b></p></div>
+          <div class="proof-step"><span>2</span><p>灵敏度向量为<br><b>∂q<sub>s</sub>/∂(h,ε) = ΔT[1,h<sub>rad</sub>]</b></p></div>
+          <div class="proof-step"><span>3</span><p>任取 δε，并令<br><b>δh = −h<sub>rad</sub>δε</b>，当前热流保持不变。</p></div>
+          <div class="proof-step"><span>4</span><p>映射 (h,ε) → q<sub>s</sub> 非单射，瞬时 Jacobian 只有一个独立方向。</p></div>
+        </div>
+        <div class="stat-note"><b>可恢复条件</b> 若 h、ε 在一段时间内遵循不同动态先验，且系统接受多种激励，长期观测可能提供额外区分信息。</div>
+        <aside class="speaker-note">这里的非单射是单时刻局部结论。EnKF 得到的 h、epsilon 后验分解来自时间先验、支持域和历史观测共同正则化。</aside>
+      </section>
+
+      <section class="slide backup-slide" data-title="备用：训练与控制配置" data-kind="backup">
+        <header class="slide-head">
+          <p class="section-no">备用 03 · 复现参数</p>
+          <h2>训练、滤波与控制配置</h2>
+        </header>
+        <div class="config-columns">
+          <table class="academic-table">
+            <thead><tr><th colspan="2">世界模型训练</th></tr></thead>
+            <tbody>
+              <tr><td>网络</td><td>3 × 128 residual MLP</td></tr>
+              <tr><td>激活</td><td>SiLU</td></tr>
+              <tr><td>优化器</td><td>AdamW</td></tr>
+              <tr><td>学习率</td><td>10<sup>−3</sup></td></tr>
+              <tr><td>批量 / 轮数</td><td>512 / 120</td></tr>
+              <tr><td>展开长度</td><td>K = 5</td></tr>
+              <tr><td>物理权重</td><td>10<sup>−3</sup></td></tr>
+            </tbody>
+          </table>
+          <table class="academic-table">
+            <thead><tr><th colspan="2">集合滤波</th></tr></thead>
+            <tbody>
+              <tr><td>集合规模</td><td>64</td></tr>
+              <tr><td>测温噪声</td><td>0.5 ℃</td></tr>
+              <tr><td>温度过程噪声</td><td>0.03 ℃</td></tr>
+              <tr><td>集合膨胀</td><td>1.01</td></tr>
+              <tr><td>局部化半径</td><td>8 节点</td></tr>
+              <tr><td>h 过程噪声</td><td>1.0</td></tr>
+              <tr><td>ε 过程噪声</td><td>0.004</td></tr>
+            </tbody>
+          </table>
+          <table class="academic-table">
+            <thead><tr><th colspan="2">滚动动作搜索</th></tr></thead>
+            <tbody>
+              <tr><td>回合长度</td><td>300 s</td></tr>
+              <tr><td>决策间隔</td><td>20 s</td></tr>
+              <tr><td>中心目标</td><td>350 ℃</td></tr>
+              <tr><td>候选动作</td><td>8 个炉温</td></tr>
+              <tr><td>尾部假设</td><td>剩余时域常值</td></tr>
+              <tr><td>风险成员</td><td>16</td></tr>
+              <tr><td>风险分位</td><td>90%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="speaker-note">遇到可复现性提问时直接展示。本页只给决定结果的主要超参数，完整配置在代码和冻结文档中。</aside>
+      </section>
+
+      <section class="slide backup-slide" data-title="备用：统计口径" data-kind="backup">
+        <header class="slide-head">
+          <p class="section-no">备用 04 · 统计</p>
+          <h2>随机种子、轨迹和控制场景如何计数</h2>
+        </header>
+        <div class="stats-method">
+          <article><span>预测 OOD</span><strong>20 条轨迹</strong><p>每条轨迹先平均 3 个模型种子，再计算物理模型减数据模型的配对差。</p></article>
+          <article><span>风险控制</span><strong>10 个 BDF 场景</strong><p>每场景先平均 3 个模型种子，再对后验均值与风险分位控制做配对。</p></article>
+          <article><span>区间估计</span><strong>100 000 次</strong><p>bootstrap 估计平均配对差；成功率另报 95% Wilson 区间。</p></article>
+        </div>
+        <table class="academic-table stats-table">
+          <thead><tr><th>结论</th><th>平均配对差</th><th>95% 区间</th><th>论文口径</th></tr></thead>
+          <tbody>
+            <tr><td>控制 OOD 轨迹 RMSE</td><td>−0.220 ℃</td><td>[−0.588, 0.153]</td><td>样本均值趋势</td></tr>
+            <tr><td>风险控制综合目标</td><td>−1.737</td><td>[−3.291, −0.226]</td><td>场景配对改善</td></tr>
+            <tr><td>风险控制中心误差</td><td>−0.143 ℃</td><td>[−0.720, 0.454]</td><td>不作优势主张</td></tr>
+          </tbody>
+        </table>
+        <aside class="speaker-note">三个随机种子不直接当作三个独立物理工况。统计单位是轨迹或 BDF 场景。</aside>
+      </section>
+
+      <section class="slide backup-slide" data-title="备用：加速与验证边界" data-kind="backup">
+        <header class="slide-head">
+          <p class="section-no">备用 05 · 答辩追问</p>
+          <h2>加速、公平性与验证边界</h2>
+        </header>
+        <div class="qa-grid">
+          <article><h3>63.4 倍包含训练吗？</h3><p>不包含。该数值比较在线候选动作规划，每回合 0.099 s 对 6.258 s。</p></article>
+          <article><h3>空间分辨率相同吗？</h3><p>不同。世界模型 41 节点，BDF 81 节点，所以结论限定为部署配置加速。</p></article>
+          <article><h3>BDF 是独立实验吗？</h3><p>属于交叉求解器数值验证。离散方法不同，但连续 PDE 和物性函数相同。</p></article>
+          <article><h3>中心测温是否泄漏答案？</h3><p>五点布局直接含中心热电偶，因此主重建证据采用无中心四点方案。</p></article>
+          <article><h3>物理约束为何并非处处更准？</h3><p>它改变优化目标。本文依据验证轨迹选择权重，优势集中在物理一致性和参数组合外推。</p></article>
+          <article><h3>下一步最关键的实验？</h3><p>用热电偶实测曲线校准边界、物性和传感器响应，并扩展到二维截面。</p></article>
+        </div>
+        <aside class="speaker-note">这页可快速回应答辩中的边界问题。所有回答都与论文收缩后的主张一致。</aside>
+      </section>
+    </main>
+  </div>
+
+  <div class="progress-track" aria-hidden="true"><div id="progressBar"></div></div>
+  <div class="slide-meta" aria-hidden="true">
+    <span id="sectionLabel">MAIN</span>
+    <span id="slideCounter">1 / 24</span>
+  </div>
+  <nav class="controls" aria-label="幻灯片控制">
+    <button id="prevBtn" type="button" aria-label="上一页" title="上一页">←</button>
+    <button id="overviewBtn" type="button" aria-label="目录" title="目录">☷</button>
+    <button id="notesBtn" type="button" aria-label="演讲者备注" title="演讲者备注">N</button>
+    <button id="fullscreenBtn" type="button" aria-label="全屏" title="全屏">⛶</button>
+    <button id="nextBtn" type="button" aria-label="下一页" title="下一页">→</button>
+  </nav>
+
+  <dialog id="overviewDialog" class="overview-dialog">
+    <div class="overview-head">
+      <h2>幻灯片目录</h2>
+      <button id="closeOverviewBtn" type="button" aria-label="关闭目录" title="关闭">×</button>
+    </div>
+    <div id="overviewGrid" class="overview-grid"></div>
+  </dialog>
+
+  <aside id="notesPanel" class="notes-panel" aria-label="演讲者备注">
+    <div class="notes-head"><strong>演讲者备注</strong><button id="closeNotesBtn" type="button" aria-label="关闭备注">×</button></div>
+    <p id="notesContent"></p>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
