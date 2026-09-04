@@ -60,10 +60,10 @@
 
 - 源代码仓库：<https://github.com/khakhasshi/heat-treatment-world-model>
 - 公开版本标签：`thesis-open-release-v1`
-- 模型权重：Hugging Face 发布包包含论文使用的 14 个正式检查点、模型卡和 SHA-256 清单
+- 模型权重：<https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model>
 - 权重清单：[`docs/huggingface-weights-manifest.csv`](docs/huggingface-weights-manifest.csv)
 
-GitHub 仓库用于保存训练、评价、状态估计、控制与绘图代码，同时保存论文源文件和可直接核对的轻量实验结果。模型权重单独发布到 Hugging Face，避免二进制文件进入 Git 历史。两处发布内容使用同一文件清单和哈希值建立对应关系。
+GitHub 仓库用于保存训练、评价、状态估计、控制与绘图代码，同时保存论文源文件和可直接核对的轻量实验结果。Hugging Face 发布包包含论文使用的 14 个正式检查点、模型卡和 SHA-256 清单。模型权重单独托管，避免二进制文件进入 Git 历史。两处发布内容使用同一文件清单和哈希值建立对应关系。
 
 ## 环境安装
 

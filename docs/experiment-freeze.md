@@ -70,6 +70,6 @@ PYTHONPATH=src uv run --no-sync python scripts/analyze_thesis_supplement.py
 
 ## 7. 公开归档
 
-源代码、轻量实验结果、论文源文件和复现入口公开于 <https://github.com/khakhasshi/heat-treatment-world-model>，公开版本标签为 `thesis-open-release-v1`。论文正式权重由 Hugging Face 模型仓库单独托管。公开权重的文件映射、字节数和 SHA-256 记录在 `docs/huggingface-weights-manifest.csv`。代码与权重的公开不改变本页冻结的实验口径。
+源代码、轻量实验结果、论文源文件和复现入口公开于 <https://github.com/khakhasshi/heat-treatment-world-model>，公开版本标签为 `thesis-open-release-v1`。论文正式权重由 <https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model> 单独托管。公开权重的文件映射、字节数和 SHA-256 记录在 `docs/huggingface-weights-manifest.csv`。代码与权重的公开不改变本页冻结的实验口径。
 
 全部公开内容仅供学习、研究复现和方法参考。引用、修改和再发布应保留来源，并遵守 `ACADEMIC_USE_NOTICE.md` 与对应许可证。禁止将论文文字、代码、图表、实验结果或模型输出未经清晰引用作为本人原创成果提交。
