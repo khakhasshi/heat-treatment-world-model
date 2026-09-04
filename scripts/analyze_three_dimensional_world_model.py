@@ -39,6 +39,16 @@ def parse_args() -> argparse.Namespace:
         default="control_ood",
     )
     parser.add_argument("--reference-shape", type=int, nargs=3, default=(21, 15, 9))
+    parser.add_argument(
+        "--show-voxel-edges",
+        action="store_true",
+        help="Show internal voxel edge lines; hidden by default for paper figures.",
+    )
+    parser.add_argument(
+        "--preview-only",
+        action="store_true",
+        help="Render the requested figure without updating analysis and metric files.",
+    )
     return parser.parse_args()
 
 
@@ -100,6 +110,7 @@ def draw_cutaway(
     coordinates_mm: tuple[np.ndarray, np.ndarray, np.ndarray],
     norm: mpl.colors.Normalize,
     title: str,
+    hide_voxel_edges: bool = False,
 ) -> None:
     x, y, z = coordinates_mm
     cell_temperature = 0.125 * (
@@ -128,8 +139,9 @@ def draw_cutaway(
         *edge_grid,
         filled,
         facecolors=facecolors,
-        edgecolor=(0.18, 0.20, 0.22, 0.13),
-        linewidth=0.12,
+        edgecolor="none" if hide_voxel_edges else (0.18, 0.20, 0.22, 0.13),
+        linewidth=0.0 if hide_voxel_edges else 0.12,
+        antialiased=not hide_voxel_edges,
         shade=False,
     )
     draw_cuboid_edges(axis, (float(np.ptp(x)), float(np.ptp(y)), float(np.ptp(z))))
@@ -378,7 +390,14 @@ def main() -> None:
     ):
         axis = figure.add_subplot(2, 2, panel, projection="3d")
         coordinates_mm = tuple(axis_values * 1000.0 for axis_values in coordinates)
-        draw_cutaway(axis, field, coordinates_mm, norm, title)
+        draw_cutaway(
+            axis,
+            field,
+            coordinates_mm,
+            norm,
+            title,
+            hide_voxel_edges=not args.show_voxel_edges,
+        )
     figure.suptitle(
         "三维 C45 试块温度场的八分体剖视比较  "
         f"{split_title}，t={times[snapshot]:.0f} s，"
@@ -403,8 +422,14 @@ def main() -> None:
     )
     figure_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(figure_path, bbox_inches="tight", facecolor="white")
-    figure.savefig(output / figure_path.name, bbox_inches="tight", facecolor="white")
+    if not args.preview_only:
+        figure.savefig(output / figure_path.name, bbox_inches="tight", facecolor="white")
     plt.close(figure)
+
+    if args.preview_only:
+        print(json.dumps(analysis["figure_case"], ensure_ascii=False, indent=2))
+        print(f"figure: {figure_path}")
+        return
 
     analysis_path = output / "three_dimensional_analysis.json"
     analysis_path.write_text(
