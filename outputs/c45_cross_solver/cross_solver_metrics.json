@@ -1,0 +1,2266 @@
+{
+  "research_question": "Do H_eff world-model gains survive a change from the training-data backward-Euler solver to a finer adaptive BDF reference?",
+  "source_dataset": "outputs/c45_effective_boundary/dynamic_boundary_holdout_dataset.npz",
+  "reference_dataset": "outputs/c45_cross_solver/cross_solver_dataset.npz",
+  "reference_solver": {
+    "config": {
+      "reference_nx": 81,
+      "convergence_nx": 161,
+      "convergence_trajectories_per_category": 2,
+      "rtol": 1e-06,
+      "atol_c": 1e-07,
+      "max_step_s": 0.25,
+      "temporal_convergence_max_step_s": 0.125,
+      "observer_noise_std_c": 0.5,
+      "observer_window": 30,
+      "observer_noise_seed": 20260908
+    },
+    "trajectory_count": 100,
+    "reference_generation_seconds": 42.40656379109714,
+    "mean_seconds_per_trajectory": 0.4240656379109714,
+    "median_seconds_per_trajectory": 0.42370845848927274,
+    "p95_seconds_per_trajectory": 0.5304772913863417,
+    "mean_rhs_evaluations": 10721.72,
+    "mean_linear_decompositions": 1633.82,
+    "convergence_indices": [
+      2,
+      16,
+      1,
+      5,
+      0,
+      8,
+      3,
+      4,
+      12,
+      17
+    ],
+    "reference_vs_convergence_grid_rmse_c": {
+      "mean": 0.002475863458056937,
+      "maximum": 0.007461017678196384
+    },
+    "reference_vs_convergence_grid_max_abs_c": {
+      "mean": 0.009215094745663066,
+      "maximum": 0.019583356392331552
+    },
+    "reference_vs_smaller_max_step_rmse_c": {
+      "mean": 0.004248433943573987,
+      "maximum": 0.008464487373635721
+    },
+    "reference_vs_smaller_max_step_max_abs_c": {
+      "mean": 0.014042775287587971,
+      "maximum": 0.029389306732923615
+    }
+  },
+  "source_solver_discrepancy": {
+    "rollout_rmse_c": 0.16634489595890045,
+    "rollout_mae_c": 0.09882045537233353,
+    "rollout_max_abs_c": 0.9560546875,
+    "trajectory_rmse_median_c": 0.09120620787143707,
+    "trajectory_rmse_p95_c": 0.38149958848953247,
+    "final_state_rmse_c": 0.31174156069755554,
+    "categories": {
+      "convection_smooth": {
+        "rollout_rmse_c": 0.1488146185874939,
+        "rollout_mae_c": 0.09572520852088928,
+        "rollout_max_abs_c": 0.55157470703125,
+        "trajectory_rmse_median_c": 0.09652978181838989,
+        "trajectory_rmse_p95_c": 0.2601597309112549,
+        "final_state_rmse_c": 0.28177884221076965
+      },
+      "convection_step": {
+        "rollout_rmse_c": 0.15855157375335693,
+        "rollout_mae_c": 0.10183823853731155,
+        "rollout_max_abs_c": 0.607696533203125,
+        "trajectory_rmse_median_c": 0.10058800131082535,
+        "trajectory_rmse_p95_c": 0.326333612203598,
+        "final_state_rmse_c": 0.27541837096214294
+      },
+      "emissivity_growth": {
+        "rollout_rmse_c": 0.17139388620853424,
+        "rollout_mae_c": 0.09549286961555481,
+        "rollout_max_abs_c": 0.80078125,
+        "trajectory_rmse_median_c": 0.07383579015731812,
+        "trajectory_rmse_p95_c": 0.37412506341934204,
+        "final_state_rmse_c": 0.3195335566997528
+      },
+      "emissivity_step": {
+        "rollout_rmse_c": 0.19228965044021606,
+        "rollout_mae_c": 0.11279468238353729,
+        "rollout_max_abs_c": 0.73626708984375,
+        "trajectory_rmse_median_c": 0.09890758991241455,
+        "trajectory_rmse_p95_c": 0.4216398298740387,
+        "final_state_rmse_c": 0.336687296628952
+      },
+      "combined": {
+        "rollout_rmse_c": 0.15721814334392548,
+        "rollout_mae_c": 0.08825128525495529,
+        "rollout_max_abs_c": 0.9560546875,
+        "trajectory_rmse_median_c": 0.08793516457080841,
+        "trajectory_rmse_p95_c": 0.29380694031715393,
+        "final_state_rmse_c": 0.33941036462783813
+      }
+    }
+  },
+  "observer": {
+    "no_noise": {
+      "low_excitation_fraction": 0.0,
+      "clipped_fraction": 0.001,
+      "one_step_delay": true,
+      "initial_prior": "training-range midpoint",
+      "causal_rmse_w_m2k": 1.467849510995685,
+      "causal_mae_w_m2k": 0.34575548586654564,
+      "causal_bias_w_m2k": -0.013825715456580227,
+      "causal_p95_abs_w_m2k": 0.8298067744012321
+    },
+    "noise_0p5c": {
+      "low_excitation_fraction": 0.0,
+      "clipped_fraction": 0.21856666666666666,
+      "one_step_delay": true,
+      "initial_prior": "training-range midpoint",
+      "causal_rmse_w_m2k": 18.388131763917933,
+      "causal_mae_w_m2k": 14.306943661739545,
+      "causal_bias_w_m2k": -4.822681994258383,
+      "causal_p95_abs_w_m2k": 38.616963209081916
+    }
+  },
+  "records": [
+    {
+      "seed": 42,
+      "physics_weight": 0.0,
+      "model_family": "separate_h_epsilon",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 2.5590357780456543,
+          "rollout_mae_c": 1.3289527893066406,
+          "rollout_max_abs_c": 25.974334716796875,
+          "trajectory_rmse_median_c": 1.5104773044586182,
+          "trajectory_rmse_p95_c": 4.046667575836182,
+          "center_rmse_c": 2.013596534729004,
+          "surface_rmse_c": 3.9951231479644775,
+          "final_state_rmse_c": 4.870402812957764,
+          "physics_residual_rmse_c": 49.68440628051758,
+          "maximum_principle_violation_fraction": 0.0010536585365853658,
+          "rollout_seconds": 0.022458457970060408,
+          "one_step_rmse_c": 0.032186202669658034
+        },
+        "source_solver": {
+          "rollout_rmse_c": 2.5134174823760986,
+          "rollout_mae_c": 1.3285382986068726,
+          "rollout_max_abs_c": 25.176666259765625,
+          "trajectory_rmse_median_c": 1.498183250427246,
+          "trajectory_rmse_p95_c": 4.192174434661865,
+          "final_state_rmse_c": 4.787043571472168
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.885374903678894,
+            "rollout_mae_c": 1.121607780456543,
+            "rollout_max_abs_c": 12.61370849609375,
+            "trajectory_rmse_median_c": 1.4648590087890625,
+            "trajectory_rmse_p95_c": 3.696993589401245,
+            "final_state_rmse_c": 3.620572328567505
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.649387240409851,
+            "rollout_mae_c": 1.0850690603256226,
+            "rollout_max_abs_c": 8.53762435913086,
+            "trajectory_rmse_median_c": 1.558685302734375,
+            "trajectory_rmse_p95_c": 2.3943257331848145,
+            "final_state_rmse_c": 2.736809730529785
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 2.9167041778564453,
+            "rollout_mae_c": 1.5080245733261108,
+            "rollout_max_abs_c": 25.974334716796875,
+            "trajectory_rmse_median_c": 1.3148021697998047,
+            "trajectory_rmse_p95_c": 6.278906345367432,
+            "final_state_rmse_c": 6.067445278167725
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 3.3907265663146973,
+            "rollout_mae_c": 1.7145123481750488,
+            "rollout_max_abs_c": 23.93310546875,
+            "trajectory_rmse_median_c": 1.657103180885315,
+            "trajectory_rmse_p95_c": 6.073066234588623,
+            "final_state_rmse_c": 5.591427326202393
+          },
+          "combined": {
+            "rollout_rmse_c": 2.5424418449401855,
+            "rollout_mae_c": 1.2155506610870361,
+            "rollout_max_abs_c": 24.740234375,
+            "trajectory_rmse_median_c": 1.3035366535186768,
+            "trajectory_rmse_p95_c": 3.8603107929229736,
+            "final_state_rmse_c": 5.470604419708252
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.4951961040496826,
+          "rollout_mae_c": 0.9574291706085205,
+          "rollout_max_abs_c": 11.834136962890625,
+          "trajectory_rmse_median_c": 1.13945472240448,
+          "trajectory_rmse_p95_c": 2.724806308746338,
+          "center_rmse_c": 1.7445898056030273,
+          "surface_rmse_c": 2.3589069843292236,
+          "final_state_rmse_c": 2.259915828704834,
+          "physics_residual_rmse_c": 43.198974609375,
+          "maximum_principle_violation_fraction": 0.0019016260162601625,
+          "rollout_seconds": 0.021565458038821816,
+          "one_step_rmse_c": 0.025974459931183438
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.4704062938690186,
+          "rollout_mae_c": 0.9428499937057495,
+          "rollout_max_abs_c": 12.669708251953125,
+          "trajectory_rmse_median_c": 1.135897159576416,
+          "trajectory_rmse_p95_c": 2.7449910640716553,
+          "final_state_rmse_c": 2.2105777263641357
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.38288152217865,
+            "rollout_mae_c": 0.9672577381134033,
+            "rollout_max_abs_c": 8.795013427734375,
+            "trajectory_rmse_median_c": 1.4311776161193848,
+            "trajectory_rmse_p95_c": 1.9031169414520264,
+            "final_state_rmse_c": 2.14158296585083
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.5455589294433594,
+            "rollout_mae_c": 1.066404938697815,
+            "rollout_max_abs_c": 8.752838134765625,
+            "trajectory_rmse_median_c": 1.2461957931518555,
+            "trajectory_rmse_p95_c": 2.3704299926757812,
+            "final_state_rmse_c": 2.1759793758392334
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.3402281999588013,
+            "rollout_mae_c": 0.8684073686599731,
+            "rollout_max_abs_c": 6.4686126708984375,
+            "trajectory_rmse_median_c": 1.0861010551452637,
+            "trajectory_rmse_p95_c": 2.330404281616211,
+            "final_state_rmse_c": 2.2245469093322754
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.6335780620574951,
+            "rollout_mae_c": 0.9556697607040405,
+            "rollout_max_abs_c": 10.376739501953125,
+            "trajectory_rmse_median_c": 0.9918521046638489,
+            "trajectory_rmse_p95_c": 2.902585983276367,
+            "final_state_rmse_c": 2.310053586959839
+          },
+          "combined": {
+            "rollout_rmse_c": 1.5531113147735596,
+            "rollout_mae_c": 0.9294058680534363,
+            "rollout_max_abs_c": 11.834136962890625,
+            "trajectory_rmse_median_c": 0.9119751453399658,
+            "trajectory_rmse_p95_c": 2.7808756828308105,
+            "final_state_rmse_c": 2.435133934020996
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "causal_observer_no_noise",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.5074771642684937,
+          "rollout_mae_c": 0.9616945385932922,
+          "rollout_max_abs_c": 11.75848388671875,
+          "trajectory_rmse_median_c": 1.123879075050354,
+          "trajectory_rmse_p95_c": 2.6911163330078125,
+          "center_rmse_c": 1.7456010580062866,
+          "surface_rmse_c": 2.3854846954345703,
+          "final_state_rmse_c": 2.281874179840088,
+          "physics_residual_rmse_c": 43.24076843261719,
+          "maximum_principle_violation_fraction": 0.0018699186991869919,
+          "rollout_seconds": 0.02154808398336172,
+          "one_step_rmse_c": 0.028738295558313948
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.4707528352737427,
+          "rollout_mae_c": 0.9383922815322876,
+          "rollout_max_abs_c": 12.60595703125,
+          "trajectory_rmse_median_c": 1.1106936931610107,
+          "trajectory_rmse_p95_c": 2.7031705379486084,
+          "final_state_rmse_c": 2.2232677936553955
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.3770133256912231,
+            "rollout_mae_c": 0.9666846990585327,
+            "rollout_max_abs_c": 8.571304321289062,
+            "trajectory_rmse_median_c": 1.405827522277832,
+            "trajectory_rmse_p95_c": 2.070601463317871,
+            "final_state_rmse_c": 2.143458366394043
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.611158013343811,
+            "rollout_mae_c": 1.0876691341400146,
+            "rollout_max_abs_c": 9.295543670654297,
+            "trajectory_rmse_median_c": 1.1847050189971924,
+            "trajectory_rmse_p95_c": 2.643211603164673,
+            "final_state_rmse_c": 2.2367403507232666
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.333988070487976,
+            "rollout_mae_c": 0.8602431416511536,
+            "rollout_max_abs_c": 6.7707061767578125,
+            "trajectory_rmse_median_c": 1.088392972946167,
+            "trajectory_rmse_p95_c": 2.348810911178589,
+            "final_state_rmse_c": 2.229342460632324
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.662198781967163,
+            "rollout_mae_c": 0.974114179611206,
+            "rollout_max_abs_c": 10.635894775390625,
+            "trajectory_rmse_median_c": 1.014920949935913,
+            "trajectory_rmse_p95_c": 2.9381260871887207,
+            "final_state_rmse_c": 2.3183789253234863
+          },
+          "combined": {
+            "rollout_rmse_c": 1.5257823467254639,
+            "rollout_mae_c": 0.9197613000869751,
+            "rollout_max_abs_c": 11.75848388671875,
+            "trajectory_rmse_median_c": 0.9601614475250244,
+            "trajectory_rmse_p95_c": 2.7392380237579346,
+            "final_state_rmse_c": 2.468294382095337
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "causal_observer_0p5c",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 9.655461311340332,
+          "rollout_mae_c": 6.4592790603637695,
+          "rollout_max_abs_c": 61.556396484375,
+          "trajectory_rmse_median_c": 6.197591304779053,
+          "trajectory_rmse_p95_c": 19.886837005615234,
+          "center_rmse_c": 9.460997581481934,
+          "surface_rmse_c": 10.241337776184082,
+          "final_state_rmse_c": 13.276006698608398,
+          "physics_residual_rmse_c": 41.3161735534668,
+          "maximum_principle_violation_fraction": 0.0024552845528455283,
+          "rollout_seconds": 0.0214962080353871,
+          "one_step_rmse_c": 0.17735359502686504
+        },
+        "source_solver": {
+          "rollout_rmse_c": 9.539658546447754,
+          "rollout_mae_c": 6.393975734710693,
+          "rollout_max_abs_c": 60.81005859375,
+          "trajectory_rmse_median_c": 6.145214080810547,
+          "trajectory_rmse_p95_c": 19.709762573242188,
+          "final_state_rmse_c": 13.040666580200195
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 8.604415893554688,
+            "rollout_mae_c": 6.233593463897705,
+            "rollout_max_abs_c": 32.4591064453125,
+            "trajectory_rmse_median_c": 6.585871696472168,
+            "trajectory_rmse_p95_c": 17.18893814086914,
+            "final_state_rmse_c": 11.269889831542969
+          },
+          "convection_step": {
+            "rollout_rmse_c": 9.275006294250488,
+            "rollout_mae_c": 6.486112594604492,
+            "rollout_max_abs_c": 31.014938354492188,
+            "trajectory_rmse_median_c": 7.13557243347168,
+            "trajectory_rmse_p95_c": 14.964862823486328,
+            "final_state_rmse_c": 12.153369903564453
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 9.038551330566406,
+            "rollout_mae_c": 6.121033668518066,
+            "rollout_max_abs_c": 44.271881103515625,
+            "trajectory_rmse_median_c": 5.888980388641357,
+            "trajectory_rmse_p95_c": 14.838119506835938,
+            "final_state_rmse_c": 11.58972454071045
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 10.237836837768555,
+            "rollout_mae_c": 6.570796966552734,
+            "rollout_max_abs_c": 57.92779541015625,
+            "trajectory_rmse_median_c": 5.89754581451416,
+            "trajectory_rmse_p95_c": 21.229595184326172,
+            "final_state_rmse_c": 14.519705772399902
+          },
+          "combined": {
+            "rollout_rmse_c": 10.934771537780762,
+            "rollout_mae_c": 6.884858131408691,
+            "rollout_max_abs_c": 61.556396484375,
+            "trajectory_rmse_median_c": 6.300536155700684,
+            "trajectory_rmse_p95_c": 24.421525955200195,
+            "final_state_rmse_c": 16.167972564697266
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.001,
+      "model_family": "separate_h_epsilon",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 2.3451337814331055,
+          "rollout_mae_c": 1.1973274946212769,
+          "rollout_max_abs_c": 22.96661376953125,
+          "trajectory_rmse_median_c": 1.2865936756134033,
+          "trajectory_rmse_p95_c": 3.3188228607177734,
+          "center_rmse_c": 1.9190796613693237,
+          "surface_rmse_c": 3.5466740131378174,
+          "final_state_rmse_c": 4.245100498199463,
+          "physics_residual_rmse_c": 16.075281143188477,
+          "maximum_principle_violation_fraction": 0.0023252032520325204,
+          "rollout_seconds": 0.022608625004068017,
+          "one_step_rmse_c": 0.03115802928045522
+        },
+        "source_solver": {
+          "rollout_rmse_c": 2.28192138671875,
+          "rollout_mae_c": 1.1774135828018188,
+          "rollout_max_abs_c": 22.0933837890625,
+          "trajectory_rmse_median_c": 1.2307825088500977,
+          "trajectory_rmse_p95_c": 3.462230920791626,
+          "final_state_rmse_c": 4.134631156921387
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.6768428087234497,
+            "rollout_mae_c": 1.0419868230819702,
+            "rollout_max_abs_c": 11.3382568359375,
+            "trajectory_rmse_median_c": 1.2944228649139404,
+            "trajectory_rmse_p95_c": 2.968311071395874,
+            "final_state_rmse_c": 3.148744821548462
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.5683164596557617,
+            "rollout_mae_c": 1.0792275667190552,
+            "rollout_max_abs_c": 9.312381744384766,
+            "trajectory_rmse_median_c": 1.3908913135528564,
+            "trajectory_rmse_p95_c": 2.2268354892730713,
+            "final_state_rmse_c": 2.163444757461548
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 2.676405429840088,
+            "rollout_mae_c": 1.2897144556045532,
+            "rollout_max_abs_c": 22.8941650390625,
+            "trajectory_rmse_median_c": 0.9998251795768738,
+            "trajectory_rmse_p95_c": 6.553471565246582,
+            "final_state_rmse_c": 5.350473403930664
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 3.132766008377075,
+            "rollout_mae_c": 1.5021611452102661,
+            "rollout_max_abs_c": 21.43865966796875,
+            "trajectory_rmse_median_c": 1.2992537021636963,
+            "trajectory_rmse_p95_c": 4.446414947509766,
+            "final_state_rmse_c": 4.945362091064453
+          },
+          "combined": {
+            "rollout_rmse_c": 2.2911739349365234,
+            "rollout_mae_c": 1.0735477209091187,
+            "rollout_max_abs_c": 22.96661376953125,
+            "trajectory_rmse_median_c": 0.8180795907974243,
+            "trajectory_rmse_p95_c": 3.2880027294158936,
+            "final_state_rmse_c": 4.735519886016846
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.4047356843948364,
+          "rollout_mae_c": 0.9092859029769897,
+          "rollout_max_abs_c": 9.75250244140625,
+          "trajectory_rmse_median_c": 1.143183708190918,
+          "trajectory_rmse_p95_c": 2.624600648880005,
+          "center_rmse_c": 1.7151422500610352,
+          "surface_rmse_c": 2.1986656188964844,
+          "final_state_rmse_c": 2.387321710586548,
+          "physics_residual_rmse_c": 15.480180740356445,
+          "maximum_principle_violation_fraction": 0.002423577235772358,
+          "rollout_seconds": 0.022727999952621758,
+          "one_step_rmse_c": 0.026142904957653933
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.3476159572601318,
+          "rollout_mae_c": 0.8716487884521484,
+          "rollout_max_abs_c": 9.886703491210938,
+          "trajectory_rmse_median_c": 1.096167802810669,
+          "trajectory_rmse_p95_c": 2.4732322692871094,
+          "final_state_rmse_c": 2.2420382499694824
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.3395891189575195,
+            "rollout_mae_c": 0.9479920864105225,
+            "rollout_max_abs_c": 8.518447875976562,
+            "trajectory_rmse_median_c": 1.3253655433654785,
+            "trajectory_rmse_p95_c": 1.9273805618286133,
+            "final_state_rmse_c": 2.3637564182281494
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.380232572555542,
+            "rollout_mae_c": 0.9518374800682068,
+            "rollout_max_abs_c": 8.875938415527344,
+            "trajectory_rmse_median_c": 1.1962071657180786,
+            "trajectory_rmse_p95_c": 1.9228252172470093,
+            "final_state_rmse_c": 2.1319663524627686
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.3365671634674072,
+            "rollout_mae_c": 0.8707308173179626,
+            "rollout_max_abs_c": 9.317138671875,
+            "trajectory_rmse_median_c": 0.965139627456665,
+            "trajectory_rmse_p95_c": 2.139235019683838,
+            "final_state_rmse_c": 2.576022148132324
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.5714075565338135,
+            "rollout_mae_c": 0.8944584131240845,
+            "rollout_max_abs_c": 8.633331298828125,
+            "trajectory_rmse_median_c": 1.0351163148880005,
+            "trajectory_rmse_p95_c": 2.8912274837493896,
+            "final_state_rmse_c": 2.45202374458313
+          },
+          "combined": {
+            "rollout_rmse_c": 1.3824387788772583,
+            "rollout_mae_c": 0.8814104199409485,
+            "rollout_max_abs_c": 9.75250244140625,
+            "trajectory_rmse_median_c": 0.9404404163360596,
+            "trajectory_rmse_p95_c": 2.624600648880005,
+            "final_state_rmse_c": 2.390728712081909
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "causal_observer_no_noise",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.442955493927002,
+          "rollout_mae_c": 0.9428113698959351,
+          "rollout_max_abs_c": 9.641735076904297,
+          "trajectory_rmse_median_c": 1.1617827415466309,
+          "trajectory_rmse_p95_c": 2.55281662940979,
+          "center_rmse_c": 1.7567710876464844,
+          "surface_rmse_c": 2.2231009006500244,
+          "final_state_rmse_c": 2.4259424209594727,
+          "physics_residual_rmse_c": 15.474265098571777,
+          "maximum_principle_violation_fraction": 0.0021902439024390243,
+          "rollout_seconds": 0.02307541703339666,
+          "one_step_rmse_c": 0.02895990282999644
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.3747087717056274,
+          "rollout_mae_c": 0.8953968286514282,
+          "rollout_max_abs_c": 9.715728759765625,
+          "trajectory_rmse_median_c": 1.11030912399292,
+          "trajectory_rmse_p95_c": 2.5953004360198975,
+          "final_state_rmse_c": 2.2739784717559814
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.3734484910964966,
+            "rollout_mae_c": 0.9831595420837402,
+            "rollout_max_abs_c": 8.295562744140625,
+            "trajectory_rmse_median_c": 1.3265600204467773,
+            "trajectory_rmse_p95_c": 1.9294434785842896,
+            "final_state_rmse_c": 2.401040554046631
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.4759070873260498,
+            "rollout_mae_c": 1.01105535030365,
+            "rollout_max_abs_c": 9.641735076904297,
+            "trajectory_rmse_median_c": 1.2665247917175293,
+            "trajectory_rmse_p95_c": 2.2132396697998047,
+            "final_state_rmse_c": 2.233891010284424
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.369128704071045,
+            "rollout_mae_c": 0.9023962020874023,
+            "rollout_max_abs_c": 9.26422119140625,
+            "trajectory_rmse_median_c": 0.9737709760665894,
+            "trajectory_rmse_p95_c": 2.3122055530548096,
+            "final_state_rmse_c": 2.5928566455841064
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.6039830446243286,
+            "rollout_mae_c": 0.9205945134162903,
+            "rollout_max_abs_c": 8.669097900390625,
+            "trajectory_rmse_median_c": 1.0548256635665894,
+            "trajectory_rmse_p95_c": 2.932647705078125,
+            "final_state_rmse_c": 2.4705028533935547
+          },
+          "combined": {
+            "rollout_rmse_c": 1.3779208660125732,
+            "rollout_mae_c": 0.8968513011932373,
+            "rollout_max_abs_c": 9.581527709960938,
+            "trajectory_rmse_median_c": 1.007359504699707,
+            "trajectory_rmse_p95_c": 2.55281662940979,
+            "final_state_rmse_c": 2.417525291442871
+          }
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "causal_observer_0p5c",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 9.940754890441895,
+          "rollout_mae_c": 6.682633399963379,
+          "rollout_max_abs_c": 63.7713623046875,
+          "trajectory_rmse_median_c": 6.666844367980957,
+          "trajectory_rmse_p95_c": 20.449993133544922,
+          "center_rmse_c": 9.897990226745605,
+          "surface_rmse_c": 10.281990051269531,
+          "final_state_rmse_c": 13.93727970123291,
+          "physics_residual_rmse_c": 14.23551082611084,
+          "maximum_principle_violation_fraction": 0.0034666666666666665,
+          "rollout_seconds": 0.024383416981436312,
+          "one_step_rmse_c": 0.1770457634030995
+        },
+        "source_solver": {
+          "rollout_rmse_c": 9.821843147277832,
+          "rollout_mae_c": 6.615207195281982,
+          "rollout_max_abs_c": 63.012847900390625,
+          "trajectory_rmse_median_c": 6.59864616394043,
+          "trajectory_rmse_p95_c": 20.272085189819336,
+          "final_state_rmse_c": 13.693435668945312
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 8.875697135925293,
+            "rollout_mae_c": 6.450747966766357,
+            "rollout_max_abs_c": 32.723388671875,
+            "trajectory_rmse_median_c": 6.891727447509766,
+            "trajectory_rmse_p95_c": 17.749469757080078,
+            "final_state_rmse_c": 11.980204582214355
+          },
+          "convection_step": {
+            "rollout_rmse_c": 9.457452774047852,
+            "rollout_mae_c": 6.639045715332031,
+            "rollout_max_abs_c": 31.367385864257812,
+            "trajectory_rmse_median_c": 6.8474225997924805,
+            "trajectory_rmse_p95_c": 15.208100318908691,
+            "final_state_rmse_c": 12.395742416381836
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 9.427828788757324,
+            "rollout_mae_c": 6.4530029296875,
+            "rollout_max_abs_c": 42.9114990234375,
+            "trajectory_rmse_median_c": 6.072335720062256,
+            "trajectory_rmse_p95_c": 16.13994789123535,
+            "final_state_rmse_c": 12.536487579345703
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 10.450384140014648,
+            "rollout_mae_c": 6.726060390472412,
+            "rollout_max_abs_c": 57.490692138671875,
+            "trajectory_rmse_median_c": 6.411055564880371,
+            "trajectory_rmse_p95_c": 21.625446319580078,
+            "final_state_rmse_c": 15.17471694946289
+          },
+          "combined": {
+            "rollout_rmse_c": 11.303853988647461,
+            "rollout_mae_c": 7.1443095207214355,
+            "rollout_max_abs_c": 63.7713623046875,
+            "trajectory_rmse_median_c": 6.728697776794434,
+            "trajectory_rmse_p95_c": 24.866920471191406,
+            "final_state_rmse_c": 16.929960250854492
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.0,
+      "model_family": "separate_h_epsilon",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 2.5248312950134277,
+          "rollout_mae_c": 1.2691073417663574,
+          "rollout_max_abs_c": 25.12408447265625,
+          "trajectory_rmse_median_c": 1.3031895160675049,
+          "trajectory_rmse_p95_c": 3.6870596408843994,
+          "center_rmse_c": 2.0452463626861572,
+          "surface_rmse_c": 3.8598246574401855,
+          "final_state_rmse_c": 4.514976978302002,
+          "physics_residual_rmse_c": 45.013614654541016,
+          "maximum_principle_violation_fraction": 0.0018154471544715447,
+          "rollout_seconds": 0.021505292039364576,
+          "one_step_rmse_c": 0.033313650724498704
+        },
+        "source_solver": {
+          "rollout_rmse_c": 2.4605231285095215,
+          "rollout_mae_c": 1.2558404207229614,
+          "rollout_max_abs_c": 24.250335693359375,
+          "trajectory_rmse_median_c": 1.2907640933990479,
+          "trajectory_rmse_p95_c": 3.72662091255188,
+          "final_state_rmse_c": 4.384678840637207
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.6293174028396606,
+            "rollout_mae_c": 1.0353102684020996,
+            "rollout_max_abs_c": 9.872222900390625,
+            "trajectory_rmse_median_c": 1.2957719564437866,
+            "trajectory_rmse_p95_c": 2.902783155441284,
+            "final_state_rmse_c": 2.505593776702881
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.631463885307312,
+            "rollout_mae_c": 1.0689796209335327,
+            "rollout_max_abs_c": 8.699073791503906,
+            "trajectory_rmse_median_c": 1.458560585975647,
+            "trajectory_rmse_p95_c": 2.571920156478882,
+            "final_state_rmse_c": 2.0198986530303955
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 2.974346876144409,
+            "rollout_mae_c": 1.4447638988494873,
+            "rollout_max_abs_c": 25.051116943359375,
+            "trajectory_rmse_median_c": 1.2105276584625244,
+            "trajectory_rmse_p95_c": 6.74190092086792,
+            "final_state_rmse_c": 6.005553245544434
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 3.515632390975952,
+            "rollout_mae_c": 1.673446536064148,
+            "rollout_max_abs_c": 22.06768798828125,
+            "trajectory_rmse_median_c": 1.342133641242981,
+            "trajectory_rmse_p95_c": 5.305986404418945,
+            "final_state_rmse_c": 5.5948309898376465
+          },
+          "combined": {
+            "rollout_rmse_c": 2.3132455348968506,
+            "rollout_mae_c": 1.1230360269546509,
+            "rollout_max_abs_c": 25.12408447265625,
+            "trajectory_rmse_median_c": 0.9607851505279541,
+            "trajectory_rmse_p95_c": 3.8352155685424805,
+            "final_state_rmse_c": 4.919175624847412
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.5528134107589722,
+          "rollout_mae_c": 0.963987410068512,
+          "rollout_max_abs_c": 18.93585205078125,
+          "trajectory_rmse_median_c": 1.1600654125213623,
+          "trajectory_rmse_p95_c": 2.767401933670044,
+          "center_rmse_c": 1.744330644607544,
+          "surface_rmse_c": 2.3448312282562256,
+          "final_state_rmse_c": 2.5765788555145264,
+          "physics_residual_rmse_c": 45.18952560424805,
+          "maximum_principle_violation_fraction": 0.0024016260162601625,
+          "rollout_seconds": 0.021516624954529107,
+          "one_step_rmse_c": 0.025341803636604827
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.5314890146255493,
+          "rollout_mae_c": 0.9340478777885437,
+          "rollout_max_abs_c": 19.8568115234375,
+          "trajectory_rmse_median_c": 1.110429286956787,
+          "trajectory_rmse_p95_c": 2.698031187057495,
+          "final_state_rmse_c": 2.5785837173461914
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.4057022333145142,
+            "rollout_mae_c": 0.9751816391944885,
+            "rollout_max_abs_c": 8.348800659179688,
+            "trajectory_rmse_median_c": 1.324814796447754,
+            "trajectory_rmse_p95_c": 2.008859395980835,
+            "final_state_rmse_c": 2.149847984313965
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.4980826377868652,
+            "rollout_mae_c": 1.0080243349075317,
+            "rollout_max_abs_c": 7.660636901855469,
+            "trajectory_rmse_median_c": 1.3781335353851318,
+            "trajectory_rmse_p95_c": 2.358346700668335,
+            "final_state_rmse_c": 1.8983644247055054
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.3036229610443115,
+            "rollout_mae_c": 0.8534485697746277,
+            "rollout_max_abs_c": 7.30364990234375,
+            "trajectory_rmse_median_c": 0.910117506980896,
+            "trajectory_rmse_p95_c": 2.0439345836639404,
+            "final_state_rmse_c": 2.3644185066223145
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.522911548614502,
+            "rollout_mae_c": 0.9427627325057983,
+            "rollout_max_abs_c": 9.511245727539062,
+            "trajectory_rmse_median_c": 1.08737051486969,
+            "trajectory_rmse_p95_c": 2.7689435482025146,
+            "final_state_rmse_c": 2.4727084636688232
+          },
+          "combined": {
+            "rollout_rmse_c": 1.9537667036056519,
+            "rollout_mae_c": 1.0405193567276,
+            "rollout_max_abs_c": 18.93585205078125,
+            "trajectory_rmse_median_c": 1.1011943817138672,
+            "trajectory_rmse_p95_c": 3.3269338607788086,
+            "final_state_rmse_c": 3.641894817352295
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "causal_observer_no_noise",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.6002854108810425,
+          "rollout_mae_c": 1.0081323385238647,
+          "rollout_max_abs_c": 19.1824951171875,
+          "trajectory_rmse_median_c": 1.2235803604125977,
+          "trajectory_rmse_p95_c": 2.8680949211120605,
+          "center_rmse_c": 1.7896956205368042,
+          "surface_rmse_c": 2.3662846088409424,
+          "final_state_rmse_c": 2.6343069076538086,
+          "physics_residual_rmse_c": 45.123748779296875,
+          "maximum_principle_violation_fraction": 0.0022674796747967478,
+          "rollout_seconds": 0.021361082908697426,
+          "one_step_rmse_c": 0.02840243015165925
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.5685337781906128,
+          "rollout_mae_c": 0.9688884019851685,
+          "rollout_max_abs_c": 20.1090087890625,
+          "trajectory_rmse_median_c": 1.1806895732879639,
+          "trajectory_rmse_p95_c": 2.7358217239379883,
+          "final_state_rmse_c": 2.628918170928955
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.4529504776000977,
+            "rollout_mae_c": 1.0145293474197388,
+            "rollout_max_abs_c": 8.3626708984375,
+            "trajectory_rmse_median_c": 1.3583710193634033,
+            "trajectory_rmse_p95_c": 2.0201971530914307,
+            "final_state_rmse_c": 2.192150115966797
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.602152705192566,
+            "rollout_mae_c": 1.0788813829421997,
+            "rollout_max_abs_c": 8.442577362060547,
+            "trajectory_rmse_median_c": 1.4098916053771973,
+            "trajectory_rmse_p95_c": 2.3961269855499268,
+            "final_state_rmse_c": 1.9793919324874878
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.3467484712600708,
+            "rollout_mae_c": 0.9007784128189087,
+            "rollout_max_abs_c": 7.6855621337890625,
+            "trajectory_rmse_median_c": 0.9850395917892456,
+            "trajectory_rmse_p95_c": 2.0617470741271973,
+            "final_state_rmse_c": 2.4190638065338135
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.5785775184631348,
+            "rollout_mae_c": 0.9932059049606323,
+            "rollout_max_abs_c": 9.62884521484375,
+            "trajectory_rmse_median_c": 1.1760857105255127,
+            "trajectory_rmse_p95_c": 2.8680949211120605,
+            "final_state_rmse_c": 2.512894868850708
+          },
+          "combined": {
+            "rollout_rmse_c": 1.9547301530838013,
+            "rollout_mae_c": 1.0532665252685547,
+            "rollout_max_abs_c": 19.1824951171875,
+            "trajectory_rmse_median_c": 1.1108331680297852,
+            "trajectory_rmse_p95_c": 3.3471884727478027,
+            "final_state_rmse_c": 3.715890645980835
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "causal_observer_0p5c",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 9.776240348815918,
+          "rollout_mae_c": 6.625467300415039,
+          "rollout_max_abs_c": 62.294769287109375,
+          "trajectory_rmse_median_c": 6.696469306945801,
+          "trajectory_rmse_p95_c": 20.246904373168945,
+          "center_rmse_c": 9.722320556640625,
+          "surface_rmse_c": 10.163233757019043,
+          "final_state_rmse_c": 13.18608570098877,
+          "physics_residual_rmse_c": 40.821895599365234,
+          "maximum_principle_violation_fraction": 0.0030886178861788617,
+          "rollout_seconds": 0.021525250049307942,
+          "one_step_rmse_c": 0.17582226316934627
+        },
+        "source_solver": {
+          "rollout_rmse_c": 9.660330772399902,
+          "rollout_mae_c": 6.55949068069458,
+          "rollout_max_abs_c": 61.543609619140625,
+          "trajectory_rmse_median_c": 6.610198020935059,
+          "trajectory_rmse_p95_c": 20.069616317749023,
+          "final_state_rmse_c": 12.955355644226074
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 8.892053604125977,
+            "rollout_mae_c": 6.457160949707031,
+            "rollout_max_abs_c": 33.1766357421875,
+            "trajectory_rmse_median_c": 7.057460784912109,
+            "trajectory_rmse_p95_c": 17.65665626525879,
+            "final_state_rmse_c": 11.79767894744873
+          },
+          "convection_step": {
+            "rollout_rmse_c": 9.343687057495117,
+            "rollout_mae_c": 6.56889533996582,
+            "rollout_max_abs_c": 31.7613525390625,
+            "trajectory_rmse_median_c": 6.795336723327637,
+            "trajectory_rmse_p95_c": 15.49312973022461,
+            "final_state_rmse_c": 12.072121620178223
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 9.17599105834961,
+            "rollout_mae_c": 6.294277667999268,
+            "rollout_max_abs_c": 43.514190673828125,
+            "trajectory_rmse_median_c": 5.937185287475586,
+            "trajectory_rmse_p95_c": 15.541202545166016,
+            "final_state_rmse_c": 11.469188690185547
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 10.146848678588867,
+            "rollout_mae_c": 6.68776273727417,
+            "rollout_max_abs_c": 52.658782958984375,
+            "trajectory_rmse_median_c": 6.5911865234375,
+            "trajectory_rmse_p95_c": 21.610925674438477,
+            "final_state_rmse_c": 14.001687049865723
+          },
+          "combined": {
+            "rollout_rmse_c": 11.150961875915527,
+            "rollout_mae_c": 7.119241714477539,
+            "rollout_max_abs_c": 62.294769287109375,
+            "trajectory_rmse_median_c": 6.788600921630859,
+            "trajectory_rmse_p95_c": 24.691556930541992,
+            "final_state_rmse_c": 16.026647567749023
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.001,
+      "model_family": "separate_h_epsilon",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 2.3896608352661133,
+          "rollout_mae_c": 1.427445888519287,
+          "rollout_max_abs_c": 18.78558349609375,
+          "trajectory_rmse_median_c": 1.455800175666809,
+          "trajectory_rmse_p95_c": 4.956483364105225,
+          "center_rmse_c": 2.0999836921691895,
+          "surface_rmse_c": 3.4569082260131836,
+          "final_state_rmse_c": 4.3309125900268555,
+          "physics_residual_rmse_c": 19.220643997192383,
+          "maximum_principle_violation_fraction": 0.0025902439024390244,
+          "rollout_seconds": 0.023066209047101438,
+          "one_step_rmse_c": 0.03596914848851715
+        },
+        "source_solver": {
+          "rollout_rmse_c": 2.3951995372772217,
+          "rollout_mae_c": 1.4251530170440674,
+          "rollout_max_abs_c": 18.479949951171875,
+          "trajectory_rmse_median_c": 1.460270881652832,
+          "trajectory_rmse_p95_c": 5.0716094970703125,
+          "final_state_rmse_c": 4.436762809753418
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 2.026172399520874,
+            "rollout_mae_c": 1.2728818655014038,
+            "rollout_max_abs_c": 18.0162353515625,
+            "trajectory_rmse_median_c": 1.5536866188049316,
+            "trajectory_rmse_p95_c": 3.5743672847747803,
+            "final_state_rmse_c": 4.638306140899658
+          },
+          "convection_step": {
+            "rollout_rmse_c": 2.0697035789489746,
+            "rollout_mae_c": 1.2916910648345947,
+            "rollout_max_abs_c": 11.614288330078125,
+            "trajectory_rmse_median_c": 1.4893929958343506,
+            "trajectory_rmse_p95_c": 4.13482141494751,
+            "final_state_rmse_c": 4.14297342300415
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 2.6129701137542725,
+            "rollout_mae_c": 1.6577736139297485,
+            "rollout_max_abs_c": 17.27606201171875,
+            "trajectory_rmse_median_c": 1.339492917060852,
+            "trajectory_rmse_p95_c": 5.416906356811523,
+            "final_state_rmse_c": 4.773317813873291
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 3.1442348957061768,
+            "rollout_mae_c": 1.7597264051437378,
+            "rollout_max_abs_c": 18.78558349609375,
+            "trajectory_rmse_median_c": 1.6981697082519531,
+            "trajectory_rmse_p95_c": 5.97481632232666,
+            "final_state_rmse_c": 4.571302890777588
+          },
+          "combined": {
+            "rollout_rmse_c": 1.85728919506073,
+            "rollout_mae_c": 1.1551563739776611,
+            "rollout_max_abs_c": 16.2347412109375,
+            "trajectory_rmse_median_c": 1.3095996379852295,
+            "trajectory_rmse_p95_c": 3.331000804901123,
+            "final_state_rmse_c": 3.380018711090088
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.5491349697113037,
+          "rollout_mae_c": 1.0128469467163086,
+          "rollout_max_abs_c": 9.541641235351562,
+          "trajectory_rmse_median_c": 1.223175048828125,
+          "trajectory_rmse_p95_c": 2.861678123474121,
+          "center_rmse_c": 1.7386850118637085,
+          "surface_rmse_c": 2.4881162643432617,
+          "final_state_rmse_c": 2.41670298576355,
+          "physics_residual_rmse_c": 16.05293846130371,
+          "maximum_principle_violation_fraction": 0.002334959349593496,
+          "rollout_seconds": 0.023336416925303638,
+          "one_step_rmse_c": 0.02584629303519379
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.4766510725021362,
+          "rollout_mae_c": 0.9683276414871216,
+          "rollout_max_abs_c": 9.67584228515625,
+          "trajectory_rmse_median_c": 1.1990745067596436,
+          "trajectory_rmse_p95_c": 2.8491101264953613,
+          "final_state_rmse_c": 2.2793045043945312
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.4979205131530762,
+            "rollout_mae_c": 1.023011326789856,
+            "rollout_max_abs_c": 8.4620361328125,
+            "trajectory_rmse_median_c": 1.2981375455856323,
+            "trajectory_rmse_p95_c": 2.3581931591033936,
+            "final_state_rmse_c": 2.4758119583129883
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.5301424264907837,
+            "rollout_mae_c": 1.035906195640564,
+            "rollout_max_abs_c": 8.624401092529297,
+            "trajectory_rmse_median_c": 1.2408294677734375,
+            "trajectory_rmse_p95_c": 2.151348829269409,
+            "final_state_rmse_c": 2.165864944458008
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.6292222738265991,
+            "rollout_mae_c": 1.0184500217437744,
+            "rollout_max_abs_c": 8.96783447265625,
+            "trajectory_rmse_median_c": 1.0398225784301758,
+            "trajectory_rmse_p95_c": 3.3728086948394775,
+            "final_state_rmse_c": 2.6551973819732666
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.5809422731399536,
+            "rollout_mae_c": 0.9988023638725281,
+            "rollout_max_abs_c": 8.4583740234375,
+            "trajectory_rmse_median_c": 1.1812314987182617,
+            "trajectory_rmse_p95_c": 2.898982524871826,
+            "final_state_rmse_c": 2.237583875656128
+          },
+          "combined": {
+            "rollout_rmse_c": 1.5034129619598389,
+            "rollout_mae_c": 0.9880642890930176,
+            "rollout_max_abs_c": 9.541641235351562,
+            "trajectory_rmse_median_c": 1.022318959236145,
+            "trajectory_rmse_p95_c": 2.8488423824310303,
+            "final_state_rmse_c": 2.51491379737854
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "causal_observer_no_noise",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.6022882461547852,
+          "rollout_mae_c": 1.056420922279358,
+          "rollout_max_abs_c": 9.392192840576172,
+          "trajectory_rmse_median_c": 1.2531325817108154,
+          "trajectory_rmse_p95_c": 2.8831281661987305,
+          "center_rmse_c": 1.7881900072097778,
+          "surface_rmse_c": 2.5268046855926514,
+          "final_state_rmse_c": 2.458271026611328,
+          "physics_residual_rmse_c": 16.0628719329834,
+          "maximum_principle_violation_fraction": 0.002245528455284553,
+          "rollout_seconds": 0.021550666890107095,
+          "one_step_rmse_c": 0.028789011948725834
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.5207815170288086,
+          "rollout_mae_c": 1.0037176609039307,
+          "rollout_max_abs_c": 9.508697509765625,
+          "trajectory_rmse_median_c": 1.247453212738037,
+          "trajectory_rmse_p95_c": 2.863628387451172,
+          "final_state_rmse_c": 2.3146073818206787
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.552415370941162,
+            "rollout_mae_c": 1.0671223402023315,
+            "rollout_max_abs_c": 8.239227294921875,
+            "trajectory_rmse_median_c": 1.3545808792114258,
+            "trajectory_rmse_p95_c": 2.4011054039001465,
+            "final_state_rmse_c": 2.5210089683532715
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.6446847915649414,
+            "rollout_mae_c": 1.1123011112213135,
+            "rollout_max_abs_c": 9.392192840576172,
+            "trajectory_rmse_median_c": 1.4072940349578857,
+            "trajectory_rmse_p95_c": 2.385108470916748,
+            "final_state_rmse_c": 2.2610576152801514
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.6600877046585083,
+            "rollout_mae_c": 1.055067539215088,
+            "rollout_max_abs_c": 8.90985107421875,
+            "trajectory_rmse_median_c": 1.0582085847854614,
+            "trajectory_rmse_p95_c": 3.3917078971862793,
+            "final_state_rmse_c": 2.6655008792877197
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.6341146230697632,
+            "rollout_mae_c": 1.044193148612976,
+            "rollout_max_abs_c": 8.784515380859375,
+            "trajectory_rmse_median_c": 1.2684602737426758,
+            "trajectory_rmse_p95_c": 2.926226854324341,
+            "final_state_rmse_c": 2.268122911453247
+          },
+          "combined": {
+            "rollout_rmse_c": 1.5150691270828247,
+            "rollout_mae_c": 1.0034205913543701,
+            "rollout_max_abs_c": 9.374496459960938,
+            "trajectory_rmse_median_c": 1.0133391618728638,
+            "trajectory_rmse_p95_c": 2.8520514965057373,
+            "final_state_rmse_c": 2.5491836071014404
+          }
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "causal_observer_0p5c",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 9.988107681274414,
+          "rollout_mae_c": 6.659403324127197,
+          "rollout_max_abs_c": 65.73583984375,
+          "trajectory_rmse_median_c": 6.545016765594482,
+          "trajectory_rmse_p95_c": 20.363182067871094,
+          "center_rmse_c": 9.966283798217773,
+          "surface_rmse_c": 10.398236274719238,
+          "final_state_rmse_c": 13.745834350585938,
+          "physics_residual_rmse_c": 15.443849563598633,
+          "maximum_principle_violation_fraction": 0.0033121951219512195,
+          "rollout_seconds": 0.0217361660907045,
+          "one_step_rmse_c": 0.17702709897032384
+        },
+        "source_solver": {
+          "rollout_rmse_c": 9.869157791137695,
+          "rollout_mae_c": 6.592217922210693,
+          "rollout_max_abs_c": 64.98468017578125,
+          "trajectory_rmse_median_c": 6.4961724281311035,
+          "trajectory_rmse_p95_c": 20.18191909790039,
+          "final_state_rmse_c": 13.503663063049316
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 8.939995765686035,
+            "rollout_mae_c": 6.418578147888184,
+            "rollout_max_abs_c": 35.011566162109375,
+            "trajectory_rmse_median_c": 6.8919525146484375,
+            "trajectory_rmse_p95_c": 17.601192474365234,
+            "final_state_rmse_c": 11.936105728149414
+          },
+          "convection_step": {
+            "rollout_rmse_c": 9.38327693939209,
+            "rollout_mae_c": 6.576079368591309,
+            "rollout_max_abs_c": 31.201553344726562,
+            "trajectory_rmse_median_c": 6.970786094665527,
+            "trajectory_rmse_p95_c": 15.555166244506836,
+            "final_state_rmse_c": 12.210358619689941
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 9.480940818786621,
+            "rollout_mae_c": 6.405731678009033,
+            "rollout_max_abs_c": 44.397552490234375,
+            "trajectory_rmse_median_c": 5.822614669799805,
+            "trajectory_rmse_p95_c": 16.38369369506836,
+            "final_state_rmse_c": 12.252320289611816
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 10.386889457702637,
+            "rollout_mae_c": 6.736701011657715,
+            "rollout_max_abs_c": 56.607696533203125,
+            "trajectory_rmse_median_c": 6.319910049438477,
+            "trajectory_rmse_p95_c": 22.108810424804688,
+            "final_state_rmse_c": 14.741905212402344
+          },
+          "combined": {
+            "rollout_rmse_c": 11.535440444946289,
+            "rollout_mae_c": 7.1599273681640625,
+            "rollout_max_abs_c": 65.73583984375,
+            "trajectory_rmse_median_c": 6.742790222167969,
+            "trajectory_rmse_p95_c": 25.988611221313477,
+            "final_state_rmse_c": 16.90364646911621
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.0,
+      "model_family": "separate_h_epsilon",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 2.532670021057129,
+          "rollout_mae_c": 1.23098623752594,
+          "rollout_max_abs_c": 25.57305908203125,
+          "trajectory_rmse_median_c": 1.1083871126174927,
+          "trajectory_rmse_p95_c": 4.378849029541016,
+          "center_rmse_c": 2.2052574157714844,
+          "surface_rmse_c": 3.464874505996704,
+          "final_state_rmse_c": 4.871837615966797,
+          "physics_residual_rmse_c": 47.25804901123047,
+          "maximum_principle_violation_fraction": 0.002478048780487805,
+          "rollout_seconds": 0.022025124984793365,
+          "one_step_rmse_c": 0.0360318697361244
+        },
+        "source_solver": {
+          "rollout_rmse_c": 2.4623498916625977,
+          "rollout_mae_c": 1.2092981338500977,
+          "rollout_max_abs_c": 24.775390625,
+          "trajectory_rmse_median_c": 1.1051194667816162,
+          "trajectory_rmse_p95_c": 4.434022426605225,
+          "final_state_rmse_c": 4.730783939361572
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.5632880926132202,
+            "rollout_mae_c": 0.9423841834068298,
+            "rollout_max_abs_c": 13.16650390625,
+            "trajectory_rmse_median_c": 0.9643707275390625,
+            "trajectory_rmse_p95_c": 2.7404816150665283,
+            "final_state_rmse_c": 2.92533802986145
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.514345407485962,
+            "rollout_mae_c": 1.0078988075256348,
+            "rollout_max_abs_c": 11.68768310546875,
+            "trajectory_rmse_median_c": 1.3175921440124512,
+            "trajectory_rmse_p95_c": 2.4198927879333496,
+            "final_state_rmse_c": 2.242419481277466
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 3.104201316833496,
+            "rollout_mae_c": 1.4356884956359863,
+            "rollout_max_abs_c": 25.57305908203125,
+            "trajectory_rmse_median_c": 1.0723216533660889,
+            "trajectory_rmse_p95_c": 7.228424549102783,
+            "final_state_rmse_c": 6.644039630889893
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 3.389315366744995,
+            "rollout_mae_c": 1.6227502822875977,
+            "rollout_max_abs_c": 21.829437255859375,
+            "trajectory_rmse_median_c": 1.157906413078308,
+            "trajectory_rmse_p95_c": 6.0261664390563965,
+            "final_state_rmse_c": 5.225419044494629
+          },
+          "combined": {
+            "rollout_rmse_c": 2.4922783374786377,
+            "rollout_mae_c": 1.1462091207504272,
+            "rollout_max_abs_c": 25.4412841796875,
+            "trajectory_rmse_median_c": 0.9477581977844238,
+            "trajectory_rmse_p95_c": 4.521421909332275,
+            "final_state_rmse_c": 5.7999749183654785
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.4236373901367188,
+          "rollout_mae_c": 0.9051139950752258,
+          "rollout_max_abs_c": 12.025421142578125,
+          "trajectory_rmse_median_c": 1.0609889030456543,
+          "trajectory_rmse_p95_c": 2.4824936389923096,
+          "center_rmse_c": 1.542195439338684,
+          "surface_rmse_c": 2.4164016246795654,
+          "final_state_rmse_c": 2.042227029800415,
+          "physics_residual_rmse_c": 51.82646560668945,
+          "maximum_principle_violation_fraction": 0.0014097560975609756,
+          "rollout_seconds": 0.021504958043806255,
+          "one_step_rmse_c": 0.02524107236974594
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.4083918333053589,
+          "rollout_mae_c": 0.8915172815322876,
+          "rollout_max_abs_c": 12.896026611328125,
+          "trajectory_rmse_median_c": 1.073499321937561,
+          "trajectory_rmse_p95_c": 2.2830607891082764,
+          "final_state_rmse_c": 2.083803176879883
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.3119897842407227,
+            "rollout_mae_c": 0.8952327370643616,
+            "rollout_max_abs_c": 9.238082885742188,
+            "trajectory_rmse_median_c": 1.2160041332244873,
+            "trajectory_rmse_p95_c": 1.943572998046875,
+            "final_state_rmse_c": 1.7826224565505981
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.4758307933807373,
+            "rollout_mae_c": 0.9845373034477234,
+            "rollout_max_abs_c": 8.307380676269531,
+            "trajectory_rmse_median_c": 1.2291460037231445,
+            "trajectory_rmse_p95_c": 2.318467140197754,
+            "final_state_rmse_c": 1.6641210317611694
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.1846998929977417,
+            "rollout_mae_c": 0.7954575419425964,
+            "rollout_max_abs_c": 6.8649444580078125,
+            "trajectory_rmse_median_c": 0.9496455192565918,
+            "trajectory_rmse_p95_c": 1.9291030168533325,
+            "final_state_rmse_c": 1.939910888671875
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.634495496749878,
+            "rollout_mae_c": 0.9848275780677795,
+            "rollout_max_abs_c": 8.50897216796875,
+            "trajectory_rmse_median_c": 1.0459294319152832,
+            "trajectory_rmse_p95_c": 2.8545544147491455,
+            "final_state_rmse_c": 2.2972726821899414
+          },
+          "combined": {
+            "rollout_rmse_c": 1.469433307647705,
+            "rollout_mae_c": 0.8655147552490234,
+            "rollout_max_abs_c": 12.025421142578125,
+            "trajectory_rmse_median_c": 0.8656444549560547,
+            "trajectory_rmse_p95_c": 3.0051887035369873,
+            "final_state_rmse_c": 2.4219202995300293
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "causal_observer_no_noise",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.4495043754577637,
+          "rollout_mae_c": 0.926086962223053,
+          "rollout_max_abs_c": 12.09454345703125,
+          "trajectory_rmse_median_c": 1.057521939277649,
+          "trajectory_rmse_p95_c": 2.518505573272705,
+          "center_rmse_c": 1.563584566116333,
+          "surface_rmse_c": 2.4318721294403076,
+          "final_state_rmse_c": 2.035381555557251,
+          "physics_residual_rmse_c": 51.96560287475586,
+          "maximum_principle_violation_fraction": 0.0010869918699186992,
+          "rollout_seconds": 0.02138008293695748,
+          "one_step_rmse_c": 0.02842271259306223
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.4215788841247559,
+          "rollout_mae_c": 0.9022408723831177,
+          "rollout_max_abs_c": 12.97540283203125,
+          "trajectory_rmse_median_c": 1.0521340370178223,
+          "trajectory_rmse_p95_c": 2.373025417327881,
+          "final_state_rmse_c": 2.066201686859131
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.3413628339767456,
+            "rollout_mae_c": 0.9219483137130737,
+            "rollout_max_abs_c": 9.018661499023438,
+            "trajectory_rmse_median_c": 1.1988437175750732,
+            "trajectory_rmse_p95_c": 1.9864816665649414,
+            "final_state_rmse_c": 1.7640119791030884
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.5560325384140015,
+            "rollout_mae_c": 1.0365254878997803,
+            "rollout_max_abs_c": 9.065853118896484,
+            "trajectory_rmse_median_c": 1.3808493614196777,
+            "trajectory_rmse_p95_c": 2.329620599746704,
+            "final_state_rmse_c": 1.662482738494873
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.1861509084701538,
+            "rollout_mae_c": 0.8016613125801086,
+            "rollout_max_abs_c": 6.7329559326171875,
+            "trajectory_rmse_median_c": 0.9713015556335449,
+            "trajectory_rmse_p95_c": 1.8829658031463623,
+            "final_state_rmse_c": 1.9148129224777222
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.6570755243301392,
+            "rollout_mae_c": 0.9996542930603027,
+            "rollout_max_abs_c": 8.796234130859375,
+            "trajectory_rmse_median_c": 1.0162209272384644,
+            "trajectory_rmse_p95_c": 2.8869762420654297,
+            "final_state_rmse_c": 2.2652013301849365
+          },
+          "combined": {
+            "rollout_rmse_c": 1.4601268768310547,
+            "rollout_mae_c": 0.8706450462341309,
+            "rollout_max_abs_c": 12.09454345703125,
+            "trajectory_rmse_median_c": 0.9159048795700073,
+            "trajectory_rmse_p95_c": 2.9665937423706055,
+            "final_state_rmse_c": 2.457775115966797
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.0,
+      "model_family": "effective",
+      "deployment": "causal_observer_0p5c",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 9.737748146057129,
+          "rollout_mae_c": 6.446122646331787,
+          "rollout_max_abs_c": 64.86349487304688,
+          "trajectory_rmse_median_c": 6.197238445281982,
+          "trajectory_rmse_p95_c": 20.403398513793945,
+          "center_rmse_c": 9.540090560913086,
+          "surface_rmse_c": 10.164506912231445,
+          "final_state_rmse_c": 13.070511817932129,
+          "physics_residual_rmse_c": 44.761348724365234,
+          "maximum_principle_violation_fraction": 0.0018073170731707318,
+          "rollout_seconds": 0.021447625011205673,
+          "one_step_rmse_c": 0.17481600725685612
+        },
+        "source_solver": {
+          "rollout_rmse_c": 9.620657920837402,
+          "rollout_mae_c": 6.379723072052002,
+          "rollout_max_abs_c": 64.11233520507812,
+          "trajectory_rmse_median_c": 6.1163859367370605,
+          "trajectory_rmse_p95_c": 20.223058700561523,
+          "final_state_rmse_c": 12.839251518249512
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 8.702707290649414,
+            "rollout_mae_c": 6.265556335449219,
+            "rollout_max_abs_c": 32.3583984375,
+            "trajectory_rmse_median_c": 6.435629367828369,
+            "trajectory_rmse_p95_c": 17.40645408630371,
+            "final_state_rmse_c": 11.282882690429688
+          },
+          "convection_step": {
+            "rollout_rmse_c": 9.182875633239746,
+            "rollout_mae_c": 6.439769268035889,
+            "rollout_max_abs_c": 31.25823974609375,
+            "trajectory_rmse_median_c": 6.4053730964660645,
+            "trajectory_rmse_p95_c": 15.089959144592285,
+            "final_state_rmse_c": 11.517590522766113
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 9.065372467041016,
+            "rollout_mae_c": 6.025338649749756,
+            "rollout_max_abs_c": 43.333526611328125,
+            "trajectory_rmse_median_c": 5.310234069824219,
+            "trajectory_rmse_p95_c": 15.105798721313477,
+            "final_state_rmse_c": 11.281355857849121
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 10.272196769714355,
+            "rollout_mae_c": 6.493204116821289,
+            "rollout_max_abs_c": 56.67633056640625,
+            "trajectory_rmse_median_c": 5.573902606964111,
+            "trajectory_rmse_p95_c": 21.91692543029785,
+            "final_state_rmse_c": 14.06234359741211
+          },
+          "combined": {
+            "rollout_rmse_c": 11.240876197814941,
+            "rollout_mae_c": 7.006747245788574,
+            "rollout_max_abs_c": 64.86349487304688,
+            "trajectory_rmse_median_c": 6.224649429321289,
+            "trajectory_rmse_p95_c": 25.261308670043945,
+            "final_state_rmse_c": 16.407760620117188
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.001,
+      "model_family": "separate_h_epsilon",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 2.212693691253662,
+          "rollout_mae_c": 1.2286235094070435,
+          "rollout_max_abs_c": 23.8643798828125,
+          "trajectory_rmse_median_c": 1.309386134147644,
+          "trajectory_rmse_p95_c": 3.5252928733825684,
+          "center_rmse_c": 1.830999732017517,
+          "surface_rmse_c": 3.425424098968506,
+          "final_state_rmse_c": 4.034066677093506,
+          "physics_residual_rmse_c": 18.086145401000977,
+          "maximum_principle_violation_fraction": 0.0028170731707317072,
+          "rollout_seconds": 0.021655332995578647,
+          "one_step_rmse_c": 0.030955381085638656
+        },
+        "source_solver": {
+          "rollout_rmse_c": 2.1783876419067383,
+          "rollout_mae_c": 1.2262020111083984,
+          "rollout_max_abs_c": 22.9083251953125,
+          "trajectory_rmse_median_c": 1.3298985958099365,
+          "trajectory_rmse_p95_c": 3.6454920768737793,
+          "final_state_rmse_c": 3.9954302310943604
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.5397347211837769,
+            "rollout_mae_c": 1.0260155200958252,
+            "rollout_max_abs_c": 9.708984375,
+            "trajectory_rmse_median_c": 1.2574338912963867,
+            "trajectory_rmse_p95_c": 2.453303813934326,
+            "final_state_rmse_c": 2.6803832054138184
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.5248574018478394,
+            "rollout_mae_c": 1.027356743812561,
+            "rollout_max_abs_c": 8.318603515625,
+            "trajectory_rmse_median_c": 1.343885898590088,
+            "trajectory_rmse_p95_c": 2.3056962490081787,
+            "final_state_rmse_c": 2.494554042816162
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 2.4846246242523193,
+            "rollout_mae_c": 1.49557626247406,
+            "rollout_max_abs_c": 19.16278076171875,
+            "trajectory_rmse_median_c": 1.462449073791504,
+            "trajectory_rmse_p95_c": 4.09810209274292,
+            "final_state_rmse_c": 5.188326358795166
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 2.9207100868225098,
+            "rollout_mae_c": 1.4476231336593628,
+            "rollout_max_abs_c": 18.347686767578125,
+            "trajectory_rmse_median_c": 1.0661112070083618,
+            "trajectory_rmse_p95_c": 5.140063762664795,
+            "final_state_rmse_c": 4.077457904815674
+          },
+          "combined": {
+            "rollout_rmse_c": 2.253926992416382,
+            "rollout_mae_c": 1.1465457677841187,
+            "rollout_max_abs_c": 23.8643798828125,
+            "trajectory_rmse_median_c": 1.3331284523010254,
+            "trajectory_rmse_p95_c": 3.7114298343658447,
+            "final_state_rmse_c": 4.941338539123535
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "oracle_dynamic",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.4267840385437012,
+          "rollout_mae_c": 0.9364365935325623,
+          "rollout_max_abs_c": 9.9483642578125,
+          "trajectory_rmse_median_c": 1.1184413433074951,
+          "trajectory_rmse_p95_c": 2.4607090950012207,
+          "center_rmse_c": 1.4987164735794067,
+          "surface_rmse_c": 2.3688578605651855,
+          "final_state_rmse_c": 2.0862741470336914,
+          "physics_residual_rmse_c": 20.6231746673584,
+          "maximum_principle_violation_fraction": 0.0016861788617886179,
+          "rollout_seconds": 0.02153570798691362,
+          "one_step_rmse_c": 0.026304562139033812
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.3833544254302979,
+          "rollout_mae_c": 0.9081022143363953,
+          "rollout_max_abs_c": 10.529937744140625,
+          "trajectory_rmse_median_c": 1.1276025772094727,
+          "trajectory_rmse_p95_c": 2.2260963916778564,
+          "final_state_rmse_c": 2.0055713653564453
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.2999539375305176,
+            "rollout_mae_c": 0.9235832691192627,
+            "rollout_max_abs_c": 7.773834228515625,
+            "trajectory_rmse_median_c": 1.2026526927947998,
+            "trajectory_rmse_p95_c": 1.870335340499878,
+            "final_state_rmse_c": 2.051896333694458
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.4024420976638794,
+            "rollout_mae_c": 0.9626241326332092,
+            "rollout_max_abs_c": 9.765846252441406,
+            "trajectory_rmse_median_c": 1.1560759544372559,
+            "trajectory_rmse_p95_c": 2.1370134353637695,
+            "final_state_rmse_c": 1.883531928062439
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.4458619356155396,
+            "rollout_mae_c": 0.918379545211792,
+            "rollout_max_abs_c": 9.9483642578125,
+            "trajectory_rmse_median_c": 1.025507926940918,
+            "trajectory_rmse_p95_c": 2.5337092876434326,
+            "final_state_rmse_c": 2.22659969329834
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.594892144203186,
+            "rollout_mae_c": 0.9661309123039246,
+            "rollout_max_abs_c": 9.8226318359375,
+            "trajectory_rmse_median_c": 1.0692715644836426,
+            "trajectory_rmse_p95_c": 2.681098222732544,
+            "final_state_rmse_c": 2.053797721862793
+          },
+          "combined": {
+            "rollout_rmse_c": 1.3739144802093506,
+            "rollout_mae_c": 0.9114653468132019,
+            "rollout_max_abs_c": 9.6610107421875,
+            "trajectory_rmse_median_c": 1.1777904033660889,
+            "trajectory_rmse_p95_c": 2.2043542861938477,
+            "final_state_rmse_c": 2.197474956512451
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "causal_observer_no_noise",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 1.4594699144363403,
+          "rollout_mae_c": 0.9596568942070007,
+          "rollout_max_abs_c": 10.47390365600586,
+          "trajectory_rmse_median_c": 1.1520012617111206,
+          "trajectory_rmse_p95_c": 2.491253614425659,
+          "center_rmse_c": 1.5280585289001465,
+          "surface_rmse_c": 2.407433032989502,
+          "final_state_rmse_c": 2.1140143871307373,
+          "physics_residual_rmse_c": 20.62411880493164,
+          "maximum_principle_violation_fraction": 0.001640650406504065,
+          "rollout_seconds": 0.021608624956570566,
+          "one_step_rmse_c": 0.029141596565470985
+        },
+        "source_solver": {
+          "rollout_rmse_c": 1.4043828248977661,
+          "rollout_mae_c": 0.9224223494529724,
+          "rollout_max_abs_c": 10.58380126953125,
+          "trajectory_rmse_median_c": 1.131009578704834,
+          "trajectory_rmse_p95_c": 2.292217254638672,
+          "final_state_rmse_c": 2.0238537788391113
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 1.3156849145889282,
+            "rollout_mae_c": 0.9366595149040222,
+            "rollout_max_abs_c": 7.555450439453125,
+            "trajectory_rmse_median_c": 1.2036519050598145,
+            "trajectory_rmse_p95_c": 1.887312650680542,
+            "final_state_rmse_c": 2.0658586025238037
+          },
+          "convection_step": {
+            "rollout_rmse_c": 1.511414885520935,
+            "rollout_mae_c": 1.0319545269012451,
+            "rollout_max_abs_c": 10.47390365600586,
+            "trajectory_rmse_median_c": 1.2239477634429932,
+            "trajectory_rmse_p95_c": 2.456329107284546,
+            "final_state_rmse_c": 1.9691213369369507
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 1.4499123096466064,
+            "rollout_mae_c": 0.9210399985313416,
+            "rollout_max_abs_c": 9.888427734375,
+            "trajectory_rmse_median_c": 1.0081164836883545,
+            "trajectory_rmse_p95_c": 2.562842845916748,
+            "final_state_rmse_c": 2.226663589477539
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 1.634361982345581,
+            "rollout_mae_c": 0.9950248003005981,
+            "rollout_max_abs_c": 10.07940673828125,
+            "trajectory_rmse_median_c": 1.03436279296875,
+            "trajectory_rmse_p95_c": 2.7324907779693604,
+            "final_state_rmse_c": 2.0691089630126953
+          },
+          "combined": {
+            "rollout_rmse_c": 1.3643591403961182,
+            "rollout_mae_c": 0.9136056900024414,
+            "rollout_max_abs_c": 9.70172119140625,
+            "trajectory_rmse_median_c": 1.1514246463775635,
+            "trajectory_rmse_p95_c": 2.174610137939453,
+            "final_state_rmse_c": 2.227292776107788
+          }
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "physics_weight": 0.001,
+      "model_family": "effective",
+      "deployment": "causal_observer_0p5c",
+      "metrics": {
+        "reference": {
+          "rollout_rmse_c": 9.777006149291992,
+          "rollout_mae_c": 6.489871978759766,
+          "rollout_max_abs_c": 65.35406494140625,
+          "trajectory_rmse_median_c": 6.203327178955078,
+          "trajectory_rmse_p95_c": 20.132062911987305,
+          "center_rmse_c": 9.581769943237305,
+          "surface_rmse_c": 10.334930419921875,
+          "final_state_rmse_c": 13.351297378540039,
+          "physics_residual_rmse_c": 19.540090560913086,
+          "maximum_principle_violation_fraction": 0.002139837398373984,
+          "rollout_seconds": 0.022366541903465986,
+          "one_step_rmse_c": 0.17593668827611705
+        },
+        "source_solver": {
+          "rollout_rmse_c": 9.660297393798828,
+          "rollout_mae_c": 6.424808025360107,
+          "rollout_max_abs_c": 64.6029052734375,
+          "trajectory_rmse_median_c": 6.137144088745117,
+          "trajectory_rmse_p95_c": 19.950822830200195,
+          "final_state_rmse_c": 13.112931251525879
+        },
+        "categories": {
+          "convection_smooth": {
+            "rollout_rmse_c": 8.677902221679688,
+            "rollout_mae_c": 6.264070987701416,
+            "rollout_max_abs_c": 32.432647705078125,
+            "trajectory_rmse_median_c": 6.560458183288574,
+            "trajectory_rmse_p95_c": 17.39632797241211,
+            "final_state_rmse_c": 11.4191255569458
+          },
+          "convection_step": {
+            "rollout_rmse_c": 9.191156387329102,
+            "rollout_mae_c": 6.438140869140625,
+            "rollout_max_abs_c": 31.357986450195312,
+            "trajectory_rmse_median_c": 6.707560062408447,
+            "trajectory_rmse_p95_c": 15.107369422912598,
+            "final_state_rmse_c": 11.779285430908203
+          },
+          "emissivity_growth": {
+            "rollout_rmse_c": 9.224928855895996,
+            "rollout_mae_c": 6.182682037353516,
+            "rollout_max_abs_c": 46.192352294921875,
+            "trajectory_rmse_median_c": 5.720181941986084,
+            "trajectory_rmse_p95_c": 15.266280174255371,
+            "final_state_rmse_c": 11.81032657623291
+          },
+          "emissivity_step": {
+            "rollout_rmse_c": 10.31921100616455,
+            "rollout_mae_c": 6.62171745300293,
+            "rollout_max_abs_c": 55.44635009765625,
+            "trajectory_rmse_median_c": 6.074431419372559,
+            "trajectory_rmse_p95_c": 22.199859619140625,
+            "final_state_rmse_c": 14.371024131774902
+          },
+          "combined": {
+            "rollout_rmse_c": 11.250799179077148,
+            "rollout_mae_c": 6.942749500274658,
+            "rollout_max_abs_c": 65.35406494140625,
+            "trajectory_rmse_median_c": 6.463522911071777,
+            "trajectory_rmse_p95_c": 25.515687942504883,
+            "final_state_rmse_c": 16.61708641052246
+          }
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "effective|causal_observer_0p5c|weight=0": {
+      "rollout_rmse_c": {
+        "mean": 9.723149935404459,
+        "sample_std": 0.06169866116113889
+      },
+      "rollout_mae_c": {
+        "mean": 6.510289669036865,
+        "sample_std": 0.09996343273897763
+      },
+      "rollout_max_abs_c": {
+        "mean": 62.904886881510414,
+        "sample_std": 1.7359169183279808
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 6.363766352335612,
+        "sample_std": 0.28812926462304755
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 20.179046630859375,
+        "sample_std": 0.26488196017562265
+      },
+      "center_rmse_c": {
+        "mean": 9.574469566345215,
+        "sample_std": 0.13401067624381377
+      },
+      "surface_rmse_c": {
+        "mean": 10.189692815144857,
+        "sample_std": 0.04473037817418984
+      },
+      "final_state_rmse_c": {
+        "mean": 13.177534739176432,
+        "sample_std": 0.1030139587967359
+      },
+      "physics_residual_rmse_c": {
+        "mean": 42.29980595906576,
+        "sample_std": 2.1460364076656204
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0024504065040650406,
+        "sample_std": 0.0006406643347914353
+      },
+      "rollout_seconds": {
+        "mean": 0.021489694365300238,
+        "sample_std": 3.9220307986998684e-05
+      },
+      "one_step_rmse_c": {
+        "mean": 0.1759972884843558,
+        "sample_std": 0.0012778158389593391
+      }
+    },
+    "effective|causal_observer_0p5c|weight=0.001": {
+      "rollout_rmse_c": {
+        "mean": 9.9019562403361,
+        "sample_std": 0.11076987694700784
+      },
+      "rollout_mae_c": {
+        "mean": 6.610636234283447,
+        "sample_std": 0.10522791057975299
+      },
+      "rollout_max_abs_c": {
+        "mean": 64.95375569661458,
+        "sample_std": 1.0416230695263617
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 6.471729437510173,
+        "sample_std": 0.24029215649686955
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 20.31507937113444,
+        "sample_std": 0.1643329197693595
+      },
+      "center_rmse_c": {
+        "mean": 9.815347989400228,
+        "sample_std": 0.2051463641234534
+      },
+      "surface_rmse_c": {
+        "mean": 10.338385581970215,
+        "sample_std": 0.05820008354946769
+      },
+      "final_state_rmse_c": {
+        "mean": 13.678137143452963,
+        "sample_std": 0.2987992712797954
+      },
+      "physics_residual_rmse_c": {
+        "mean": 16.40648365020752,
+        "sample_std": 2.7802229819287265
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0029728997289972903,
+        "sample_std": 0.0007255756332453185
+      },
+      "rollout_seconds": {
+        "mean": 0.022828708325202268,
+        "sample_std": 0.0013828169331677569
+      },
+      "one_step_rmse_c": {
+        "mean": 0.17666985021651346,
+        "sample_std": 0.0006350054435964156
+      }
+    },
+    "effective|causal_observer_no_noise|weight=0": {
+      "rollout_rmse_c": {
+        "mean": 1.5190889835357666,
+        "sample_std": 0.0760582403218144
+      },
+      "rollout_mae_c": {
+        "mean": 0.9653046131134033,
+        "sample_std": 0.04114165069143456
+      },
+      "rollout_max_abs_c": {
+        "mean": 14.345174153645834,
+        "sample_std": 4.192611308831217
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1349937915802002,
+        "sample_std": 0.08358530074188956
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.692572275797526,
+        "sample_std": 0.1747992215593126
+      },
+      "center_rmse_c": {
+        "mean": 1.6996270815531414,
+        "sample_std": 0.11986140795089174
+      },
+      "surface_rmse_c": {
+        "mean": 2.39454714457194,
+        "sample_std": 0.033719826554545036
+      },
+      "final_state_rmse_c": {
+        "mean": 2.317187547683716,
+        "sample_std": 0.3010202149480013
+      },
+      "physics_residual_rmse_c": {
+        "mean": 46.77670669555664,
+        "sample_std": 4.5912837437231735
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0017414634146341462,
+        "sample_std": 0.0006006358584563636
+      },
+      "rollout_seconds": {
+        "mean": 0.021429749943005543,
+        "sample_std": 0.00010291967304035734
+      },
+      "one_step_rmse_c": {
+        "mean": 0.028521146101011807,
+        "sample_std": 0.00018833018733669903
+      }
+    },
+    "effective|causal_observer_no_noise|weight=0.001": {
+      "rollout_rmse_c": {
+        "mean": 1.5015712181727092,
+        "sample_std": 0.08761347679065433
+      },
+      "rollout_mae_c": {
+        "mean": 0.9862963954607645,
+        "sample_std": 0.06131092780636572
+      },
+      "rollout_max_abs_c": {
+        "mean": 9.835943857828775,
+        "sample_std": 0.5664030014005215
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1889721949895222,
+        "sample_std": 0.055779348822951845
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.642399470011393,
+        "sample_std": 0.21073734856338486
+      },
+      "center_rmse_c": {
+        "mean": 1.6910065412521362,
+        "sample_std": 0.1419888311584025
+      },
+      "surface_rmse_c": {
+        "mean": 2.385779539744059,
+        "sample_std": 0.1530054004746799
+      },
+      "final_state_rmse_c": {
+        "mean": 2.332742611567179,
+        "sample_std": 0.19011262927456246
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.387085278828938,
+        "sample_std": 2.818759308315218
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0020254742547425476,
+        "sample_std": 0.00033441163418104693
+      },
+      "rollout_seconds": {
+        "mean": 0.022078236293358106,
+        "sample_std": 0.0008640699367498701
+      },
+      "one_step_rmse_c": {
+        "mean": 0.028963503781397754,
+        "sample_std": 0.00017631988863873872
+      }
+    },
+    "effective|oracle_dynamic|weight=0": {
+      "rollout_rmse_c": {
+        "mean": 1.4905489683151245,
+        "sample_std": 0.06471327513618644
+      },
+      "rollout_mae_c": {
+        "mean": 0.9421768585840861,
+        "sample_std": 0.03226444660630261
+      },
+      "rollout_max_abs_c": {
+        "mean": 14.26513671875,
+        "sample_std": 4.046088690822721
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1201696793238323,
+        "sample_std": 0.05227784757848534
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.658233960469564,
+        "sample_std": 0.1536785354574827
+      },
+      "center_rmse_c": {
+        "mean": 1.6770386298497517,
+        "sample_std": 0.11677770040340951
+      },
+      "surface_rmse_c": {
+        "mean": 2.373379945755005,
+        "sample_std": 0.03791675579968068
+      },
+      "final_state_rmse_c": {
+        "mean": 2.292907238006592,
+        "sample_std": 0.2686992616789039
+      },
+      "physics_residual_rmse_c": {
+        "mean": 46.738321940104164,
+        "sample_std": 4.517463646190912
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0019043360433604337,
+        "sample_std": 0.0004959405126527234
+      },
+      "rollout_seconds": {
+        "mean": 0.021529013679052394,
+        "sample_std": 3.2096303848046827e-05
+      },
+      "one_step_rmse_c": {
+        "mean": 0.025519111979178066,
+        "sample_std": 0.0003975462426905361
+      }
+    },
+    "effective|oracle_dynamic|weight=0.001": {
+      "rollout_rmse_c": {
+        "mean": 1.4602182308832805,
+        "sample_std": 0.07778928147904836
+      },
+      "rollout_mae_c": {
+        "mean": 0.9528564810752869,
+        "sample_std": 0.053697597481461586
+      },
+      "rollout_max_abs_c": {
+        "mean": 9.747502644856771,
+        "sample_std": 0.2034076024245215
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1616000334421794,
+        "sample_std": 0.054741739512374744
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.6489959557851157,
+        "sample_std": 0.20159461475414292
+      },
+      "center_rmse_c": {
+        "mean": 1.6508479118347168,
+        "sample_std": 0.13227451110303248
+      },
+      "surface_rmse_c": {
+        "mean": 2.351879914601644,
+        "sample_std": 0.1454702960203378
+      },
+      "final_state_rmse_c": {
+        "mean": 2.2967662811279297,
+        "sample_std": 0.182882527102555
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.38543128967285,
+        "sample_std": 2.818554503027418
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0021482384823848237,
+        "sample_std": 0.00040260104592118834
+      },
+      "rollout_seconds": {
+        "mean": 0.02253337495494634,
+        "sample_std": 0.000915995271543223
+      },
+      "one_step_rmse_c": {
+        "mean": 0.026097920043960512,
+        "sample_std": 0.0002324228360737974
+      }
+    },
+    "separate_h_epsilon|oracle_dynamic|weight=0": {
+      "rollout_rmse_c": {
+        "mean": 2.538845698038737,
+        "sample_std": 0.017919009585112163
+      },
+      "rollout_mae_c": {
+        "mean": 1.2763487895329793,
+        "sample_std": 0.049383096716059754
+      },
+      "rollout_max_abs_c": {
+        "mean": 25.557159423828125,
+        "sample_std": 0.425348056024158
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.3073513110478718,
+        "sample_std": 0.20107740051234557
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 4.037525415420532,
+        "sample_std": 0.3459852943222772
+      },
+      "center_rmse_c": {
+        "mean": 2.088033437728882,
+        "sample_std": 0.10274494475899422
+      },
+      "surface_rmse_c": {
+        "mean": 3.7732741038004556,
+        "sample_std": 0.2755161598321863
+      },
+      "final_state_rmse_c": {
+        "mean": 4.7524058024088545,
+        "sample_std": 0.20562064476236477
+      },
+      "physics_residual_rmse_c": {
+        "mean": 47.31868998209635,
+        "sample_std": 2.3359862154631528
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0017823848238482387,
+        "sample_std": 0.0007127704609555563
+      },
+      "rollout_seconds": {
+        "mean": 0.02199629166473945,
+        "sample_std": 0.0004772366741133915
+      },
+      "one_step_rmse_c": {
+        "mean": 0.03384390771009371,
+        "sample_std": 0.001976908735780494
+      }
+    },
+    "separate_h_epsilon|oracle_dynamic|weight=0.001": {
+      "rollout_rmse_c": {
+        "mean": 2.3158294359842935,
+        "sample_std": 0.0920510782751532
+      },
+      "rollout_mae_c": {
+        "mean": 1.2844656308492024,
+        "sample_std": 0.12480935741329886
+      },
+      "rollout_max_abs_c": {
+        "mean": 21.8721923828125,
+        "sample_std": 2.7105095117371203
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.3505933284759521,
+        "sample_std": 0.0918217543035909
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 3.933533032735189,
+        "sample_std": 0.8918957348647877
+      },
+      "center_rmse_c": {
+        "mean": 1.9500210285186768,
+        "sample_std": 0.13713540336296245
+      },
+      "surface_rmse_c": {
+        "mean": 3.4763354460398355,
+        "sample_std": 0.06291619886793316
+      },
+      "final_state_rmse_c": {
+        "mean": 4.203359921773274,
+        "sample_std": 0.15276151608504443
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.794023513793945,
+        "sample_std": 1.592899327822053
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0025775067750677507,
+        "sample_std": 0.0002461822090252263
+      },
+      "rollout_seconds": {
+        "mean": 0.0224433890155827,
+        "sample_std": 0.0007198055342300275
+      },
+      "one_step_rmse_c": {
+        "mean": 0.03269418628487034,
+        "sample_std": 0.0028380098042822145
+      }
+    }
+  },
+  "speed_benchmark": {
+    "effective_world_model_single_trajectory": {
+      "repeats": 20,
+      "median_seconds": 0.007641687989234924,
+      "p95_seconds": 0.008049453847343102
+    },
+    "reference_to_world_model_speedup": 55.44697180598889
+  }
+}

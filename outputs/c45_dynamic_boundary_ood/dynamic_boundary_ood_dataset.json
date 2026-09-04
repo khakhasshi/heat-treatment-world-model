@@ -1,0 +1,42 @@
+{
+  "config": {
+    "trajectories_per_category": 20,
+    "steps": 300,
+    "nx": 41,
+    "dt_s": 1.0,
+    "seed": 20260904
+  },
+  "category_labels": {
+    "0": "convection_smooth",
+    "1": "convection_step",
+    "2": "emissivity_growth",
+    "3": "emissivity_step",
+    "4": "combined"
+  },
+  "parameter_columns": [
+    "convection_w_m2k",
+    "emissivity",
+    "conductivity_scale",
+    "density_kg_m3",
+    "heat_capacity_scale",
+    "length_m",
+    "dt_s"
+  ],
+  "training_ranges": {
+    "convection_w_m2k": [
+      10.0,
+      60.0
+    ],
+    "emissivity": [
+      0.65,
+      0.9
+    ]
+  },
+  "control_distribution": "ramp_hold_or_two_stage_training_family",
+  "ood_definition": "parameter values remain inside training ranges, but their within-trajectory time dependence was absent from training",
+  "deployment_modes": {
+    "observed_dynamic": "true parameter value supplied at every transition",
+    "frozen_initial": "first parameter value held for the complete rollout",
+    "frozen_mean": "trajectory-mean parameter value held for the complete rollout"
+  }
+}

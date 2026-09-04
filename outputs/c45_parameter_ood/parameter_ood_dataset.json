@@ -1,0 +1,82 @@
+{
+  "config": {
+    "trajectories_per_category": 20,
+    "steps": 300,
+    "nx": 41,
+    "dt_s": 1.0,
+    "seed": 20260903
+  },
+  "category_labels": {
+    "0": "convection",
+    "1": "emissivity",
+    "2": "conductivity_scale",
+    "3": "heat_capacity_scale",
+    "4": "combined"
+  },
+  "direction_labels": {
+    "-1": "below_training",
+    "0": "in_distribution",
+    "1": "above_training"
+  },
+  "training_ranges": {
+    "convection": [
+      10.0,
+      60.0
+    ],
+    "emissivity": [
+      0.65,
+      0.9
+    ],
+    "conductivity_scale": [
+      0.95,
+      1.05
+    ],
+    "heat_capacity_scale": [
+      0.95,
+      1.05
+    ]
+  },
+  "ood_ranges": {
+    "convection": [
+      [
+        5.0,
+        9.0
+      ],
+      [
+        65.0,
+        80.0
+      ]
+    ],
+    "emissivity": [
+      [
+        0.45,
+        0.6
+      ],
+      [
+        0.92,
+        0.98
+      ]
+    ],
+    "conductivity_scale": [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        1.1,
+        1.2
+      ]
+    ],
+    "heat_capacity_scale": [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        1.1,
+        1.2
+      ]
+    ]
+  },
+  "control_distribution": "ramp_hold_or_two_stage_training_family"
+}

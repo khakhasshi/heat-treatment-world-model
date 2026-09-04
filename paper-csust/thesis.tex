@@ -1,0 +1,52 @@
+\documentclass{csustThesis}
+
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usetikzlibrary{arrows.meta,positioning,fit}
+
+\addbibresource[location=local]{reference.bib}
+\input{baseinfo.tex}
+
+\sisetup{detect-all,per-mode=symbol}
+\definecolor{accent}{HTML}{1F5A75}
+\setlength{\headheight}{35pt}
+\setlength{\emergencystretch}{2em}
+\newcommand{\Heff}{{H_{\mathrm{eff}}}}
+\newcommand{\Tinfty}{{T_{\infty}}}
+\newcommand{\wm}{World Model}
+\graphicspath{{figures/}}
+\hypersetup{
+  hidelinks,
+  pdftitle={基于物理约束世界模型的金属热处理温度场演化预测与闭环控制研究},
+  pdfauthor={江景哲}
+}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\input{body/prepages.tex}
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\input{body/abstract.tex}
+\makecontents
+
+\fancyfoot[C]{\zihao{-5} 第 \thepage 页，共 \pageref{LastPage} 页}
+\pagenumbering{arabic}
+
+\input{body/01-introduction.tex}
+\input{body/02-physical-model.tex}
+\input{body/03-world-model.tex}
+\input{body/04-prediction-experiments.tex}
+\input{body/05-identification-control.tex}
+\input{body/06-conclusion.tex}
+
+\setcounter{secnumdepth}{0}
+\chap{参考文献}
+\printbibliography[heading=none]
+
+\chap{致谢}
+感谢指导教师在课题选题、研究方法和论文修改方面给予的指导。感谢参与课程学习和学术交流的老师与同学。本文的数值实验、程序实现和论文撰写也得到开源科学计算软件与公开学术资料的支持，在此一并致谢。
+
+\input{body/appendix.tex}
+
+\end{document}

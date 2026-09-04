@@ -1,0 +1,21 @@
+\begin{abstract}
+
+金属热处理过程需要同时掌握工件内部温度场、炉温控制和表面换热状态。传统数值求解能够提供可靠基准，但在大量候选工艺推演和在线滚动决策中计算开销随模型规模快速增长。固定工况的温度场拟合难以直接回答控制量改变后的未来状态。本文将热处理温度场表述为受控动力学系统，构建显式接收当前温度场、炉温动作和热物性参数的递归世界模型。该模型属于有监督神经动力学模型，以离散物理残差作为正则项。模型采用多层感知机预测温度增量，通过五步闭环展开学习递归状态转移。
+
+动态边界的瞬时局部可辨识性分析给出本文的关键参数化。在 $h(t)$ 与 $\varepsilon(t)$ 逐时自由变化的观测模型下，单次温度转移对二者的灵敏度只有一个独立方向，可观测组合为等效换热系数 $\Heff$。据此建立 $\Heff$ 驱动的状态转移模型，并配置因果边界观测器和增广状态集合卡尔曼滤波器。控制器采用常值尾部假设下的单移动阻塞滚动动作搜索。该结构把温度场预测、边界估计和控制连接到同一状态空间中。
+
+数值实验采用 C45/AISI 1045 类中碳钢一维平板，考虑温变导热系数、温变比热和灰体辐射。三随机种子结果显示，物理正则使控制曲线 OOD 的离散物理残差降低 $44.8\%$。四参数组合 OOD 的最大误差由 \SI{121.76}{\degreeCelsius} 降至 \SI{61.69}{\degreeCelsius}。在动态边界测试中，$\Heff$ 参数化将滚动 RMSE 从 $2.285\pm0.108$~\si{\degreeCelsius} 降至 $1.409\pm0.068$~\si{\degreeCelsius}。交叉求解器数值验证保持相同排序，单条轨迹推演获得 55.4 倍在线加速。在包含中心热电偶的理想五测点场景中，未观测节点 RMSE 为 \SI{1.073}{\degreeCelsius}。严格参数 OOD 工况下，风险感知控制的场景配对综合目标平均降低 1.737，95\% bootstrap 区间为 $[-3.291,-0.226]$。这些结果说明，可辨识边界表示和轨迹级物理约束能够改善热处理世界模型的分布外推演质量，并支持内部温度不可完全测量时的滚动工艺决策。
+
+\keywords{关键词：} 金属热处理；温度场；物理信息神经网络；世界模型；参数辨识；模型预测控制
+\end{abstract}
+
+\begin{abstract*}
+
+Heat-treatment operation requires estimates of internal temperature fields under controllable furnace commands and uncertain surface heat transfer. This study formulates the process as a controlled dynamical system. A supervised neural-dynamics world model predicts temperature increments from the current field, command, and thermophysical parameters. Five-step closed-loop unrolling and a discrete energy residual encode temperature-dependent conduction and convective-radiative boundaries.
+
+Identifiability analysis shows that a freely varying convection coefficient and emissivity have one independent instantaneous sensitivity direction. Their observable combination is the effective heat-transfer coefficient $\Heff$. The transition model is coupled with a causal boundary observer and an augmented-state ensemble Kalman filter. Control uses single-move-blocking action search under a constant-tail assumption.
+
+Tests on a one-dimensional C45/AISI 1045 steel slab show that physics regularization reduces the OOD-control discrete residual by $44.8\%$. Under combined parameter shift, maximum error decreases from \SI{121.76}{\degreeCelsius} to \SI{61.69}{\degreeCelsius}. The identifiable boundary representation reduces dynamic-boundary rollout RMSE from $2.285\pm0.108$ to $1.409\pm0.068$~\si{\degreeCelsius}. Cross-solver validation gives a $55.4\times$ online speedup. In an idealized five-sensor layout, unobserved-node RMSE is \SI{1.073}{\degreeCelsius}. Under stringent parameter shift, risk-aware control reduces the paired objective by 1.737, with a 95\% bootstrap interval of $[-3.291,-0.226]$. The results support identifiable boundary modeling and trajectory-level physical regularization for robust thermal-process world models.
+
+\par\noindent{\bfseries\zihao{4}Key words: }\zihao{-4}metal heat treatment; temperature field; physics-informed neural network; world model; parameter identification; model predictive control
+\end{abstract*}

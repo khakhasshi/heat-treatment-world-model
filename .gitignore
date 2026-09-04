@@ -6,6 +6,11 @@ __pycache__/
 .DS_Store
 *.py[cod]
 outputs/*
+outputs/**/*
 !outputs/.gitkeep
+!outputs/**/
+!outputs/**/*.json
+!outputs/**/*.csv
+!outputs/**/*.png
 output/pdf/*.pdf
 tmp/

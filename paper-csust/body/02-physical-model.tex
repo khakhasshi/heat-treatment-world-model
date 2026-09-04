@@ -1,0 +1,117 @@
+\chap{热处理温度场物理模型}
+
+\sect{研究对象与基本假设}
+
+研究对象为两侧受热条件相同的 C45/AISI 1045 类中碳钢平板。$L$ 表示平板总厚度，完整一维截面为 $x\in[0,L]$，中心位于 $x=L/2$。两侧边界条件相同，所以温度场关于中心面对称。模型假设材料宏观各向同性，截面内无体热源，炉内对流和辐射沿表面均匀分布。研究温区覆盖加热和随后冷却过程。导热系数与比热随温度变化，密度取 \SI{7870}{\kilogram\per\cubic\metre}。
+
+本文关注温度场状态转移和边界参数识别。相变动力学、组织演化、热应力与变形不进入当前状态方程。温变比热表能够反映部分高温热容变化，但不单独计算潜热。该建模范围与当前数值证据一致。
+
+\sect{控制方程}
+
+无内热源的一维非稳态导热方程为
+\begin{equation}
+  \rho c_p(T)\frac{\partial T}{\partial t}
+  =\frac{\partial}{\partial x}\left[k(T)\frac{\partial T}{\partial x}\right],
+  \qquad 0<x<L.
+  \label{eq:heat_pde}
+\end{equation}
+式中，$T$ 为温度，$\rho$ 为密度，$c_p(T)$ 为比热容，$k(T)$ 为导热系数。
+
+两侧表面采用对流与灰体辐射联合边界。以指向工件内部的热流为正，有
+\begin{equation}
+  q_s=h(\Tinfty-T_s)
+  +\varepsilon\sigma\left(T_{\infty,K}^{4}-T_{s,K}^{4}\right),
+  \label{eq:mixed_boundary}
+\end{equation}
+其中 $T_s$ 为表面温度，$\Tinfty$ 为炉气与等效炉壁温度，$h$ 为对流换热系数，$\varepsilon$ 为表面发射率，$\sigma$ 为 Stefan--Boltzmann 常数，下标 K 表示开尔文温度。
+
+四次方差可因式分解为
+\begin{equation}
+  T_{\infty,K}^{4}-T_{s,K}^{4}
+  =(T_{\infty,K}-T_{s,K})(T_{\infty,K}+T_{s,K})
+  (T_{\infty,K}^{2}+T_{s,K}^{2}).
+\end{equation}
+定义
+\begin{equation}
+  h_{\mathrm{rad}}(T_s,\Tinfty)
+  =\sigma(T_{\infty,K}+T_{s,K})(T_{\infty,K}^{2}+T_{s,K}^{2}),
+  \label{eq:hrad}
+\end{equation}
+边界热流可以写为
+\begin{equation}
+  q_s=\left[h+\varepsilon h_{\mathrm{rad}}(T_s,\Tinfty)\right](\Tinfty-T_s).
+  \label{eq:heff_flux}
+\end{equation}
+式\eqref{eq:heff_flux}为后续可辨识性分析提供了直接形式。
+
+\sect{温变物性与参数空间}
+
+高温物性采用公开 AISI 1045 数据表的分段线性插值\cite{sanchez2023splat}。Carollo 等的低温实验反演结果用于核对低温段变化趋势\cite{carollo2019properties}。表\ref{tab:properties}列出计算所用节点值。原始数据在 \SI{600}{\degreeCelsius} 至 \SI{800}{\degreeCelsius} 间给出明显的比热变化，本文按表值插值，并将其作为经验等效热容曲线。相变附近的表观热容效应可能包含在经验数据中，但数据源未将其与显热、潜热分别标定。当前模型不建立显式相变动力学，也不据此解释组织转变。
+
+\begin{table}[H]
+  \centering
+  \caption{C45/AISI 1045 类中碳钢温变物性}
+  \label{tab:properties}
+  \begin{tabular}{c*{6}{r}}
+    \toprule
+    温度/\si{\degreeCelsius} & 0 & 200 & 400 & 600 & 800 & 1000 \\
+    \midrule
+    $c_p$/\si{\joule\per\kilogram\per\kelvin} & 510 & 600 & 725 & 900 & 562 & 600 \\
+    $k$/\si{\watt\per\metre\per\kelvin} & 45 & 41 & 36 & 32 & 27 & 23 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+数据生成时对 $k(T)$ 和 $c_p(T)$ 分别乘以尺度因子 $s_k$ 与 $s_c$。两个尺度的训练范围均为 0.95 至 1.05。平板厚度在 \SIrange{10}{40}{\milli\metre} 内采样，对流换热系数在 \SIrange{10}{60}{\watt\per\square\metre\per\kelvin} 内采样，发射率范围为 $0.65$ 至 $0.90$。初始温度为 \SIrange{15}{40}{\degreeCelsius}，炉温上限为 \SI{950}{\degreeCelsius}。这些范围用于构造受控数值环境，不代表特定炉次的标定值。
+
+在 $L=\SI{20}{\milli\metre}$、$h=\SI{25}{\watt\per\square\metre\per\kelvin}$、$\varepsilon=0.75$、$\Tinfty=\SI{850}{\degreeCelsius}$ 的算例中，辐射等效系数由初始约 \SI{81.62}{\watt\per\square\metre\per\kelvin} 增至 \SI{146.85}{\watt\per\square\metre\per\kelvin}。辐射贡献高于对流项。300 s 后，联合边界给出的中心温度为 \SI{475.59}{\degreeCelsius}，纯对流计算值为 \SI{154.99}{\degreeCelsius}。因此，高温工况中的辐射项需要保留。
+
+\sect{数值离散与参考求解器}
+
+训练数据生成器采用 41 个等距节点，时间步长为 \SI{1}{\second}。内部节点使用守恒形式离散。界面导热系数取相邻节点旧时刻导热系数的算术平均。节点 $i$ 的离散平衡写为
+\begin{equation}
+  \rho c_{p,i}^{n}\frac{T_i^{n+1}-T_i^n}{\Delta t}
+  =\frac{1}{\Delta x}
+  \left[
+    k_{i+1/2}^{n}\frac{T_{i+1}^{n+1}-T_i^{n+1}}{\Delta x}
+    -k_{i-1/2}^{n}\frac{T_i^{n+1}-T_{i-1}^{n+1}}{\Delta x}
+  \right].
+  \label{eq:discrete_balance}
+\end{equation}
+物性和辐射等效系数由旧状态计算，新状态通过隐式线性系统求解。以左侧半控制体为例，表面离散式为
+\begin{equation}
+  T_1^{n+1}-T_1^n
+  =\frac{2\Delta t}{\rho c_{p,1}^{n}\Delta x^2}
+  \left[
+    k_{3/2}^{n}(T_2^{n+1}-T_1^{n+1})
+    +\Delta x\Heff_1^n(\Tinfty^n-T_1^{n+1})
+  \right],
+  \label{eq:surface_discrete_balance}
+\end{equation}
+其中 $\Heff_1^n=h^n+\varepsilon^nh_{\mathrm{rad}}(T_1^n,\Tinfty^n)$，右侧表面采用镜像形式。该格式为数据生成和训练物理残差提供统一离散基础。
+
+交叉求解器数值验证使用 SciPy 自适应 BDF 积分器和 81 节点网格。相同连续方程在离散方法、步长控制和空间分辨率上与训练生成器不同。参考求解器采用相对容差 $10^{-6}$、绝对温度容差 $10^{-7}$~\si{\degreeCelsius}、最大内部步长 \SI{0.25}{\second}。161 节点与更小时间步的收敛检查分别得到平均 RMSE \SI{0.00248}{\degreeCelsius} 和 \SI{0.00425}{\degreeCelsius}。训练生成器与 BDF 参考轨迹的整体 RMSE 为 \SI{0.166}{\degreeCelsius}。该检验用于排除模型只适配单一离散格式的情形，不替代真实炉体实验。
+
+\sect{受控数值数据集}
+
+每条轨迹包含 300 个状态转移。训练、验证和测试按完整轨迹划分，避免相邻时刻泄漏。训练及 ID 测试包含线性升温保温和两段加热。控制 OOD 使用炉温阶跃及升温后冷却。参数 OOD 保持控制曲线类型不变，将 $h$、$\varepsilon$、$s_k$ 和 $s_c$ 推到表\ref{tab:ood_ranges}所列区间。每个单因素类别包含低侧和高侧各 10 条轨迹，组合类别对四个参数分别随机选择低侧或高侧区间。
+
+\begin{table}[H]
+  \centering
+  \caption{训练参数范围与参数 OOD 测试范围}
+  \label{tab:ood_ranges}
+  \begin{tabular}{lccc}
+    \toprule
+    参数 & 训练范围 & OOD 低侧 & OOD 高侧 \\
+    \midrule
+    $h$/\si{\watt\per\square\metre\per\kelvin} & $10$--$60$ & $5$--$9$ & $65$--$80$ \\
+    $\varepsilon$ & $0.65$--$0.90$ & $0.45$--$0.60$ & $0.92$--$0.98$ \\
+    $s_k$ & $0.95$--$1.05$ & $0.80$--$0.90$ & $1.10$--$1.20$ \\
+    $s_c$ & $0.95$--$1.05$ & $0.80$--$0.90$ & $1.10$--$1.20$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+动态边界 OOD 使 $h(t)$ 与 $\varepsilon(t)$ 在单条轨迹内变化，同时保持瞬时值位于训练范围。$h$ 的测试形式包括余弦平滑过渡、35\%--65\% 时刻切换的阶跃和正弦变化；$\varepsilon$ 采用指数增长或阶跃变化。联合类别组合正弦 $h(t)$ 与增长型 $\varepsilon(t)$。训练数据中的边界参数在每条轨迹内保持常数，所以该测试隔离了边界时间结构的变化。
+
+这种设计将三类外推来源分开。控制 OOD 检验动作序列结构，参数 OOD 检验热动力学参数范围，动态边界 OOD 检验时间变化机制。模型在同一状态转移框架下接受三类测试，评价结果具有可比性。

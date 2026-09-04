@@ -1,0 +1,759 @@
+{
+  "dataset": "outputs/c45_radiative_dataset.npz",
+  "training_sizes": [
+    5,
+    10,
+    20,
+    40,
+    70
+  ],
+  "physics_weights": [
+    0.0,
+    0.001
+  ],
+  "nested_training_subsets": true,
+  "controlled_variables": {
+    "epochs": 120,
+    "target_updates": 4920,
+    "evaluations": 12,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "hidden_width": 128,
+    "hidden_depth": 3,
+    "rollout_horizon": 5,
+    "evaluate_every": 10,
+    "seed": 42
+  },
+  "runs": {
+    "5": {
+      "weight_0": {
+        "physics_weight": 0.0,
+        "training_trajectories": 5,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 1640,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.0,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 5,
+          "seed": 42,
+          "evaluate_every": 136
+        },
+        "training": {
+          "best_epoch": 1632.0,
+          "best_validation_rollout_rmse_c": 39.967201232910156,
+          "elapsed_seconds": 42.92060595890507
+        },
+        "test": {
+          "rollout_rmse_c": 38.26476287841797,
+          "rollout_mae_c": 22.75667953491211,
+          "rollout_max_abs_c": 207.30685424804688,
+          "center_rmse_c": 35.95687484741211,
+          "surface_rmse_c": 43.09528350830078,
+          "final_state_rmse_c": 79.08833312988281,
+          "physics_residual_rmse_c": 383.2836608886719,
+          "maximum_principle_violation_fraction": 0.0037560975609756096,
+          "rollout_seconds": 0.010965958004817367,
+          "one_step_rmse_c": 0.34555475972925725
+        },
+        "ood_test": {
+          "rollout_rmse_c": 81.47364807128906,
+          "rollout_mae_c": 58.62261962890625,
+          "rollout_max_abs_c": 256.97857666015625,
+          "center_rmse_c": 79.26253509521484,
+          "surface_rmse_c": 84.39672088623047,
+          "final_state_rmse_c": 116.16368865966797,
+          "physics_residual_rmse_c": 484.5678405761719,
+          "maximum_principle_violation_fraction": 0.005292682926829269,
+          "rollout_seconds": 0.011501291999593377,
+          "one_step_rmse_c": 0.7095213241336771
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 87.499267578125,
+            "rollout_mae_c": 66.7880859375,
+            "rollout_max_abs_c": 256.97857666015625,
+            "center_rmse_c": 87.68252563476562,
+            "surface_rmse_c": 87.66864013671875,
+            "final_state_rmse_c": 110.8503646850586,
+            "physics_residual_rmse_c": 570.153076171875,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.010428707930259407,
+            "one_step_rmse_c": 0.607225924323667
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 71.48919677734375,
+            "rollout_mae_c": 46.37440872192383,
+            "rollout_max_abs_c": 250.58819580078125,
+            "center_rmse_c": 64.6067886352539,
+            "surface_rmse_c": 79.23590087890625,
+            "final_state_rmse_c": 123.70651245117188,
+            "physics_residual_rmse_c": 315.2826232910156,
+            "maximum_principle_violation_fraction": 0.01323170731707317,
+            "rollout_seconds": 0.010053707985207438,
+            "one_step_rmse_c": 0.8399204534598761
+          }
+        }
+      },
+      "weight_0p001": {
+        "physics_weight": 0.001,
+        "training_trajectories": 5,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 1640,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.001,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 5,
+          "seed": 42,
+          "evaluate_every": 136
+        },
+        "training": {
+          "best_epoch": 1496.0,
+          "best_validation_rollout_rmse_c": 38.6576042175293,
+          "elapsed_seconds": 39.56369004200678
+        },
+        "test": {
+          "rollout_rmse_c": 39.20075225830078,
+          "rollout_mae_c": 22.673582077026367,
+          "rollout_max_abs_c": 194.74444580078125,
+          "center_rmse_c": 37.267337799072266,
+          "surface_rmse_c": 42.40003204345703,
+          "final_state_rmse_c": 81.03495025634766,
+          "physics_residual_rmse_c": 267.14306640625,
+          "maximum_principle_violation_fraction": 0.0035880758807588075,
+          "rollout_seconds": 0.010117167024873197,
+          "one_step_rmse_c": 0.35586545036092787
+        },
+        "ood_test": {
+          "rollout_rmse_c": 72.24162292480469,
+          "rollout_mae_c": 52.38740539550781,
+          "rollout_max_abs_c": 237.60833740234375,
+          "center_rmse_c": 70.94851684570312,
+          "surface_rmse_c": 73.73841094970703,
+          "final_state_rmse_c": 99.14562225341797,
+          "physics_residual_rmse_c": 288.1038513183594,
+          "maximum_principle_violation_fraction": 0.0056544715447154476,
+          "rollout_seconds": 0.010772833018563688,
+          "one_step_rmse_c": 0.6199782760339793
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 77.29866027832031,
+            "rollout_mae_c": 59.005126953125,
+            "rollout_max_abs_c": 237.60833740234375,
+            "center_rmse_c": 77.79206085205078,
+            "surface_rmse_c": 76.67414093017578,
+            "final_state_rmse_c": 100.88169860839844,
+            "physics_residual_rmse_c": 309.8680419921875,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.009722666931338608,
+            "one_step_rmse_c": 0.5583582178807188
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 63.91015625,
+            "rollout_mae_c": 42.46083068847656,
+            "rollout_max_abs_c": 232.33128356933594,
+            "center_rmse_c": 59.21843338012695,
+            "surface_rmse_c": 69.10135650634766,
+            "final_state_rmse_c": 96.48295593261719,
+            "physics_residual_rmse_c": 251.95681762695312,
+            "maximum_principle_violation_fraction": 0.014136178861788617,
+            "rollout_seconds": 0.009343457990325987,
+            "one_step_rmse_c": 0.702343767663031
+          }
+        }
+      }
+    },
+    "10": {
+      "weight_0": {
+        "physics_weight": 0.0,
+        "training_trajectories": 10,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 820,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.0,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 10,
+          "seed": 42,
+          "evaluate_every": 68
+        },
+        "training": {
+          "best_epoch": 68.0,
+          "best_validation_rollout_rmse_c": 15.528095245361328,
+          "elapsed_seconds": 39.40978708304465
+        },
+        "test": {
+          "rollout_rmse_c": 15.23253059387207,
+          "rollout_mae_c": 10.322968482971191,
+          "rollout_max_abs_c": 62.13377380371094,
+          "center_rmse_c": 13.806076049804688,
+          "surface_rmse_c": 15.981608390808105,
+          "final_state_rmse_c": 26.062047958374023,
+          "physics_residual_rmse_c": 216.7445068359375,
+          "maximum_principle_violation_fraction": 0.005116531165311653,
+          "rollout_seconds": 0.01091199996881187,
+          "one_step_rmse_c": 0.14129173399463563
+        },
+        "ood_test": {
+          "rollout_rmse_c": 21.451753616333008,
+          "rollout_mae_c": 15.606910705566406,
+          "rollout_max_abs_c": 145.96963500976562,
+          "center_rmse_c": 19.80651092529297,
+          "surface_rmse_c": 22.45399284362793,
+          "final_state_rmse_c": 42.463809967041016,
+          "physics_residual_rmse_c": 336.8460388183594,
+          "maximum_principle_violation_fraction": 0.004991869918699187,
+          "rollout_seconds": 0.011292708106338978,
+          "one_step_rmse_c": 0.27377187018199506
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 20.04759979248047,
+            "rollout_mae_c": 16.41021728515625,
+            "rollout_max_abs_c": 75.5802001953125,
+            "center_rmse_c": 19.008562088012695,
+            "surface_rmse_c": 19.954120635986328,
+            "final_state_rmse_c": 28.758586883544922,
+            "physics_residual_rmse_c": 279.9232177734375,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.010329416021704674,
+            "one_step_rmse_c": 0.22186943853005442
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 23.400531768798828,
+            "rollout_mae_c": 14.40195083618164,
+            "rollout_max_abs_c": 145.96963500976562,
+            "center_rmse_c": 20.946517944335938,
+            "surface_rmse_c": 25.75275230407715,
+            "final_state_rmse_c": 57.160762786865234,
+            "physics_residual_rmse_c": 407.5875549316406,
+            "maximum_principle_violation_fraction": 0.012479674796747968,
+            "rollout_seconds": 0.0101114590652287,
+            "one_step_rmse_c": 0.33695479007030177
+          }
+        }
+      },
+      "weight_0p001": {
+        "physics_weight": 0.001,
+        "training_trajectories": 10,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 820,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.001,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 10,
+          "seed": 42,
+          "evaluate_every": 68
+        },
+        "training": {
+          "best_epoch": 68.0,
+          "best_validation_rollout_rmse_c": 15.980362892150879,
+          "elapsed_seconds": 42.15571079100482
+        },
+        "test": {
+          "rollout_rmse_c": 16.870256423950195,
+          "rollout_mae_c": 11.717280387878418,
+          "rollout_max_abs_c": 58.05320739746094,
+          "center_rmse_c": 15.695462226867676,
+          "surface_rmse_c": 17.440813064575195,
+          "final_state_rmse_c": 26.770105361938477,
+          "physics_residual_rmse_c": 163.95985412597656,
+          "maximum_principle_violation_fraction": 0.005609756097560975,
+          "rollout_seconds": 0.010636500082910061,
+          "one_step_rmse_c": 0.14428891942928654
+        },
+        "ood_test": {
+          "rollout_rmse_c": 20.670284271240234,
+          "rollout_mae_c": 15.06180191040039,
+          "rollout_max_abs_c": 134.1051025390625,
+          "center_rmse_c": 20.535465240478516,
+          "surface_rmse_c": 21.166643142700195,
+          "final_state_rmse_c": 39.033790588378906,
+          "physics_residual_rmse_c": 220.8111114501953,
+          "maximum_principle_violation_fraction": 0.0051178861788617885,
+          "rollout_seconds": 0.011206916999071836,
+          "one_step_rmse_c": 0.2604293048254455
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 19.427642822265625,
+            "rollout_mae_c": 15.309932708740234,
+            "rollout_max_abs_c": 70.19482421875,
+            "center_rmse_c": 19.21358871459961,
+            "surface_rmse_c": 19.308794021606445,
+            "final_state_rmse_c": 26.653141021728516,
+            "physics_residual_rmse_c": 194.9357147216797,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.010094541008584201,
+            "one_step_rmse_c": 0.21403260972650423
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 22.405391693115234,
+            "rollout_mae_c": 14.689608573913574,
+            "rollout_max_abs_c": 134.1051025390625,
+            "center_rmse_c": 22.372314453125,
+            "surface_rmse_c": 23.68169593811035,
+            "final_state_rmse_c": 52.378501892089844,
+            "physics_residual_rmse_c": 254.7429656982422,
+            "maximum_principle_violation_fraction": 0.012794715447154471,
+            "rollout_seconds": 0.009688875055871904,
+            "one_step_rmse_c": 0.3175588371120337
+          }
+        }
+      }
+    },
+    "20": {
+      "weight_0": {
+        "physics_weight": 0.0,
+        "training_trajectories": 20,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 410,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.0,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 20,
+          "seed": 42,
+          "evaluate_every": 34
+        },
+        "training": {
+          "best_epoch": 204.0,
+          "best_validation_rollout_rmse_c": 8.418646812438965,
+          "elapsed_seconds": 42.88796883402392
+        },
+        "test": {
+          "rollout_rmse_c": 10.236593246459961,
+          "rollout_mae_c": 4.494207859039307,
+          "rollout_max_abs_c": 97.08859252929688,
+          "center_rmse_c": 8.649942398071289,
+          "surface_rmse_c": 12.804261207580566,
+          "final_state_rmse_c": 23.258190155029297,
+          "physics_residual_rmse_c": 148.67840576171875,
+          "maximum_principle_violation_fraction": 0.004758807588075881,
+          "rollout_seconds": 0.011077833012677729,
+          "one_step_rmse_c": 0.1307632006888488
+        },
+        "ood_test": {
+          "rollout_rmse_c": 19.215425491333008,
+          "rollout_mae_c": 11.905208587646484,
+          "rollout_max_abs_c": 161.667724609375,
+          "center_rmse_c": 16.08747673034668,
+          "surface_rmse_c": 25.771825790405273,
+          "final_state_rmse_c": 43.197410583496094,
+          "physics_residual_rmse_c": 156.1160888671875,
+          "maximum_principle_violation_fraction": 0.005455284552845528,
+          "rollout_seconds": 0.013508416013792157,
+          "one_step_rmse_c": 0.2572949543192902
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 17.28190040588379,
+            "rollout_mae_c": 12.284024238586426,
+            "rollout_max_abs_c": 93.08273315429688,
+            "center_rmse_c": 15.477255821228027,
+            "surface_rmse_c": 21.059717178344727,
+            "final_state_rmse_c": 29.00385284423828,
+            "physics_residual_rmse_c": 141.18789672851562,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.01059591700322926,
+            "one_step_rmse_c": 0.18661744641803477
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 21.796449661254883,
+            "rollout_mae_c": 11.336981773376465,
+            "rollout_max_abs_c": 161.667724609375,
+            "center_rmse_c": 16.961692810058594,
+            "surface_rmse_c": 31.54679298400879,
+            "final_state_rmse_c": 58.33700180053711,
+            "physics_residual_rmse_c": 176.15206909179688,
+            "maximum_principle_violation_fraction": 0.01363821138211382,
+            "rollout_seconds": 0.010149832931347191,
+            "one_step_rmse_c": 0.33654511131111164
+          }
+        }
+      },
+      "weight_0p001": {
+        "physics_weight": 0.001,
+        "training_trajectories": 20,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 410,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.001,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 20,
+          "seed": 42,
+          "evaluate_every": 34
+        },
+        "training": {
+          "best_epoch": 170.0,
+          "best_validation_rollout_rmse_c": 7.652634620666504,
+          "elapsed_seconds": 43.241081958054565
+        },
+        "test": {
+          "rollout_rmse_c": 11.010103225708008,
+          "rollout_mae_c": 4.977846145629883,
+          "rollout_max_abs_c": 89.30926513671875,
+          "center_rmse_c": 10.768159866333008,
+          "surface_rmse_c": 11.264997482299805,
+          "final_state_rmse_c": 24.576276779174805,
+          "physics_residual_rmse_c": 97.07420349121094,
+          "maximum_principle_violation_fraction": 0.0046124661246612466,
+          "rollout_seconds": 0.011944792000576854,
+          "one_step_rmse_c": 0.14580347252992573
+        },
+        "ood_test": {
+          "rollout_rmse_c": 18.474811553955078,
+          "rollout_mae_c": 12.188713073730469,
+          "rollout_max_abs_c": 131.34634399414062,
+          "center_rmse_c": 17.876909255981445,
+          "surface_rmse_c": 20.073455810546875,
+          "final_state_rmse_c": 38.91117477416992,
+          "physics_residual_rmse_c": 118.68872833251953,
+          "maximum_principle_violation_fraction": 0.004894308943089431,
+          "rollout_seconds": 0.012089499970898032,
+          "one_step_rmse_c": 0.26375171884674764
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 17.942340850830078,
+            "rollout_mae_c": 13.378082275390625,
+            "rollout_max_abs_c": 65.56021118164062,
+            "center_rmse_c": 18.532669067382812,
+            "surface_rmse_c": 17.524959564208984,
+            "final_state_rmse_c": 25.89154624938965,
+            "physics_residual_rmse_c": 87.91918182373047,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.01094120810739696,
+            "one_step_rmse_c": 0.19608576602070024
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 19.24591827392578,
+            "rollout_mae_c": 10.404658317565918,
+            "rollout_max_abs_c": 131.34634399414062,
+            "center_rmse_c": 16.845470428466797,
+            "surface_rmse_c": 23.38103485107422,
+            "final_state_rmse_c": 52.722293853759766,
+            "physics_residual_rmse_c": 153.6973114013672,
+            "maximum_principle_violation_fraction": 0.012235772357723577,
+            "rollout_seconds": 0.010316542000509799,
+            "one_step_rmse_c": 0.34093690267882665
+          }
+        }
+      }
+    },
+    "40": {
+      "weight_0": {
+        "physics_weight": 0.0,
+        "training_trajectories": 40,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 205,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.0,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 40,
+          "seed": 42,
+          "evaluate_every": 17
+        },
+        "training": {
+          "best_epoch": 204.0,
+          "best_validation_rollout_rmse_c": 3.715339422225952,
+          "elapsed_seconds": 43.99117654201109
+        },
+        "test": {
+          "rollout_rmse_c": 3.7458181381225586,
+          "rollout_mae_c": 1.9963725805282593,
+          "rollout_max_abs_c": 24.369354248046875,
+          "center_rmse_c": 2.9266297817230225,
+          "surface_rmse_c": 5.7145185470581055,
+          "final_state_rmse_c": 7.7910003662109375,
+          "physics_residual_rmse_c": 60.57558822631836,
+          "maximum_principle_violation_fraction": 0.0025203252032520327,
+          "rollout_seconds": 0.01033154095057398,
+          "one_step_rmse_c": 0.04163516502175753
+        },
+        "ood_test": {
+          "rollout_rmse_c": 12.045270919799805,
+          "rollout_mae_c": 6.877680778503418,
+          "rollout_max_abs_c": 118.73641967773438,
+          "center_rmse_c": 8.700557708740234,
+          "surface_rmse_c": 18.744056701660156,
+          "final_state_rmse_c": 27.95636749267578,
+          "physics_residual_rmse_c": 104.87356567382812,
+          "maximum_principle_violation_fraction": 0.004154471544715447,
+          "rollout_seconds": 0.011008042027242482,
+          "one_step_rmse_c": 0.19255384106092788
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 8.67138385772705,
+            "rollout_mae_c": 5.943639278411865,
+            "rollout_max_abs_c": 50.077545166015625,
+            "center_rmse_c": 6.36699914932251,
+            "surface_rmse_c": 13.314733505249023,
+            "final_state_rmse_c": 14.665741920471191,
+            "physics_residual_rmse_c": 80.57843017578125,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.009898083051666617,
+            "one_step_rmse_c": 0.13425519505447453
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 15.809240341186523,
+            "rollout_mae_c": 8.2787446975708,
+            "rollout_max_abs_c": 118.73641967773438,
+            "center_rmse_c": 11.33319091796875,
+            "surface_rmse_c": 24.747241973876953,
+            "final_state_rmse_c": 40.38898468017578,
+            "physics_residual_rmse_c": 133.25479125976562,
+            "maximum_principle_violation_fraction": 0.010386178861788617,
+            "rollout_seconds": 0.00960654194932431,
+            "one_step_rmse_c": 0.25623381058813505
+          }
+        }
+      },
+      "weight_0p001": {
+        "physics_weight": 0.001,
+        "training_trajectories": 40,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 205,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.001,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 40,
+          "seed": 42,
+          "evaluate_every": 17
+        },
+        "training": {
+          "best_epoch": 204.0,
+          "best_validation_rollout_rmse_c": 3.5344109535217285,
+          "elapsed_seconds": 40.354015124961734
+        },
+        "test": {
+          "rollout_rmse_c": 3.507293939590454,
+          "rollout_mae_c": 1.8713889122009277,
+          "rollout_max_abs_c": 24.025482177734375,
+          "center_rmse_c": 2.439244508743286,
+          "surface_rmse_c": 5.52406120300293,
+          "final_state_rmse_c": 7.468752384185791,
+          "physics_residual_rmse_c": 24.50684356689453,
+          "maximum_principle_violation_fraction": 0.0034092140921409214,
+          "rollout_seconds": 0.011010583024471998,
+          "one_step_rmse_c": 0.03829347263338576
+        },
+        "ood_test": {
+          "rollout_rmse_c": 11.17979907989502,
+          "rollout_mae_c": 6.106446266174316,
+          "rollout_max_abs_c": 102.51947021484375,
+          "center_rmse_c": 7.754269123077393,
+          "surface_rmse_c": 17.547657012939453,
+          "final_state_rmse_c": 26.562944412231445,
+          "physics_residual_rmse_c": 69.79341888427734,
+          "maximum_principle_violation_fraction": 0.004764227642276422,
+          "rollout_seconds": 0.011532875010743737,
+          "one_step_rmse_c": 0.1919182244635058
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 7.766095161437988,
+            "rollout_mae_c": 4.977736949920654,
+            "rollout_max_abs_c": 48.494598388671875,
+            "center_rmse_c": 5.6627020835876465,
+            "surface_rmse_c": 11.379944801330566,
+            "final_state_rmse_c": 13.845199584960938,
+            "physics_residual_rmse_c": 40.999454498291016,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.010495291906408966,
+            "one_step_rmse_c": 0.13926434473729593
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 14.899711608886719,
+            "rollout_mae_c": 7.799510478973389,
+            "rollout_max_abs_c": 102.51947021484375,
+            "center_rmse_c": 10.11051082611084,
+            "surface_rmse_c": 23.99053955078125,
+            "final_state_rmse_c": 38.424476623535156,
+            "physics_residual_rmse_c": 98.26683044433594,
+            "maximum_principle_violation_fraction": 0.011910569105691058,
+            "rollout_seconds": 0.010090957977809012,
+            "one_step_rmse_c": 0.25097744048100995
+          }
+        }
+      }
+    },
+    "70": {
+      "weight_0": {
+        "physics_weight": 0.0,
+        "training_trajectories": 70,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 120,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.0,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 70,
+          "seed": 42,
+          "evaluate_every": 10
+        },
+        "training": {
+          "best_epoch": 90.0,
+          "best_validation_rollout_rmse_c": 2.3573529720306396,
+          "elapsed_seconds": 41.53848829201888
+        },
+        "test": {
+          "rollout_rmse_c": 2.5375430583953857,
+          "rollout_mae_c": 1.3730977773666382,
+          "rollout_max_abs_c": 20.277679443359375,
+          "center_rmse_c": 1.584240198135376,
+          "surface_rmse_c": 4.138675212860107,
+          "final_state_rmse_c": 5.468576908111572,
+          "physics_residual_rmse_c": 57.36930465698242,
+          "maximum_principle_violation_fraction": 0.0012520325203252032,
+          "rollout_seconds": 0.010566000011749566,
+          "one_step_rmse_c": 0.02958391802939562
+        },
+        "ood_test": {
+          "rollout_rmse_c": 5.687143325805664,
+          "rollout_mae_c": 3.638495922088623,
+          "rollout_max_abs_c": 57.46917724609375,
+          "center_rmse_c": 4.777284145355225,
+          "surface_rmse_c": 9.350930213928223,
+          "final_state_rmse_c": 11.230921745300293,
+          "physics_residual_rmse_c": 128.21942138671875,
+          "maximum_principle_violation_fraction": 0.0009186991869918699,
+          "rollout_seconds": 0.011046333005651832,
+          "one_step_rmse_c": 0.15108071973748788
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 4.821913719177246,
+            "rollout_mae_c": 3.3312952518463135,
+            "rollout_max_abs_c": 30.668609619140625,
+            "center_rmse_c": 4.226301193237305,
+            "surface_rmse_c": 6.803055286407471,
+            "final_state_rmse_c": 8.857126235961914,
+            "physics_residual_rmse_c": 59.828548431396484,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.010009624995291233,
+            "one_step_rmse_c": 0.1335985600629334
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 6.781055927276611,
+            "rollout_mae_c": 4.099297523498535,
+            "rollout_max_abs_c": 57.46917724609375,
+            "center_rmse_c": 5.501244068145752,
+            "surface_rmse_c": 12.213820457458496,
+            "final_state_rmse_c": 14.059197425842285,
+            "physics_residual_rmse_c": 189.0274200439453,
+            "maximum_principle_violation_fraction": 0.002296747967479675,
+            "rollout_seconds": 0.009589417022652924,
+            "one_step_rmse_c": 0.17404193981526278
+          }
+        }
+      },
+      "weight_0p001": {
+        "physics_weight": 0.001,
+        "training_trajectories": 70,
+        "planned_optimizer_updates": 4920,
+        "config": {
+          "epochs": 120,
+          "batch_size": 512,
+          "learning_rate": 0.001,
+          "hidden_width": 128,
+          "hidden_depth": 3,
+          "physics_weight": 0.001,
+          "rollout_horizon": 5,
+          "max_train_trajectories": 70,
+          "seed": 42,
+          "evaluate_every": 10
+        },
+        "training": {
+          "best_epoch": 120.0,
+          "best_validation_rollout_rmse_c": 2.300002336502075,
+          "elapsed_seconds": 41.3654239999596
+        },
+        "test": {
+          "rollout_rmse_c": 2.003251791000366,
+          "rollout_mae_c": 1.1761784553527832,
+          "rollout_max_abs_c": 15.72698974609375,
+          "center_rmse_c": 1.4421048164367676,
+          "surface_rmse_c": 3.3856921195983887,
+          "final_state_rmse_c": 4.269464492797852,
+          "physics_residual_rmse_c": 19.371234893798828,
+          "maximum_principle_violation_fraction": 0.002753387533875339,
+          "rollout_seconds": 0.011118624941445887,
+          "one_step_rmse_c": 0.028251294458131647
+        },
+        "ood_test": {
+          "rollout_rmse_c": 4.825408935546875,
+          "rollout_mae_c": 3.0398049354553223,
+          "rollout_max_abs_c": 26.007080078125,
+          "center_rmse_c": 5.396413803100586,
+          "surface_rmse_c": 6.695944786071777,
+          "final_state_rmse_c": 8.409122467041016,
+          "physics_residual_rmse_c": 69.40142059326172,
+          "maximum_principle_violation_fraction": 0.0003902439024390244,
+          "rollout_seconds": 0.011529542040079832,
+          "one_step_rmse_c": 0.14656831859690442
+        },
+        "ood_by_schedule": {
+          "step_hold": {
+            "rollout_rmse_c": 4.641382217407227,
+            "rollout_mae_c": 2.8462045192718506,
+            "rollout_max_abs_c": 26.007080078125,
+            "center_rmse_c": 4.309967994689941,
+            "surface_rmse_c": 5.832958221435547,
+            "final_state_rmse_c": 8.490864753723145,
+            "physics_residual_rmse_c": 23.6998233795166,
+            "maximum_principle_violation_fraction": 0.0,
+            "rollout_seconds": 0.010588707984425128,
+            "one_step_rmse_c": 0.13785558014338178
+          },
+          "heat_cool": {
+            "rollout_rmse_c": 5.088986873626709,
+            "rollout_mae_c": 3.3302056789398193,
+            "rollout_max_abs_c": 20.609588623046875,
+            "center_rmse_c": 6.703690528869629,
+            "surface_rmse_c": 7.813712120056152,
+            "final_state_rmse_c": 8.28499698638916,
+            "physics_residual_rmse_c": 105.82472229003906,
+            "maximum_principle_violation_fraction": 0.000975609756097561,
+            "rollout_seconds": 0.01014283299446106,
+            "one_step_rmse_c": 0.15874331033403158
+          }
+        }
+      }
+    }
+  }
+}

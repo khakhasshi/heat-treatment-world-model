@@ -1,0 +1,582 @@
+{
+  "rollout_horizon_ablation": {
+    "controlled_variables": {
+      "dataset": "outputs/c45_radiative_dataset.npz",
+      "training_seeds": [
+        42,
+        7,
+        123
+      ],
+      "epochs": 120,
+      "batch_size": 512,
+      "learning_rate": 0.001,
+      "hidden_width": 128,
+      "hidden_depth": 3,
+      "physics_weight": 0.001,
+      "checkpoint_metric": "validation 300-step rollout RMSE"
+    },
+    "horizons": {
+      "1": {
+        "validation_rollout_rmse_c": {
+          "mean": 2.0627919832865396,
+          "sample_std": 0.1867851511265881,
+          "samples": [
+            2.049663543701172,
+            1.8829174041748047,
+            2.2557950019836426
+          ]
+        },
+        "test_rollout_rmse_c": {
+          "mean": 2.1958421071370444,
+          "sample_std": 0.005377186913099541,
+          "samples": [
+            2.1958281993865967,
+            2.201226234436035,
+            2.190471887588501
+          ]
+        },
+        "test_one_step_rmse_c": {
+          "mean": 0.028624162318251767,
+          "sample_std": 0.0002948788696987672,
+          "samples": [
+            0.02843018486478055,
+            0.02896350019075323,
+            0.02847880189922152
+          ]
+        },
+        "ood_test_rollout_rmse_c": {
+          "mean": 5.046078681945801,
+          "sample_std": 0.4687227889042925,
+          "samples": [
+            4.540350437164307,
+            5.131968975067139,
+            5.465916633605957
+          ]
+        },
+        "ood_test_one_step_rmse_c": {
+          "mean": 0.1497912831901652,
+          "sample_std": 0.0023958962182831353,
+          "samples": [
+            0.14749800635645405,
+            0.14959777993101914,
+            0.15227806328302232
+          ]
+        }
+      },
+      "5": {
+        "validation_rollout_rmse_c": {
+          "mean": 2.0353356997172036,
+          "sample_std": 0.2444276200123045,
+          "samples": [
+            2.300002336502075,
+            1.987905502319336,
+            1.8180992603302002
+          ]
+        },
+        "test_rollout_rmse_c": {
+          "mean": 2.103466351826986,
+          "sample_std": 0.12324284266636892,
+          "samples": [
+            2.003251791000366,
+            2.2410755157470703,
+            2.0660717487335205
+          ]
+        },
+        "test_one_step_rmse_c": {
+          "mean": 0.02848082640067652,
+          "sample_std": 0.0018352389142791746,
+          "samples": [
+            0.028251294458131647,
+            0.030420034255922872,
+            0.026771150487975043
+          ]
+        },
+        "ood_test_rollout_rmse_c": {
+          "mean": 5.58875846862793,
+          "sample_std": 0.7894430508666902,
+          "samples": [
+            4.825408935546875,
+            6.401934623718262,
+            5.538931846618652
+          ]
+        },
+        "ood_test_one_step_rmse_c": {
+          "mean": 0.15171184592984735,
+          "sample_std": 0.005458295337567545,
+          "samples": [
+            0.14656831859690442,
+            0.15743814330569067,
+            0.151129075886947
+          ]
+        }
+      }
+    },
+    "relative_change_k5_vs_k1": {
+      "validation_rollout_rmse_c": -0.01331025318684401,
+      "test_rollout_rmse_c": -0.04206848707828943,
+      "ood_test_rollout_rmse_c": 0.10754485232736562
+    }
+  },
+  "paired_control_ood_prediction": {
+    "pairing_unit": "Each of 20 control-OOD trajectories is averaged over three model seeds before forming physics-minus-data trajectory-RMSE differences.",
+    "trajectory_count": 20,
+    "data_only_mean_trajectory_rmse_c": 5.146633148193359,
+    "physics_mean_trajectory_rmse_c": 4.926429271697998,
+    "mean_paired_difference_c": -0.22020335495471954,
+    "median_paired_difference_c": -0.3211573362350464,
+    "bootstrap_95_ci_for_mean_difference_c": [
+      -0.5881706565618515,
+      0.15272795446217036
+    ],
+    "improved_trajectories": 12,
+    "unchanged_trajectories": 0,
+    "worsened_trajectories": 8
+  },
+  "paired_risk_control": {
+    "pairing_unit": "Each of 10 BDF scenarios is averaged over three model seeds before forming risk-aware minus certainty-equivalent paired differences.",
+    "bootstrap_samples": 100000,
+    "bootstrap_seed": 20260903,
+    "metrics": {
+      "objective": {
+        "scenario_count": 10,
+        "scenario_seed_average_rows": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "certainty_equivalent": 30.426442583401997,
+            "risk_aware": 32.68312615156174,
+            "paired_difference_risk_minus_baseline": 2.2566835681597404
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "certainty_equivalent": 42.59114068746567,
+            "risk_aware": 36.848276714483895,
+            "paired_difference_risk_minus_baseline": -5.742863972981773
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "certainty_equivalent": 12.848919749259949,
+            "risk_aware": 11.580306927363077,
+            "paired_difference_risk_minus_baseline": -1.2686128218968715
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "certainty_equivalent": 13.953886409600576,
+            "risk_aware": 8.754761755466461,
+            "paired_difference_risk_minus_baseline": -5.199124654134115
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "certainty_equivalent": 15.626166621843973,
+            "risk_aware": 13.060661017894745,
+            "paired_difference_risk_minus_baseline": -2.5655056039492283
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "certainty_equivalent": 15.822329024473825,
+            "risk_aware": 14.631286720434824,
+            "paired_difference_risk_minus_baseline": -1.1910423040390015
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "certainty_equivalent": 13.67070084810257,
+            "risk_aware": 12.490082661310831,
+            "paired_difference_risk_minus_baseline": -1.1806181867917385
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "certainty_equivalent": 16.04409482081731,
+            "risk_aware": 12.306083778540293,
+            "paired_difference_risk_minus_baseline": -3.7380110422770176
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "certainty_equivalent": 17.37834632396698,
+            "risk_aware": 18.633549471696217,
+            "paired_difference_risk_minus_baseline": 1.2552031477292367
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "certainty_equivalent": 35.39433842897415,
+            "risk_aware": 35.39433842897415,
+            "paired_difference_risk_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": -1.7373891870180767,
+        "median_paired_difference": -1.2298275629679365,
+        "bootstrap_95_ci_for_mean_difference": [
+          -3.291420036504666,
+          -0.22564878746867834
+        ],
+        "improved_scenarios": 7,
+        "unchanged_scenarios": 1,
+        "worsened_scenarios": 2
+      },
+      "overtemperature_c": {
+        "scenario_count": 10,
+        "scenario_seed_average_rows": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "certainty_equivalent": 1.488922119140625,
+            "risk_aware": 0.2796732584635417,
+            "paired_difference_risk_minus_baseline": -1.2092488606770833
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "certainty_equivalent": 0.0,
+            "risk_aware": 0.0,
+            "paired_difference_risk_minus_baseline": 0.0
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "certainty_equivalent": 1.5325927734375,
+            "risk_aware": 1.5325927734375,
+            "paired_difference_risk_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": -0.12092488606770832,
+        "median_paired_difference": 0.0,
+        "bootstrap_95_ci_for_mean_difference": [
+          -0.362774658203125,
+          0.0
+        ],
+        "improved_scenarios": 1,
+        "unchanged_scenarios": 9,
+        "worsened_scenarios": 0
+      },
+      "final_center_abs_error_c": {
+        "scenario_count": 10,
+        "scenario_seed_average_rows": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "certainty_equivalent": 12.316416422526041,
+            "risk_aware": 14.255401611328125,
+            "paired_difference_risk_minus_baseline": 1.938985188802084
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "certainty_equivalent": 17.994140625,
+            "risk_aware": 18.056325276692707,
+            "paired_difference_risk_minus_baseline": 0.06218465169270715
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "certainty_equivalent": 1.48944091796875,
+            "risk_aware": 1.7208150227864583,
+            "paired_difference_risk_minus_baseline": 0.23137410481770826
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "certainty_equivalent": 4.2100830078125,
+            "risk_aware": 2.195648193359375,
+            "paired_difference_risk_minus_baseline": -2.014434814453125
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "certainty_equivalent": 2.0026041666666665,
+            "risk_aware": 2.11627197265625,
+            "paired_difference_risk_minus_baseline": 0.11366780598958348
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "certainty_equivalent": 2.9872945149739585,
+            "risk_aware": 2.4738260904947915,
+            "paired_difference_risk_minus_baseline": -0.513468424479167
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "certainty_equivalent": 1.638275146484375,
+            "risk_aware": 0.739013671875,
+            "paired_difference_risk_minus_baseline": -0.899261474609375
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "certainty_equivalent": 2.4429423014322915,
+            "risk_aware": 2.1087646484375,
+            "paired_difference_risk_minus_baseline": -0.3341776529947915
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "certainty_equivalent": 2.8795674641927085,
+            "risk_aware": 2.8600667317708335,
+            "paired_difference_risk_minus_baseline": -0.019500732421875
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "certainty_equivalent": 11.695068359375,
+            "risk_aware": 11.695068359375,
+            "paired_difference_risk_minus_baseline": 0.0
+          }
+        ],
+        "mean_paired_difference": -0.14346313476562506,
+        "median_paired_difference": -0.0097503662109375,
+        "bootstrap_95_ci_for_mean_difference": [
+          -0.7203694661458334,
+          0.4539754231770832
+        ],
+        "improved_scenarios": 5,
+        "unchanged_scenarios": 1,
+        "worsened_scenarios": 4
+      }
+    }
+  },
+  "control_success_intervals": {
+    "dynamic_boundary_control": {
+      "effective_world_model_observer|weight=0|noise=0C": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "effective_world_model_observer|weight=0|noise=0.5C": {
+        "successes": 28,
+        "trials": 30,
+        "success_rate": 0.9333333333333333,
+        "wilson_95_interval": [
+          0.7867654163738308,
+          0.9815229762087295
+        ]
+      },
+      "effective_world_model_observer|weight=0.001|noise=0C": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "effective_world_model_observer|weight=0.001|noise=0.5C": {
+        "successes": 28,
+        "trials": 30,
+        "success_rate": 0.9333333333333333,
+        "wilson_95_interval": [
+          0.7867654163738308,
+          0.9815229762087295
+        ]
+      },
+      "effective_world_model_oracle|weight=0": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "effective_world_model_oracle|weight=0.001": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "fixed_750c": {
+        "successes": 1,
+        "trials": 10,
+        "success_rate": 0.1,
+        "wilson_95_interval": [
+          0.017876213095072896,
+          0.4041500267952385
+        ]
+      },
+      "legacy_world_model_oracle|weight=0": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "legacy_world_model_oracle|weight=0.001": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "proportional_feedback": {
+        "successes": 0,
+        "trials": 10,
+        "success_rate": 0.0,
+        "wilson_95_interval": [
+          0.0,
+          0.2775327998628892
+        ]
+      },
+      "reference_solver_mpc": {
+        "successes": 10,
+        "trials": 10,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.7224672001371107,
+          0.9999999999999999
+        ]
+      },
+      "source_solver_mpc": {
+        "successes": 10,
+        "trials": 10,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.7224672001371107,
+          0.9999999999999999
+        ]
+      }
+    },
+    "partial_observability_id": {
+      "full_state_oracle_boundary": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "sparse_certainty_equivalent": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "sparse_risk_aware": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      },
+      "sparse_state_oracle_boundary": {
+        "successes": 30,
+        "trials": 30,
+        "success_rate": 1.0,
+        "wilson_95_interval": [
+          0.8864866068260312,
+          0.9999999999999999
+        ]
+      }
+    },
+    "partial_observability_ood": {
+      "full_state_oracle_boundary": {
+        "successes": 24,
+        "trials": 30,
+        "success_rate": 0.8,
+        "wilson_95_interval": [
+          0.6269430358685175,
+          0.9049489282271013
+        ]
+      },
+      "sparse_certainty_equivalent": {
+        "successes": 21,
+        "trials": 30,
+        "success_rate": 0.7,
+        "wilson_95_interval": [
+          0.5212421254128504,
+          0.8333525173175619
+        ]
+      },
+      "sparse_risk_aware": {
+        "successes": 21,
+        "trials": 30,
+        "success_rate": 0.7,
+        "wilson_95_interval": [
+          0.5212421254128504,
+          0.8333525173175619
+        ]
+      },
+      "sparse_state_oracle_boundary": {
+        "successes": 24,
+        "trials": 30,
+        "success_rate": 0.8,
+        "wilson_95_interval": [
+          0.6269430358685175,
+          0.9049489282271013
+        ]
+      }
+    }
+  }
+}

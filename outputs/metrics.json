@@ -1,0 +1,33 @@
+{
+  "problem": {
+    "alpha": 0.4,
+    "length": 1.0,
+    "final_time": 1.0,
+    "boundary_temperature_c": 20.0,
+    "temperature_scale_c": 800.0
+  },
+  "training": {
+    "epochs": 2000,
+    "learning_rate": 0.001,
+    "n_domain": 2000,
+    "n_boundary": 200,
+    "n_initial": 200,
+    "hidden_width": 32,
+    "hidden_depth": 4,
+    "weight_pde": 1.0,
+    "weight_boundary": 1.0,
+    "weight_initial": 1.0,
+    "seed": 42,
+    "log_every": 200
+  },
+  "training_summary": {
+    "elapsed_seconds": 6.2178244170499966,
+    "best_epoch": 1980,
+    "best_loss": 0.00014818859926890582
+  },
+  "metrics": {
+    "relative_l2": 0.009944871838030132,
+    "max_absolute_dimensionless": 0.009329500608146102,
+    "temperature_rmse_c": 2.0261756601823806
+  }
+}

@@ -1,115 +1,136 @@
-# 基于物理约束世界模型的金属热处理温度场演化预测研究
+# 金属热处理物理约束世界模型
 
-本项目研究能够在不同热处理工艺条件下连续推演工件温度场的 World Model。模型状态是工件内部温度分布，控制量是炉温或冷却介质温度，环境参数包括换热系数和材料热物性。
+本仓库保存本科毕业论文《基于物理约束世界模型的金属热处理温度场演化预测与闭环控制研究》的代码、实验配置、结果图、论文源文件和答辩材料。
 
-原 PINN 研究作为物理建模基础和对照方法保留。论文重点从“求解单个固定工况”切换为“学习一类热处理过程的状态转移规律，并对未见工艺进行多步预测”。
+研究对象是 C45 钢试块的非稳态传热过程。模型学习带控制输入和工艺参数的温度场状态转移：
 
-## 核心定义
+\[
+\mathbf{T}_{k+1}=F_\theta(\mathbf{T}_k, T_{\infty,k}, \mathbf{p})
+\]
+
+网络可递归推演完整温度轨迹，并供状态估计和滚动时域控制调用。训练目标同时包含数据误差和离散热传导残差。动态对流与辐射边界通过有效换热系数 \(H_{\mathrm{eff}}\) 表示，以处理本文瞬时观测模型下的局部不可辨识性。
+
+![三维试块温度场剖面](paper/figures/three_dimensional_temperature_cutaway.png)
+
+## 研究内容
+
+- 一维对称平板的有限差分数据生成与物理约束状态转移模型
+- 控制轨迹、材料参数和动态边界条件下的样本外泛化
+- 基于 \(H_{\mathrm{eff}}\) 的因果边界观测器与噪声压力测试
+- EnKF 稀疏测温状态估计与不确定性传播
+- 带常值尾部假设的单移动阻塞滚动时域控制
+- BDF 交叉求解器数值验证与在线推理计时
+- \(17\times13\times9\) 三维温度场世界模型，共 1,989 个状态量
+
+## 主要结果
+
+下表列出论文主张所依赖的代表性结果。完整统计量和适用边界见 `docs/` 与论文正文。
+
+| 研究问题 | 代表性结果 |
+| --- | --- |
+| 控制轨迹 OOD 的物理一致性 | 物理约束模型的离散残差降低 44.8% |
+| 四参数联合 OOD 的尾部风险 | 最大绝对误差由 121.76 °C 降至 61.69 °C |
+| 动态边界状态估计 | 引入 \(H_{\mathrm{eff}}\) 后 rollout RMSE 由 \(2.285\pm0.108\) °C 降至 \(1.409\pm0.068\) °C |
+| 交叉求解器在线计算 | 相对 BDF 数值推演获得 55.4 倍在线加速 |
+| 五传感器稀疏观测 | 未观测节点 RMSE 为 1.073 °C |
+| 严格参数 OOD 风险控制 | 配对目标函数平均下降 1.737，bootstrap 95% CI 为 [-3.291, -0.226] |
+| 三维 ID 物理一致性 | 隐式能量残差由 4.758 °C 降至 3.259 °C |
+
+三维实验在 ID 能量一致性上给出正向证据。其控制 OOD 精度差异尚未形成统计优势，因此三维部分用于验证方法的空间扩展可行性，不承担超出证据范围的性能主张。
+
+## 目录结构
 
 ```text
-状态 s_t：t 时刻各空间节点的温度
-动作 a_t：下一时间步的炉温或介质温度
-参数 p：换热系数、发射率、物性修正系数、密度和工件尺寸
-转移模型：s_(t+dt) = F(s_t, a_t, p)
+.
+├── defense-slides/          # HTML 答辩演示文稿
+├── docs/                    # 实验冻结、复现和专题研究记录
+├── outputs/                 # 轻量结果：JSON、CSV 和 PNG
+├── paper/                   # 通用 LaTeX 论文源文件
+├── paper-csust/             # 长沙理工大学模板版本
+├── scripts/                 # 数据生成、训练、评估和绘图入口
+├── src/heat_world_model/    # 模型、求解器、估计器和控制器
+└── tests/                   # 单元与集成测试
 ```
 
-训练目标由多步数据预测误差和包含导热、对流、辐射边界的离散能量平衡残差组成。
+## 环境安装
 
-## 当前进度
-
-- 已完成 PINN 一维热方程解析基准，相对 L2 误差约 0.994%。
-- 已建立一维金属平板隐式有限差分环境模拟器。
-- 已建立多工况温度场轨迹生成和轨迹级数据集划分工具。
-- 已实现普通自回归 World Model、物理约束 World Model 和多步闭环训练。
-- 已完成少数据/完整数据对照，并建立炉温候选方案规划与有限差分复核流程。
-- 已增加 C45/AISI 1045 温变物性、对流加辐射边界和未见控制曲线 OOD 测试。
-- 已完成四档物理权重消融及三个训练随机种子的重复实验。
-- 已完成固定约 4920 次优化更新的 `5-70` 条嵌套数据量曲线。
-- 已完成换热系数、发射率、导热系数、比热及组合参数的三种子 OOD 评估。
-- 已完成换热系数与发射率时间变化的动态边界 OOD 及参数可观测性评估。
-- 已完成动态边界可辨识性、等效换热系数因果观测器和物理等价参数测试。
-- 已完成以唯一可辨识 `H_eff` 为边界输入的三种子重训和带噪因果闭环部署测试。
-- 已完成 81/161 节点自适应 BDF 参考解下的跨求解器、跨网格验证。
-- 已完成独立 BDF 工件中的 280 回合闭环控制、数值 MPC 对照和反事实边界诊断。
-- 已完成 5/41 稀疏测温、增广 EnKF 状态/边界联合估计和风险感知控制。
-- 已完成边界与材料参数分布外的 100 条 BDF 轨迹及 120 回合收紧约束压力测试。
-
-## 快速开始
+推荐 Python 3.11 至 3.13。项目使用 `uv` 管理环境：
 
 ```bash
-uv sync --no-editable --extra dev
-uv run --no-sync pytest
+uv sync --extra dev
+uv run --no-sync pytest -q
+```
 
-# 生成 100 条不同工况的完整温度场轨迹
+也可以使用现有 Python 环境：
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e '.[dev]'
+pytest -q
+```
+
+## 实验复现
+
+生成轨迹并训练一维基线模型：
+
+```bash
 uv run --no-sync generate-heat-trajectories --trajectories 100 --steps 300
-
-# 对比普通 World Model 与物理约束 World Model
-uv run --no-sync compare-heat-world-models --epochs 100 --rollout-horizon 5 \
-  --physics-weight 0.01
-
-# 生成温变物性、对流加辐射的 C45 数据集并进行 OOD 对比
-uv run --no-sync generate-heat-trajectories --model c45-radiation
 uv run --no-sync compare-heat-world-models \
-  --dataset outputs/c45_radiative_dataset.npz \
-  --output-dir outputs/c45_world_model_run \
-  --epochs 120 --rollout-horizon 5 --physics-weight 0.01
+  --dataset outputs/world_model_dataset.npz \
+  --output-dir outputs/world_model_run \
+  --epochs 100 --rollout-horizon 5 --physics-weight 0.01
+```
 
-# 固定其余条件，扫描物理损失权重
-uv run --no-sync sweep-physics-weight \
-  --weights 0,0.001,0.01,0.1 --epochs 120
+运行主要专题实验：
 
-# 聚合不同训练随机种子的扫描结果
-uv run --no-sync aggregate-physics-sweeps \
-  outputs/c45_physics_weight_sweep/physics_weight_sweep.json \
-  outputs/c45_physics_weight_seed7/physics_weight_sweep.json \
-  outputs/c45_physics_weight_seed123/physics_weight_sweep.json
-
-# 使用嵌套训练子集比较数据效率
-uv run --no-sync sweep-training-size \
-  --training-sizes 5,10,20,40,70 --weights 0,0.001 \
-  --target-updates 4920
-
-# 在不重新训练的前提下评估参数分布外泛化
+```bash
 uv run --no-sync evaluate-parameter-ood
-
-# 评估参数值不越界但时间结构未见的动态边界 OOD
 uv run --no-sync evaluate-dynamic-boundary-ood
-
-# 分析动态边界可辨识性、噪声窗口和参数等价性
 uv run --no-sync analyze-boundary-observer
-
-# 重训 H_eff 参数化模型并执行带噪因果闭环评估
 uv run --no-sync evaluate-effective-boundary
-
-# 用高分辨率自适应 BDF 参考解进行跨求解器验证
 uv run --no-sync evaluate-cross-solver
-
-# 在 BDF 工件中比较固定工艺、数值 MPC 与 World Model MPC
 uv run --no-sync evaluate-closed-loop-control
-
-# 评估稀疏测温下的状态估计与后验风险控制
 uv run --no-sync evaluate-partial-observability
-
-# 在边界和材料参数 OOD 下执行 BDF 压力测试
 uv run --no-sync evaluate-ood-partial-observability
-
-# 用训练后的模型搜索炉温控制方案
-uv run --no-sync plan-heat-treatment --desired-center 400
-
-# 重跑原 PINN 对照基线
-uv run --no-sync heat-pinn-baseline --epochs 2000
 ```
 
-轨迹数据默认写入 `outputs/world_model_dataset.npz`，元数据和训练/验证/测试轨迹编号写入 `outputs/world_model_dataset.json`。
+三维模型的数据生成、训练和分析命令见 [`docs/three-dimensional-world-model.md`](docs/three-dimensional-world-model.md)。三维正式配置采用 \(17\times13\times9\) 网格。训练产物默认写入 `outputs/three_dimensional_world_model/`。
 
-## 目录说明
+不同脚本的详细参数可通过 `--help` 查看。正式结果对应的配置、随机种子和文件哈希记录在 [`docs/experiment-freeze.md`](docs/experiment-freeze.md) 及各专题文档中。
 
-```text
-docs/                   新课题方案、模型架构、数学模型和文献笔记
-src/heat_world_model/   数值环境与 World Model 代码
-src/heat_pinn/          保留的 PINN 对照基线
-tests/                  数值正确性和数据边界测试
-outputs/                实验数据、指标和图像
+## 编译论文
+
+通用版本：
+
+```bash
+make -C paper
 ```
 
-研究主线见 [World Model 研究方案](docs/world-model-plan.md)，技术定义见 [模型架构](docs/world-model-architecture.md)，C45 参数与边界见 [材料模型](docs/material-model.md)，实验结论见 [World Model 实验结果](docs/world-model-results.md)，参数外推见 [参数 OOD 结果](docs/parameter-ood-results.md)，时间变化边界见 [动态边界 OOD 结果](docs/dynamic-boundary-ood-results.md)，边界反演见 [等效换热系数观测器结果](docs/boundary-observer-results.md)，结构重参数化见 [等效边界模型结果](docs/effective-boundary-model-results.md)，离散迁移见 [跨求解器验证结果](docs/cross-solver-results.md)，闭环决策见 [闭环控制结果](docs/closed-loop-control-results.md)，稀疏测温与风险控制见 [部分可观测结果](docs/partial-observability-results.md)，真实数据路线见 [实验验证计划](docs/experimental-validation-plan.md)。
+长沙理工大学模板版本：
+
+```bash
+make -C paper-csust thesis
+```
+
+编译结果分别写入 `paper/build/main.pdf` 和 `paper-csust/build/thesis.pdf`。学校模板中的学号、班级和指导教师字段仍需在 `paper-csust/baseinfo.tex` 中填写。
+
+## 查看答辩幻灯片
+
+```bash
+python3 -m http.server 9187 --directory defense-slides
+```
+
+浏览器访问 <http://127.0.0.1:9187/>。演示文稿为原生 HTML，可使用方向键翻页。
+
+## 数据与版本策略
+
+仓库纳入源代码、配置、论文源文件、正式插图，以及便于核对结果的 JSON、CSV 和 PNG。模型权重、生成数据集和逐点预测数组通常为 `.pt`、`.npz` 或 `.npy`，体积较大且可由脚本重建，因此不进入 Git。冻结实验的关键产物以 SHA-256 哈希记录，便于检查论文数字与本地文件是否一致。
+
+数值真值来自有限差分或 BDF 求解器。当前工作不包含真实炉体实验，也不建立相变、组织演化、残余应力和变形模型。论文中的 350 °C、300 s 工况用于方法学基准。
+
+## 作者
+
+江景哲
+
+<contact@jiangjingzhe.com>

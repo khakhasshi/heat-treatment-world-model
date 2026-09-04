@@ -1,0 +1,44 @@
+{
+  "config": {
+    "trajectories": 96,
+    "steps": 300,
+    "shape": [
+      9,
+      7,
+      5
+    ],
+    "dimensions_m": [
+      0.06,
+      0.04,
+      0.02
+    ],
+    "dt_s": 1.0,
+    "seed": 42
+  },
+  "model": "three_dimensional_c45_convection_radiation",
+  "solver": "BDF method of lines on a node-centered finite-volume grid",
+  "parameter_columns": [
+    "convection_w_m2k",
+    "emissivity",
+    "conductivity_scale",
+    "heat_capacity_scale"
+  ],
+  "split_labels": {
+    "0": "train",
+    "1": "validation",
+    "2": "test",
+    "3": "control_ood_test"
+  },
+  "split_counts": {
+    "train": 56,
+    "validation": 12,
+    "test": 12,
+    "control_ood_test": 16
+  },
+  "schedule_type_labels": {
+    "0": "ramp_hold",
+    "1": "two_stage",
+    "2": "step_hold_ood",
+    "3": "heat_cool_ood"
+  }
+}

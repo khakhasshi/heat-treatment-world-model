@@ -1,0 +1,65 @@
+{
+  "dataset": "outputs/world_model_dataset.npz",
+  "models": {
+    "data_driven": {
+      "config": {
+        "epochs": 100,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.0,
+        "max_train_trajectories": 5,
+        "seed": 42,
+        "evaluate_every": 5
+      },
+      "training": {
+        "best_epoch": 35.0,
+        "best_validation_rollout_rmse_c": 16.086748123168945,
+        "elapsed_seconds": 0.9958040420897305
+      },
+      "test": {
+        "rollout_rmse_c": 14.800637245178223,
+        "rollout_mae_c": 11.43091869354248,
+        "rollout_max_abs_c": 60.13655090332031,
+        "center_rmse_c": 13.297435760498047,
+        "surface_rmse_c": 13.711722373962402,
+        "final_state_rmse_c": 18.541046142578125,
+        "physics_residual_rmse_c": 564.1317749023438,
+        "rollout_seconds": 0.01111954206135124,
+        "one_step_rmse_c": 0.16350048615603457,
+        "maximum_principle_violation_fraction": 0.006542005420054201
+      }
+    },
+    "physics_informed": {
+      "config": {
+        "epochs": 100,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.01,
+        "max_train_trajectories": 5,
+        "seed": 42,
+        "evaluate_every": 5
+      },
+      "training": {
+        "best_epoch": 25.0,
+        "best_validation_rollout_rmse_c": 52.660762786865234,
+        "elapsed_seconds": 0.9260580419795588
+      },
+      "test": {
+        "rollout_rmse_c": 72.62298583984375,
+        "rollout_mae_c": 55.13072204589844,
+        "rollout_max_abs_c": 357.17718505859375,
+        "center_rmse_c": 65.67977142333984,
+        "surface_rmse_c": 48.33668899536133,
+        "final_state_rmse_c": 117.76322174072266,
+        "physics_residual_rmse_c": 677.1085205078125,
+        "rollout_seconds": 0.010922792018391192,
+        "one_step_rmse_c": 0.3324200457615051,
+        "maximum_principle_violation_fraction": 0.010455284552845528
+      }
+    }
+  }
+}

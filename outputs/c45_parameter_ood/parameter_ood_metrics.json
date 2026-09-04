@@ -1,0 +1,2044 @@
+{
+  "dataset_config": {
+    "trajectories_per_category": 20,
+    "steps": 300,
+    "nx": 41,
+    "dt_s": 1.0,
+    "seed": 20260903
+  },
+  "model_dirs": [
+    "outputs/c45_physics_weight_sweep",
+    "outputs/c45_physics_weight_seed7",
+    "outputs/c45_physics_weight_seed123"
+  ],
+  "physics_weights": [
+    0.0,
+    0.001
+  ],
+  "per_seed": {
+    "42": {
+      "weight_0": {
+        "overall": {
+          "rollout_rmse_c": 7.680105209350586,
+          "rollout_mae_c": 4.471129417419434,
+          "rollout_max_abs_c": 92.76116943359375,
+          "center_rmse_c": 8.260950088500977,
+          "surface_rmse_c": 8.087570190429688,
+          "final_state_rmse_c": 14.067536354064941,
+          "physics_residual_rmse_c": 331.4065246582031,
+          "maximum_principle_violation_fraction": 0.0017642276422764227,
+          "rollout_seconds": 0.024978875066153705,
+          "one_step_rmse_c": 0.07094575523443994
+        },
+        "categories": {
+          "convection": {
+            "overall": {
+              "rollout_rmse_c": 2.917902946472168,
+              "rollout_mae_c": 1.831099033355713,
+              "rollout_max_abs_c": 20.0294189453125,
+              "center_rmse_c": 2.194343090057373,
+              "surface_rmse_c": 4.701559066772461,
+              "final_state_rmse_c": 4.70513916015625,
+              "physics_residual_rmse_c": 86.91931915283203,
+              "maximum_principle_violation_fraction": 0.0030772357723577236,
+              "rollout_seconds": 0.011763959075324237,
+              "one_step_rmse_c": 0.02638944114637141
+            },
+            "below_training": {
+              "rollout_rmse_c": 1.584027886390686,
+              "rollout_mae_c": 1.0867105722427368,
+              "rollout_max_abs_c": 7.111114501953125,
+              "center_rmse_c": 1.6734411716461182,
+              "surface_rmse_c": 2.1661746501922607,
+              "final_state_rmse_c": 2.7231814861297607,
+              "physics_residual_rmse_c": 45.58319091796875,
+              "maximum_principle_violation_fraction": 0.0037560975609756096,
+              "rollout_seconds": 0.010241459007374942,
+              "one_step_rmse_c": 0.01984175657708376
+            },
+            "above_training": {
+              "rollout_rmse_c": 3.8104031085968018,
+              "rollout_mae_c": 2.5754878520965576,
+              "rollout_max_abs_c": 20.0294189453125,
+              "center_rmse_c": 2.6134033203125,
+              "surface_rmse_c": 6.2862548828125,
+              "final_state_rmse_c": 6.071321964263916,
+              "physics_residual_rmse_c": 114.15825653076172,
+              "maximum_principle_violation_fraction": 0.0023983739837398375,
+              "rollout_seconds": 0.010585082927718759,
+              "one_step_rmse_c": 0.03160869981462942
+            }
+          },
+          "emissivity": {
+            "overall": {
+              "rollout_rmse_c": 3.5455214977264404,
+              "rollout_mae_c": 2.290787696838379,
+              "rollout_max_abs_c": 23.8763427734375,
+              "center_rmse_c": 2.4049274921417236,
+              "surface_rmse_c": 6.257266521453857,
+              "final_state_rmse_c": 7.085425853729248,
+              "physics_residual_rmse_c": 125.96914672851562,
+              "maximum_principle_violation_fraction": 0.0013211382113821138,
+              "rollout_seconds": 0.011725542019121349,
+              "one_step_rmse_c": 0.03410488693762199
+            },
+            "below_training": {
+              "rollout_rmse_c": 3.586913824081421,
+              "rollout_mae_c": 2.4021763801574707,
+              "rollout_max_abs_c": 20.45355224609375,
+              "center_rmse_c": 2.5398855209350586,
+              "surface_rmse_c": 6.646149635314941,
+              "final_state_rmse_c": 5.912059307098389,
+              "physics_residual_rmse_c": 153.37466430664062,
+              "maximum_principle_violation_fraction": 0.0017642276422764227,
+              "rollout_seconds": 0.010897041065618396,
+              "one_step_rmse_c": 0.03061986257002672
+            },
+            "above_training": {
+              "rollout_rmse_c": 3.5036404132843018,
+              "rollout_mae_c": 2.179398775100708,
+              "rollout_max_abs_c": 23.8763427734375,
+              "center_rmse_c": 2.2619316577911377,
+              "surface_rmse_c": 5.842555522918701,
+              "final_state_rmse_c": 8.09036922454834,
+              "physics_residual_rmse_c": 90.62374114990234,
+              "maximum_principle_violation_fraction": 0.0008780487804878049,
+              "rollout_seconds": 0.011283083935268223,
+              "one_step_rmse_c": 0.03726540728639681
+            }
+          },
+          "conductivity_scale": {
+            "overall": {
+              "rollout_rmse_c": 7.209510326385498,
+              "rollout_mae_c": 5.373926639556885,
+              "rollout_max_abs_c": 35.199432373046875,
+              "center_rmse_c": 8.883968353271484,
+              "surface_rmse_c": 6.724729061126709,
+              "final_state_rmse_c": 12.468615531921387,
+              "physics_residual_rmse_c": 272.5089416503906,
+              "maximum_principle_violation_fraction": 0.00043089430894308945,
+              "rollout_seconds": 0.012306499993428588,
+              "one_step_rmse_c": 0.06324787359740136
+            },
+            "below_training": {
+              "rollout_rmse_c": 7.548146724700928,
+              "rollout_mae_c": 5.547301769256592,
+              "rollout_max_abs_c": 35.199432373046875,
+              "center_rmse_c": 9.711115837097168,
+              "surface_rmse_c": 8.66333293914795,
+              "final_state_rmse_c": 12.798789978027344,
+              "physics_residual_rmse_c": 248.17906188964844,
+              "maximum_principle_violation_fraction": 0.0006422764227642276,
+              "rollout_seconds": 0.011129749938845634,
+              "one_step_rmse_c": 0.062217031639716994
+            },
+            "above_training": {
+              "rollout_rmse_c": 6.854163646697998,
+              "rollout_mae_c": 5.2005510330200195,
+              "rollout_max_abs_c": 29.832916259765625,
+              "center_rmse_c": 7.971449375152588,
+              "surface_rmse_c": 3.9230873584747314,
+              "final_state_rmse_c": 12.129457473754883,
+              "physics_residual_rmse_c": 294.8379211425781,
+              "maximum_principle_violation_fraction": 0.00021951219512195122,
+              "rollout_seconds": 0.011361709097400308,
+              "one_step_rmse_c": 0.06426218367935038
+            }
+          },
+          "heat_capacity_scale": {
+            "overall": {
+              "rollout_rmse_c": 5.838503837585449,
+              "rollout_mae_c": 3.775026559829712,
+              "rollout_max_abs_c": 37.01422119140625,
+              "center_rmse_c": 4.576088905334473,
+              "surface_rmse_c": 7.747300148010254,
+              "final_state_rmse_c": 10.770587921142578,
+              "physics_residual_rmse_c": 359.44781494140625,
+              "maximum_principle_violation_fraction": 0.0016869918699186992,
+              "rollout_seconds": 0.010903874994255602,
+              "one_step_rmse_c": 0.07131069694485836
+            },
+            "below_training": {
+              "rollout_rmse_c": 6.501451015472412,
+              "rollout_mae_c": 4.318293571472168,
+              "rollout_max_abs_c": 37.01422119140625,
+              "center_rmse_c": 5.423346519470215,
+              "surface_rmse_c": 8.054887771606445,
+              "final_state_rmse_c": 11.676766395568848,
+              "physics_residual_rmse_c": 449.9039001464844,
+              "maximum_principle_violation_fraction": 0.0015853658536585367,
+              "rollout_seconds": 0.009954749955795705,
+              "one_step_rmse_c": 0.08936493954638083
+            },
+            "above_training": {
+              "rollout_rmse_c": 5.089930534362793,
+              "rollout_mae_c": 3.231760263442993,
+              "rollout_max_abs_c": 32.8087158203125,
+              "center_rmse_c": 3.531073808670044,
+              "surface_rmse_c": 7.4269843101501465,
+              "final_state_rmse_c": 9.780810356140137,
+              "physics_residual_rmse_c": 236.6261749267578,
+              "maximum_principle_violation_fraction": 0.0017886178861788618,
+              "rollout_seconds": 0.00978762493468821,
+              "one_step_rmse_c": 0.04673690543119186
+            }
+          },
+          "combined": {
+            "overall": {
+              "rollout_rmse_c": 13.702920913696289,
+              "rollout_mae_c": 9.084805488586426,
+              "rollout_max_abs_c": 92.76116943359375,
+              "center_rmse_c": 15.190528869628906,
+              "surface_rmse_c": 12.67056941986084,
+              "final_state_rmse_c": 25.40992546081543,
+              "physics_residual_rmse_c": 567.6832885742188,
+              "maximum_principle_violation_fraction": 0.0023048780487804877,
+              "rollout_seconds": 0.010998917045071721,
+              "one_step_rmse_c": 0.11925370732955268
+            }
+          }
+        }
+      },
+      "weight_0p001": {
+        "overall": {
+          "rollout_rmse_c": 5.738311767578125,
+          "rollout_mae_c": 3.3586604595184326,
+          "rollout_max_abs_c": 42.756439208984375,
+          "center_rmse_c": 5.495785236358643,
+          "surface_rmse_c": 6.889402866363525,
+          "final_state_rmse_c": 10.353130340576172,
+          "physics_residual_rmse_c": 113.28732299804688,
+          "maximum_principle_violation_fraction": 0.0032300813008130083,
+          "rollout_seconds": 0.021733583067543805,
+          "one_step_rmse_c": 0.060321565606610346
+        },
+        "categories": {
+          "convection": {
+            "overall": {
+              "rollout_rmse_c": 2.4195125102996826,
+              "rollout_mae_c": 1.5861531496047974,
+              "rollout_max_abs_c": 11.190704345703125,
+              "center_rmse_c": 1.804304838180542,
+              "surface_rmse_c": 4.001487731933594,
+              "final_state_rmse_c": 3.5170490741729736,
+              "physics_residual_rmse_c": 26.87535285949707,
+              "maximum_principle_violation_fraction": 0.00508130081300813,
+              "rollout_seconds": 0.01135291694663465,
+              "one_step_rmse_c": 0.023192076728948213
+            },
+            "below_training": {
+              "rollout_rmse_c": 1.3253189325332642,
+              "rollout_mae_c": 0.9527685046195984,
+              "rollout_max_abs_c": 6.14874267578125,
+              "center_rmse_c": 1.3195019960403442,
+              "surface_rmse_c": 1.7261985540390015,
+              "final_state_rmse_c": 2.1058669090270996,
+              "physics_residual_rmse_c": 17.17741584777832,
+              "maximum_principle_violation_fraction": 0.007577235772357724,
+              "rollout_seconds": 0.010067750001326203,
+              "one_step_rmse_c": 0.017922464183923445
+            },
+            "above_training": {
+              "rollout_rmse_c": 3.1546170711517334,
+              "rollout_mae_c": 2.2195382118225098,
+              "rollout_max_abs_c": 11.190704345703125,
+              "center_rmse_c": 2.184020519256592,
+              "surface_rmse_c": 5.389252662658691,
+              "final_state_rmse_c": 4.506062030792236,
+              "physics_residual_rmse_c": 33.904361724853516,
+              "maximum_principle_violation_fraction": 0.0025853658536585367,
+              "rollout_seconds": 0.009933167020790279,
+              "one_step_rmse_c": 0.027468711720406977
+            }
+          },
+          "emissivity": {
+            "overall": {
+              "rollout_rmse_c": 2.7276663780212402,
+              "rollout_mae_c": 1.748408317565918,
+              "rollout_max_abs_c": 14.763229370117188,
+              "center_rmse_c": 2.5658152103424072,
+              "surface_rmse_c": 3.637073278427124,
+              "final_state_rmse_c": 5.128772735595703,
+              "physics_residual_rmse_c": 47.62518310546875,
+              "maximum_principle_violation_fraction": 0.0021707317073170734,
+              "rollout_seconds": 0.011312333983369172,
+              "one_step_rmse_c": 0.03085577938830004
+            },
+            "below_training": {
+              "rollout_rmse_c": 3.015738010406494,
+              "rollout_mae_c": 1.9840277433395386,
+              "rollout_max_abs_c": 14.510269165039062,
+              "center_rmse_c": 3.114617109298706,
+              "surface_rmse_c": 2.998140335083008,
+              "final_state_rmse_c": 5.00566291809082,
+              "physics_residual_rmse_c": 60.082557678222656,
+              "maximum_principle_violation_fraction": 0.0026666666666666666,
+              "rollout_seconds": 0.010072416975162923,
+              "one_step_rmse_c": 0.03291280634511997
+            },
+            "above_training": {
+              "rollout_rmse_c": 2.4053382873535156,
+              "rollout_mae_c": 1.5127887725830078,
+              "rollout_max_abs_c": 14.763229370117188,
+              "center_rmse_c": 1.8617130517959595,
+              "surface_rmse_c": 4.179444789886475,
+              "final_state_rmse_c": 5.248996257781982,
+              "physics_residual_rmse_c": 30.436864852905273,
+              "maximum_principle_violation_fraction": 0.0016747967479674797,
+              "rollout_seconds": 0.010014917002990842,
+              "one_step_rmse_c": 0.02865144819786797
+            }
+          },
+          "conductivity_scale": {
+            "overall": {
+              "rollout_rmse_c": 5.176322937011719,
+              "rollout_mae_c": 3.5406620502471924,
+              "rollout_max_abs_c": 31.172088623046875,
+              "center_rmse_c": 4.901107311248779,
+              "surface_rmse_c": 6.987936496734619,
+              "final_state_rmse_c": 10.244109153747559,
+              "physics_residual_rmse_c": 93.96031188964844,
+              "maximum_principle_violation_fraction": 0.003048780487804878,
+              "rollout_seconds": 0.011269541922956705,
+              "one_step_rmse_c": 0.056467655801428374
+            },
+            "below_training": {
+              "rollout_rmse_c": 5.799921989440918,
+              "rollout_mae_c": 4.163074016571045,
+              "rollout_max_abs_c": 25.79876708984375,
+              "center_rmse_c": 5.041706085205078,
+              "surface_rmse_c": 8.621817588806152,
+              "final_state_rmse_c": 10.538915634155273,
+              "physics_residual_rmse_c": 91.65784454345703,
+              "maximum_principle_violation_fraction": 0.0033658536585365853,
+              "rollout_seconds": 0.00990979210473597,
+              "one_step_rmse_c": 0.051058324004414166
+            },
+            "above_training": {
+              "rollout_rmse_c": 4.46649169921875,
+              "rollout_mae_c": 2.918250322341919,
+              "rollout_max_abs_c": 31.172088623046875,
+              "center_rmse_c": 4.756355285644531,
+              "surface_rmse_c": 4.829780101776123,
+              "final_state_rmse_c": 9.940563201904297,
+              "physics_residual_rmse_c": 96.20767974853516,
+              "maximum_principle_violation_fraction": 0.0027317073170731706,
+              "rollout_seconds": 0.010108000016771257,
+              "one_step_rmse_c": 0.0614022768728249
+            }
+          },
+          "heat_capacity_scale": {
+            "overall": {
+              "rollout_rmse_c": 5.650970935821533,
+              "rollout_mae_c": 3.574907064437866,
+              "rollout_max_abs_c": 26.8040771484375,
+              "center_rmse_c": 4.888680934906006,
+              "surface_rmse_c": 6.647679805755615,
+              "final_state_rmse_c": 9.684405326843262,
+              "physics_residual_rmse_c": 102.6251220703125,
+              "maximum_principle_violation_fraction": 0.001613821138211382,
+              "rollout_seconds": 0.011290249996818602,
+              "one_step_rmse_c": 0.06755272014572732
+            },
+            "below_training": {
+              "rollout_rmse_c": 6.734050750732422,
+              "rollout_mae_c": 4.60552453994751,
+              "rollout_max_abs_c": 23.080352783203125,
+              "center_rmse_c": 5.809310436248779,
+              "surface_rmse_c": 7.321375846862793,
+              "final_state_rmse_c": 11.182945251464844,
+              "physics_residual_rmse_c": 117.17884063720703,
+              "maximum_principle_violation_fraction": 0.001886178861788618,
+              "rollout_seconds": 0.009905874961987138,
+              "one_step_rmse_c": 0.08502344699271261
+            },
+            "above_training": {
+              "rollout_rmse_c": 4.30342960357666,
+              "rollout_mae_c": 2.5442893505096436,
+              "rollout_max_abs_c": 26.8040771484375,
+              "center_rmse_c": 3.7483761310577393,
+              "surface_rmse_c": 5.897521018981934,
+              "final_state_rmse_c": 7.906778335571289,
+              "physics_residual_rmse_c": 85.63264465332031,
+              "maximum_principle_violation_fraction": 0.0013414634146341464,
+              "rollout_seconds": 0.00982879102230072,
+              "one_step_rmse_c": 0.04356320653292768
+            }
+          },
+          "combined": {
+            "overall": {
+              "rollout_rmse_c": 9.623882293701172,
+              "rollout_mae_c": 6.343172073364258,
+              "rollout_max_abs_c": 42.756439208984375,
+              "center_rmse_c": 9.657085418701172,
+              "surface_rmse_c": 10.726428985595703,
+              "final_state_rmse_c": 17.278112411499023,
+              "physics_residual_rmse_c": 204.49740600585938,
+              "maximum_principle_violation_fraction": 0.004235772357723577,
+              "rollout_seconds": 0.011370041058398783,
+              "one_step_rmse_c": 0.09461257619682412
+            }
+          }
+        }
+      }
+    },
+    "7": {
+      "weight_0": {
+        "overall": {
+          "rollout_rmse_c": 9.828028678894043,
+          "rollout_mae_c": 5.124094486236572,
+          "rollout_max_abs_c": 154.331787109375,
+          "center_rmse_c": 6.404304504394531,
+          "surface_rmse_c": 17.217178344726562,
+          "final_state_rmse_c": 16.77222442626953,
+          "physics_residual_rmse_c": 353.9329833984375,
+          "maximum_principle_violation_fraction": 0.0024317073170731706,
+          "rollout_seconds": 0.023195665911771357,
+          "one_step_rmse_c": 0.07856656273754459
+        },
+        "categories": {
+          "convection": {
+            "overall": {
+              "rollout_rmse_c": 3.3807058334350586,
+              "rollout_mae_c": 2.000168561935425,
+              "rollout_max_abs_c": 26.04144287109375,
+              "center_rmse_c": 2.508542776107788,
+              "surface_rmse_c": 5.611091136932373,
+              "final_state_rmse_c": 5.143006324768066,
+              "physics_residual_rmse_c": 75.0400161743164,
+              "maximum_principle_violation_fraction": 0.0030853658536585367,
+              "rollout_seconds": 0.01156174996867776,
+              "one_step_rmse_c": 0.031009754190010796
+            },
+            "below_training": {
+              "rollout_rmse_c": 1.5784186124801636,
+              "rollout_mae_c": 1.072878360748291,
+              "rollout_max_abs_c": 8.425018310546875,
+              "center_rmse_c": 1.5793910026550293,
+              "surface_rmse_c": 2.5087568759918213,
+              "final_state_rmse_c": 2.809257745742798,
+              "physics_residual_rmse_c": 42.8628044128418,
+              "maximum_principle_violation_fraction": 0.004211382113821138,
+              "rollout_seconds": 0.010176624986343086,
+              "one_step_rmse_c": 0.021120904836150364
+            },
+            "above_training": {
+              "rollout_rmse_c": 4.512974739074707,
+              "rollout_mae_c": 2.9274582862854004,
+              "rollout_max_abs_c": 26.04144287109375,
+              "center_rmse_c": 3.1766488552093506,
+              "surface_rmse_c": 7.528269290924072,
+              "final_state_rmse_c": 6.708881855010986,
+              "physics_residual_rmse_c": 97.08135223388672,
+              "maximum_principle_violation_fraction": 0.001959349593495935,
+              "rollout_seconds": 0.009989375015720725,
+              "one_step_rmse_c": 0.03843328342511029
+            }
+          },
+          "emissivity": {
+            "overall": {
+              "rollout_rmse_c": 3.2034003734588623,
+              "rollout_mae_c": 2.080505609512329,
+              "rollout_max_abs_c": 26.582855224609375,
+              "center_rmse_c": 2.5350921154022217,
+              "surface_rmse_c": 4.843774795532227,
+              "final_state_rmse_c": 5.634943008422852,
+              "physics_residual_rmse_c": 132.0467529296875,
+              "maximum_principle_violation_fraction": 0.002565040650406504,
+              "rollout_seconds": 0.01130266604013741,
+              "one_step_rmse_c": 0.03316029021262268
+            },
+            "below_training": {
+              "rollout_rmse_c": 3.7485735416412354,
+              "rollout_mae_c": 2.59798002243042,
+              "rollout_max_abs_c": 17.864166259765625,
+              "center_rmse_c": 3.301815986633301,
+              "surface_rmse_c": 5.047385215759277,
+              "final_state_rmse_c": 5.288908958435059,
+              "physics_residual_rmse_c": 167.5978546142578,
+              "maximum_principle_violation_fraction": 0.0037804878048780487,
+              "rollout_seconds": 0.010169000015594065,
+              "one_step_rmse_c": 0.03381909179639498
+            },
+            "above_training": {
+              "rollout_rmse_c": 2.5439629554748535,
+              "rollout_mae_c": 1.5630309581756592,
+              "rollout_max_abs_c": 26.582855224609375,
+              "center_rmse_c": 1.3969237804412842,
+              "surface_rmse_c": 4.631221294403076,
+              "final_state_rmse_c": 5.96092414855957,
+              "physics_residual_rmse_c": 82.3629379272461,
+              "maximum_principle_violation_fraction": 0.0013495934959349594,
+              "rollout_seconds": 0.010202082921750844,
+              "one_step_rmse_c": 0.03248813204906876
+            }
+          },
+          "conductivity_scale": {
+            "overall": {
+              "rollout_rmse_c": 8.137590408325195,
+              "rollout_mae_c": 5.730931282043457,
+              "rollout_max_abs_c": 59.06707763671875,
+              "center_rmse_c": 7.140743732452393,
+              "surface_rmse_c": 11.853487968444824,
+              "final_state_rmse_c": 14.855886459350586,
+              "physics_residual_rmse_c": 269.10589599609375,
+              "maximum_principle_violation_fraction": 0.0006829268292682926,
+              "rollout_seconds": 0.01136925001628697,
+              "one_step_rmse_c": 0.07924191751942744
+            },
+            "below_training": {
+              "rollout_rmse_c": 9.493106842041016,
+              "rollout_mae_c": 6.8997039794921875,
+              "rollout_max_abs_c": 59.06707763671875,
+              "center_rmse_c": 8.066744804382324,
+              "surface_rmse_c": 16.0382022857666,
+              "final_state_rmse_c": 16.279638290405273,
+              "physics_residual_rmse_c": 308.0479431152344,
+              "maximum_principle_violation_fraction": 0.0006341463414634147,
+              "rollout_seconds": 0.010176375042647123,
+              "one_step_rmse_c": 0.08593486692196795
+            },
+            "above_training": {
+              "rollout_rmse_c": 6.505512237548828,
+              "rollout_mae_c": 4.562158584594727,
+              "rollout_max_abs_c": 40.163726806640625,
+              "center_rmse_c": 6.075201988220215,
+              "surface_rmse_c": 4.877138614654541,
+              "final_state_rmse_c": 13.280365943908691,
+              "physics_residual_rmse_c": 223.47804260253906,
+              "maximum_principle_violation_fraction": 0.0007317073170731707,
+              "rollout_seconds": 0.009962457930669188,
+              "one_step_rmse_c": 0.07192886852742732
+            }
+          },
+          "heat_capacity_scale": {
+            "overall": {
+              "rollout_rmse_c": 5.340253829956055,
+              "rollout_mae_c": 3.456176280975342,
+              "rollout_max_abs_c": 37.89739990234375,
+              "center_rmse_c": 5.818759441375732,
+              "surface_rmse_c": 7.318789482116699,
+              "final_state_rmse_c": 8.763354301452637,
+              "physics_residual_rmse_c": 312.0007019042969,
+              "maximum_principle_violation_fraction": 0.0023699186991869917,
+              "rollout_seconds": 0.0112614999525249,
+              "one_step_rmse_c": 0.06114718871959554
+            },
+            "below_training": {
+              "rollout_rmse_c": 5.989188194274902,
+              "rollout_mae_c": 4.162301063537598,
+              "rollout_max_abs_c": 25.95086669921875,
+              "center_rmse_c": 7.2616658210754395,
+              "surface_rmse_c": 7.799478054046631,
+              "final_state_rmse_c": 8.303165435791016,
+              "physics_residual_rmse_c": 364.7049865722656,
+              "maximum_principle_violation_fraction": 0.0024146341463414634,
+              "rollout_seconds": 0.010308500030077994,
+              "one_step_rmse_c": 0.07777942497703771
+            },
+            "above_training": {
+              "rollout_rmse_c": 4.600679874420166,
+              "rollout_mae_c": 2.750051259994507,
+              "rollout_max_abs_c": 37.89739990234375,
+              "center_rmse_c": 3.870933771133423,
+              "surface_rmse_c": 6.804226875305176,
+              "final_state_rmse_c": 9.200554847717285,
+              "physics_residual_rmse_c": 248.35281372070312,
+              "maximum_principle_violation_fraction": 0.0023252032520325204,
+              "rollout_seconds": 0.010450624977238476,
+              "one_step_rmse_c": 0.037793106819654414
+            }
+          },
+          "combined": {
+            "overall": {
+              "rollout_rmse_c": 19.14474105834961,
+              "rollout_mae_c": 12.352690696716309,
+              "rollout_max_abs_c": 154.331787109375,
+              "center_rmse_c": 10.368602752685547,
+              "surface_rmse_c": 35.116085052490234,
+              "final_state_rmse_c": 32.41667175292969,
+              "physics_residual_rmse_c": 658.4171142578125,
+              "maximum_principle_violation_fraction": 0.0034552845528455283,
+              "rollout_seconds": 0.011029959074221551,
+              "one_step_rmse_c": 0.1370549311175706
+            }
+          }
+        }
+      },
+      "weight_0p001": {
+        "overall": {
+          "rollout_rmse_c": 6.577853679656982,
+          "rollout_mae_c": 3.8953113555908203,
+          "rollout_max_abs_c": 71.74676513671875,
+          "center_rmse_c": 5.984055995941162,
+          "surface_rmse_c": 7.577484130859375,
+          "final_state_rmse_c": 11.604276657104492,
+          "physics_residual_rmse_c": 147.55914306640625,
+          "maximum_principle_violation_fraction": 0.0016691056910569106,
+          "rollout_seconds": 0.021599749918095767,
+          "one_step_rmse_c": 0.061760473516853626
+        },
+        "categories": {
+          "convection": {
+            "overall": {
+              "rollout_rmse_c": 3.3959755897521973,
+              "rollout_mae_c": 1.9828890562057495,
+              "rollout_max_abs_c": 21.913604736328125,
+              "center_rmse_c": 3.0668227672576904,
+              "surface_rmse_c": 4.6302032470703125,
+              "final_state_rmse_c": 6.692265510559082,
+              "physics_residual_rmse_c": 28.49980926513672,
+              "maximum_principle_violation_fraction": 0.003540650406504065,
+              "rollout_seconds": 0.010783709003590047,
+              "one_step_rmse_c": 0.03737734701409812
+            },
+            "below_training": {
+              "rollout_rmse_c": 1.4786335229873657,
+              "rollout_mae_c": 1.013472318649292,
+              "rollout_max_abs_c": 8.880455017089844,
+              "center_rmse_c": 1.458648681640625,
+              "surface_rmse_c": 1.9843113422393799,
+              "final_state_rmse_c": 2.4398274421691895,
+              "physics_residual_rmse_c": 18.76133918762207,
+              "maximum_principle_violation_fraction": 0.00575609756097561,
+              "rollout_seconds": 0.009706416982226074,
+              "one_step_rmse_c": 0.018821285547115416
+            },
+            "above_training": {
+              "rollout_rmse_c": 4.569348335266113,
+              "rollout_mae_c": 2.952305793762207,
+              "rollout_max_abs_c": 21.913604736328125,
+              "center_rmse_c": 4.084501266479492,
+              "surface_rmse_c": 6.240198135375977,
+              "final_state_rmse_c": 9.144401550292969,
+              "physics_residual_rmse_c": 35.67198181152344,
+              "maximum_principle_violation_fraction": 0.0013252032520325203,
+              "rollout_seconds": 0.009533000062219799,
+              "one_step_rmse_c": 0.049395258234585196
+            }
+          },
+          "emissivity": {
+            "overall": {
+              "rollout_rmse_c": 3.6302146911621094,
+              "rollout_mae_c": 2.359288454055786,
+              "rollout_max_abs_c": 21.68463134765625,
+              "center_rmse_c": 2.9861326217651367,
+              "surface_rmse_c": 4.707009792327881,
+              "final_state_rmse_c": 6.109801292419434,
+              "physics_residual_rmse_c": 49.16984176635742,
+              "maximum_principle_violation_fraction": 0.0005772357723577236,
+              "rollout_seconds": 0.010860624955967069,
+              "one_step_rmse_c": 0.03287899048986966
+            },
+            "below_training": {
+              "rollout_rmse_c": 4.414017200469971,
+              "rollout_mae_c": 3.119203567504883,
+              "rollout_max_abs_c": 19.654251098632812,
+              "center_rmse_c": 3.8417904376983643,
+              "surface_rmse_c": 4.9301276206970215,
+              "final_state_rmse_c": 6.324402809143066,
+              "physics_residual_rmse_c": 60.2951545715332,
+              "maximum_principle_violation_fraction": 0.0009349593495934959,
+              "rollout_seconds": 0.009785542031750083,
+              "one_step_rmse_c": 0.036929586272921144
+            },
+            "above_training": {
+              "rollout_rmse_c": 2.621711254119873,
+              "rollout_mae_c": 1.5993732213974,
+              "rollout_max_abs_c": 21.68463134765625,
+              "center_rmse_c": 1.753460168838501,
+              "surface_rmse_c": 4.472775936126709,
+              "final_state_rmse_c": 5.887381553649902,
+              "physics_residual_rmse_c": 34.63871765136719,
+              "maximum_principle_violation_fraction": 0.00021951219512195122,
+              "rollout_seconds": 0.00966504099778831,
+              "one_step_rmse_c": 0.02825352744405464
+            }
+          },
+          "conductivity_scale": {
+            "overall": {
+              "rollout_rmse_c": 5.825388431549072,
+              "rollout_mae_c": 4.039610862731934,
+              "rollout_max_abs_c": 38.2398681640625,
+              "center_rmse_c": 5.413100242614746,
+              "surface_rmse_c": 7.695796489715576,
+              "final_state_rmse_c": 11.378073692321777,
+              "physics_residual_rmse_c": 112.0431900024414,
+              "maximum_principle_violation_fraction": 0.0008577235772357723,
+              "rollout_seconds": 0.010809415951371193,
+              "one_step_rmse_c": 0.058229504912494574
+            },
+            "below_training": {
+              "rollout_rmse_c": 5.2472357749938965,
+              "rollout_mae_c": 3.588477849960327,
+              "rollout_max_abs_c": 38.2398681640625,
+              "center_rmse_c": 3.6377100944519043,
+              "surface_rmse_c": 9.59276294708252,
+              "final_state_rmse_c": 10.263826370239258,
+              "physics_residual_rmse_c": 111.88796997070312,
+              "maximum_principle_violation_fraction": 0.0008699186991869918,
+              "rollout_seconds": 0.00978762493468821,
+              "one_step_rmse_c": 0.053828006079729866
+            },
+            "above_training": {
+              "rollout_rmse_c": 6.3511271476745605,
+              "rollout_mae_c": 4.490744113922119,
+              "rollout_max_abs_c": 32.277496337890625,
+              "center_rmse_c": 6.735753536224365,
+              "surface_rmse_c": 5.140961647033691,
+              "final_state_rmse_c": 12.392539978027344,
+              "physics_residual_rmse_c": 112.19819641113281,
+              "maximum_principle_violation_fraction": 0.0008455284552845528,
+              "rollout_seconds": 0.009931999957188964,
+              "one_step_rmse_c": 0.06232091339341092
+            }
+          },
+          "heat_capacity_scale": {
+            "overall": {
+              "rollout_rmse_c": 4.728758335113525,
+              "rollout_mae_c": 3.1446235179901123,
+              "rollout_max_abs_c": 34.541900634765625,
+              "center_rmse_c": 4.874969482421875,
+              "surface_rmse_c": 5.516012668609619,
+              "final_state_rmse_c": 7.442512512207031,
+              "physics_residual_rmse_c": 161.8575439453125,
+              "maximum_principle_violation_fraction": 0.0016747967479674797,
+              "rollout_seconds": 0.011113541084341705,
+              "one_step_rmse_c": 0.051578632170322124
+            },
+            "below_training": {
+              "rollout_rmse_c": 3.9359378814697266,
+              "rollout_mae_c": 2.8905935287475586,
+              "rollout_max_abs_c": 13.51214599609375,
+              "center_rmse_c": 4.513575553894043,
+              "surface_rmse_c": 4.612123012542725,
+              "final_state_rmse_c": 5.165350914001465,
+              "physics_residual_rmse_c": 180.27381896972656,
+              "maximum_principle_violation_fraction": 0.001065040650406504,
+              "rollout_seconds": 0.00971354206558317,
+              "one_step_rmse_c": 0.058414270339750524
+            },
+            "above_training": {
+              "rollout_rmse_c": 5.406543254852295,
+              "rollout_mae_c": 3.398653507232666,
+              "rollout_max_abs_c": 34.541900634765625,
+              "center_rmse_c": 5.211361408233643,
+              "surface_rmse_c": 6.291352272033691,
+              "final_state_rmse_c": 9.17066764831543,
+              "physics_residual_rmse_c": 141.05703735351562,
+              "maximum_principle_violation_fraction": 0.0022845528455284554,
+              "rollout_seconds": 0.009527749964036047,
+              "one_step_rmse_c": 0.04368619477360462
+            }
+          },
+          "combined": {
+            "overall": {
+              "rollout_rmse_c": 11.633286476135254,
+              "rollout_mae_c": 7.950143814086914,
+              "rollout_max_abs_c": 71.74676513671875,
+              "center_rmse_c": 10.375704765319824,
+              "surface_rmse_c": 12.403424263000488,
+              "final_state_rmse_c": 20.157590866088867,
+              "physics_residual_rmse_c": 258.62530517578125,
+              "maximum_principle_violation_fraction": 0.0016951219512195122,
+              "rollout_seconds": 0.011034708935767412,
+              "one_step_rmse_c": 0.10267743488559807
+            }
+          }
+        }
+      }
+    },
+    "123": {
+      "weight_0": {
+        "overall": {
+          "rollout_rmse_c": 9.279279708862305,
+          "rollout_mae_c": 5.010106563568115,
+          "rollout_max_abs_c": 118.17977905273438,
+          "center_rmse_c": 9.107319831848145,
+          "surface_rmse_c": 11.907625198364258,
+          "final_state_rmse_c": 15.960807800292969,
+          "physics_residual_rmse_c": 340.2366027832031,
+          "maximum_principle_violation_fraction": 0.00449349593495935,
+          "rollout_seconds": 0.021205208962783217,
+          "one_step_rmse_c": 0.07731584929979585
+        },
+        "categories": {
+          "convection": {
+            "overall": {
+              "rollout_rmse_c": 2.9485716819763184,
+              "rollout_mae_c": 1.8985211849212646,
+              "rollout_max_abs_c": 15.87713623046875,
+              "center_rmse_c": 1.9150028228759766,
+              "surface_rmse_c": 4.973182201385498,
+              "final_state_rmse_c": 4.674999713897705,
+              "physics_residual_rmse_c": 62.464752197265625,
+              "maximum_principle_violation_fraction": 0.004536585365853658,
+              "rollout_seconds": 0.010814375011250377,
+              "one_step_rmse_c": 0.02807627025599147
+            },
+            "below_training": {
+              "rollout_rmse_c": 2.0173141956329346,
+              "rollout_mae_c": 1.2986533641815186,
+              "rollout_max_abs_c": 9.955581665039062,
+              "center_rmse_c": 1.59273099899292,
+              "surface_rmse_c": 2.8681395053863525,
+              "final_state_rmse_c": 3.5270612239837646,
+              "physics_residual_rmse_c": 39.757057189941406,
+              "maximum_principle_violation_fraction": 0.006853658536585366,
+              "rollout_seconds": 0.009620624943636358,
+              "one_step_rmse_c": 0.023719811373546798
+            },
+            "above_training": {
+              "rollout_rmse_c": 3.6494650840759277,
+              "rollout_mae_c": 2.4983890056610107,
+              "rollout_max_abs_c": 15.87713623046875,
+              "center_rmse_c": 2.1903605461120605,
+              "surface_rmse_c": 6.421749114990234,
+              "final_state_rmse_c": 5.592055797576904,
+              "physics_residual_rmse_c": 78.88642120361328,
+              "maximum_principle_violation_fraction": 0.002219512195121951,
+              "rollout_seconds": 0.009614457958377898,
+              "one_step_rmse_c": 0.031842179406421055
+            }
+          },
+          "emissivity": {
+            "overall": {
+              "rollout_rmse_c": 2.969194173812866,
+              "rollout_mae_c": 1.8923414945602417,
+              "rollout_max_abs_c": 23.006004333496094,
+              "center_rmse_c": 3.447112560272217,
+              "surface_rmse_c": 4.589110851287842,
+              "final_state_rmse_c": 6.270277500152588,
+              "physics_residual_rmse_c": 128.12454223632812,
+              "maximum_principle_violation_fraction": 0.004101626016260162,
+              "rollout_seconds": 0.010756207979284227,
+              "one_step_rmse_c": 0.03698225261182997
+            },
+            "below_training": {
+              "rollout_rmse_c": 3.3483083248138428,
+              "rollout_mae_c": 2.2135612964630127,
+              "rollout_max_abs_c": 23.006004333496094,
+              "center_rmse_c": 4.536244869232178,
+              "surface_rmse_c": 4.873779773712158,
+              "final_state_rmse_c": 6.51361083984375,
+              "physics_residual_rmse_c": 169.20436096191406,
+              "maximum_principle_violation_fraction": 0.004829268292682927,
+              "rollout_seconds": 0.009595041978172958,
+              "one_step_rmse_c": 0.03831399224039904
+            },
+            "above_training": {
+              "rollout_rmse_c": 2.53398060798645,
+              "rollout_mae_c": 1.5711219310760498,
+              "rollout_max_abs_c": 21.027130126953125,
+              "center_rmse_c": 1.7853996753692627,
+              "surface_rmse_c": 4.285573959350586,
+              "final_state_rmse_c": 6.017111301422119,
+              "physics_residual_rmse_c": 64.82034301757812,
+              "maximum_principle_violation_fraction": 0.0033739837398373985,
+              "rollout_seconds": 0.009812708012759686,
+              "one_step_rmse_c": 0.03560073054156405
+            }
+          },
+          "conductivity_scale": {
+            "overall": {
+              "rollout_rmse_c": 6.760552406311035,
+              "rollout_mae_c": 4.945679187774658,
+              "rollout_max_abs_c": 31.998031616210938,
+              "center_rmse_c": 5.93062686920166,
+              "surface_rmse_c": 8.881513595581055,
+              "final_state_rmse_c": 11.243729591369629,
+              "physics_residual_rmse_c": 307.0907897949219,
+              "maximum_principle_violation_fraction": 0.004207317073170732,
+              "rollout_seconds": 0.010916874976828694,
+              "one_step_rmse_c": 0.06642598194408399
+            },
+            "below_training": {
+              "rollout_rmse_c": 7.038276195526123,
+              "rollout_mae_c": 5.001639366149902,
+              "rollout_max_abs_c": 31.998031616210938,
+              "center_rmse_c": 4.624908447265625,
+              "surface_rmse_c": 10.494900703430176,
+              "final_state_rmse_c": 10.777939796447754,
+              "physics_residual_rmse_c": 366.4817199707031,
+              "maximum_principle_violation_fraction": 0.005691056910569106,
+              "rollout_seconds": 0.009609833010472357,
+              "one_step_rmse_c": 0.05851258775848241
+            },
+            "above_training": {
+              "rollout_rmse_c": 6.470920085906982,
+              "rollout_mae_c": 4.889719009399414,
+              "rollout_max_abs_c": 29.529998779296875,
+              "center_rmse_c": 6.996777534484863,
+              "surface_rmse_c": 6.900696754455566,
+              "final_state_rmse_c": 11.690975189208984,
+              "physics_residual_rmse_c": 233.02503967285156,
+              "maximum_principle_violation_fraction": 0.002723577235772358,
+              "rollout_seconds": 0.009648792096413672,
+              "one_step_rmse_c": 0.07349217120399587
+            }
+          },
+          "heat_capacity_scale": {
+            "overall": {
+              "rollout_rmse_c": 6.227468490600586,
+              "rollout_mae_c": 3.878244400024414,
+              "rollout_max_abs_c": 38.4716796875,
+              "center_rmse_c": 4.857699394226074,
+              "surface_rmse_c": 9.28348445892334,
+              "final_state_rmse_c": 11.412775993347168,
+              "physics_residual_rmse_c": 286.2745056152344,
+              "maximum_principle_violation_fraction": 0.0028170731707317072,
+              "rollout_seconds": 0.010962541098706424,
+              "one_step_rmse_c": 0.06967890946597839
+            },
+            "below_training": {
+              "rollout_rmse_c": 7.048351764678955,
+              "rollout_mae_c": 4.518925189971924,
+              "rollout_max_abs_c": 36.86761474609375,
+              "center_rmse_c": 5.82120418548584,
+              "surface_rmse_c": 11.006852149963379,
+              "final_state_rmse_c": 11.988672256469727,
+              "physics_residual_rmse_c": 344.3690490722656,
+              "maximum_principle_violation_fraction": 0.001967479674796748,
+              "rollout_seconds": 0.009916333016008139,
+              "one_step_rmse_c": 0.08471407187836268
+            },
+            "above_training": {
+              "rollout_rmse_c": 5.28048038482666,
+              "rollout_mae_c": 3.2375636100769043,
+              "rollout_max_abs_c": 38.4716796875,
+              "center_rmse_c": 3.648022413253784,
+              "surface_rmse_c": 7.156491756439209,
+              "final_state_rmse_c": 10.806231498718262,
+              "physics_residual_rmse_c": 212.87586975097656,
+              "maximum_principle_violation_fraction": 0.0036666666666666666,
+              "rollout_seconds": 0.009764250018633902,
+              "one_step_rmse_c": 0.0503371346287611
+            }
+          },
+          "combined": {
+            "overall": {
+              "rollout_rmse_c": 18.125356674194336,
+              "rollout_mae_c": 12.435746192932129,
+              "rollout_max_abs_c": 118.17977905273438,
+              "center_rmse_c": 18.449851989746094,
+              "surface_rmse_c": 22.318172454833984,
+              "final_state_rmse_c": 30.917505264282227,
+              "physics_residual_rmse_c": 618.2468872070312,
+              "maximum_principle_violation_fraction": 0.006804878048780488,
+              "rollout_seconds": 0.010916083003394306,
+              "one_step_rmse_c": 0.13588663732246603
+            }
+          }
+        }
+      },
+      "weight_0p001": {
+        "overall": {
+          "rollout_rmse_c": 7.829686164855957,
+          "rollout_mae_c": 4.411714553833008,
+          "rollout_max_abs_c": 70.56484985351562,
+          "center_rmse_c": 7.841827869415283,
+          "surface_rmse_c": 8.01292610168457,
+          "final_state_rmse_c": 13.607559204101562,
+          "physics_residual_rmse_c": 128.52951049804688,
+          "maximum_principle_violation_fraction": 0.0033666666666666667,
+          "rollout_seconds": 0.02096554101444781,
+          "one_step_rmse_c": 0.07486727980498298
+        },
+        "categories": {
+          "convection": {
+            "overall": {
+              "rollout_rmse_c": 2.264688014984131,
+              "rollout_mae_c": 1.4337782859802246,
+              "rollout_max_abs_c": 13.784423828125,
+              "center_rmse_c": 1.8031920194625854,
+              "surface_rmse_c": 3.667982339859009,
+              "final_state_rmse_c": 3.5630009174346924,
+              "physics_residual_rmse_c": 23.6292781829834,
+              "maximum_principle_violation_fraction": 0.004386178861788618,
+              "rollout_seconds": 0.010708375019021332,
+              "one_step_rmse_c": 0.022832174690889735
+            },
+            "below_training": {
+              "rollout_rmse_c": 1.1952402591705322,
+              "rollout_mae_c": 0.8569703102111816,
+              "rollout_max_abs_c": 5.3424072265625,
+              "center_rmse_c": 1.3166099786758423,
+              "surface_rmse_c": 1.7489866018295288,
+              "final_state_rmse_c": 2.0007598400115967,
+              "physics_residual_rmse_c": 16.648874282836914,
+              "maximum_principle_violation_fraction": 0.00659349593495935,
+              "rollout_seconds": 0.009602000005543232,
+              "one_step_rmse_c": 0.017800060363483187
+            },
+            "above_training": {
+              "rollout_rmse_c": 2.971367597579956,
+              "rollout_mae_c": 2.0105865001678467,
+              "rollout_max_abs_c": 13.784423828125,
+              "center_rmse_c": 2.1839277744293213,
+              "surface_rmse_c": 4.8835673332214355,
+              "final_state_rmse_c": 4.624598503112793,
+              "physics_residual_rmse_c": 28.97413444519043,
+              "maximum_principle_violation_fraction": 0.002178861788617886,
+              "rollout_seconds": 0.010035958024673164,
+              "one_step_rmse_c": 0.02694019657054062
+            }
+          },
+          "emissivity": {
+            "overall": {
+              "rollout_rmse_c": 2.780209541320801,
+              "rollout_mae_c": 1.8436990976333618,
+              "rollout_max_abs_c": 17.910430908203125,
+              "center_rmse_c": 3.148038148880005,
+              "surface_rmse_c": 3.599928617477417,
+              "final_state_rmse_c": 5.000272750854492,
+              "physics_residual_rmse_c": 50.40242004394531,
+              "maximum_principle_violation_fraction": 0.0018089430894308943,
+              "rollout_seconds": 0.011483625043183565,
+              "one_step_rmse_c": 0.028074606086486112
+            },
+            "below_training": {
+              "rollout_rmse_c": 3.254938840866089,
+              "rollout_mae_c": 2.288923501968384,
+              "rollout_max_abs_c": 15.136199951171875,
+              "center_rmse_c": 4.167722225189209,
+              "surface_rmse_c": 3.497690200805664,
+              "final_state_rmse_c": 5.093625068664551,
+              "physics_residual_rmse_c": 64.77838134765625,
+              "maximum_principle_violation_fraction": 0.0024227642276422766,
+              "rollout_seconds": 0.009509625029750168,
+              "one_step_rmse_c": 0.02982034871772499
+            },
+            "above_training": {
+              "rollout_rmse_c": 2.2055623531341553,
+              "rollout_mae_c": 1.3984744548797607,
+              "rollout_max_abs_c": 17.910430908203125,
+              "center_rmse_c": 1.565369725227356,
+              "surface_rmse_c": 3.699342727661133,
+              "final_state_rmse_c": 4.905144214630127,
+              "physics_residual_rmse_c": 29.741716384887695,
+              "maximum_principle_violation_fraction": 0.0011951219512195122,
+              "rollout_seconds": 0.009532833937555552,
+              "one_step_rmse_c": 0.026212855933224893
+            }
+          },
+          "conductivity_scale": {
+            "overall": {
+              "rollout_rmse_c": 5.89736270904541,
+              "rollout_mae_c": 4.1597466468811035,
+              "rollout_max_abs_c": 30.0859375,
+              "center_rmse_c": 6.407488822937012,
+              "surface_rmse_c": 6.268702030181885,
+              "final_state_rmse_c": 10.392481803894043,
+              "physics_residual_rmse_c": 102.02178192138672,
+              "maximum_principle_violation_fraction": 0.0028170731707317072,
+              "rollout_seconds": 0.010812333086505532,
+              "one_step_rmse_c": 0.06281241586459904
+            },
+            "below_training": {
+              "rollout_rmse_c": 5.082463264465332,
+              "rollout_mae_c": 3.1760263442993164,
+              "rollout_max_abs_c": 30.0859375,
+              "center_rmse_c": 5.855087757110596,
+              "surface_rmse_c": 6.889118671417236,
+              "final_state_rmse_c": 8.444364547729492,
+              "physics_residual_rmse_c": 98.44171905517578,
+              "maximum_principle_violation_fraction": 0.0035121951219512196,
+              "rollout_seconds": 0.009791749995201826,
+              "one_step_rmse_c": 0.05746432662510391
+            },
+            "above_training": {
+              "rollout_rmse_c": 6.612588882446289,
+              "rollout_mae_c": 5.143466472625732,
+              "rollout_max_abs_c": 23.581634521484375,
+              "center_rmse_c": 6.91590690612793,
+              "surface_rmse_c": 5.579721927642822,
+              "final_state_rmse_c": 12.029133796691895,
+              "physics_residual_rmse_c": 105.48040008544922,
+              "maximum_principle_violation_fraction": 0.0021219512195121953,
+              "rollout_seconds": 0.009639416937716305,
+              "one_step_rmse_c": 0.06773957368331496
+            }
+          },
+          "heat_capacity_scale": {
+            "overall": {
+              "rollout_rmse_c": 6.635110855102539,
+              "rollout_mae_c": 4.4346842765808105,
+              "rollout_max_abs_c": 31.048828125,
+              "center_rmse_c": 5.62909460067749,
+              "surface_rmse_c": 7.045639991760254,
+              "final_state_rmse_c": 11.496468544006348,
+              "physics_residual_rmse_c": 112.15898132324219,
+              "maximum_principle_violation_fraction": 0.0033048780487804877,
+              "rollout_seconds": 0.010755957919172943,
+              "one_step_rmse_c": 0.07571329068810814
+            },
+            "below_training": {
+              "rollout_rmse_c": 6.880200386047363,
+              "rollout_mae_c": 4.366162300109863,
+              "rollout_max_abs_c": 31.048828125,
+              "center_rmse_c": 6.314830303192139,
+              "surface_rmse_c": 7.171239852905273,
+              "final_state_rmse_c": 11.224370956420898,
+              "physics_residual_rmse_c": 133.9866943359375,
+              "maximum_principle_violation_fraction": 0.0022357723577235773,
+              "rollout_seconds": 0.009522416978143156,
+              "one_step_rmse_c": 0.09038949767542269
+            },
+            "above_training": {
+              "rollout_rmse_c": 6.380613327026367,
+              "rollout_mae_c": 4.503207206726074,
+              "rollout_max_abs_c": 27.997344970703125,
+              "center_rmse_c": 4.847301006317139,
+              "surface_rmse_c": 6.917759418487549,
+              "final_state_rmse_c": 11.762273788452148,
+              "physics_residual_rmse_c": 84.89311218261719,
+              "maximum_principle_violation_fraction": 0.0043739837398373985,
+              "rollout_seconds": 0.009511542040854692,
+              "one_step_rmse_c": 0.05739985829023514
+            }
+          },
+          "combined": {
+            "overall": {
+              "rollout_rmse_c": 14.65803337097168,
+              "rollout_mae_c": 10.186664581298828,
+              "rollout_max_abs_c": 70.56484985351562,
+              "center_rmse_c": 14.885128021240234,
+              "surface_rmse_c": 14.3416748046875,
+              "final_state_rmse_c": 25.45502471923828,
+              "physics_residual_rmse_c": 237.72323608398438,
+              "maximum_principle_violation_fraction": 0.004516260162601626,
+              "rollout_seconds": 0.010730999987572432,
+              "one_step_rmse_c": 0.1305302835061227
+            }
+          }
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "weight_0": {
+      "convection": {
+        "rollout_rmse_c": {
+          "mean": 3.082393487294515,
+          "sample_std": 0.2588007626133712,
+          "samples": [
+            2.917902946472168,
+            3.3807058334350586,
+            2.9485716819763184
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 1.909929593404134,
+          "sample_std": 0.08511016514862083,
+          "samples": [
+            1.831099033355713,
+            2.000168561935425,
+            1.8985211849212646
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 20.649332682291668,
+          "sample_std": 5.110430720803774,
+          "samples": [
+            20.0294189453125,
+            26.04144287109375,
+            15.87713623046875
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 2.205962896347046,
+          "sample_std": 0.2969405394085866,
+          "samples": [
+            2.194343090057373,
+            2.508542776107788,
+            1.9150028228759766
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 5.095277468363444,
+          "sample_std": 0.4668967630281407,
+          "samples": [
+            4.701559066772461,
+            5.611091136932373,
+            4.973182201385498
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 4.841048399607341,
+          "sample_std": 0.26193708782973224,
+          "samples": [
+            4.70513916015625,
+            5.143006324768066,
+            4.674999713897705
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 74.80802917480469,
+          "sample_std": 12.22893391600539,
+          "samples": [
+            86.91931915283203,
+            75.0400161743164,
+            62.464752197265625
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.0035663956639566397,
+          "sample_std": 0.0008402187618744056,
+          "samples": [
+            0.0030772357723577236,
+            0.0030853658536585367,
+            0.004536585365853658
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.011380028018417457,
+          "sample_std": 0.0005001945862267635,
+          "samples": [
+            0.011763959075324237,
+            0.01156174996867776,
+            0.010814375011250377
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.02849182186412456,
+          "sample_std": 0.0023380195699721066,
+          "samples": [
+            0.02638944114637141,
+            0.031009754190010796,
+            0.02807627025599147
+          ]
+        }
+      },
+      "emissivity": {
+        "rollout_rmse_c": {
+          "mean": 3.2393720149993896,
+          "sample_std": 0.289842656140682,
+          "samples": [
+            3.5455214977264404,
+            3.2034003734588623,
+            2.969194173812866
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 2.0878782669703164,
+          "sample_std": 0.19932538996816782,
+          "samples": [
+            2.290787696838379,
+            2.080505609512329,
+            1.8923414945602417
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 24.48840077718099,
+          "sample_std": 1.8653221770713813,
+          "samples": [
+            23.8763427734375,
+            26.582855224609375,
+            23.006004333496094
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 2.795710722605387,
+          "sample_std": 0.5678723209260411,
+          "samples": [
+            2.4049274921417236,
+            2.5350921154022217,
+            3.447112560272217
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 5.230050722757976,
+          "sample_std": 0.8986615903343934,
+          "samples": [
+            6.257266521453857,
+            4.843774795532227,
+            4.589110851287842
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 6.3302154541015625,
+          "sample_std": 0.727096650985773,
+          "samples": [
+            7.085425853729248,
+            5.634943008422852,
+            6.270277500152588
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 128.7134806315104,
+          "sample_std": 3.08130826259247,
+          "samples": [
+            125.96914672851562,
+            132.0467529296875,
+            128.12454223632812
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.00266260162601626,
+          "sample_std": 0.0013928089302701692,
+          "samples": [
+            0.0013211382113821138,
+            0.002565040650406504,
+            0.004101626016260162
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.011261472012847662,
+          "sample_std": 0.0004859782208185879,
+          "samples": [
+            0.011725542019121349,
+            0.01130266604013741,
+            0.010756207979284227
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.034749143254024874,
+          "sample_std": 0.001990765881804627,
+          "samples": [
+            0.03410488693762199,
+            0.03316029021262268,
+            0.03698225261182997
+          ]
+        }
+      },
+      "conductivity_scale": {
+        "rollout_rmse_c": {
+          "mean": 7.369217713673909,
+          "sample_std": 0.7022736303704245,
+          "samples": [
+            7.209510326385498,
+            8.137590408325195,
+            6.760552406311035
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 5.350179036458333,
+          "sample_std": 0.39316430964429916,
+          "samples": [
+            5.373926639556885,
+            5.730931282043457,
+            4.945679187774658
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 42.08818054199219,
+          "sample_std": 14.791026050158015,
+          "samples": [
+            35.199432373046875,
+            59.06707763671875,
+            31.998031616210938
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 7.318446318308513,
+          "sample_std": 1.484668359313588,
+          "samples": [
+            8.883968353271484,
+            7.140743732452393,
+            5.93062686920166
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 9.15324354171753,
+          "sample_std": 2.5751543361649656,
+          "samples": [
+            6.724729061126709,
+            11.853487968444824,
+            8.881513595581055
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 12.856077194213867,
+          "sample_std": 1.8369850882724492,
+          "samples": [
+            12.468615531921387,
+            14.855886459350586,
+            11.243729591369629
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 282.90187581380206,
+          "sample_std": 21.01720365845125,
+          "samples": [
+            272.5089416503906,
+            269.10589599609375,
+            307.0907897949219
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.0017737127371273715,
+          "sample_std": 0.002111327223841002,
+          "samples": [
+            0.00043089430894308945,
+            0.0006829268292682926,
+            0.004207317073170732
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.01153087499551475,
+          "sample_std": 0.0007087710470404736,
+          "samples": [
+            0.012306499993428588,
+            0.01136925001628697,
+            0.010916874976828694
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.06963859102030427,
+          "sample_std": 0.008467172081184162,
+          "samples": [
+            0.06324787359740136,
+            0.07924191751942744,
+            0.06642598194408399
+          ]
+        }
+      },
+      "heat_capacity_scale": {
+        "rollout_rmse_c": {
+          "mean": 5.802075386047363,
+          "sample_std": 0.44472771172566333,
+          "samples": [
+            5.838503837585449,
+            5.340253829956055,
+            6.227468490600586
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 3.7031490802764893,
+          "sample_std": 0.22002307453900924,
+          "samples": [
+            3.775026559829712,
+            3.456176280975342,
+            3.878244400024414
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 37.79443359375,
+          "sample_std": 0.7341647379764513,
+          "samples": [
+            37.01422119140625,
+            37.89739990234375,
+            38.4716796875
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 5.084182580312093,
+          "sample_std": 0.6515585088624226,
+          "samples": [
+            4.576088905334473,
+            5.818759441375732,
+            4.857699394226074
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 8.116524696350098,
+          "sample_std": 1.0330787304435625,
+          "samples": [
+            7.747300148010254,
+            7.318789482116699,
+            9.28348445892334
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 10.315572738647461,
+          "sample_std": 1.3820773992783901,
+          "samples": [
+            10.770587921142578,
+            8.763354301452637,
+            11.412775993347168
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 319.2410074869792,
+          "sample_std": 37.12007298125737,
+          "samples": [
+            359.44781494140625,
+            312.0007019042969,
+            286.2745056152344
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.0022913279132791326,
+          "sample_std": 0.0005691250480641458,
+          "samples": [
+            0.0016869918699186992,
+            0.0023699186991869917,
+            0.0028170731707317072
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.011042638681828976,
+          "sample_std": 0.00019179577631124942,
+          "samples": [
+            0.010903874994255602,
+            0.0112614999525249,
+            0.010962541098706424
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.0673789317101441,
+          "sample_std": 0.005458172598887441,
+          "samples": [
+            0.07131069694485836,
+            0.06114718871959554,
+            0.06967890946597839
+          ]
+        }
+      },
+      "combined": {
+        "rollout_rmse_c": {
+          "mean": 16.99100621541341,
+          "sample_std": 2.89282126032547,
+          "samples": [
+            13.702920913696289,
+            19.14474105834961,
+            18.125356674194336
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 11.291080792744955,
+          "sample_std": 1.911141698610485,
+          "samples": [
+            9.084805488586426,
+            12.352690696716309,
+            12.435746192932129
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 121.75757853190105,
+          "sample_std": 30.940842378305582,
+          "samples": [
+            92.76116943359375,
+            154.331787109375,
+            118.17977905273438
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 14.669661204020182,
+          "sample_std": 4.065725599653821,
+          "samples": [
+            15.190528869628906,
+            10.368602752685547,
+            18.449851989746094
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 23.36827564239502,
+          "sample_std": 11.259543975314765,
+          "samples": [
+            12.67056941986084,
+            35.116085052490234,
+            22.318172454833984
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 29.58136749267578,
+          "sample_std": 3.6895218537161836,
+          "samples": [
+            25.40992546081543,
+            32.41667175292969,
+            30.917505264282227
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 614.7824300130209,
+          "sample_std": 45.466016193768745,
+          "samples": [
+            567.6832885742188,
+            658.4171142578125,
+            618.2468872070312
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.0041883468834688345,
+          "sample_std": 0.0023378484308085833,
+          "samples": [
+            0.0023048780487804877,
+            0.0034552845528455283,
+            0.006804878048780488
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.010981653040895859,
+          "sample_std": 5.886827886817396e-05,
+          "samples": [
+            0.010998917045071721,
+            0.011029959074221551,
+            0.010916083003394306
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.1307317585898631,
+          "sample_std": 0.009957433060214632,
+          "samples": [
+            0.11925370732955268,
+            0.1370549311175706,
+            0.13588663732246603
+          ]
+        }
+      }
+    },
+    "weight_0p001": {
+      "convection": {
+        "rollout_rmse_c": {
+          "mean": 2.693392038345337,
+          "sample_std": 0.6133599197192755,
+          "samples": [
+            2.4195125102996826,
+            3.3959755897521973,
+            2.264688014984131
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 1.6676068305969238,
+          "sample_std": 0.28347254912035597,
+          "samples": [
+            1.5861531496047974,
+            1.9828890562057495,
+            1.4337782859802246
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 15.62957763671875,
+          "sample_std": 5.594514512434699,
+          "samples": [
+            11.190704345703125,
+            21.913604736328125,
+            13.784423828125
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 2.2247732083002725,
+          "sample_std": 0.7292365215735298,
+          "samples": [
+            1.804304838180542,
+            3.0668227672576904,
+            1.8031920194625854
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 4.099891106287639,
+          "sample_std": 0.4885997202535351,
+          "samples": [
+            4.001487731933594,
+            4.6302032470703125,
+            3.667982339859009
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 4.590771834055583,
+          "sample_std": 1.8200919337393189,
+          "samples": [
+            3.5170490741729736,
+            6.692265510559082,
+            3.5630009174346924
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 26.334813435872395,
+          "sample_std": 2.4798498758845806,
+          "samples": [
+            26.87535285949707,
+            28.49980926513672,
+            23.6292781829834
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.004336043360433604,
+          "sample_std": 0.0007715478566734368,
+          "samples": [
+            0.00508130081300813,
+            0.003540650406504065,
+            0.004386178861788618
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.010948333656415343,
+          "sample_std": 0.0003523982567369762,
+          "samples": [
+            0.01135291694663465,
+            0.010783709003590047,
+            0.010708375019021332
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.02780053281131202,
+          "sample_std": 0.008295716369022254,
+          "samples": [
+            0.023192076728948213,
+            0.03737734701409812,
+            0.022832174690889735
+          ]
+        }
+      },
+      "emissivity": {
+        "rollout_rmse_c": {
+          "mean": 3.0460302035013833,
+          "sample_std": 0.5066002691668745,
+          "samples": [
+            2.7276663780212402,
+            3.6302146911621094,
+            2.780209541320801
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 1.983798623085022,
+          "sample_std": 0.32865566032445764,
+          "samples": [
+            1.748408317565918,
+            2.359288454055786,
+            1.8436990976333618
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 18.119430541992188,
+          "sample_std": 3.465430993233509,
+          "samples": [
+            14.763229370117188,
+            21.68463134765625,
+            17.910430908203125
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 2.8999953269958496,
+          "sample_std": 0.30051724193873985,
+          "samples": [
+            2.5658152103424072,
+            2.9861326217651367,
+            3.148038148880005
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 3.981337229410807,
+          "sample_std": 0.6287252443534002,
+          "samples": [
+            3.637073278427124,
+            4.707009792327881,
+            3.599928617477417
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 5.412948926289876,
+          "sample_std": 0.6069023617147118,
+          "samples": [
+            5.128772735595703,
+            6.109801292419434,
+            5.000272750854492
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 49.06581497192383,
+          "sample_std": 1.3915377945207827,
+          "samples": [
+            47.62518310546875,
+            49.16984176635742,
+            50.40242004394531
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.0015189701897018971,
+          "sample_std": 0.0008353864588416102,
+          "samples": [
+            0.0021707317073170734,
+            0.0005772357723577236,
+            0.0018089430894308943
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.011218861327506602,
+          "sample_std": 0.00032184643887022015,
+          "samples": [
+            0.011312333983369172,
+            0.010860624955967069,
+            0.011483625043183565
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.030603125321551936,
+          "sample_std": 0.0024121365906498837,
+          "samples": [
+            0.03085577938830004,
+            0.03287899048986966,
+            0.028074606086486112
+          ]
+        }
+      },
+      "conductivity_scale": {
+        "rollout_rmse_c": {
+          "mean": 5.6330246925354,
+          "sample_std": 0.3971491461391922,
+          "samples": [
+            5.176322937011719,
+            5.825388431549072,
+            5.89736270904541
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 3.913339853286743,
+          "sample_std": 0.32829058822493473,
+          "samples": [
+            3.5406620502471924,
+            4.039610862731934,
+            4.1597466468811035
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 33.16596476236979,
+          "sample_std": 4.4275617288532105,
+          "samples": [
+            31.172088623046875,
+            38.2398681640625,
+            30.0859375
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 5.573898792266846,
+          "sample_std": 0.7659559026906805,
+          "samples": [
+            4.901107311248779,
+            5.413100242614746,
+            6.407488822937012
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 6.984145005544026,
+          "sample_std": 0.7135547846255577,
+          "samples": [
+            6.987936496734619,
+            7.695796489715576,
+            6.268702030181885
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 10.671554883321127,
+          "sample_std": 0.6163442475043038,
+          "samples": [
+            10.244109153747559,
+            11.378073692321777,
+            10.392481803894043
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 102.67509460449219,
+          "sample_std": 9.059124312369358,
+          "samples": [
+            93.96031188964844,
+            112.0431900024414,
+            102.02178192138672
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.0022411924119241193,
+          "sample_std": 0.0012037074323155777,
+          "samples": [
+            0.003048780487804878,
+            0.0008577235772357723,
+            0.0028170731707317072
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.010963763653611144,
+          "sample_std": 0.00026481576600029526,
+          "samples": [
+            0.011269541922956705,
+            0.010809415951371193,
+            0.010812333086505532
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.059169858859507325,
+          "sample_std": 0.0032752395674283453,
+          "samples": [
+            0.056467655801428374,
+            0.058229504912494574,
+            0.06281241586459904
+          ]
+        }
+      },
+      "heat_capacity_scale": {
+        "rollout_rmse_c": {
+          "mean": 5.671613375345866,
+          "sample_std": 0.9533438861970284,
+          "samples": [
+            5.650970935821533,
+            4.728758335113525,
+            6.635110855102539
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 3.718071619669596,
+          "sample_std": 0.6568380756472072,
+          "samples": [
+            3.574907064437866,
+            3.1446235179901123,
+            4.4346842765808105
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 30.798268636067707,
+          "sample_std": 3.8749920154128437,
+          "samples": [
+            26.8040771484375,
+            34.541900634765625,
+            31.048828125
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 5.13091500600179,
+          "sample_std": 0.4314906515739821,
+          "samples": [
+            4.888680934906006,
+            4.874969482421875,
+            5.62909460067749
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 6.403110822041829,
+          "sample_std": 0.7935996646788226,
+          "samples": [
+            6.647679805755615,
+            5.516012668609619,
+            7.045639991760254
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 9.541128794352213,
+          "sample_std": 2.030772267023683,
+          "samples": [
+            9.684405326843262,
+            7.442512512207031,
+            11.496468544006348
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 125.54721577962239,
+          "sample_std": 31.804929911709433,
+          "samples": [
+            102.6251220703125,
+            161.8575439453125,
+            112.15898132324219
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.002197831978319783,
+          "sample_std": 0.0009592146568094898,
+          "samples": [
+            0.001613821138211382,
+            0.0016747967479674797,
+            0.0033048780487804877
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.01105324966677775,
+          "sample_std": 0.0002722008400659929,
+          "samples": [
+            0.011290249996818602,
+            0.011113541084341705,
+            0.010755957919172943
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.06494821433471919,
+          "sample_std": 0.01227631961673435,
+          "samples": [
+            0.06755272014572732,
+            0.051578632170322124,
+            0.07571329068810814
+          ]
+        }
+      },
+      "combined": {
+        "rollout_rmse_c": {
+          "mean": 11.971734046936035,
+          "sample_std": 2.5340835297660704,
+          "samples": [
+            9.623882293701172,
+            11.633286476135254,
+            14.65803337097168
+          ]
+        },
+        "rollout_mae_c": {
+          "mean": 8.159993489583334,
+          "sample_std": 1.9303202660094405,
+          "samples": [
+            6.343172073364258,
+            7.950143814086914,
+            10.186664581298828
+          ]
+        },
+        "rollout_max_abs_c": {
+          "mean": 61.689351399739586,
+          "sample_std": 16.407029101921612,
+          "samples": [
+            42.756439208984375,
+            71.74676513671875,
+            70.56484985351562
+          ]
+        },
+        "center_rmse_c": {
+          "mean": 11.63930606842041,
+          "sample_std": 2.8338354845313405,
+          "samples": [
+            9.657085418701172,
+            10.375704765319824,
+            14.885128021240234
+          ]
+        },
+        "surface_rmse_c": {
+          "mean": 12.490509351094564,
+          "sample_std": 1.8091955235798711,
+          "samples": [
+            10.726428985595703,
+            12.403424263000488,
+            14.3416748046875
+          ]
+        },
+        "final_state_rmse_c": {
+          "mean": 20.96357599894206,
+          "sample_std": 4.147611692034311,
+          "samples": [
+            17.278112411499023,
+            20.157590866088867,
+            25.45502471923828
+          ]
+        },
+        "physics_residual_rmse_c": {
+          "mean": 233.61531575520834,
+          "sample_std": 27.296769482999007,
+          "samples": [
+            204.49740600585938,
+            258.62530517578125,
+            237.72323608398438
+          ]
+        },
+        "maximum_principle_violation_fraction": {
+          "mean": 0.003482384823848238,
+          "sample_std": 0.0015541556498881125,
+          "samples": [
+            0.004235772357723577,
+            0.0016951219512195122,
+            0.004516260162601626
+          ]
+        },
+        "rollout_seconds": {
+          "mean": 0.011045249993912876,
+          "sample_std": 0.000319650915814177,
+          "samples": [
+            0.011370041058398783,
+            0.011034708935767412,
+            0.010730999987572432
+          ]
+        },
+        "one_step_rmse_c": {
+          "mean": 0.10927343152951496,
+          "sample_std": 0.018845445162798156,
+          "samples": [
+            0.09461257619682412,
+            0.10267743488559807,
+            0.1305302835061227
+          ]
+        }
+      }
+    }
+  }
+}

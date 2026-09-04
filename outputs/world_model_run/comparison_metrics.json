@@ -1,0 +1,63 @@
+{
+  "dataset": "outputs/world_model_dataset.npz",
+  "models": {
+    "data_driven": {
+      "config": {
+        "epochs": 60,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.0,
+        "seed": 42,
+        "evaluate_every": 5
+      },
+      "training": {
+        "best_epoch": 55.0,
+        "best_validation_rollout_rmse_c": 0.7038487195968628,
+        "elapsed_seconds": 5.91960641706828
+      },
+      "test": {
+        "rollout_rmse_c": 0.9074565172195435,
+        "rollout_mae_c": 0.7099294662475586,
+        "rollout_max_abs_c": 3.43609619140625,
+        "center_rmse_c": 1.0743573904037476,
+        "surface_rmse_c": 1.4081283807754517,
+        "final_state_rmse_c": 1.1811639070510864,
+        "physics_residual_rmse_c": 17.294540405273438,
+        "rollout_seconds": 0.01568987499922514,
+        "one_step_rmse_c": 0.008145964031889415,
+        "maximum_principle_violation_fraction": 0.0013712737127371275
+      }
+    },
+    "physics_informed": {
+      "config": {
+        "epochs": 60,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.1,
+        "seed": 42,
+        "evaluate_every": 5
+      },
+      "training": {
+        "best_epoch": 60.0,
+        "best_validation_rollout_rmse_c": 1.8227492570877075,
+        "elapsed_seconds": 6.029637124971487
+      },
+      "test": {
+        "rollout_rmse_c": 1.3435993194580078,
+        "rollout_mae_c": 1.00686514377594,
+        "rollout_max_abs_c": 5.787567138671875,
+        "center_rmse_c": 1.363544225692749,
+        "surface_rmse_c": 1.871231198310852,
+        "final_state_rmse_c": 2.1251533031463623,
+        "physics_residual_rmse_c": 9.06314468383789,
+        "rollout_seconds": 0.010763040976598859,
+        "one_step_rmse_c": 0.014153845653230012,
+        "maximum_principle_violation_fraction": 0.0023902439024390243
+      }
+    }
+  }
+}

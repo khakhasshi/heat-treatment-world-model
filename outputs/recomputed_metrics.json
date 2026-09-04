@@ -1,0 +1,156 @@
+{
+  "constant_full": {
+    "data_driven": {
+      "test": {
+        "rollout_rmse_c": 0.6116506457328796,
+        "rollout_mae_c": 0.4013250470161438,
+        "rollout_max_abs_c": 3.2791290283203125,
+        "center_rmse_c": 0.4234931766986847,
+        "surface_rmse_c": 1.352950096130371,
+        "final_state_rmse_c": 0.8142998814582825,
+        "physics_residual_rmse_c": 11.941747665405273,
+        "maximum_principle_violation_fraction": 0.00041734417344173444,
+        "rollout_seconds": 0.015993415960110724
+      }
+    },
+    "physics_informed": {
+      "test": {
+        "rollout_rmse_c": 0.7022451162338257,
+        "rollout_mae_c": 0.49353376030921936,
+        "rollout_max_abs_c": 4.175079345703125,
+        "center_rmse_c": 0.5423733592033386,
+        "surface_rmse_c": 1.3703349828720093,
+        "final_state_rmse_c": 0.9398162961006165,
+        "physics_residual_rmse_c": 15.015623092651367,
+        "maximum_principle_violation_fraction": 0.0011598915989159892,
+        "rollout_seconds": 0.01091954205185175
+      }
+    }
+  },
+  "constant_low_data": {
+    "data_driven": {
+      "test": {
+        "rollout_rmse_c": 15.41551399230957,
+        "rollout_mae_c": 10.956478118896484,
+        "rollout_max_abs_c": 71.42701721191406,
+        "center_rmse_c": 17.29386329650879,
+        "surface_rmse_c": 14.124075889587402,
+        "final_state_rmse_c": 23.37692642211914,
+        "physics_residual_rmse_c": 526.8486328125,
+        "maximum_principle_violation_fraction": 0.006205962059620596,
+        "rollout_seconds": 0.011071583023294806
+      }
+    },
+    "physics_informed": {
+      "test": {
+        "rollout_rmse_c": 10.837750434875488,
+        "rollout_mae_c": 6.982796669006348,
+        "rollout_max_abs_c": 51.491485595703125,
+        "center_rmse_c": 11.653318405151367,
+        "surface_rmse_c": 9.68123722076416,
+        "final_state_rmse_c": 18.500415802001953,
+        "physics_residual_rmse_c": 136.02256774902344,
+        "maximum_principle_violation_fraction": 0.010200542005420055,
+        "rollout_seconds": 0.010873374994844198
+      }
+    }
+  },
+  "c45": {
+    "data_driven": {
+      "test": {
+        "rollout_rmse_c": 2.5375430583953857,
+        "rollout_mae_c": 1.3730977773666382,
+        "rollout_max_abs_c": 20.277679443359375,
+        "center_rmse_c": 1.584240198135376,
+        "surface_rmse_c": 4.138675212860107,
+        "final_state_rmse_c": 5.468576908111572,
+        "physics_residual_rmse_c": 57.36930465698242,
+        "maximum_principle_violation_fraction": 0.0012520325203252032,
+        "rollout_seconds": 0.010972957941703498
+      },
+      "ood_test": {
+        "rollout_rmse_c": 5.687143325805664,
+        "rollout_mae_c": 3.638495922088623,
+        "rollout_max_abs_c": 57.46917724609375,
+        "center_rmse_c": 4.777284145355225,
+        "surface_rmse_c": 9.350930213928223,
+        "final_state_rmse_c": 11.230921745300293,
+        "physics_residual_rmse_c": 128.21942138671875,
+        "maximum_principle_violation_fraction": 0.0009186991869918699,
+        "rollout_seconds": 0.011463208007626235
+      },
+      "ood_by_schedule": {
+        "step_hold": {
+          "rollout_rmse_c": 4.821913719177246,
+          "rollout_mae_c": 3.3312952518463135,
+          "rollout_max_abs_c": 30.668609619140625,
+          "center_rmse_c": 4.226301193237305,
+          "surface_rmse_c": 6.803055286407471,
+          "final_state_rmse_c": 8.857126235961914,
+          "physics_residual_rmse_c": 59.828548431396484,
+          "maximum_principle_violation_fraction": 0.0,
+          "rollout_seconds": 0.010634290985763073
+        },
+        "heat_cool": {
+          "rollout_rmse_c": 6.781055927276611,
+          "rollout_mae_c": 4.099297523498535,
+          "rollout_max_abs_c": 57.46917724609375,
+          "center_rmse_c": 5.501244068145752,
+          "surface_rmse_c": 12.213820457458496,
+          "final_state_rmse_c": 14.059197425842285,
+          "physics_residual_rmse_c": 189.0274200439453,
+          "maximum_principle_violation_fraction": 0.002296747967479675,
+          "rollout_seconds": 0.01019066700246185
+        }
+      }
+    },
+    "physics_informed": {
+      "test": {
+        "rollout_rmse_c": 2.6557366847991943,
+        "rollout_mae_c": 1.6563506126403809,
+        "rollout_max_abs_c": 17.704010009765625,
+        "center_rmse_c": 2.541123628616333,
+        "surface_rmse_c": 3.435286283493042,
+        "final_state_rmse_c": 5.123330593109131,
+        "physics_residual_rmse_c": 27.2421932220459,
+        "maximum_principle_violation_fraction": 0.0035284552845528455,
+        "rollout_seconds": 0.010901666944846511
+      },
+      "ood_test": {
+        "rollout_rmse_c": 5.571280002593994,
+        "rollout_mae_c": 3.9886422157287598,
+        "rollout_max_abs_c": 41.4495849609375,
+        "center_rmse_c": 5.093197822570801,
+        "surface_rmse_c": 7.954620838165283,
+        "final_state_rmse_c": 11.01980972290039,
+        "physics_residual_rmse_c": 68.06167602539062,
+        "maximum_principle_violation_fraction": 0.0004878048780487805,
+        "rollout_seconds": 0.011633750051259995
+      },
+      "ood_by_schedule": {
+        "step_hold": {
+          "rollout_rmse_c": 5.189396858215332,
+          "rollout_mae_c": 4.151689052581787,
+          "rollout_max_abs_c": 15.858154296875,
+          "center_rmse_c": 5.073464393615723,
+          "surface_rmse_c": 6.1867356300354,
+          "final_state_rmse_c": 8.896852493286133,
+          "physics_residual_rmse_c": 71.71499633789062,
+          "maximum_principle_violation_fraction": 0.0,
+          "rollout_seconds": 0.010678582941181958
+        },
+        "heat_cool": {
+          "rollout_rmse_c": 6.099438667297363,
+          "rollout_mae_c": 3.7440717220306396,
+          "rollout_max_abs_c": 41.4495849609375,
+          "center_rmse_c": 5.12265682220459,
+          "surface_rmse_c": 10.038745880126953,
+          "final_state_rmse_c": 13.596304893493652,
+          "physics_residual_rmse_c": 62.1805305480957,
+          "maximum_principle_violation_fraction": 0.0012195121951219512,
+          "rollout_seconds": 0.01023274997714907
+        }
+      }
+    }
+  }
+}

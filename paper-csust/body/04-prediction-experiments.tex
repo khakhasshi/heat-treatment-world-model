@@ -1,0 +1,155 @@
+\chap{温度场推演与分布外泛化}
+
+\sect{展开长度的受控比较}
+
+为检验闭环展开的作用，在 C45 温变物性数据上比较 $K=1$ 与 $K=5$。两组使用相同的 70 条训练轨迹、网络容量、物理权重 $10^{-3}$、批量大小、120 轮训练和三个随机种子，检查点均由验证集 300 步滚动 RMSE 选择。结果见表\ref{tab:unroll_ablation}。
+
+\begin{table}[H]
+  \centering
+  \caption{相同训练设置下的展开长度消融，均值$\pm$样本标准差}
+  \label{tab:unroll_ablation}
+  \small
+  \begin{tabular}{ccccc}
+    \toprule
+    $K$ & \shortstack{验证滚动\\RMSE} & \shortstack{ID 滚动\\RMSE} & \shortstack{控制 OOD\\滚动 RMSE} & \shortstack{ID 一步\\RMSE} \\
+    \midrule
+    1 & $2.063\pm0.187$ & $2.196\pm0.005$ & $\mathbf{5.046\pm0.469}$ & $0.02862\pm0.00029$ \\
+    5 & $\mathbf{2.035\pm0.244}$ & $\mathbf{2.103\pm0.123}$ & $5.589\pm0.789$ & $0.02848\pm0.00184$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+两种设置的一步误差接近，完整轨迹误差达到约 \SI{2}{\degreeCelsius}，说明模型选择仍需依据闭环轨迹。$K=5$ 的验证和 ID 滚动 RMSE 分别降低 $1.3\%$ 和 $4.2\%$，控制 OOD RMSE 比 $K=1$ 高 $10.8\%$。展开长度改变了训练输入分布，但没有形成对所有测试分布一致的优势。本文保留 $K=5$，因为其验证均值最低并与部署时递归输入一致。OOD 结论由后续物理权重和边界参数化实验承担。
+
+\sect{物理权重与控制曲线 OOD}
+
+C45 温变物性数据集包含 120 条轨迹。训练、验证、ID 测试和控制 OOD 分别使用 70、15、15 和 20 条轨迹。三随机种子重复实验结果列于表\ref{tab:weight_results}。
+
+\begin{table}[H]
+  \centering
+  \caption{不同物理权重的三随机种子结果，均值$\pm$样本标准差}
+  \label{tab:weight_results}
+  \small
+  \begin{tabular}{ccccc}
+    \toprule
+    $\lambda_{\mathrm{phy}}$ & 验证 RMSE & ID RMSE & OOD RMSE & OOD 物理残差 \\
+    \midrule
+    0 & $2.282\pm0.109$ & $2.389\pm0.139$ & $5.994\pm0.430$ & $127.41\pm7.36$ \\
+    $10^{-3}$ & $\mathbf{2.035\pm0.244}$ & $\mathbf{2.103\pm0.123}$ & $\mathbf{5.589\pm0.789}$ & $70.35\pm4.24$ \\
+    $10^{-2}$ & $2.242\pm0.109$ & $2.739\pm0.107$ & $6.865\pm1.202$ & $\mathbf{60.29\pm10.42}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+$\lambda_{\mathrm{phy}}=10^{-3}$ 在验证集上取得最低均值，并作为正式模型。相对数据基线，其 ID RMSE 降低 $11.9\%$，控制 OOD 的总体 RMSE 均值降低 $6.8\%$，OOD 物理残差降低 $44.8\%$。升温后冷却轨迹的 RMSE 均值降低 $10.1\%$。更大的 $10^{-2}$ 权重继续降低残差，但场误差增加。模型选择因此以验证轨迹精度为主，物理残差用于描述一致性。
+
+控制 OOD 进一步采用轨迹配对统计。对每条轨迹先平均三个模型种子，再计算物理模型与数据模型的轨迹 RMSE 差。20 条轨迹中有 12 条改善、8 条增加，平均配对差为 \SI{-0.220}{\degreeCelsius}，100000 次 bootstrap 的 95\% 区间为 $[-0.588,0.153]$~\si{\degreeCelsius}。该区间跨越零，所以 $6.8\%$ 只作为当前样本上的均值趋势。物理正则在本组实验中的稳定证据主要来自能量残差，以及四参数组合 OOD 的尾部误差。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{physics_weight_replicates.png}
+  \caption{物理权重在 ID 与控制 OOD 条件下的重复实验结果}
+  \label{fig:weight_results}
+\end{figure}
+
+\sect{参数分布外泛化}
+
+参数 OOD 集包含 100 条轨迹。换热系数、发射率、导热系数尺度和比热尺度各有 20 条单因素轨迹，另有 20 条四参数组合轨迹。控制曲线保持在训练类型内。表\ref{tab:param_ood}给出正式权重下的三随机种子结果。
+
+\begin{table}[H]
+  \centering
+  \caption{参数 OOD 的滚动 RMSE，单位：\si{\degreeCelsius}}
+  \label{tab:param_ood}
+  \begin{tabular}{lccc}
+    \toprule
+    OOD 类型 & 数据模型 & 物理模型 & 相对降低 \\
+    \midrule
+    对流换热系数 $h$ & $3.082\pm0.259$ & $2.693\pm0.613$ & $12.6\%$ \\
+    发射率 $\varepsilon$ & $3.239\pm0.290$ & $3.046\pm0.507$ & $6.0\%$ \\
+    导热系数尺度 $s_k$ & $7.369\pm0.702$ & $5.633\pm0.397$ & $23.6\%$ \\
+    比热尺度 $s_c$ & $5.802\pm0.445$ & $5.672\pm0.953$ & $2.2\%$ \\
+    四参数组合 & $16.991\pm2.893$ & $11.972\pm2.534$ & $29.5\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+物理模型在五类参数 OOD 的平均 RMSE 上均取得更低数值。导热系数和四参数组合的三个种子全部改善。组合 OOD 的最大绝对误差由 $121.76\pm30.94$~\si{\degreeCelsius} 降至 $61.69\pm16.41$~\si{\degreeCelsius}，离散物理残差由 $614.78\pm45.47$ 降至 $233.62\pm27.30$~\si{\degreeCelsius}。多参数同时偏移时，热扩散时间尺度和表面热流共同改变。离散能量约束在此条件下提供了最明显的稳定作用。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{parameter_ood_metrics.png}
+  \caption{不同参数 OOD 类别的温度场推演误差}
+  \label{fig:param_ood}
+\end{figure}
+
+\sect{动态边界 OOD}
+
+动态边界测试包含 $h$ 平滑变化、$h$ 阶跃、$\varepsilon$ 增长、$\varepsilon$ 阶跃和联合变化五类，共 100 条轨迹。所有瞬时参数值位于训练范围内，训练数据中的边界参数在单条轨迹内保持常数。该实验检验时间结构外推。
+
+逐步提供真实 $h(t)$ 与 $\varepsilon(t)$ 时，数据模型滚动 RMSE 为 $4.795\pm0.289$~\si{\degreeCelsius}，物理模型为 $4.089\pm0.162$~\si{\degreeCelsius}，降低 $14.7\%$。物理残差降低 $57.3\%$，逐轨迹 RMSE 的 95\% 分位数降低 $13.0\%$。若整段推演固定使用首时刻参数，两类模型的 RMSE 均约为 \SI{19.4}{\degreeCelsius}。动态输入的缺失会形成主要误差源。该结果促使模型输入转向可在线估计的 $\Heff$。
+
+图\ref{fig:dynamic_trajectory}给出联合边界变化类别中的中位误差轨迹。对流与辐射条件在 300~s 内连续变化，物理模型在中心和表面位置均保持稳定跟踪。炉温远高于工件温度时，两条预测曲线仍能贴合数值参考，说明递归模型能够处理边界热流随状态持续变化的过程。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{dynamic_boundary_trajectory_zh.png}
+  \caption{联合动态边界下的代表性温度场推演轨迹}
+  \label{fig:dynamic_trajectory}
+\end{figure}
+
+\sect{三维试块扩展实验}
+
+为检验受控状态转移在三维温度场上的可实现性，本文增加固定长方体试块实验。三维数值模型能够表达氧化层、支承遮蔽和各表面非均匀受热对钢坯温度场的影响\cite{yang2022reheating3d}；本文先采用均匀六面边界建立受控基准。试块尺寸为 \SI{60}{\milli\metre}$\times$\SI{40}{\milli\metre}$\times$\SI{20}{\milli\metre}，材料物性和六个表面的对流--辐射边界与一维实验一致。基础训练网格为 $9\times7\times5$，共 315 个温度状态。参考轨迹由三维方法线和 BDF 积分生成，每条轨迹包含 300 个 \SI{1}{\second} 状态转移。数据集共 96 条轨迹，其中训练、验证、ID 测试和控制曲线 OOD 分别为 56、12、12 和 16 条。
+
+三维模型采用卷积残差状态转移器。输入包含当前温度场、炉温动作、$h$、$\varepsilon$、导热系数尺度、比热尺度及三个空间坐标通道。网络含 3 个残差块和 16 个隐藏通道，共 45489 个参数。训练使用三步闭环展开，批量大小为 256，AdamW 初始学习率为 $8\times10^{-4}$。检查点依据验证集 300 步滚动 RMSE 选择。数据模型与物理模型使用相同数据、网络容量和随机种子。三维物理损失按六个表面控制体的能量平衡计算，权重取 $10^{-1}$。该权重根据三维损失尺度重新设定，未沿用一维实验的数值。
+
+\begin{table}[H]
+  \centering
+  \caption{三维固定几何扩展实验，单位：\si{\degreeCelsius}}
+  \label{tab:three_dimensional_results}
+  \small
+  \begin{tabular}{lcccccc}
+    \toprule
+    模型 & 验证滚动 & ID 滚动 & ID 终态 & OOD 滚动 & OOD 终态 & OOD 能量残差 \\
+    \midrule
+    数据模型 & $5.050$ & $4.464$ & $5.606$ & $13.612$ & $21.715$ & $3.273$ \\
+    物理模型 & $5.381$ & $4.633$ & $5.281$ & $13.381$ & $19.166$ & $3.171$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+表\ref{tab:three_dimensional_results}显示，物理模型在控制 OOD 上的总体 RMSE 降低 $1.7\%$，终态平均 RMSE 降低 $11.7\%$，半隐式能量残差降低 $3.1\%$。ID 滚动 RMSE 增加 $3.8\%$，但终态误差降低 $5.8\%$，体现了场平均拟合与长时物理一致性之间的权衡。逐轨迹比较中有 6/16 条 OOD 轨迹改善，平均配对差为 \SI{-0.254}{\degreeCelsius}，bootstrap 95\% 区间为 $[-1.135,0.509]$~\si{\degreeCelsius}。区间包含零，所以三维实验用于证明方法可扩展及展示误差结构，不据此提出稳定的总体精度优势。
+
+进一步将网格加密至 $17\times13\times9$，温度状态数增至 1989。本文使用相同的 96 条随机工况重新求解全部 BDF 轨迹。两个模型沿用 16 个隐藏通道和 3 个残差块，并分别载入对应基础模型中形状相容的 16 个卷积参数张量。网格相关的坐标和归一化统计量均重新计算。训练 12 轮，批量大小为 64，每两轮执行一次 300 步验证推演。两个检查点均在第 6 轮取得最小验证误差。表\ref{tab:three_dimensional_refinement}给出网格加密结果。
+
+\begin{table}[H]
+  \centering
+  \caption{三维模型的网格加密验证，单位：\si{\degreeCelsius}}
+  \label{tab:three_dimensional_refinement}
+  \small
+  \begin{tabular}{lccccc}
+    \toprule
+    网格 & 状态数 & 数据模型验证 & 物理模型验证 & 数据模型 ID & 物理模型 ID \\
+    \midrule
+    $9\times7\times5$ & 315 & $5.050$ & $5.381$ & $4.464$ & $4.633$ \\
+    $17\times13\times9$ & 1989 & $4.724$ & $4.335$ & $3.983$ & $4.082$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+网格加密后，数据模型和物理模型的 ID 滚动 RMSE 分别降低 $10.8\%$ 和 $11.9\%$。物理模型在加密网格上的验证误差较数据模型低 $8.2\%$，ID 离散能量残差由 \SI{4.758}{\degreeCelsius} 降至 \SI{3.259}{\degreeCelsius}。控制 OOD 滚动 RMSE 分别为 \SI{17.014}{\degreeCelsius} 和 \SI{18.104}{\degreeCelsius}；物理模型改善 8/16 条轨迹，平均配对差为 \SI{0.653}{\degreeCelsius}，bootstrap 95\% 区间为 $[-0.346,1.851]$~\si{\degreeCelsius}。固定 96 条轨迹和同一通道规模足以提高分布内空间解析度，但未形成加密网格上的控制 OOD 优势。本文未根据该测试集反向调整损失权重。
+
+图\ref{fig:three_dimensional_cutaway}选取加密网格数据模型轨迹 RMSE 最接近 ID 上四分位数的工况，剖视时刻取 $25\times19\times13$ BDF 参考场内温差最大时刻。每个面板切去朝向观察者的一个八分体，使三个中心切面和试块外表面同时可见。颜色表示各控制体的平均温度，四个面板使用统一色标。图中模型场直接绘制于 $17\times13\times9$ 网格，没有进行显示插值。在 $t=\SI{192}{\second}$ 时，显式欧拉、数据世界模型和物理约束世界模型相对细网格 BDF 的场 RMSE 分别为 $0.34$、$5.15$ 和 \SI{4.53}{\degreeCelsius}。两个世界模型均恢复了表面至芯部的三维温度梯度，物理约束模型在该代表时刻保留了更接近参考场的芯部低温区。该目标与端淬数字孪生的三维场重建相近，但本文面向加热过程的动作条件化未来推演\cite{midaoui2026jominy}。
+
+\sect{结果讨论}
+
+实验给出两个稳定判断。物理约束在控制和参数 OOD 中主要改善尾部误差及离散能量一致性。动态边界的时间结构需要作为逐步输入，否则固定参数会形成约 \SI{19.4}{\degreeCelsius} 的主要误差。展开长度对不同分布呈现权衡，所以完整轨迹验证比单步指标更适合作为模型选择依据。
+
+物理损失的权重需要结合验证轨迹和残差尺度确定。较大权重可以获得更小残差，但可能改变数据拟合目标。一维正式模型选用 $10^{-3}$。三维固定几何实验重新标定为 $10^{-1}$，并观察到 OOD 终态误差与 ID 场平均误差之间的权衡。网格加密实验沿用该权重，用于考察既定方法在更高维状态上的行为。权重结论依赖离散方程、数据覆盖和网络容量，几何或网格改变后需要重新评估。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{three_dimensional_temperature_cutaway.png}
+  \caption{三维 C45 试块在不同数值与学习算法下的八分体剖视温度场}
+  \label{fig:three_dimensional_cutaway}
+\end{figure}

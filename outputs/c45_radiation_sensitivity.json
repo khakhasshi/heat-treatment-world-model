@@ -1,0 +1,27 @@
+{
+  "setup": {
+    "initial_c": 25.0,
+    "environment_c": 850.0,
+    "steps": 300,
+    "length_m": 0.02,
+    "nx": 41,
+    "convection_w_m2k": 25.0,
+    "dt_s": 1.0
+  },
+  "cases": {
+    "convection_only": {
+      "final_center_c": 154.98844629050882,
+      "final_surface_c": 157.05646831866525,
+      "final_nonuniformity_c": 2.068022028157145,
+      "initial_h_rad_w_m2k": 0.0,
+      "final_h_rad_w_m2k": 0.0
+    },
+    "convection_radiation": {
+      "final_center_c": 475.5913383227045,
+      "final_surface_c": 484.699119922528,
+      "final_nonuniformity_c": 9.107781599823511,
+      "initial_h_rad_w_m2k": 81.62216503967248,
+      "final_h_rad_w_m2k": 146.85449507279196
+    }
+  }
+}

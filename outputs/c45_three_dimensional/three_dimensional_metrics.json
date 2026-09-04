@@ -1,0 +1,161 @@
+{
+  "dataset_config": {
+    "trajectories": 96,
+    "steps": 300,
+    "shape": [
+      9,
+      7,
+      5
+    ],
+    "dimensions_m": [
+      0.06,
+      0.04,
+      0.02
+    ],
+    "dt_s": 1.0,
+    "seed": 42
+  },
+  "device": "mps",
+  "models": {
+    "data_only": {
+      "training": {
+        "best_epoch": 25.0,
+        "best_validation_rollout_rmse_c": 5.0500359535217285,
+        "elapsed_seconds": 690.7649355840003,
+        "parameter_count": 45489.0,
+        "device": "mps",
+        "config": {
+          "epochs": 40,
+          "batch_size": 256,
+          "learning_rate": 0.0008,
+          "weight_decay": 1e-06,
+          "hidden_channels": 16,
+          "residual_blocks": 3,
+          "rollout_horizon": 3,
+          "physics_weight": 0.0,
+          "evaluate_every": 5,
+          "seed": 42
+        }
+      },
+      "validation": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 5.0500359535217285,
+        "trajectory_rmse_mean_c": 4.6071858406066895,
+        "trajectory_rmse_p95_c": 8.896151542663574,
+        "final_rmse_mean_c": 6.937499523162842,
+        "maximum_error_mean_c": 21.97279930114746
+      },
+      "id_test": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 4.463786602020264,
+        "trajectory_rmse_mean_c": 3.8490381240844727,
+        "trajectory_rmse_p95_c": 7.349188804626465,
+        "final_rmse_mean_c": 5.606022357940674,
+        "maximum_error_mean_c": 17.432233810424805
+      },
+      "control_ood": {
+        "trajectory_count": 16.0,
+        "rollout_rmse_c": 13.6121187210083,
+        "trajectory_rmse_mean_c": 11.874340057373047,
+        "trajectory_rmse_p95_c": 24.172637939453125,
+        "final_rmse_mean_c": 21.715106964111328,
+        "maximum_error_mean_c": 53.82000732421875
+      }
+    },
+    "physics_constrained": {
+      "training": {
+        "best_epoch": 25.0,
+        "best_validation_rollout_rmse_c": 5.381045818328857,
+        "elapsed_seconds": 452.2473686250014,
+        "parameter_count": 45489.0,
+        "device": "mps",
+        "config": {
+          "epochs": 25,
+          "batch_size": 256,
+          "learning_rate": 0.0008,
+          "weight_decay": 1e-06,
+          "hidden_channels": 16,
+          "residual_blocks": 3,
+          "rollout_horizon": 3,
+          "physics_weight": 0.1,
+          "evaluate_every": 5,
+          "seed": 42
+        }
+      },
+      "validation": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 5.381045818328857,
+        "trajectory_rmse_mean_c": 4.769455432891846,
+        "trajectory_rmse_p95_c": 10.008888244628906,
+        "final_rmse_mean_c": 6.999078273773193,
+        "maximum_error_mean_c": 20.79938316345215
+      },
+      "id_test": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 4.632940292358398,
+        "trajectory_rmse_mean_c": 3.8558971881866455,
+        "trajectory_rmse_p95_c": 7.768906116485596,
+        "final_rmse_mean_c": 5.281278610229492,
+        "maximum_error_mean_c": 16.60462760925293
+      },
+      "control_ood": {
+        "trajectory_count": 16.0,
+        "rollout_rmse_c": 13.380538940429688,
+        "trajectory_rmse_mean_c": 11.620091438293457,
+        "trajectory_rmse_p95_c": 24.54774284362793,
+        "final_rmse_mean_c": 19.165992736816406,
+        "maximum_error_mean_c": 52.34241485595703
+      }
+    }
+  },
+  "supplementary_analysis": {
+    "device": "mps",
+    "models": {
+      "data_only": {
+        "id_test": {
+          "one_step_rmse_c": 0.06328589094764639,
+          "implicit_physics_residual_rmse_c": 1.8908565103511341
+        },
+        "control_ood": {
+          "one_step_rmse_c": 0.3292351297833972,
+          "implicit_physics_residual_rmse_c": 3.27345150369206
+        }
+      },
+      "physics_constrained": {
+        "id_test": {
+          "one_step_rmse_c": 0.06551384847594245,
+          "implicit_physics_residual_rmse_c": 1.81123607189916
+        },
+        "control_ood": {
+          "one_step_rmse_c": 0.32228488874403055,
+          "implicit_physics_residual_rmse_c": 3.1711206797819504
+        }
+      }
+    },
+    "control_ood_paired": {
+      "improved_trajectories": 6,
+      "trajectory_count": 16,
+      "mean_difference_c": -0.2542498707771301,
+      "bootstrap_95_ci_c": [
+        -1.135363021492958,
+        0.5087155193090439
+      ],
+      "representative_selection": "data-only trajectory RMSE nearest the 75th percentile",
+      "representative_local_index": 13
+    },
+    "figure_case": {
+      "snapshot_time_s": 109.0,
+      "environment_temperature_c": 854.8067626953125,
+      "convection_w_m2k": 29.618453979492188,
+      "emissivity": 0.8788247108459473,
+      "conductivity_scale": 0.9996916651725769,
+      "heat_capacity_scale": 0.9634366631507874,
+      "fine_bdf_elapsed_seconds": 2.577659667000262,
+      "snapshot_rmse_c": {
+        "explicit_euler": 1.4541746472156427,
+        "data_only_world_model": 3.655467926933718,
+        "physics_constrained_world_model": 3.639145494585749
+      }
+    }
+  }
+}

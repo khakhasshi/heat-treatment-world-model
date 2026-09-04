@@ -1,0 +1,20 @@
+{
+  "config": {
+    "epochs": 120,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "hidden_width": 128,
+    "hidden_depth": 3,
+    "physics_weight": 0.0,
+    "rollout_horizon": 5,
+    "max_train_trajectories": null,
+    "seed": 42,
+    "evaluate_every": 10,
+    "physics_parameterization": "c45_effective"
+  },
+  "summary": {
+    "best_epoch": 110.0,
+    "best_validation_rollout_rmse_c": 1.5199966430664062,
+    "elapsed_seconds": 57.37514120794367
+  }
+}

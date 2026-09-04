@@ -1,0 +1,18 @@
+{
+  "config": {
+    "epochs": 100,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "hidden_width": 128,
+    "hidden_depth": 3,
+    "physics_weight": 0.0,
+    "max_train_trajectories": 5,
+    "seed": 42,
+    "evaluate_every": 5
+  },
+  "summary": {
+    "best_epoch": 35.0,
+    "best_validation_rollout_rmse_c": 16.086748123168945,
+    "elapsed_seconds": 0.9958040420897305
+  }
+}

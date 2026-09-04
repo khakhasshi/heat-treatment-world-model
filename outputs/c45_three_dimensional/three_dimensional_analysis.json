@@ -1,0 +1,50 @@
+{
+  "device": "mps",
+  "models": {
+    "data_only": {
+      "id_test": {
+        "one_step_rmse_c": 0.06328589094764639,
+        "implicit_physics_residual_rmse_c": 1.8908565103511341
+      },
+      "control_ood": {
+        "one_step_rmse_c": 0.3292351297833972,
+        "implicit_physics_residual_rmse_c": 3.27345150369206
+      }
+    },
+    "physics_constrained": {
+      "id_test": {
+        "one_step_rmse_c": 0.06551384847594245,
+        "implicit_physics_residual_rmse_c": 1.81123607189916
+      },
+      "control_ood": {
+        "one_step_rmse_c": 0.32228488874403055,
+        "implicit_physics_residual_rmse_c": 3.1711206797819504
+      }
+    }
+  },
+  "control_ood_paired": {
+    "improved_trajectories": 6,
+    "trajectory_count": 16,
+    "mean_difference_c": -0.2542498707771301,
+    "bootstrap_95_ci_c": [
+      -1.135363021492958,
+      0.5087155193090439
+    ],
+    "representative_selection": "data-only trajectory RMSE nearest the 75th percentile",
+    "representative_local_index": 13
+  },
+  "figure_case": {
+    "snapshot_time_s": 109.0,
+    "environment_temperature_c": 854.8067626953125,
+    "convection_w_m2k": 29.618453979492188,
+    "emissivity": 0.8788247108459473,
+    "conductivity_scale": 0.9996916651725769,
+    "heat_capacity_scale": 0.9634366631507874,
+    "fine_bdf_elapsed_seconds": 2.577659667000262,
+    "snapshot_rmse_c": {
+      "explicit_euler": 1.4541746472156427,
+      "data_only_world_model": 3.655467926933718,
+      "physics_constrained_world_model": 3.639145494585749
+    }
+  }
+}

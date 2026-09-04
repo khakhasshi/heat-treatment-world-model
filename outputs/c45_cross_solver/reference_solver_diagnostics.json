@@ -1,0 +1,49 @@
+{
+  "config": {
+    "reference_nx": 81,
+    "convergence_nx": 161,
+    "convergence_trajectories_per_category": 2,
+    "rtol": 1e-06,
+    "atol_c": 1e-07,
+    "max_step_s": 0.25,
+    "temporal_convergence_max_step_s": 0.125,
+    "observer_noise_std_c": 0.5,
+    "observer_window": 30,
+    "observer_noise_seed": 20260908
+  },
+  "trajectory_count": 100,
+  "reference_generation_seconds": 42.40656379109714,
+  "mean_seconds_per_trajectory": 0.4240656379109714,
+  "median_seconds_per_trajectory": 0.42370845848927274,
+  "p95_seconds_per_trajectory": 0.5304772913863417,
+  "mean_rhs_evaluations": 10721.72,
+  "mean_linear_decompositions": 1633.82,
+  "convergence_indices": [
+    2,
+    16,
+    1,
+    5,
+    0,
+    8,
+    3,
+    4,
+    12,
+    17
+  ],
+  "reference_vs_convergence_grid_rmse_c": {
+    "mean": 0.002475863458056937,
+    "maximum": 0.007461017678196384
+  },
+  "reference_vs_convergence_grid_max_abs_c": {
+    "mean": 0.009215094745663066,
+    "maximum": 0.019583356392331552
+  },
+  "reference_vs_smaller_max_step_rmse_c": {
+    "mean": 0.004248433943573987,
+    "maximum": 0.008464487373635721
+  },
+  "reference_vs_smaller_max_step_max_abs_c": {
+    "mean": 0.014042775287587971,
+    "maximum": 0.029389306732923615
+  }
+}

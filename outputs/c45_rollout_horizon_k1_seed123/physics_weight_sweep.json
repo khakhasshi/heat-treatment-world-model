@@ -1,0 +1,95 @@
+{
+  "dataset": "outputs/c45_radiative_dataset.npz",
+  "controlled_variables": {
+    "epochs": 120,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "hidden_width": 128,
+    "hidden_depth": 3,
+    "rollout_horizon": 1,
+    "max_train_trajectories": null,
+    "evaluate_every": 10,
+    "seed": 123
+  },
+  "models": {
+    "weight_0p001": {
+      "physics_weight": 0.001,
+      "config": {
+        "epochs": 120,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.001,
+        "rollout_horizon": 1,
+        "max_train_trajectories": null,
+        "seed": 123,
+        "evaluate_every": 10,
+        "physics_parameterization": "auto"
+      },
+      "training": {
+        "best_epoch": 110.0,
+        "best_validation_rollout_rmse_c": 2.2557950019836426,
+        "elapsed_seconds": 15.561224083066918
+      },
+      "test": {
+        "rollout_rmse_c": 2.190471887588501,
+        "rollout_mae_c": 1.320289134979248,
+        "rollout_max_abs_c": 15.38427734375,
+        "trajectory_rmse_median_c": 1.4815764427185059,
+        "trajectory_rmse_p95_c": 4.376096248626709,
+        "center_rmse_c": 1.8666586875915527,
+        "surface_rmse_c": 3.3685102462768555,
+        "final_state_rmse_c": 4.300910949707031,
+        "physics_residual_rmse_c": 17.697107315063477,
+        "maximum_principle_violation_fraction": 0.0025040650406504064,
+        "rollout_seconds": 0.011881709098815918,
+        "one_step_rmse_c": 0.02847880189922152
+      },
+      "ood_test": {
+        "rollout_rmse_c": 5.465916633605957,
+        "rollout_mae_c": 3.6194753646850586,
+        "rollout_max_abs_c": 38.09379577636719,
+        "trajectory_rmse_median_c": 4.289885997772217,
+        "trajectory_rmse_p95_c": 9.208636283874512,
+        "center_rmse_c": 6.819393157958984,
+        "surface_rmse_c": 6.524563312530518,
+        "final_state_rmse_c": 9.931671142578125,
+        "physics_residual_rmse_c": 95.1983871459961,
+        "maximum_principle_violation_fraction": 0.0004796747967479675,
+        "rollout_seconds": 0.012803749996237457,
+        "one_step_rmse_c": 0.15227806328302232
+      },
+      "ood_by_schedule": {
+        "step_hold": {
+          "rollout_rmse_c": 4.506202697753906,
+          "rollout_mae_c": 3.164616346359253,
+          "rollout_max_abs_c": 23.346221923828125,
+          "trajectory_rmse_median_c": 2.772207736968994,
+          "trajectory_rmse_p95_c": 8.18748950958252,
+          "center_rmse_c": 4.593414306640625,
+          "surface_rmse_c": 5.631428241729736,
+          "final_state_rmse_c": 7.19313383102417,
+          "physics_residual_rmse_c": 36.01993942260742,
+          "maximum_principle_violation_fraction": 0.0,
+          "rollout_seconds": 0.011351458029821515,
+          "one_step_rmse_c": 0.13763151681014557
+        },
+        "heat_cool": {
+          "rollout_rmse_c": 6.650700569152832,
+          "rollout_mae_c": 4.301764011383057,
+          "rollout_max_abs_c": 38.09379577636719,
+          "trajectory_rmse_median_c": 6.876709461212158,
+          "trajectory_rmse_p95_c": 8.614490509033203,
+          "center_rmse_c": 9.198431015014648,
+          "surface_rmse_c": 7.671722412109375,
+          "final_state_rmse_c": 12.99936294555664,
+          "physics_residual_rmse_c": 143.9120635986328,
+          "maximum_principle_violation_fraction": 0.0011991869918699188,
+          "rollout_seconds": 0.011129541089758277,
+          "one_step_rmse_c": 0.17192403044653826
+        }
+      }
+    }
+  }
+}

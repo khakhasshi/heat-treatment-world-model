@@ -1,0 +1,48 @@
+{
+  "config": {
+    "steps": 300,
+    "initial_temperature_c": 20.0,
+    "desired_center_temperature_c": 500.0,
+    "convection_w_m2k": 80.0,
+    "target_min_c": 650.0,
+    "target_max_c": 950.0,
+    "target_count": 31,
+    "ramp_min_steps": 30,
+    "ramp_max_steps": 300,
+    "ramp_count": 28,
+    "uniformity_weight": 0.25
+  },
+  "candidate_count": 868,
+  "reference_optimum": {
+    "candidate": 840,
+    "target_furnace_c": 950.0,
+    "ramp_steps": 30,
+    "score": 55.608551025390625
+  },
+  "models": {
+    "data_driven": {
+      "selected_candidate": 840.0,
+      "predicted_score": 54.821311950683594,
+      "verified_score": 55.608551025390625,
+      "reference_optimum_score": 55.608551025390625,
+      "planning_regret": 0.0,
+      "selected_final_center_c": 445.5043029785156,
+      "selected_final_nonuniformity_c": 4.451416015625,
+      "candidate_evaluation_seconds": 0.11207691708113998,
+      "target_furnace_c": 950.0,
+      "ramp_steps": 30
+    },
+    "physics_informed": {
+      "selected_candidate": 840.0,
+      "predicted_score": 53.742515563964844,
+      "verified_score": 55.608551025390625,
+      "reference_optimum_score": 55.608551025390625,
+      "planning_regret": 0.0,
+      "selected_final_center_c": 445.5043029785156,
+      "selected_final_nonuniformity_c": 4.451416015625,
+      "candidate_evaluation_seconds": 0.11218487494625151,
+      "target_furnace_c": 950.0,
+      "ramp_steps": 30
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "dataset": "outputs/world_model_dataset.npz",
+  "models": {
+    "data_driven": {
+      "config": {
+        "epochs": 300,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.0,
+        "rollout_horizon": 5,
+        "max_train_trajectories": 5,
+        "seed": 42,
+        "evaluate_every": 10
+      },
+      "training": {
+        "best_epoch": 40.0,
+        "best_validation_rollout_rmse_c": 16.111892700195312,
+        "elapsed_seconds": 5.924751750077121
+      },
+      "test": {
+        "rollout_rmse_c": 15.41551399230957,
+        "rollout_mae_c": 10.956478118896484,
+        "rollout_max_abs_c": 71.42701721191406,
+        "center_rmse_c": 17.29386329650879,
+        "surface_rmse_c": 14.124075889587402,
+        "final_state_rmse_c": 23.37692642211914,
+        "physics_residual_rmse_c": 526.8486328125,
+        "rollout_seconds": 0.011352917063049972,
+        "one_step_rmse_c": 0.18375155657386438,
+        "maximum_principle_violation_fraction": 0.006205962059620596
+      }
+    },
+    "physics_informed": {
+      "config": {
+        "epochs": 300,
+        "batch_size": 512,
+        "learning_rate": 0.001,
+        "hidden_width": 128,
+        "hidden_depth": 3,
+        "physics_weight": 0.01,
+        "rollout_horizon": 5,
+        "max_train_trajectories": 5,
+        "seed": 42,
+        "evaluate_every": 10
+      },
+      "training": {
+        "best_epoch": 290.0,
+        "best_validation_rollout_rmse_c": 11.655374526977539,
+        "elapsed_seconds": 5.87239345908165
+      },
+      "test": {
+        "rollout_rmse_c": 10.837750434875488,
+        "rollout_mae_c": 6.982796669006348,
+        "rollout_max_abs_c": 51.491485595703125,
+        "center_rmse_c": 11.653318405151367,
+        "surface_rmse_c": 9.68123722076416,
+        "final_state_rmse_c": 18.500415802001953,
+        "physics_residual_rmse_c": 136.02256774902344,
+        "rollout_seconds": 0.011503417044878006,
+        "one_step_rmse_c": 0.11952844224388888,
+        "maximum_principle_violation_fraction": 0.010200542005420055
+      }
+    }
+  }
+}

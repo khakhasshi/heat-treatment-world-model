@@ -1,0 +1,27 @@
+{
+  "config": {
+    "trajectories": 100,
+    "steps": 300,
+    "nx": 41,
+    "dt_s": 1.0,
+    "seed": 42
+  },
+  "parameter_columns": [
+    "convection_w_m2k",
+    "conductivity_w_mk",
+    "density_kg_m3",
+    "heat_capacity_j_kgk",
+    "length_m",
+    "dt_s"
+  ],
+  "split_labels": {
+    "0": "train",
+    "1": "validation",
+    "2": "test"
+  },
+  "split_counts": {
+    "train": 70,
+    "validation": 15,
+    "test": 15
+  }
+}
