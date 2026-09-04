@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software or its model weights, please cite the repository and identify the reused components."
+title: "Physics-Informed World Model for Metal Heat-Treatment Temperature Fields"
+version: 1.0.0
+date-released: 2026-09-04
+authors:
+  - family-names: Jiang
+    given-names: Jingzhe
+    email: contact@jiangjingzhe.com
+repository-code: "https://github.com/khakhasshi/heat-treatment-world-model"
+url: "https://github.com/khakhasshi/heat-treatment-world-model"
+license: MIT
+keywords:
+  - physics-informed neural network
+  - world model
+  - metal heat treatment
+  - temperature field
+  - model predictive control

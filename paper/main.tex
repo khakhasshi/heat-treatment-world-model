@@ -112,6 +112,17 @@ Tests on a one-dimensional C45/AISI 1045 steel slab show that physics regulariza
 
 \appendix
 \chapter{复现信息}
+\section{代码与公开材料}
+本文代码公开于 GitHub，仓库地址如下。
+\begin{center}
+  \url{https://github.com/khakhasshi/heat-treatment-world-model}
+\end{center}
+仓库包含有限差分与 BDF 求解器、世界模型训练和评价程序、边界观测器、EnKF 状态估计、滚动时域控制、绘图脚本、轻量实验结果及两套论文源文件。公开版本以标签 \texttt{thesis-open-release-v1} 标识。模型权重由 Hugging Face 单独托管，其文件映射与 SHA-256 校验值记录在仓库的 \path{docs/huggingface-weights-manifest.csv}。该组织方式使代码版本、论文取数和二进制检查点能够逐项核对。
+
+\section{实验冻结与复现边界}
 论文基础实验版本冻结于 Git 标签 \texttt{experiment-freeze-v1}。论文修订所用的等预算展开步数消融和风险控制配对统计另附结果校验值。正式指标文件的 SHA-256 校验值、命令行入口和评价协议见项目中的 \texttt{docs/experiment-freeze.md}。全部训练集、验证集和测试集按完整轨迹划分。模型检查点依据验证集完整轨迹 RMSE 选择。
+
+\section{学术诚信与引用说明}
+公开材料用于学习、研究复现和方法参考。复用代码、图表、实验结果或模型输出时，应明确标注来源和修改范围，并给出所用版本或权重文件。不得将公开内容未经引用作为本人原创成果提交。具体说明和推荐引用信息见仓库中的 \path{ACADEMIC_USE_NOTICE.md} 与 \path{CITATION.cff}。
 
 \end{document}

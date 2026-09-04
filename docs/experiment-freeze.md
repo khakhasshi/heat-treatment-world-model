@@ -67,3 +67,9 @@ PYTHONPATH=src uv run --no-sync python scripts/analyze_thesis_supplement.py
 | `outputs/thesis_supplement/thesis_supplement_metrics.json` | `266e58b89b95f5beeee942771fadddaffe2aecd00b591f87ac8a5547fe3cc639` |
 
 等预算展开步数实验表明，五步模型的验证集轨迹 RMSE 比一步模型低 1.3%，ID 测试集低 4.2%，控制 OOD 测试集高 10.8%。论文据验证集选择五步模型，不把展开步数表述为普遍精度优势。控制 OOD 的 20 条轨迹中有 12 条 RMSE 改善，平均配对差为 -0.220℃，95% bootstrap 区间为 [-0.588, 0.153]℃，所以正文只将总体 RMSE 变化作为均值趋势。风险控制的综合目标平均配对差为 -1.737，95% bootstrap 区间为 [-3.291, -0.226]；中心误差区间跨越零，超温变化集中在一个场景。正文只将综合目标的配对改善作为风险控制统计结论。
+
+## 7. 公开归档
+
+源代码、轻量实验结果、论文源文件和复现入口公开于 <https://github.com/khakhasshi/heat-treatment-world-model>，公开版本标签为 `thesis-open-release-v1`。论文正式权重由 Hugging Face 模型仓库单独托管。公开权重的文件映射、字节数和 SHA-256 记录在 `docs/huggingface-weights-manifest.csv`。代码与权重的公开不改变本页冻结的实验口径。
+
+全部公开内容仅供学习、研究复现和方法参考。引用、修改和再发布应保留来源，并遵守 `ACADEMIC_USE_NOTICE.md` 与对应许可证。禁止将论文文字、代码、图表、实验结果或模型输出未经清晰引用作为本人原创成果提交。
