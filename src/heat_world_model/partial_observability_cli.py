@@ -494,6 +494,7 @@ def _plot_closed_loop(result: dict[str, object], path: Path) -> None:
         "sparse_certainty_equivalent": "sparse/mean",
         "sparse_risk_aware": "sparse/risk",
     }
+    controllers = [key for key in CONTROLLERS if key in result["aggregate"]]
     metrics = (
         ("final_center_abs_error_c", "Final center error (degC)"),
         ("objective", "Verified objective"),
@@ -502,9 +503,9 @@ def _plot_closed_loop(result: dict[str, object], path: Path) -> None:
     )
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
     for axis, (metric, ylabel) in zip(axes.ravel(), metrics, strict=True):
-        values = [result["aggregate"][key][metric]["mean"] for key in CONTROLLERS]
+        values = [result["aggregate"][key][metric]["mean"] for key in controllers]
         axis.bar(
-            [labels[key] for key in CONTROLLERS],
+            [labels[key] for key in controllers],
             values,
             color=("#264653", "#2A9D8F", "#E9C46A", "#E76F51"),
         )

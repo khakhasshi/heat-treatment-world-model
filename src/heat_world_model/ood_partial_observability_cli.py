@@ -29,25 +29,99 @@ SENSORS = (0, 1, 20, 39, 40)
 def select_ood_control_scenarios(
     categories: np.ndarray,
     directions: np.ndarray,
+    *,
+    per_category: int = 2,
+    start_per_side: int = 0,
+    excluded_indices: tuple[int, ...] = (),
 ) -> np.ndarray:
+    if per_category <= 0 or per_category % 2 != 0:
+        raise ValueError("per_category must be a positive even number")
+    if start_per_side < 0:
+        raise ValueError("start_per_side cannot be negative")
+    per_side = per_category // 2
+    excluded = np.asarray(excluded_indices, dtype=np.int64)
     selected = []
     for category_id in PARAMETER_OOD_CATEGORY_NAMES:
         candidates = np.flatnonzero(categories == category_id)
+        if excluded.size:
+            candidates = candidates[~np.isin(candidates, excluded)]
         if category_id < 4:
             below = candidates[directions[candidates, category_id] < 0]
             above = candidates[directions[candidates, category_id] > 0]
-            if below.size == 0 or above.size == 0:
-                raise ValueError("each isolated OOD category needs both directions")
-            selected.extend((below[0], above[0]))
+            stop = start_per_side + per_side
+            if below.size < stop or above.size < stop:
+                raise ValueError("not enough isolated OOD cases in both directions")
+            selected.extend(below[start_per_side:stop])
+            selected.extend(above[start_per_side:stop])
         else:
             direction_score = directions[candidates].sum(axis=1)
-            selected.extend(
-                (
-                    candidates[np.argmin(direction_score)],
-                    candidates[np.argmax(direction_score)],
-                )
-            )
+            order = candidates[np.argsort(direction_score, kind="stable")]
+            low = order[start_per_side : start_per_side + per_side]
+            high_pool = order[::-1]
+            high_pool = high_pool[~np.isin(high_pool, low)]
+            high = high_pool[start_per_side : start_per_side + per_side]
+            if low.size != per_side or high.size != per_side:
+                raise ValueError("not enough combined OOD cases for balanced selection")
+            selected.extend(low)
+            selected.extend(high)
     return np.asarray(selected, dtype=np.int64)
+
+
+def paired_controller_statistics(
+    records: list[dict[str, object]],
+    *,
+    reference_controller: str = "sparse_certainty_equivalent",
+    candidate_controller: str = "sparse_risk_aware",
+    bootstrap_samples: int = 100_000,
+    bootstrap_seed: int = 20260905,
+) -> dict[str, object]:
+    scenario_indices = sorted({int(record["scenario_index"]) for record in records})
+    rng = np.random.default_rng(bootstrap_seed)
+    result: dict[str, object] = {
+        "reference_controller": reference_controller,
+        "candidate_controller": candidate_controller,
+        "scenario_count": len(scenario_indices),
+        "bootstrap_samples": bootstrap_samples,
+        "bootstrap_seed": bootstrap_seed,
+        "metrics": {},
+    }
+    for metric in ("objective", "overtemperature_c", "final_center_abs_error_c", "success"):
+        reference_values = []
+        candidate_values = []
+        for scenario_index in scenario_indices:
+            by_controller = {}
+            for controller in (reference_controller, candidate_controller):
+                values = [
+                    float(record["result"]["metrics"][metric])
+                    for record in records
+                    if int(record["scenario_index"]) == scenario_index
+                    and record["controller"] == controller
+                ]
+                if not values:
+                    raise ValueError(f"missing {controller} records for scenario {scenario_index}")
+                by_controller[controller] = float(np.mean(values))
+            reference_values.append(by_controller[reference_controller])
+            candidate_values.append(by_controller[candidate_controller])
+        reference_array = np.asarray(reference_values)
+        candidate_array = np.asarray(candidate_values)
+        differences = candidate_array - reference_array
+        draws = rng.integers(
+            0, differences.size, size=(bootstrap_samples, differences.size)
+        )
+        bootstrap_means = differences[draws].mean(axis=1)
+        tolerance = 1e-12
+        result["metrics"][metric] = {
+            "reference_mean": float(reference_array.mean()),
+            "candidate_mean": float(candidate_array.mean()),
+            "paired_mean_difference": float(differences.mean()),
+            "paired_bootstrap_95_interval": [
+                float(value) for value in np.quantile(bootstrap_means, [0.025, 0.975])
+            ],
+            "improved_scenarios": int(np.sum(differences < -tolerance)),
+            "unchanged_scenarios": int(np.sum(np.abs(differences) <= tolerance)),
+            "worsened_scenarios": int(np.sum(differences > tolerance)),
+        }
+    return result
 
 
 def generate_parameter_ood_bdf_dataset(
@@ -159,15 +233,19 @@ def run_ood_closed_loop(
     dataset: dict[str, np.ndarray],
     models: dict[int, object],
     experiment: PartialObservabilityConfig,
+    *,
+    controllers: tuple[str, ...] = CONTROLLERS,
+    scenario_offset_per_side: int = 0,
+    excluded_scenario_indices: tuple[int, ...] = (),
 ) -> tuple[dict[str, object], dict[str, dict[str, np.ndarray]]]:
     control_config = ClosedLoopControlConfig(maximum_surface_temperature_c=360.0)
     enkf_config = _filter_configs(experiment)["expanded_support"]
-    if experiment.scenarios_per_category != 2:
-        raise ValueError(
-            "OOD closed-loop selection requires two scenarios per category"
-        )
     selected = select_ood_control_scenarios(
-        dataset["parameter_ood_type"], dataset["parameter_directions"]
+        dataset["parameter_ood_type"],
+        dataset["parameter_directions"],
+        per_category=experiment.scenarios_per_category,
+        start_per_side=scenario_offset_per_side,
+        excluded_indices=excluded_scenario_indices,
     )
     representative_index = int(
         next(i for i in selected if dataset["parameter_ood_type"][i] == 4)
@@ -176,7 +254,7 @@ def run_ood_closed_loop(
     representative = {}
     for seed, model in models.items():
         for scenario_index in selected:
-            for controller in CONTROLLERS:
+            for controller in controllers:
                 result, history = run_partial_observation_episode(
                     controller,
                     model,
@@ -205,8 +283,11 @@ def run_ood_closed_loop(
                     f"ood_closed_loop seed={seed} scenario={scenario_index} "
                     f"controller={controller} complete"
                 )
-    return {
+    result = {
         "scenario_indices": selected.tolist(),
+        "scenario_offset_per_side": scenario_offset_per_side,
+        "excluded_scenario_indices": list(excluded_scenario_indices),
+        "controllers": list(controllers),
         "aggregate": _closed_loop_aggregate(records),
         "aggregate_by_category": {
             category: _closed_loop_aggregate(
@@ -215,7 +296,13 @@ def run_ood_closed_loop(
             for category in PARAMETER_OOD_CATEGORY_NAMES.values()
         },
         "records": records,
-    }, representative
+    }
+    if {
+        "sparse_certainty_equivalent",
+        "sparse_risk_aware",
+    }.issubset(controllers):
+        result["paired_risk_vs_mean"] = paired_controller_statistics(records)
+    return result, representative
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -233,6 +320,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("outputs/c45_ood_partial_observability"),
     )
     parser.add_argument("--scenarios-per-category", type=int, default=2)
+    parser.add_argument("--scenario-offset-per-side", type=int, default=0)
+    parser.add_argument("--exclude-scenario-indices", type=int, nargs="*", default=[])
+    parser.add_argument(
+        "--controllers",
+        nargs="+",
+        choices=CONTROLLERS,
+        default=list(CONTROLLERS),
+    )
+    parser.add_argument("--closed-loop-only", action="store_true")
     parser.add_argument("--regenerate-reference", action="store_true")
     return parser
 
@@ -259,8 +355,15 @@ def main() -> None:
         )
         for seed in DEFAULT_SEEDS
     }
-    open_loop = run_ood_open_loop(dataset, models, experiment)
-    closed_loop, representative = run_ood_closed_loop(dataset, models, experiment)
+    open_loop = None if args.closed_loop_only else run_ood_open_loop(dataset, models, experiment)
+    closed_loop, representative = run_ood_closed_loop(
+        dataset,
+        models,
+        experiment,
+        controllers=tuple(args.controllers),
+        scenario_offset_per_side=args.scenario_offset_per_side,
+        excluded_scenario_indices=tuple(args.exclude_scenario_indices),
+    )
     control_config = ClosedLoopControlConfig(maximum_surface_temperature_c=360.0)
     result = {
         "research_question": (

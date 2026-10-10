@@ -1,23 +1,94 @@
 \appendix
 
 \chap{复现信息}
-\sect{代码与公开材料}
-本文代码公开于 GitHub，仓库地址如下。
+\sect{代码、模型与版本对应}
+
+论文代码仓库与模型权重托管地址分别为
 \begin{center}
-  \url{https://github.com/khakhasshi/heat-treatment-world-model}
-\end{center}
-仓库包含有限差分与 BDF 求解器、世界模型训练和评价程序、边界观测器、EnKF 状态估计、滚动时域控制、绘图脚本、轻量实验结果及论文源文件。公开版本以标签 \texttt{thesis-open-release-v1} 标识。模型权重由 Hugging Face 单独托管，地址如下。
-\begin{center}
+  \url{https://github.com/khakhasshi/heat-treatment-world-model}\\
   \url{https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model}
 \end{center}
-权重文件映射与 SHA-256 校验值记录在下列清单中。
-\begin{center}
-  \path{docs/huggingface-weights-manifest.csv}
-\end{center}
-代码版本、论文取数和二进制检查点可据此逐项核对。
+代码包含控制体守恒离散求解器、神经动力学训练与评价、边界观测器、集合滤波器、滚动控制及绘图程序。公开版本以 \path{thesis-open-release-v1} 标识，其权重映射和 SHA-256 值见 \path{docs/huggingface-weights-manifest.csv}。公开权重清单记录已发布模型，本地快照清单记录本文实验的完整输入，两者分别核对。
 
-\sect{实验冻结与复现边界}
-论文基础实验版本冻结于 Git 标签 \texttt{experiment-freeze-v1}。论文修订所用的等预算展开步数消融和风险控制配对统计另附结果校验值。正式指标文件的 SHA-256 校验值、命令行入口和评价协议见项目中的 \texttt{docs/experiment-freeze.md}。全部训练集、验证集和测试集按完整轨迹划分。模型检查点依据验证集完整轨迹 RMSE 选择。
+本文对应本地快照 \path{thesis-scientific-style-20261010}，包含未提交修改，尚未公开发布。本次文字修订与校验记录见
+\begin{center}
+  \path{docs/thesis-scientific-style-20261010.md}
+\end{center}
+源文件、正式结果、模型输入和两版导出 PDF 的内容校验值记录在
+\begin{center}
+  \path{docs/thesis-scientific-style-20261010-manifest.json}
+\end{center}
+该快照沿用已完成的数值实验及其训练配置。正文组织与实验取数关系见
+\begin{center}
+  \path{docs/thesis-integrated-revision-20261010.md}
+\end{center}
+下列历史实验版本的记录独立保留：
+\begin{center}
+  \small\texttt{experiment-freeze-v1}\\
+  \texttt{thesis-revision-v2-20260905}\\
+  \texttt{thesis-audit-followup-20261001}
+\end{center}
+
+\sect{实验组织与复现入口}
+
+实验按独立物理轨迹划分训练、验证与测试集；模型检查点依据完整验证轨迹误差选择。各专题的采样范围、随机种子、网格、超参数与正式指标见 \path{docs/experiment-freeze.md} 及其链接。预测、估计与控制实验具有各自的信息条件，使用真实边界的预测对照仅评价边界已知时的预测性能，未知边界的在线估计采用独立实验评价。
+
+第四章的一维训练与 OOD 实验使用以下命令行入口，依次对应模型比较、参数范围外推和边界时间结构外推：
+\begin{center}
+  \small\texttt{compare-heat-world-models}\\
+  \texttt{evaluate-parameter-ood}\\
+  \texttt{evaluate-dynamic-boundary-ood}
+\end{center}
+第五章的状态估计、传感器扰动和控制实验入口如下。响应状态补偿使用独立校准轨迹，参数 OOD 的探索与确认场景分别保存。
+\begin{center}
+  \small\texttt{evaluate-partial-observability}\\
+  \texttt{evaluate-sensor-robustness}\\
+  \texttt{evaluate-closed-loop-control}\\
+  \texttt{evaluate-ood-partial-observability}\\
+  \texttt{analyze-ood-control-extension}
+\end{center}
+模块形式的入口统一以 \path{heat_world_model} 为包名，使用下列调用方式：
+\begin{center}
+  \small\texttt{PYTHONPATH=src .venv/bin/python -m}\\
+  \texttt{heat\_world\_model.}\textit{模块名}
+\end{center}
+\begin{table}[H]
+  \centering
+  \small
+  \caption{专题评价的模块入口}
+  \begin{tabular}{ll}
+    \toprule
+    评价内容 & 模块名 \\
+    \midrule
+    同信息边界与完整推演计时 & \texttt{fair\_boundary\_audit\_cli} \\
+    三维动作与模型评价 & \texttt{three\_dimensional\_action\_audit\_cli} \\
+    传感器响应状态补偿 & \texttt{sensor\_response\_cli} \\
+    四点与五点闭环对照 & \texttt{sparse\_control\_audit\_cli} \\
+    独立场景成功率 & \texttt{scenario\_success\_audit\_cli} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+边界表示对照的 \texttt{--mode evaluate} 与完整推演计时的 \texttt{--mode benchmark} 分开运行，两种参考求解器使用相同的 100 条场景。计时阶段固定硬件和线程配置，并暂停其他重计算任务。三维两网格共享 96 条工况，采用零阶保持动作，各自按对应网格参考场训练和验证。测点闭环比较共享场景和共同测点的随机扰动。
+
+具体参数以冻结协议为准；正式结果、原始逐轨迹记录及二进制输入的对应关系见
+\begin{center}
+  \path{docs/thesis-audit-followup-20261001.md}\\
+  \path{outputs/c45_audit_followup_20261001/}
+\end{center}
+完整性核对可执行
+\begin{center}
+  \small\texttt{python3 scripts/freeze\_thesis\_revision.py --manifest}\\
+  \path{docs/thesis-scientific-style-20261010-manifest.json}
+\end{center}
+
+\sect{协议溯源与结果使用边界}
+
+有效边界模型的训练和验证选模使用参考温度构造 $\Heff$，测试时的自主表示对照只依赖预测表面温度与已知真实边界历史。参考状态条件输入的结果与自主推演指标分别记录。控制实验中的真实状态或真实未来边界输入均单独标明，相应结果仅适用于所注明的信息条件。
+
+三维实现记录保留了动作离散方式的核查过程。早期参考轨迹从前一炉温向当前指令线性变化，网络输入只包含当前动作；正文采用与网络输入一致的零阶保持参考及匹配训练预算。两种动作定义下，基础网格 OOD 参考轨迹的差异为 RMSE \SI{1.415}{\degreeCelsius}、最大绝对差 \SI{13.148}{\degreeCelsius}，两项数值均描述参考解的变化。基础网格物理模型的训练预算由 25 轮改为与数据模型一致的 40 轮，动作定义与训练预算的共同变化限制了对版本间网络误差差异的单因素归因。剖面图固定为全局工况 74 的 \SI{192}{\second} 时刻；该工况最初按 ID 数据模型误差接近上四分位数选取，时刻按参考场内部温差最大选取。图中展示该选例在最终协议下的温度场，总体性能以完整测试集统计为准。原始记录、协议和选例信息均保留在相应结果目录。
+
+控制实验中，10 条探索性 OOD 场景与 40 条独立确认场景分别报告。三种训练种子作用于同一场景时构成重复模型评价，独立物理样本数按场景计。论文的场景成功指标要求三个固定模型均成功；其区间只反映当前模型面板与场景样本下的不确定性。配对分析以各场景内的模型指标均值之差为统计量，以场景为重采样单位，与总体 RMSE 均值的直接相减具有不同统计含义。
 
 \sect{学术诚信与引用说明}
-公开材料用于学习、研究复现和方法参考。复用代码、图表、实验结果或模型输出时，应明确标注来源和修改范围，并给出所用版本或权重文件。不得将公开内容未经引用作为本人原创成果提交。具体说明和推荐引用信息见仓库中的 \path{ACADEMIC_USE_NOTICE.md} 与 \path{CITATION.cff}。
+
+公开材料用于学习、研究复现和方法参考。复用代码、图表、实验结果或模型输出时，应标注来源、修改范围及所用版本或权重文件。具体说明和推荐引用信息见 \path{ACADEMIC_USE_NOTICE.md} 与 \path{CITATION.cff}。

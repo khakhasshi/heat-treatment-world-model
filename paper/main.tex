@@ -25,7 +25,7 @@
   pdftitle={基于物理约束世界模型的金属热处理温度场演化预测与闭环控制研究},
   pdfauthor={江景哲}
 }
-\sisetup{detect-all,per-mode=symbol}
+\sisetup{detect-all,per-mode=symbol,range-phrase={--}}
 \setstretch{1.45}
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt}
@@ -73,27 +73,34 @@
 \pagenumbering{Roman}
 \chapter*{摘\quad 要}
 \addcontentsline{toc}{chapter}{摘要}
-金属热处理过程需要同时掌握工件内部温度场、炉温控制和表面换热状态。传统数值求解能够提供可靠基准，但在大量候选工艺推演和在线滚动决策中计算开销随模型规模快速增长。固定工况的温度场拟合又难以直接回答控制量改变后的未来状态。本文将热处理温度场表述为受控动力学系统，构建显式接收当前温度场、炉温动作和热物性参数的递归世界模型。该模型属于有监督神经动力学模型，以离散物理残差作为正则项。模型采用多层感知机预测温度增量，通过五步闭环展开学习递归状态转移。
+金属热处理中的炉温可以直接调节，工件内部温度与表面换热状态难以完整测量。本文以 C45/AISI 1045 类中碳钢为对象，研究有限测温条件下的递归温度场预测与炉温决策。数值环境包含温变物性和对流辐射边界；神经状态转移模型以炉温为动作，采用多步展开与离散能量残差训练，并与增广状态集合滤波和常值尾部滚动搜索连接。
 
-动态边界的瞬时局部可辨识性分析给出本文的关键参数化。在 $h(t)$ 与 $\varepsilon(t)$ 逐时自由变化的观测模型下，单次温度转移对二者的灵敏度只有一个独立方向，可观测组合为等效换热系数 $\Heff$。据此建立 $\Heff$ 驱动的状态转移模型，并配置因果边界观测器和增广状态集合卡尔曼滤波器。控制器采用常值尾部假设下的单移动阻塞滚动动作搜索。该结构把温度场预测、边界估计和控制连接到同一状态空间中。
+在一维对称边界、单一表面温度且对流系数与发射率逐时自由变化的瞬时观测模型下，热流只能约束等效组合 $\Heff$。当前动作下的等效参数组合在炉温改变后可能产生不同热流，控制模型需保留参数后验。已知相同动态边界并由预测表面温度逐步重算 $\Heff$ 时，模型的滚动均方根误差（RMSE）从 $2.285\pm0.108$ 降至 $1.494\pm0.082$~\si{\degreeCelsius}；BDF 参考下的配对比较同样支持改善。该结果限定于已知边界推演，训练与验证仍使用参考状态构造等效输入。
 
-数值实验采用 C45/AISI 1045 类中碳钢一维平板，考虑温变导热系数、温变比热和灰体辐射。三随机种子结果显示，物理正则使控制曲线 OOD 的离散物理残差降低 $44.8\%$。四参数组合 OOD 的最大误差由 \SI{121.76}{\degreeCelsius} 降至 \SI{61.69}{\degreeCelsius}。在动态边界测试中，$\Heff$ 参数化将滚动 RMSE 从 $2.285\pm0.108$~\si{\degreeCelsius} 降至 $1.409\pm0.068$~\si{\degreeCelsius}。交叉求解器数值验证保持相同排序，单条轨迹推演获得 55.4 倍在线加速。在包含中心热电偶的理想五测点场景中，未观测节点 RMSE 为 \SI{1.073}{\degreeCelsius}。严格参数 OOD 工况下，风险感知控制的场景配对综合目标平均降低 1.737，95\% bootstrap 区间为 $[-3.291,-0.226]$。这些结果说明，可辨识边界表示和轨迹级物理约束能够改善热处理世界模型的分布外推演质量，并支持内部温度不可完全测量时的滚动工艺决策。
+完整轨迹评价中，物理约束改善了离散方程一致性和部分参数外推表现，三维分布外（OOD）温度精度未获得稳定改善。无中心四点的开环未测节点 RMSE 为 \SI{2.128}{\degreeCelsius}；在同分布闭环中删去中心测点，中心误差由 \SI{1.284}{\degreeCelsius} 增至 \SI{7.445}{\degreeCelsius}。独立校准的传感器响应状态可减轻滞后偏差，后验区间仍存在欠覆盖；40 条独立参数 OOD 场景未确认风险分位控制的综合收益。
 
-\noindent\textbf{关键词：} 金属热处理；温度场；物理信息神经网络；世界模型；参数辨识；模型预测控制
+有效边界表示的预测收益和中心测点的闭环作用均在给定数值条件下得到支持。方法评价需同时考虑轨迹精度、方程一致性、计算耗时与控制表现；开环指标对闭环性能的解释存在限制。真实炉体验证与组织性能预测仍需进一步研究。
+
+\noindent\textbf{关键词：} 金属热处理；温度场；物理约束神经动力学；世界模型；参数辨识；模型预测控制
 
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 \begin{spacing}{1.20}
-Heat-treatment operation requires estimates of internal temperature fields under controllable furnace commands and uncertain surface heat transfer. This study formulates the process as a controlled dynamical system. A supervised neural-dynamics world model predicts temperature increments from the current field, command, and thermophysical parameters. Five-step closed-loop unrolling and a discrete energy residual encode temperature-dependent conduction and convective-radiative boundaries.
+Furnace temperature can be controlled, while internal temperatures and surface heat transfer are partly observed. For C45/AISI 1045 steel, this thesis combines an action-conditioned neural model, ensemble filtering and rolling search. Training uses multi-step rollout and a discrete energy residual in a numerical environment with temperature-dependent properties and convective-radiative boundaries.
 
-Identifiability analysis shows that a freely varying convection coefficient and emissivity have one independent instantaneous sensitivity direction. Their observable combination is the effective heat-transfer coefficient $\Heff$. The transition model is coupled with a causal boundary observer and an augmented-state ensemble Kalman filter. Control uses single-move-blocking action search under a constant-tail assumption.
+At a given surface temperature and furnace command, instantaneous heat flux constrains freely varying convection and emissivity only through their effective combination $\Heff$. Equivalent parameters can produce different responses to another command, requiring parameter uncertainty in control. With identical known boundary histories, recomputing $\Heff$ from predicted temperatures reduces rollout RMSE from $2.285\pm0.108$ to $1.494\pm0.082$~\si{\degreeCelsius}. Paired BDF comparisons support this improvement; training and validation still use reference-state coefficients.
 
-Tests on a one-dimensional C45/AISI 1045 steel slab show that physics regularization reduces the OOD-control discrete residual by $44.8\%$. Under combined parameter shift, maximum error decreases from \SI{121.76}{\degreeCelsius} to \SI{61.69}{\degreeCelsius}. The identifiable boundary representation reduces dynamic-boundary rollout RMSE from $2.285\pm0.108$ to $1.409\pm0.068$~\si{\degreeCelsius}. Cross-solver validation gives a $55.4\times$ online speedup. In an idealized five-sensor layout, unobserved-node RMSE is \SI{1.073}{\degreeCelsius}. Under stringent parameter shift, risk-aware control reduces the paired objective by 1.737, with a 95\% bootstrap interval of $[-3.291,-0.226]$. The results support identifiable boundary modeling and trajectory-level physical regularization for robust thermal-process world models.
+Physics regularization improves discrete consistency and selected extrapolation tasks, without a stable three-dimensional out-of-distribution (OOD) accuracy advantage. Four-sensor open-loop RMSE at unobserved nodes is \SI{2.128}{\degreeCelsius}. Removing the center sensor in in-distribution control raises center error from \SI{1.284}{\degreeCelsius} to \SI{7.445}{\degreeCelsius}. Calibrated response states reduce sensor-lag bias; intervals remain under-covered. Forty independent parameter-OOD scenarios do not confirm an overall risk-control benefit.
 
-\noindent\textbf{Keywords:} metal heat treatment; temperature field; physics-informed neural network; world model; parameter identification; model predictive control
+The results support effective-boundary inputs and center sensing under the tested conditions. Control quality requires evaluation beyond open-loop accuracy, residuals and computational speed. Real-furnace validation and microstructure prediction remain future work.
+
+\noindent\textbf{Keywords:} metal heat treatment; temperature field; physics-constrained neural dynamics; world model; parameter identification; model predictive control
 \end{spacing}
 
+\begingroup
+\setstretch{1.18}
 \tableofcontents
+\endgroup
 \clearpage
 \pagenumbering{arabic}
 
@@ -111,26 +118,98 @@ Tests on a one-dimensional C45/AISI 1045 steel slab show that physics regulariza
 \endgroup
 
 \appendix
+
 \chapter{复现信息}
-\section{代码与公开材料}
-本文代码公开于 GitHub，仓库地址如下。
+\section{代码、模型与版本对应}
+
+论文代码仓库与模型权重托管地址分别为
 \begin{center}
-  \url{https://github.com/khakhasshi/heat-treatment-world-model}
-\end{center}
-仓库包含有限差分与 BDF 求解器、世界模型训练和评价程序、边界观测器、EnKF 状态估计、滚动时域控制、绘图脚本、轻量实验结果及两套论文源文件。公开版本以标签 \texttt{thesis-open-release-v1} 标识。模型权重由 Hugging Face 单独托管，地址如下。
-\begin{center}
+  \url{https://github.com/khakhasshi/heat-treatment-world-model}\\
   \url{https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model}
 \end{center}
-权重文件映射与 SHA-256 校验值记录在下列清单中。
-\begin{center}
-  \path{docs/huggingface-weights-manifest.csv}
-\end{center}
-该组织方式使代码版本、论文取数和二进制检查点能够逐项核对。
+代码包含控制体守恒离散求解器、神经动力学训练与评价、边界观测器、集合滤波器、滚动控制及绘图程序。公开版本以 \path{thesis-open-release-v1} 标识，其权重映射和 SHA-256 值见 \path{docs/huggingface-weights-manifest.csv}。公开权重清单记录已发布模型，本地快照清单记录本文实验的完整输入，两者分别核对。
 
-\section{实验冻结与复现边界}
-论文基础实验版本冻结于 Git 标签 \texttt{experiment-freeze-v1}。论文修订所用的等预算展开步数消融和风险控制配对统计另附结果校验值。正式指标文件的 SHA-256 校验值、命令行入口和评价协议见项目中的 \texttt{docs/experiment-freeze.md}。全部训练集、验证集和测试集按完整轨迹划分。模型检查点依据验证集完整轨迹 RMSE 选择。
+本文对应本地快照 \path{thesis-scientific-style-20261010}，包含未提交修改，尚未公开发布。本次文字修订与校验记录见
+\begin{center}
+  \path{docs/thesis-scientific-style-20261010.md}
+\end{center}
+源文件、正式结果、模型输入和两版导出 PDF 的内容校验值记录在
+\begin{center}
+  \path{docs/thesis-scientific-style-20261010-manifest.json}
+\end{center}
+该快照沿用已完成的数值实验及其训练配置。正文组织与实验取数关系见
+\begin{center}
+  \path{docs/thesis-integrated-revision-20261010.md}
+\end{center}
+下列历史实验版本的记录独立保留：
+\begin{center}
+  \small\texttt{experiment-freeze-v1}\\
+  \texttt{thesis-revision-v2-20260905}\\
+  \texttt{thesis-audit-followup-20261001}
+\end{center}
+
+\section{实验组织与复现入口}
+
+实验按独立物理轨迹划分训练、验证与测试集；模型检查点依据完整验证轨迹误差选择。各专题的采样范围、随机种子、网格、超参数与正式指标见 \path{docs/experiment-freeze.md} 及其链接。预测、估计与控制实验具有各自的信息条件，使用真实边界的预测对照仅评价边界已知时的预测性能，未知边界的在线估计采用独立实验评价。
+
+第四章的一维训练与 OOD 实验使用以下命令行入口，依次对应模型比较、参数范围外推和边界时间结构外推：
+\begin{center}
+  \small\texttt{compare-heat-world-models}\\
+  \texttt{evaluate-parameter-ood}\\
+  \texttt{evaluate-dynamic-boundary-ood}
+\end{center}
+第五章的状态估计、传感器扰动和控制实验入口如下。响应状态补偿使用独立校准轨迹，参数 OOD 的探索与确认场景分别保存。
+\begin{center}
+  \small\texttt{evaluate-partial-observability}\\
+  \texttt{evaluate-sensor-robustness}\\
+  \texttt{evaluate-closed-loop-control}\\
+  \texttt{evaluate-ood-partial-observability}\\
+  \texttt{analyze-ood-control-extension}
+\end{center}
+模块形式的入口统一以 \path{heat_world_model} 为包名，使用下列调用方式：
+\begin{center}
+  \small\texttt{PYTHONPATH=src .venv/bin/python -m}\\
+  \texttt{heat\_world\_model.}\textit{模块名}
+\end{center}
+\begin{table}[H]
+  \centering
+  \small
+  \caption{专题评价的模块入口}
+  \begin{tabular}{ll}
+    \toprule
+    评价内容 & 模块名 \\
+    \midrule
+    同信息边界与完整推演计时 & \texttt{fair\_boundary\_audit\_cli} \\
+    三维动作与模型评价 & \texttt{three\_dimensional\_action\_audit\_cli} \\
+    传感器响应状态补偿 & \texttt{sensor\_response\_cli} \\
+    四点与五点闭环对照 & \texttt{sparse\_control\_audit\_cli} \\
+    独立场景成功率 & \texttt{scenario\_success\_audit\_cli} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+边界表示对照的 \texttt{--mode evaluate} 与完整推演计时的 \texttt{--mode benchmark} 分开运行，两种参考求解器使用相同的 100 条场景。计时阶段固定硬件和线程配置，并暂停其他重计算任务。三维两网格共享 96 条工况，采用零阶保持动作，各自按对应网格参考场训练和验证。测点闭环比较共享场景和共同测点的随机扰动。
+
+具体参数以冻结协议为准；正式结果、原始逐轨迹记录及二进制输入的对应关系见
+\begin{center}
+  \path{docs/thesis-audit-followup-20261001.md}\\
+  \path{outputs/c45_audit_followup_20261001/}
+\end{center}
+完整性核对可执行
+\begin{center}
+  \small\texttt{python3 scripts/freeze\_thesis\_revision.py --manifest}\\
+  \path{docs/thesis-scientific-style-20261010-manifest.json}
+\end{center}
+
+\section{协议溯源与结果使用边界}
+
+有效边界模型的训练和验证选模使用参考温度构造 $\Heff$，测试时的自主表示对照只依赖预测表面温度与已知真实边界历史。参考状态条件输入的结果与自主推演指标分别记录。控制实验中的真实状态或真实未来边界输入均单独标明，相应结果仅适用于所注明的信息条件。
+
+三维实现记录保留了动作离散方式的核查过程。早期参考轨迹从前一炉温向当前指令线性变化，网络输入只包含当前动作；正文采用与网络输入一致的零阶保持参考及匹配训练预算。两种动作定义下，基础网格 OOD 参考轨迹的差异为 RMSE \SI{1.415}{\degreeCelsius}、最大绝对差 \SI{13.148}{\degreeCelsius}，两项数值均描述参考解的变化。基础网格物理模型的训练预算由 25 轮改为与数据模型一致的 40 轮，动作定义与训练预算的共同变化限制了对版本间网络误差差异的单因素归因。剖面图固定为全局工况 74 的 \SI{192}{\second} 时刻；该工况最初按 ID 数据模型误差接近上四分位数选取，时刻按参考场内部温差最大选取。图中展示该选例在最终协议下的温度场，总体性能以完整测试集统计为准。原始记录、协议和选例信息均保留在相应结果目录。
+
+控制实验中，10 条探索性 OOD 场景与 40 条独立确认场景分别报告。三种训练种子作用于同一场景时构成重复模型评价，独立物理样本数按场景计。论文的场景成功指标要求三个固定模型均成功；其区间只反映当前模型面板与场景样本下的不确定性。配对分析以各场景内的模型指标均值之差为统计量，以场景为重采样单位，与总体 RMSE 均值的直接相减具有不同统计含义。
 
 \section{学术诚信与引用说明}
-公开材料用于学习、研究复现和方法参考。复用代码、图表、实验结果或模型输出时，应明确标注来源和修改范围，并给出所用版本或权重文件。不得将公开内容未经引用作为本人原创成果提交。具体说明和推荐引用信息见仓库中的 \path{ACADEMIC_USE_NOTICE.md} 与 \path{CITATION.cff}。
+
+公开材料用于学习、研究复现和方法参考。复用代码、图表、实验结果或模型输出时，应标注来源、修改范围及所用版本或权重文件。具体说明和推荐引用信息见 \path{ACADEMIC_USE_NOTICE.md} 与 \path{CITATION.cff}。
 
 \end{document}

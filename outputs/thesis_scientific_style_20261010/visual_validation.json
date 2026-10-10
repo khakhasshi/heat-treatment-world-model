@@ -1,0 +1,21 @@
+{
+  "all_page_contacts_reviewed": {
+    "generic": 56,
+    "school": 59
+  },
+  "detail_pages_reviewed": {
+    "generic": [
+      17,
+      55
+    ],
+    "school": [
+      5,
+      20
+    ]
+  },
+  "issues_resolved": [
+    "chapter 3 end page with few lines",
+    "inline formula and equation reference line overflow"
+  ],
+  "remaining_detected_layout_issues": []
+}

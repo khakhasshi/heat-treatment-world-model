@@ -1,0 +1,103 @@
+{
+  "action_interpolation": "zero_order_hold",
+  "dataset_sha256": "f85ef6a9a759497c3da51c5b9bc6e015c27fa27eb2127961e3e398ff6efceb94",
+  "device": "mps",
+  "models": {
+    "data_only": {
+      "training": {
+        "best_epoch": 4.0,
+        "best_validation_rollout_rmse_c": 4.307761192321777,
+        "elapsed_seconds": 1379.9488331249995,
+        "parameter_count": 45489.0,
+        "device": "mps",
+        "warm_start_path": "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_audit_followup_20261001/three_dimensional/base/seed_7/data_only.pt",
+        "warm_start_tensors": 16.0,
+        "config": {
+          "epochs": 12,
+          "batch_size": 64,
+          "learning_rate": 0.0008,
+          "weight_decay": 1e-06,
+          "hidden_channels": 16,
+          "residual_blocks": 3,
+          "rollout_horizon": 3,
+          "physics_weight": 0.0,
+          "evaluate_every": 2,
+          "seed": 7
+        }
+      },
+      "checkpoint_sha256": "4651a8a384f1ec9b72671593cd410e6d7002500caa3a1130a3c6301517dacd72",
+      "validation": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 4.307761192321777,
+        "trajectory_rmse_mean_c": 4.089340686798096,
+        "trajectory_rmse_p95_c": 6.8943328857421875,
+        "final_rmse_mean_c": 6.564521789550781,
+        "maximum_error_mean_c": 26.3604793548584
+      },
+      "id_test": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 3.7671332359313965,
+        "trajectory_rmse_mean_c": 3.611037254333496,
+        "trajectory_rmse_p95_c": 5.3967437744140625,
+        "final_rmse_mean_c": 6.12075662612915,
+        "maximum_error_mean_c": 24.610383987426758
+      },
+      "control_ood": {
+        "trajectory_count": 16.0,
+        "rollout_rmse_c": 18.569629669189453,
+        "trajectory_rmse_mean_c": 14.555025100708008,
+        "trajectory_rmse_p95_c": 35.48516082763672,
+        "final_rmse_mean_c": 30.144241333007812,
+        "maximum_error_mean_c": 75.87150573730469
+      }
+    },
+    "physics_constrained": {
+      "training": {
+        "best_epoch": 4.0,
+        "best_validation_rollout_rmse_c": 3.522958278656006,
+        "elapsed_seconds": 1383.6391400419998,
+        "parameter_count": 45489.0,
+        "device": "mps",
+        "warm_start_path": "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_audit_followup_20261001/three_dimensional/base/seed_7/physics_constrained.pt",
+        "warm_start_tensors": 16.0,
+        "config": {
+          "epochs": 12,
+          "batch_size": 64,
+          "learning_rate": 0.0008,
+          "weight_decay": 1e-06,
+          "hidden_channels": 16,
+          "residual_blocks": 3,
+          "rollout_horizon": 3,
+          "physics_weight": 0.1,
+          "evaluate_every": 2,
+          "seed": 7
+        }
+      },
+      "checkpoint_sha256": "3a0e39aca005152f4abc6201aff39d20d1323a3430607a6f65fad5d309108042",
+      "validation": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 3.522958278656006,
+        "trajectory_rmse_mean_c": 3.3687756061553955,
+        "trajectory_rmse_p95_c": 4.89039421081543,
+        "final_rmse_mean_c": 6.334160327911377,
+        "maximum_error_mean_c": 23.031326293945312
+      },
+      "id_test": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 3.9049432277679443,
+        "trajectory_rmse_mean_c": 3.623621702194214,
+        "trajectory_rmse_p95_c": 6.568357467651367,
+        "final_rmse_mean_c": 6.818997859954834,
+        "maximum_error_mean_c": 22.50067710876465
+      },
+      "control_ood": {
+        "trajectory_count": 16.0,
+        "rollout_rmse_c": 16.433815002441406,
+        "trajectory_rmse_mean_c": 13.33510971069336,
+        "trajectory_rmse_p95_c": 31.27263069152832,
+        "final_rmse_mean_c": 25.87004280090332,
+        "maximum_error_mean_c": 62.20243453979492
+      }
+    }
+  }
+}

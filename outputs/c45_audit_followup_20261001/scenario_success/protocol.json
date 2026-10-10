@@ -1,0 +1,15 @@
+{
+  "protocol_version": 1,
+  "analysis_only": true,
+  "independent_unit": "scenario, conditional on the fixed trained model panel",
+  "primary_endpoint": "all members of the fixed model panel succeed in the scenario",
+  "historical_episode_rate": "descriptive only; no independent-episode Wilson interval",
+  "interval_assumption": "Wilson model assumes independent scenario draws with a common success probability; scenario mix and fixed trained models limit generalization",
+  "new_training_or_tuning": false,
+  "inputs_sha256": {
+    "outputs/c45_closed_loop_control/closed_loop_control_metrics.json": "e9f19110ada1de574e89d35d2c65050e27694ae50ed86184628ea6779dfe7308",
+    "outputs/c45_partial_observability/partial_observability_metrics.json": "296ab9cc368b3b01e8d8fb7fc5bd42443414977b1e23d365bbe4351e611c8af5",
+    "outputs/c45_ood_partial_observability/ood_partial_observability_metrics.json": "21269ee624361e4b6d70261383a8ea00c1cb620e61f35e516074bd9f9559e347",
+    "outputs/c45_ood_control_expanded/ood_partial_observability_metrics.json": "4442611e3e2d3c5126be5811167e14f2526a2065ac511a5a779f611a52a7756a"
+  }
+}

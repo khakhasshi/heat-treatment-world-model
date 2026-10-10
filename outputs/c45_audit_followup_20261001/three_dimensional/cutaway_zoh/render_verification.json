@@ -1,0 +1,46 @@
+{
+  "fixed_trajectory_id": 74,
+  "fixed_id_local_index": 8,
+  "fixed_snapshot_time_s": 192.0,
+  "model_seed": 42,
+  "action_interpolation": "zero_order_hold",
+  "frozen_reference_inputs_hashes_unchanged": true,
+  "render_input_hashes_verified_after_exit": true,
+  "new_dataset_controls_parameters_dimensions_dt_match_reference": true,
+  "both_full_prediction_arrays_finite": true,
+  "both_prediction_initial_states_match_frozen_reference": true,
+  "independently_recomputed_snapshot_errors": {
+    "explicit_euler": {
+      "rmse_c": 0.2697624940384475,
+      "max_absolute_error_c": 0.41960994247699546
+    },
+    "data_only_world_model": {
+      "rmse_c": 6.401000147109145,
+      "max_absolute_error_c": 16.18419923386415
+    },
+    "physics_constrained_world_model": {
+      "rmse_c": 3.229567625541584,
+      "max_absolute_error_c": 7.531870517314587
+    }
+  },
+  "common_color_scale": true,
+  "model_display_native_grid": [
+    17,
+    13,
+    9
+  ],
+  "fine_reference_grid": [
+    25,
+    19,
+    13
+  ],
+  "bdf_interpolation_only_for_error_calculation": true,
+  "figure_dimensions_pixels": [
+    1572,
+    1368
+  ],
+  "figure_sha256": "6ee246922d803afa49031caf3feb7bd9a13bea2ec00e9dbfa4bcc9757897a193",
+  "visual_check": "Inspected rendered PNG: all four titles, axes, units, cutaway surfaces and color bar readable; no clipped text observed",
+  "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONPATH=src .venv/bin/python -u outputs/c45_audit_followup_20261001/three_dimensional/build_zoh_cutaway.py --stage render",
+  "interpretation": "Fixed historical single ID example; does not estimate aggregate or OOD accuracy"
+}

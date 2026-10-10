@@ -1,0 +1,3811 @@
+{
+  "protocol": {
+    "protocol_version": 1,
+    "analysis_only": true,
+    "independent_unit": "scenario, conditional on the fixed trained model panel",
+    "primary_endpoint": "all members of the fixed model panel succeed in the scenario",
+    "historical_episode_rate": "descriptive only; no independent-episode Wilson interval",
+    "interval_assumption": "Wilson model assumes independent scenario draws with a common success probability; scenario mix and fixed trained models limit generalization",
+    "new_training_or_tuning": false,
+    "inputs_sha256": {
+      "outputs/c45_closed_loop_control/closed_loop_control_metrics.json": "e9f19110ada1de574e89d35d2c65050e27694ae50ed86184628ea6779dfe7308",
+      "outputs/c45_partial_observability/partial_observability_metrics.json": "296ab9cc368b3b01e8d8fb7fc5bd42443414977b1e23d365bbe4351e611c8af5",
+      "outputs/c45_ood_partial_observability/ood_partial_observability_metrics.json": "21269ee624361e4b6d70261383a8ea00c1cb620e61f35e516074bd9f9559e347",
+      "outputs/c45_ood_control_expanded/ood_partial_observability_metrics.json": "4442611e3e2d3c5126be5811167e14f2526a2065ac511a5a779f611a52a7756a"
+    }
+  },
+  "experiments": {
+    "dynamic_boundary": {
+      "effective_world_model_observer|weight=0.001|noise=0.5C": {
+        "episode_successes": 28,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 0.9333333333333333,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 9,
+          "trials": 10,
+          "rate": 0.9,
+          "scenario_wilson_95_interval": [
+            0.5958499732047616,
+            0.982123786904927
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 9,
+            "independent_scenarios": 10,
+            "rate": 0.9,
+            "scenario_wilson_95_interval": [
+              0.5958499732047616,
+              0.982123786904927
+            ]
+          },
+          "7": {
+            "successes": 9,
+            "independent_scenarios": 10,
+            "rate": 0.9,
+            "scenario_wilson_95_interval": [
+              0.5958499732047616,
+              0.982123786904927
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "effective_world_model_observer|weight=0.001|noise=0C": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "effective_world_model_observer|weight=0|noise=0.5C": {
+        "episode_successes": 28,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 0.9333333333333333,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 9,
+          "trials": 10,
+          "rate": 0.9,
+          "scenario_wilson_95_interval": [
+            0.5958499732047616,
+            0.982123786904927
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 9,
+            "independent_scenarios": 10,
+            "rate": 0.9,
+            "scenario_wilson_95_interval": [
+              0.5958499732047616,
+              0.982123786904927
+            ]
+          },
+          "7": {
+            "successes": 9,
+            "independent_scenarios": 10,
+            "rate": 0.9,
+            "scenario_wilson_95_interval": [
+              0.5958499732047616,
+              0.982123786904927
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "effective_world_model_observer|weight=0|noise=0C": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "effective_world_model_oracle|weight=0": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "effective_world_model_oracle|weight=0.001": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "fixed_750c": {
+        "episode_successes": 1,
+        "episode_count": 10,
+        "descriptive_episode_success_rate": 0.1,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "deterministic"
+        ],
+        "all_panel_members_successful": {
+          "successes": 1,
+          "trials": 10,
+          "rate": 0.1,
+          "scenario_wilson_95_interval": [
+            0.01787621309507295,
+            0.40415002679523837
+          ]
+        },
+        "at_least_one_panel_member_successful": 1,
+        "per_model_seed": {
+          "deterministic": {
+            "successes": 1,
+            "independent_scenarios": 10,
+            "rate": 0.1,
+            "scenario_wilson_95_interval": [
+              0.01787621309507295,
+              0.40415002679523837
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          }
+        ]
+      },
+      "legacy_world_model_oracle|weight=0": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "legacy_world_model_oracle|weight=0.001": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "proportional_feedback": {
+        "episode_successes": 0,
+        "episode_count": 10,
+        "descriptive_episode_success_rate": 0.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "deterministic"
+        ],
+        "all_panel_members_successful": {
+          "successes": 0,
+          "trials": 10,
+          "rate": 0.0,
+          "scenario_wilson_95_interval": [
+            0.0,
+            0.27753279986288903
+          ]
+        },
+        "at_least_one_panel_member_successful": 0,
+        "per_model_seed": {
+          "deterministic": {
+            "successes": 0,
+            "independent_scenarios": 10,
+            "rate": 0.0,
+            "scenario_wilson_95_interval": [
+              0.0,
+              0.27753279986288903
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": false
+            },
+            "all_success": false
+          }
+        ]
+      },
+      "reference_solver_mpc": {
+        "episode_successes": 10,
+        "episode_count": 10,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "deterministic"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "deterministic": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "source_solver_mpc": {
+        "episode_successes": 10,
+        "episode_count": 10,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "deterministic"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "deterministic": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 2,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 3,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "convection_step",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "convection_smooth",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "combined",
+            "seed_success": {
+              "deterministic": true
+            },
+            "all_success": true
+          }
+        ]
+      }
+    },
+    "partial_id": {
+      "full_state_oracle_boundary": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 6,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 7,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 10,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 14,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 19,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 22,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 23,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "sparse_certainty_equivalent": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 6,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 7,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 10,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 14,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 19,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 22,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 23,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "sparse_risk_aware": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 6,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 7,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 10,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 14,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 19,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 22,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 23,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "sparse_state_oracle_boundary": {
+        "episode_successes": 30,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 1.0,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 10,
+          "trials": 10,
+          "rate": 1.0,
+          "scenario_wilson_95_interval": [
+            0.7224672001371109,
+            1.0
+          ]
+        },
+        "at_least_one_panel_member_successful": 10,
+        "per_model_seed": {
+          "123": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "42": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          },
+          "7": {
+            "successes": 10,
+            "independent_scenarios": 10,
+            "rate": 1.0,
+            "scenario_wilson_95_interval": [
+              0.7224672001371109,
+              1.0
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 6,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 7,
+            "category": "emissivity_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 10,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "emissivity_growth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 14,
+            "category": "convection_step",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 19,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 22,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 23,
+            "category": "convection_smooth",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      }
+    },
+    "partial_ood_10": {
+      "full_state_oracle_boundary": {
+        "episode_successes": 24,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 0.8,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 7,
+          "trials": 10,
+          "rate": 0.7,
+          "scenario_wilson_95_interval": [
+            0.3967781474611454,
+            0.8922087325936989
+          ]
+        },
+        "at_least_one_panel_member_successful": 9,
+        "per_model_seed": {
+          "123": {
+            "successes": 8,
+            "independent_scenarios": 10,
+            "rate": 0.8,
+            "scenario_wilson_95_interval": [
+              0.4901624715366419,
+              0.9433178485456246
+            ]
+          },
+          "42": {
+            "successes": 8,
+            "independent_scenarios": 10,
+            "rate": 0.8,
+            "scenario_wilson_95_interval": [
+              0.4901624715366419,
+              0.9433178485456246
+            ]
+          },
+          "7": {
+            "successes": 8,
+            "independent_scenarios": 10,
+            "rate": 0.8,
+            "scenario_wilson_95_interval": [
+              0.4901624715366419,
+              0.9433178485456246
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          }
+        ]
+      },
+      "sparse_certainty_equivalent": {
+        "episode_successes": 21,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 0.7,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 7,
+          "trials": 10,
+          "rate": 0.7,
+          "scenario_wilson_95_interval": [
+            0.3967781474611454,
+            0.8922087325936989
+          ]
+        },
+        "at_least_one_panel_member_successful": 7,
+        "per_model_seed": {
+          "123": {
+            "successes": 7,
+            "independent_scenarios": 10,
+            "rate": 0.7,
+            "scenario_wilson_95_interval": [
+              0.3967781474611454,
+              0.8922087325936989
+            ]
+          },
+          "42": {
+            "successes": 7,
+            "independent_scenarios": 10,
+            "rate": 0.7,
+            "scenario_wilson_95_interval": [
+              0.3967781474611454,
+              0.8922087325936989
+            ]
+          },
+          "7": {
+            "successes": 7,
+            "independent_scenarios": 10,
+            "rate": 0.7,
+            "scenario_wilson_95_interval": [
+              0.3967781474611454,
+              0.8922087325936989
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          }
+        ]
+      },
+      "sparse_risk_aware": {
+        "episode_successes": 21,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 0.7,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 7,
+          "trials": 10,
+          "rate": 0.7,
+          "scenario_wilson_95_interval": [
+            0.3967781474611454,
+            0.8922087325936989
+          ]
+        },
+        "at_least_one_panel_member_successful": 7,
+        "per_model_seed": {
+          "123": {
+            "successes": 7,
+            "independent_scenarios": 10,
+            "rate": 0.7,
+            "scenario_wilson_95_interval": [
+              0.3967781474611454,
+              0.8922087325936989
+            ]
+          },
+          "42": {
+            "successes": 7,
+            "independent_scenarios": 10,
+            "rate": 0.7,
+            "scenario_wilson_95_interval": [
+              0.3967781474611454,
+              0.8922087325936989
+            ]
+          },
+          "7": {
+            "successes": 7,
+            "independent_scenarios": 10,
+            "rate": 0.7,
+            "scenario_wilson_95_interval": [
+              0.3967781474611454,
+              0.8922087325936989
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          }
+        ]
+      },
+      "sparse_state_oracle_boundary": {
+        "episode_successes": 24,
+        "episode_count": 30,
+        "descriptive_episode_success_rate": 0.8,
+        "independent_scenario_count": 10,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 8,
+          "trials": 10,
+          "rate": 0.8,
+          "scenario_wilson_95_interval": [
+            0.4901624715366419,
+            0.9433178485456246
+          ]
+        },
+        "at_least_one_panel_member_successful": 8,
+        "per_model_seed": {
+          "123": {
+            "successes": 8,
+            "independent_scenarios": 10,
+            "rate": 0.8,
+            "scenario_wilson_95_interval": [
+              0.4901624715366419,
+              0.9433178485456246
+            ]
+          },
+          "42": {
+            "successes": 8,
+            "independent_scenarios": 10,
+            "rate": 0.8,
+            "scenario_wilson_95_interval": [
+              0.4901624715366419,
+              0.9433178485456246
+            ]
+          },
+          "7": {
+            "successes": 8,
+            "independent_scenarios": 10,
+            "rate": 0.8,
+            "scenario_wilson_95_interval": [
+              0.4901624715366419,
+              0.9433178485456246
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 0,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 1,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 3,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 5,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 8,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 11,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 13,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 15,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 16,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 20,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          }
+        ]
+      }
+    },
+    "partial_ood_40": {
+      "sparse_certainty_equivalent": {
+        "episode_successes": 75,
+        "episode_count": 120,
+        "descriptive_episode_success_rate": 0.625,
+        "independent_scenario_count": 40,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 20,
+          "trials": 40,
+          "rate": 0.5,
+          "scenario_wilson_95_interval": [
+            0.35199526933465386,
+            0.6480047306653461
+          ]
+        },
+        "at_least_one_panel_member_successful": 28,
+        "per_model_seed": {
+          "123": {
+            "successes": 24,
+            "independent_scenarios": 40,
+            "rate": 0.6,
+            "scenario_wilson_95_interval": [
+              0.445958936603462,
+              0.7365167431570807
+            ]
+          },
+          "42": {
+            "successes": 27,
+            "independent_scenarios": 40,
+            "rate": 0.675,
+            "scenario_wilson_95_interval": [
+              0.5201774618987768,
+              0.799154977682173
+            ]
+          },
+          "7": {
+            "successes": 24,
+            "independent_scenarios": 40,
+            "rate": 0.6,
+            "scenario_wilson_95_interval": [
+              0.445958936603462,
+              0.7365167431570807
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 2,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 6,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 7,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 9,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 10,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 14,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 18,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 19,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 22,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 23,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 24,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 25,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 27,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 28,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 29,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 30,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 31,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 32,
+            "category": "combined",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 34,
+            "category": "convection",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 35,
+            "category": "convection",
+            "seed_success": {
+              "42": false,
+              "7": true,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 36,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 37,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 38,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 39,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 40,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 43,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 46,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 47,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 50,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 52,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 55,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 58,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 60,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 61,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 78,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 81,
+            "category": "combined",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 98,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      },
+      "sparse_risk_aware": {
+        "episode_successes": 72,
+        "episode_count": 120,
+        "descriptive_episode_success_rate": 0.6,
+        "independent_scenario_count": 40,
+        "model_panel": [
+          "123",
+          "42",
+          "7"
+        ],
+        "all_panel_members_successful": {
+          "successes": 19,
+          "trials": 40,
+          "rate": 0.475,
+          "scenario_wilson_95_interval": [
+            0.3293547011267891,
+            0.6250263789330752
+          ]
+        },
+        "at_least_one_panel_member_successful": 28,
+        "per_model_seed": {
+          "123": {
+            "successes": 24,
+            "independent_scenarios": 40,
+            "rate": 0.6,
+            "scenario_wilson_95_interval": [
+              0.445958936603462,
+              0.7365167431570807
+            ]
+          },
+          "42": {
+            "successes": 23,
+            "independent_scenarios": 40,
+            "rate": 0.575,
+            "scenario_wilson_95_interval": [
+              0.42195068541991076,
+              0.7149060744004961
+            ]
+          },
+          "7": {
+            "successes": 25,
+            "independent_scenarios": 40,
+            "rate": 0.625,
+            "scenario_wilson_95_interval": [
+              0.4703243913730111,
+              0.7577702083276672
+            ]
+          }
+        },
+        "scenarios": [
+          {
+            "scenario_index": 2,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 4,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 6,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 7,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 9,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 10,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 12,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 14,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 17,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 18,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 19,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 22,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 23,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 24,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 25,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 27,
+            "category": "emissivity",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 28,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 29,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 30,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 31,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 32,
+            "category": "combined",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 34,
+            "category": "convection",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 35,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 36,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": true,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 37,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 38,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 39,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 40,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 43,
+            "category": "convection",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 46,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 47,
+            "category": "emissivity",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 50,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 52,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 55,
+            "category": "convection",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          },
+          {
+            "scenario_index": 58,
+            "category": "conductivity_scale",
+            "seed_success": {
+              "42": false,
+              "7": true,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 60,
+            "category": "heat_capacity_scale",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 61,
+            "category": "combined",
+            "seed_success": {
+              "42": false,
+              "7": true,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 78,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": false,
+              "123": true
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 81,
+            "category": "combined",
+            "seed_success": {
+              "42": false,
+              "7": false,
+              "123": false
+            },
+            "all_success": false
+          },
+          {
+            "scenario_index": 98,
+            "category": "combined",
+            "seed_success": {
+              "42": true,
+              "7": true,
+              "123": true
+            },
+            "all_success": true
+          }
+        ]
+      }
+    }
+  }
+}

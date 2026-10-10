@@ -1,0 +1,268 @@
+{
+  "01-introduction.tex": {
+    "old_chars": 4836,
+    "new_chars": 4783,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 1,
+      "identical": true
+    },
+    "table": {
+      "count": 0,
+      "identical": true
+    },
+    "figure": {
+      "count": 0,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "02-physical-model.tex": {
+    "old_chars": 5959,
+    "new_chars": 5797,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 7,
+      "identical": true
+    },
+    "table": {
+      "count": 2,
+      "identical": true
+    },
+    "figure": {
+      "count": 0,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "03-world-model.tex": {
+    "old_chars": 8229,
+    "new_chars": 7585,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 12,
+      "identical": true
+    },
+    "table": {
+      "count": 1,
+      "identical": true
+    },
+    "figure": {
+      "count": 2,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "04-prediction-experiments.tex": {
+    "old_chars": 14491,
+    "new_chars": 13787,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 0,
+      "identical": true
+    },
+    "table": {
+      "count": 8,
+      "identical": true
+    },
+    "figure": {
+      "count": 7,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "05-identification-control.tex": {
+    "old_chars": 18319,
+    "new_chars": 18142,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 6,
+      "identical": true
+    },
+    "table": {
+      "count": 9,
+      "identical": true
+    },
+    "figure": {
+      "count": 11,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "06-conclusion.tex": {
+    "old_chars": 3277,
+    "new_chars": 3242,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 0,
+      "identical": true
+    },
+    "table": {
+      "count": 0,
+      "identical": true
+    },
+    "figure": {
+      "count": 0,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": false,
+      "removed": {
+        "$\\Heff$": 1
+      },
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "abstract.tex": {
+    "old_chars": 2895,
+    "new_chars": 2882,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 0,
+      "identical": true
+    },
+    "table": {
+      "count": 0,
+      "identical": true
+    },
+    "figure": {
+      "count": 0,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  },
+  "appendix.tex": {
+    "old_chars": 3606,
+    "new_chars": 3682,
+    "numbers_equal_excluding_paths": true,
+    "equation": {
+      "count": 0,
+      "identical": true
+    },
+    "table": {
+      "count": 1,
+      "identical": true
+    },
+    "figure": {
+      "count": 0,
+      "identical": true
+    },
+    "inline_math": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "units": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "references": {
+      "same_multiset": true,
+      "removed": {},
+      "added": {}
+    },
+    "chapter_titles_same": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "expected_unique_episodes": 600,
+  "unique_episode_count": 600,
+  "complete_expected_grid": true,
+  "raw_npz_verified": 600,
+  "all_saved_array_values_finite": true,
+  "all_control_metrics_recomputed_exactly": true,
+  "frozen_inputs_match": {
+    "outputs/c45_partial_observability/partial_observability_metrics.json": true,
+    "outputs/c45_ood_control_expanded/ood_partial_observability_metrics.json": true,
+    "outputs/c45_cross_solver/cross_solver_dataset.npz": true,
+    "outputs/c45_ood_control_expanded/parameter_ood_bdf_dataset.npz": true,
+    "outputs/c45_effective_boundary/seed_42/weight_0p001.pt": true,
+    "outputs/c45_effective_boundary/seed_7/weight_0p001.pt": true,
+    "outputs/c45_effective_boundary/seed_123/weight_0p001.pt": true,
+    "src/heat_world_model/sparse_control_audit_cli.py": true,
+    "src/heat_world_model/data_assimilation.py": true,
+    "src/heat_world_model/control.py": true,
+    "src/heat_world_model/model.py": true,
+    "src/heat_world_model/reference_solver.py": true,
+    "src/heat_world_model/closed_loop_control_cli.py": true,
+    "src/heat_world_model/partial_observability_cli.py": true,
+    "src/heat_world_model/boundary_observer_cli.py": true,
+    "src/heat_world_model/simulator.py": true
+  },
+  "legacy_five_sensor_episodes_checked": 300,
+  "legacy_non_timing_control_metric_max_abs_difference": 0.0,
+  "legacy_assimilation_metric_max_abs_difference": 1.6342482922482304e-13,
+  "legacy_changed_action_sequence_count": 0,
+  "unit_tests": "6 passed: tests/test_sparse_control_audit.py"
+}

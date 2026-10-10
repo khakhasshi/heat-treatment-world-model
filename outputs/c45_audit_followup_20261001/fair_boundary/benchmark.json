@@ -1,0 +1,118 @@
+{
+  "protocol": "protocol.json",
+  "summaries": [
+    {
+      "method": "separate_h_epsilon",
+      "median_trajectory_seconds": 0.008115792006719857,
+      "p95_trajectory_seconds": 0.00860662146442337,
+      "mean_trajectory_seconds": 0.00818654336821055,
+      "global_rollout_rmse_c": 2.3451329435053165,
+      "scenario_count": 100,
+      "repeats": 3
+    },
+    {
+      "method": "effective_autonomous",
+      "median_trajectory_seconds": 0.010283562500262633,
+      "p95_trajectory_seconds": 0.010962060124438722,
+      "mean_trajectory_seconds": 0.010375141180993523,
+      "global_rollout_rmse_c": 1.4735796395768663,
+      "scenario_count": 100,
+      "repeats": 3
+    },
+    {
+      "method": "source_solver_41",
+      "median_trajectory_seconds": 0.010873145511141047,
+      "p95_trajectory_seconds": 0.011351262834796216,
+      "mean_trajectory_seconds": 0.010961012050684076,
+      "global_rollout_rmse_c": 0.16634553774694716,
+      "scenario_count": 100,
+      "repeats": 3
+    },
+    {
+      "method": "bdf_solver_81",
+      "median_trajectory_seconds": 0.452846687490819,
+      "p95_trajectory_seconds": 0.562345986852597,
+      "mean_trajectory_seconds": 0.4474285699691973,
+      "global_rollout_rmse_c": 4.061004603389845e-06,
+      "scenario_count": 100,
+      "repeats": 3
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "baseline": "separate_h_epsilon",
+      "target": "effective_autonomous",
+      "median_paired_speed_ratio": 0.7891721515578827,
+      "ratio_of_median_times": 0.7892004357937813,
+      "paired_time_difference_seconds": {
+        "mean_difference": 0.002188597812782973,
+        "confidence_interval_95": [
+          0.0021328048037030384,
+          0.00224581205668801
+        ],
+        "scenario_count": 100,
+        "model_seed_count": 1,
+        "improved_scenarios": 0,
+        "tied_scenarios": 0,
+        "worsened_scenarios": 100,
+        "bootstrap_replicates": 100000,
+        "bootstrap_seed": 20261001,
+        "unit": "independent trajectory; training seeds averaged before resampling"
+      }
+    },
+    {
+      "baseline": "source_solver_41",
+      "target": "effective_autonomous",
+      "median_paired_speed_ratio": 1.058399434705211,
+      "ratio_of_median_times": 1.0573325645527372,
+      "paired_time_difference_seconds": {
+        "mean_difference": -0.0005858708696905524,
+        "confidence_interval_95": [
+          -0.0006448581020740676,
+          -0.0005267466782606789
+        ],
+        "scenario_count": 100,
+        "model_seed_count": 1,
+        "improved_scenarios": 96,
+        "tied_scenarios": 0,
+        "worsened_scenarios": 4,
+        "bootstrap_replicates": 100000,
+        "bootstrap_seed": 20261001,
+        "unit": "independent trajectory; training seeds averaged before resampling"
+      }
+    },
+    {
+      "baseline": "bdf_solver_81",
+      "target": "effective_autonomous",
+      "median_paired_speed_ratio": 43.433697021878615,
+      "ratio_of_median_times": 44.03597366955797,
+      "paired_time_difference_seconds": {
+        "mean_difference": -0.43705342878820375,
+        "confidence_interval_95": [
+          -0.45289261516430274,
+          -0.42083405632622456
+        ],
+        "scenario_count": 100,
+        "model_seed_count": 1,
+        "improved_scenarios": 100,
+        "tied_scenarios": 0,
+        "worsened_scenarios": 0,
+        "bootstrap_replicates": 100000,
+        "bootstrap_seed": 20261001,
+        "unit": "independent trajectory; training seeds averaged before resampling"
+      }
+    }
+  ],
+  "wall_seconds": 195.90691645801417,
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "processor": "arm",
+    "python": "3.11.15",
+    "torch": "2.14.0",
+    "numpy": "2.4.6",
+    "torch_threads": 1,
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "interpretation": "Same 100 input trajectories and timing protocol; different numerical discretizations/accuracy, not evidence of universal speed advantage"
+}

@@ -1,0 +1,515 @@
+{
+  "baseline_scenario_indices": [
+    0,
+    1,
+    3,
+    5,
+    8,
+    11,
+    13,
+    15,
+    16,
+    20
+  ],
+  "expanded_scenario_indices": [
+    2,
+    4,
+    6,
+    7,
+    9,
+    10,
+    12,
+    14,
+    17,
+    18,
+    19,
+    22,
+    23,
+    24,
+    25,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    43,
+    46,
+    47,
+    50,
+    52,
+    55,
+    58,
+    60,
+    61,
+    78,
+    81,
+    98
+  ],
+  "scenario_overlap": [],
+  "baseline_10": {
+    "reference_controller": "sparse_certainty_equivalent",
+    "candidate_controller": "sparse_risk_aware",
+    "scenario_count": 10,
+    "bootstrap_samples": 100000,
+    "bootstrap_seed": 20260905,
+    "metrics": {
+      "objective": {
+        "reference_mean": 21.3756365497907,
+        "candidate_mean": 19.638247362772624,
+        "paired_mean_difference": -1.7373891870180767,
+        "paired_bootstrap_95_interval": [
+          -3.2767947272956373,
+          -0.21140224536259974
+        ],
+        "improved_scenarios": 7,
+        "unchanged_scenarios": 1,
+        "worsened_scenarios": 2
+      },
+      "overtemperature_c": {
+        "reference_mean": 0.3021514892578125,
+        "candidate_mean": 0.18122660319010417,
+        "paired_mean_difference": -0.12092488606770832,
+        "paired_bootstrap_95_interval": [
+          -0.362774658203125,
+          0.0
+        ],
+        "improved_scenarios": 1,
+        "unchanged_scenarios": 9,
+        "worsened_scenarios": 0
+      },
+      "final_center_abs_error_c": {
+        "reference_mean": 5.965583292643229,
+        "candidate_mean": 5.822120157877604,
+        "paired_mean_difference": -0.14346313476562506,
+        "paired_bootstrap_95_interval": [
+          -0.7141128540039063,
+          0.4484385172526043
+        ],
+        "improved_scenarios": 5,
+        "unchanged_scenarios": 1,
+        "worsened_scenarios": 4
+      },
+      "success": {
+        "reference_mean": 0.7,
+        "candidate_mean": 0.7,
+        "paired_mean_difference": 0.0,
+        "paired_bootstrap_95_interval": [
+          0.0,
+          0.0
+        ],
+        "improved_scenarios": 0,
+        "unchanged_scenarios": 10,
+        "worsened_scenarios": 0
+      }
+    }
+  },
+  "confirmatory_40": {
+    "reference_controller": "sparse_certainty_equivalent",
+    "candidate_controller": "sparse_risk_aware",
+    "scenario_count": 40,
+    "bootstrap_samples": 100000,
+    "bootstrap_seed": 20260905,
+    "metrics": {
+      "objective": {
+        "reference_mean": 26.018782717982923,
+        "candidate_mean": 25.531233302752177,
+        "paired_mean_difference": -0.487549415230751,
+        "paired_bootstrap_95_interval": [
+          -2.801500756355624,
+          1.9496575855339564
+        ],
+        "improved_scenarios": 23,
+        "unchanged_scenarios": 1,
+        "worsened_scenarios": 16
+      },
+      "overtemperature_c": {
+        "reference_mean": 0.6410471598307291,
+        "candidate_mean": 0.5845611572265625,
+        "paired_mean_difference": -0.056486002604166675,
+        "paired_bootstrap_95_interval": [
+          -0.5268906211853028,
+          0.41807442982991505
+        ],
+        "improved_scenarios": 8,
+        "unchanged_scenarios": 23,
+        "worsened_scenarios": 9
+      },
+      "final_center_abs_error_c": {
+        "reference_mean": 6.615637969970703,
+        "candidate_mean": 7.161838531494141,
+        "paired_mean_difference": 0.5462005615234375,
+        "paired_bootstrap_95_interval": [
+          0.07026734670003267,
+          1.0292206319173172
+        ],
+        "improved_scenarios": 12,
+        "unchanged_scenarios": 1,
+        "worsened_scenarios": 27
+      },
+      "success": {
+        "reference_mean": 0.625,
+        "candidate_mean": 0.6,
+        "paired_mean_difference": -0.025,
+        "paired_bootstrap_95_interval": [
+          -0.08333333333333334,
+          0.025
+        ],
+        "improved_scenarios": 5,
+        "unchanged_scenarios": 32,
+        "worsened_scenarios": 3
+      }
+    }
+  },
+  "combined_50": {
+    "reference_controller": "sparse_certainty_equivalent",
+    "candidate_controller": "sparse_risk_aware",
+    "scenario_count": 50,
+    "bootstrap_samples": 100000,
+    "bootstrap_seed": 20260905,
+    "metrics": {
+      "objective": {
+        "reference_mean": 25.090153484344484,
+        "candidate_mean": 24.35263611475627,
+        "paired_mean_difference": -0.7375173695882161,
+        "paired_bootstrap_95_interval": [
+          -2.630137966513634,
+          1.2475763666133084
+        ],
+        "improved_scenarios": 30,
+        "unchanged_scenarios": 2,
+        "worsened_scenarios": 18
+      },
+      "overtemperature_c": {
+        "reference_mean": 0.5732680257161458,
+        "candidate_mean": 0.5038942464192708,
+        "paired_mean_difference": -0.06937377929687502,
+        "paired_bootstrap_95_interval": [
+          -0.44793360392252607,
+          0.3163673756917316
+        ],
+        "improved_scenarios": 9,
+        "unchanged_scenarios": 32,
+        "worsened_scenarios": 9
+      },
+      "final_center_abs_error_c": {
+        "reference_mean": 6.4856270345052085,
+        "candidate_mean": 6.893894856770833,
+        "paired_mean_difference": 0.4082678222656251,
+        "paired_bootstrap_95_interval": [
+          0.004037623087565192,
+          0.8194814351399731
+        ],
+        "improved_scenarios": 17,
+        "unchanged_scenarios": 2,
+        "worsened_scenarios": 31
+      },
+      "success": {
+        "reference_mean": 0.6399999999999999,
+        "candidate_mean": 0.62,
+        "paired_mean_difference": -0.02,
+        "paired_bootstrap_95_interval": [
+          -0.06666666666666667,
+          0.02
+        ],
+        "improved_scenarios": 5,
+        "unchanged_scenarios": 42,
+        "worsened_scenarios": 3
+      }
+    }
+  },
+  "confirmatory_by_category": {
+    "combined": {
+      "reference_controller": "sparse_certainty_equivalent",
+      "candidate_controller": "sparse_risk_aware",
+      "scenario_count": 8,
+      "bootstrap_samples": 100000,
+      "bootstrap_seed": 20260905,
+      "metrics": {
+        "objective": {
+          "reference_mean": 28.96562171479066,
+          "candidate_mean": 24.435816928744316,
+          "paired_mean_difference": -4.529804786046347,
+          "paired_bootstrap_95_interval": [
+            -10.364391180376211,
+            -0.7750103125969565
+          ],
+          "improved_scenarios": 6,
+          "unchanged_scenarios": 1,
+          "worsened_scenarios": 1
+        },
+        "overtemperature_c": {
+          "reference_mean": 1.0229199727376304,
+          "candidate_mean": 0.3654390970865885,
+          "paired_mean_difference": -0.6574808756510416,
+          "paired_bootstrap_95_interval": [
+            -1.9476343790690105,
+            0.08416493733723958
+          ],
+          "improved_scenarios": 2,
+          "unchanged_scenarios": 3,
+          "worsened_scenarios": 3
+        },
+        "final_center_abs_error_c": {
+          "reference_mean": 6.812615712483724,
+          "candidate_mean": 6.525929768880208,
+          "paired_mean_difference": -0.28668594360351585,
+          "paired_bootstrap_95_interval": [
+            -1.2111104329427085,
+            0.6380221048990882
+          ],
+          "improved_scenarios": 3,
+          "unchanged_scenarios": 1,
+          "worsened_scenarios": 4
+        },
+        "success": {
+          "reference_mean": 0.5833333333333333,
+          "candidate_mean": 0.5833333333333333,
+          "paired_mean_difference": -6.938893903907228e-18,
+          "paired_bootstrap_95_interval": [
+            -0.125,
+            0.125
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 6,
+          "worsened_scenarios": 1
+        }
+      }
+    },
+    "conductivity_scale": {
+      "reference_controller": "sparse_certainty_equivalent",
+      "candidate_controller": "sparse_risk_aware",
+      "scenario_count": 8,
+      "bootstrap_samples": 100000,
+      "bootstrap_seed": 20260905,
+      "metrics": {
+        "objective": {
+          "reference_mean": 32.798123660186924,
+          "candidate_mean": 30.129925698041916,
+          "paired_mean_difference": -2.66819796214501,
+          "paired_bootstrap_95_interval": [
+            -6.459112393359343,
+            0.6139775514602666
+          ],
+          "improved_scenarios": 4,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 4
+        },
+        "overtemperature_c": {
+          "reference_mean": 0.9203567504882812,
+          "candidate_mean": 0.3905487060546875,
+          "paired_mean_difference": -0.5298080444335938,
+          "paired_bootstrap_95_interval": [
+            -1.4286905924479165,
+            0.08797709147135416
+          ],
+          "improved_scenarios": 3,
+          "unchanged_scenarios": 4,
+          "worsened_scenarios": 1
+        },
+        "final_center_abs_error_c": {
+          "reference_mean": 9.86739730834961,
+          "candidate_mean": 10.478068033854168,
+          "paired_mean_difference": 0.6106707255045575,
+          "paired_bootstrap_95_interval": [
+            -0.8107401529947913,
+            1.9127782185872397
+          ],
+          "improved_scenarios": 3,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 5
+        },
+        "success": {
+          "reference_mean": 0.29166666666666663,
+          "candidate_mean": 0.29166666666666663,
+          "paired_mean_difference": 6.938893903907228e-18,
+          "paired_bootstrap_95_interval": [
+            -0.125,
+            0.125
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 6,
+          "worsened_scenarios": 1
+        }
+      }
+    },
+    "convection": {
+      "reference_controller": "sparse_certainty_equivalent",
+      "candidate_controller": "sparse_risk_aware",
+      "scenario_count": 8,
+      "bootstrap_samples": 100000,
+      "bootstrap_seed": 20260905,
+      "metrics": {
+        "objective": {
+          "reference_mean": 20.699434061845146,
+          "candidate_mean": 22.666275051732857,
+          "paired_mean_difference": 1.966840989887714,
+          "paired_bootstrap_95_interval": [
+            -3.016018311182658,
+            7.99340367813905
+          ],
+          "improved_scenarios": 4,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 4
+        },
+        "overtemperature_c": {
+          "reference_mean": 0.3604342142740885,
+          "candidate_mean": 0.7990264892578125,
+          "paired_mean_difference": 0.438592274983724,
+          "paired_bootstrap_95_interval": [
+            -0.586865743001302,
+            1.787920633951823
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 5,
+          "worsened_scenarios": 2
+        },
+        "final_center_abs_error_c": {
+          "reference_mean": 3.832715352376302,
+          "candidate_mean": 4.914451599121094,
+          "paired_mean_difference": 1.081736246744792,
+          "paired_bootstrap_95_interval": [
+            -0.35490163167317657,
+            2.603777567545573
+          ],
+          "improved_scenarios": 3,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 5
+        },
+        "success": {
+          "reference_mean": 0.7916666666666666,
+          "candidate_mean": 0.7916666666666666,
+          "paired_mean_difference": 6.938893903907228e-18,
+          "paired_bootstrap_95_interval": [
+            -0.125,
+            0.125
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 6,
+          "worsened_scenarios": 1
+        }
+      }
+    },
+    "emissivity": {
+      "reference_controller": "sparse_certainty_equivalent",
+      "candidate_controller": "sparse_risk_aware",
+      "scenario_count": 8,
+      "bootstrap_samples": 100000,
+      "bootstrap_seed": 20260905,
+      "metrics": {
+        "objective": {
+          "reference_mean": 28.0285420914491,
+          "candidate_mean": 29.08992234617472,
+          "paired_mean_difference": 1.0613802547256157,
+          "paired_bootstrap_95_interval": [
+            -4.60412536561489,
+            8.857713252305984
+          ],
+          "improved_scenarios": 6,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 2
+        },
+        "overtemperature_c": {
+          "reference_mean": 0.7361412048339844,
+          "candidate_mean": 0.8987706502278645,
+          "paired_mean_difference": 0.16262944539388016,
+          "paired_bootstrap_95_interval": [
+            -0.9219830830891927,
+            1.5679219563802083
+          ],
+          "improved_scenarios": 2,
+          "unchanged_scenarios": 5,
+          "worsened_scenarios": 1
+        },
+        "final_center_abs_error_c": {
+          "reference_mean": 7.250526428222656,
+          "candidate_mean": 7.9269866943359375,
+          "paired_mean_difference": 0.6764602661132814,
+          "paired_bootstrap_95_interval": [
+            0.2950884501139325,
+            1.0548019409179688
+          ],
+          "improved_scenarios": 2,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 6
+        },
+        "success": {
+          "reference_mean": 0.7083333333333333,
+          "candidate_mean": 0.625,
+          "paired_mean_difference": -0.08333333333333334,
+          "paired_bootstrap_95_interval": [
+            -0.25,
+            0.0
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 7,
+          "worsened_scenarios": 0
+        }
+      }
+    },
+    "heat_capacity_scale": {
+      "reference_controller": "sparse_certainty_equivalent",
+      "candidate_controller": "sparse_risk_aware",
+      "scenario_count": 8,
+      "bootstrap_samples": 100000,
+      "bootstrap_seed": 20260905,
+      "metrics": {
+        "objective": {
+          "reference_mean": 19.602192061642807,
+          "candidate_mean": 21.334226489067078,
+          "paired_mean_difference": 1.732034427424272,
+          "paired_bootstrap_95_interval": [
+            -0.40291712929805135,
+            4.85871530075868
+          ],
+          "improved_scenarios": 3,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 5
+        },
+        "overtemperature_c": {
+          "reference_mean": 0.16538365681966147,
+          "candidate_mean": 0.4690208435058594,
+          "paired_mean_difference": 0.3036371866861979,
+          "paired_bootstrap_95_interval": [
+            0.0,
+            0.7851028442382812
+          ],
+          "improved_scenarios": 0,
+          "unchanged_scenarios": 6,
+          "worsened_scenarios": 2
+        },
+        "final_center_abs_error_c": {
+          "reference_mean": 5.3149350484212246,
+          "candidate_mean": 5.963756561279297,
+          "paired_mean_difference": 0.6488215128580728,
+          "paired_bootstrap_95_interval": [
+            0.26977666219075525,
+            1.0057195027669266
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 0,
+          "worsened_scenarios": 7
+        },
+        "success": {
+          "reference_mean": 0.75,
+          "candidate_mean": 0.7083333333333333,
+          "paired_mean_difference": -0.04166666666666667,
+          "paired_bootstrap_95_interval": [
+            -0.125,
+            0.0
+          ],
+          "improved_scenarios": 1,
+          "unchanged_scenarios": 7,
+          "worsened_scenarios": 0
+        }
+      }
+    }
+  }
+}

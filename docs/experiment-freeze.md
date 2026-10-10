@@ -1,5 +1,7 @@
 # 实验版本冻结说明
 
+> 历史冻结记录：以下哈希和指标不覆盖本轮审查后的结果。当前论文的同信息对照、独立场景统计、四点闭环、正式计时和三维动作一致性实验见[补充报告](thesis-audit-followup-20261001.md)；本轮使用独立的 `thesis-audit-followup-20261001-manifest.json` 清单。
+
 ## 1. 冻结范围
 
 - 冻结日期：2026-09-03
@@ -73,3 +75,35 @@ PYTHONPATH=src uv run --no-sync python scripts/analyze_thesis_supplement.py
 源代码、轻量实验结果、论文源文件和复现入口公开于 <https://github.com/khakhasshi/heat-treatment-world-model>，公开版本标签为 `thesis-open-release-v1`。论文正式权重由 <https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model> 单独托管。公开权重的文件映射、字节数和 SHA-256 记录在 `docs/huggingface-weights-manifest.csv`。代码与权重的公开不改变本页冻结的实验口径。
 
 全部公开内容仅供学习、研究复现和方法参考。引用、修改和再发布应保留来源，并遵守 `ACADEMIC_USE_NOTICE.md` 与对应许可证。禁止将论文文字、代码、图表、实验结果或模型输出未经清晰引用作为本人原创成果提交。
+
+## 8. 2026-09-05 补充数值实验
+
+本轮增加四组确认性实验。反事实参数实验固定当前表面温度和炉温，构造五组具有相同 `H_eff` 的 `(h, epsilon)`，再扫描 400--950°C 候选炉温。稀疏测温实验采用 90 条独立 BDF 轨迹、三个模型种子和无中心测点的四点布局。严格参数 OOD 扩展排除原 10 条场景，另取 40 条新场景完成 240 个闭环回合。三维重复实验在同一冻结数据上使用种子 42、7 和 123，分别完成基础网格训练及 $17\times13\times9$ 加密网格迁移训练。
+
+补充实验的正式轻量产物如下。
+
+| 结果文件 | SHA-256 |
+| --- | --- |
+| `outputs/c45_counterfactual_identifiability/counterfactual_identifiability_metrics.json` | `d42ea961d4199fab0cc2446c78b465c2c1544347103eb1d793256429058f6140` |
+| `outputs/c45_counterfactual_identifiability/counterfactual_identifiability.png` | `6b10be3fea9f2823c91dc8c35d2c623bed7295b8ee87e8dd5274e5fca7d8d70d` |
+| `outputs/c45_sensor_robustness/sensor_robustness_metrics.json` | `2336a77afba4ff0cc4c115b52c877937dc81cdd9ca93ec0dcb07f57c04bc3551` |
+| `outputs/c45_sensor_robustness/sensor_robustness.png` | `e5302deb9466fe237089c2526ad97292b37d481df0fe6a3f660ebf2c497707af` |
+| `outputs/c45_ood_control_expanded/ood_control_extension_analysis.json` | `9cd928aabf251fc116b7be1cf7828a401b31019ec3d2b004a2f9480fdc964baf` |
+| `outputs/c45_ood_control_expanded/ood_control_extension.png` | `ac7aeda42be365bc4384b30d7ddc235703a3c5248f7c3c7cf499f87a3da75c92` |
+| `outputs/c45_three_dimensional_replicates/three_dimensional_replicates.json` | `fe9e8ba6617b16a578cca36b3e8e1bfe6bc0b1e55e37ce1fa977abd885046bb1` |
+| `outputs/c45_three_dimensional_replicates/three_dimensional_replicates.png` | `f011f8040ff1e8c782dc35588d7f254f46e42ed1f03db0bccbaf74f29bbb52f7` |
+
+对应命令为：
+
+```bash
+uv run --no-sync analyze-counterfactual-identifiability
+uv run --no-sync evaluate-sensor-robustness
+uv run --no-sync analyze-ood-control-extension
+uv run --no-sync aggregate-three-dimensional-replicates
+```
+
+确认性结果修正了原 10 场景风险控制的证据强度。新增 40 场景的综合目标配对差为 -0.488，95% bootstrap 区间为 [-2.802, 1.950]。论文据此只保留场景相关的权衡结论。三维实验的稳定结论是离散能量残差在验证、ID 和控制 OOD 上分别降低 30.0%、30.8% 和 17.5%。控制 OOD RMSE 的配对区间为 [-1.079, 0.023]°C，所以不提出稳定精度优势主张。
+
+## 9. 本科论文修订 v2（独立本地快照）
+
+本次新增传感器响应状态补偿，1080 条记录及独立校准结果见 `outputs/c45_sensor_response/`。修订说明和论文取数映射见 `docs/thesis-revision-v2.md`，文件哈希见 `docs/thesis-revision-v2-manifest.json`。该快照包含本地未提交源码与最终 PDF，不是 Git 标签或公开发布版本；本节不改写上文历史实验哈希。

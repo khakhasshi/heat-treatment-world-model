@@ -1,0 +1,29 @@
+{
+  "input_hashes_unchanged": true,
+  "all_fields_finite": true,
+  "fine_prefix_shape": [
+    193,
+    25,
+    19,
+    13
+  ],
+  "euler_prefix_shape": [
+    193,
+    17,
+    13,
+    9
+  ],
+  "held_commands_match_frozen_prefix": true,
+  "snapshot_time_s": 192.0,
+  "fine_snapshot_range_c": [
+    303.4017851180123,
+    374.3847302397235
+  ],
+  "euler_snapshot_range_c": [
+    303.26485026552973,
+    374.19405400496095
+  ],
+  "euler_vs_projected_bdf_snapshot_rmse_c": 0.2697624940384475,
+  "euler_vs_projected_bdf_snapshot_max_error_c": 0.41960994247699546,
+  "interpretation": "Fixed historical case only; no aggregate or out-of-distribution conclusion"
+}

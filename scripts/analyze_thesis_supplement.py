@@ -10,6 +10,7 @@ import numpy as np
 
 from heat_world_model.evaluate import rollout_predictions
 from heat_world_model.model import load_world_model
+from heat_world_model.scenario_success_audit_cli import summarize_scenario_success
 
 
 SEEDS = (42, 7, 123)
@@ -220,22 +221,8 @@ def paired_control_ood_summary(
     }
 
 
-def wilson_interval(successes: int, trials: int, z: float = 1.959963984540054) -> list[float]:
-    proportion = successes / trials
-    denominator = 1.0 + z**2 / trials
-    center = (proportion + z**2 / (2.0 * trials)) / denominator
-    half_width = (
-        z
-        * np.sqrt(
-            proportion * (1.0 - proportion) / trials
-            + z**2 / (4.0 * trials**2)
-        )
-        / denominator
-    )
-    return [float(center - half_width), float(center + half_width)]
-
-
 def success_interval_summary(outputs: Path) -> dict[str, object]:
+    """Use scenario-level records; repeated training seeds are not new trials."""
     sources = {
         "dynamic_boundary_control": (
             outputs / "c45_closed_loop_control" / "closed_loop_control_metrics.json"
@@ -254,26 +241,12 @@ def success_interval_summary(outputs: Path) -> dict[str, object]:
     result: dict[str, object] = {}
     for experiment, source in sources.items():
         payload = load_json(source)
-        aggregate = (
-            payload["aggregate"]
+        records = (
+            payload["records"]
             if experiment == "dynamic_boundary_control"
-            else payload["closed_loop"]["aggregate"]
+            else payload["closed_loop"]["records"]
         )
-        experiment_result = {}
-        for controller, metrics in aggregate.items():
-            trials = int(metrics.get("episode_count", metrics.get("record_count")))
-            rate_value = metrics.get("success_rate", metrics.get("success"))
-            rate = float(
-                rate_value if isinstance(rate_value, (float, int)) else rate_value["mean"]
-            )
-            successes = int(round(rate * trials))
-            experiment_result[controller] = {
-                "successes": successes,
-                "trials": trials,
-                "success_rate": rate,
-                "wilson_95_interval": wilson_interval(successes, trials),
-            }
-        result[experiment] = experiment_result
+        result[experiment] = summarize_scenario_success(records)
     return result
 
 

@@ -1,0 +1,13 @@
+{
+  "sha256": {
+    "figure_metrics.json": "ce9df26cd7b897ab040249298fa7038aa59ab8038be09a4f84b71a88a6a98635",
+    "protocol.json": "8825efc48838911d0121f00179cbed2b8e1561a709f1702fccc9c62c79057f5f",
+    "reference.log": "5af0887327f76af2694b2c14baca29c80a9330a9c8f30693106755fe01c4c63e",
+    "reference_fields.npz": "11fdc34ebd49c1094dcf67ed81e43a2120de2131c1888817242ff7c8d7c8714a",
+    "reference_results.json": "b1bc0a325c2b35e410ea8ed668bdbc574c51be3450c0b2f378457559562383dc",
+    "reference_verification.json": "544ecb31263f270c550f3d65b610facbe10418ac1bf83f6fdf216ddc07ab7d96",
+    "render.log": "dbd21bfa353c7ab4050ca7a8da00c632680247c7d2078d6390b34a724e5a5683",
+    "render_verification.json": "76afa26c06d0513f581df82e14919656712464553470c77297c242d3774e501b",
+    "three_dimensional_temperature_cutaway_zoh.png": "6ee246922d803afa49031caf3feb7bd9a13bea2ec00e9dbfa4bcc9757897a193"
+  }
+}

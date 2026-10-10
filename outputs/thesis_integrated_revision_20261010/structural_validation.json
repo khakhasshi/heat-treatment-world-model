@@ -1,0 +1,26 @@
+{
+  "labels": 63,
+  "duplicate_labels": [],
+  "missing_refs": [],
+  "removed_labels": [
+    "tab:industrial_application"
+  ],
+  "equation": {
+    "before": 26,
+    "after": 26,
+    "exact_preserved": 25
+  },
+  "tabular": {
+    "before": 19,
+    "after": 20,
+    "exact_preserved": 17
+  },
+  "reviewed_changes": {
+    "equation": "Five-sensor positions restated as S4 and S5=S4 union center; same positions.",
+    "tables": "Known-boundary and observed-boundary rows split; bold formatting removed from exploratory risk values; numeric cells retained.",
+    "removed_table": "Industrial application prospects replaced by bounded prose; no measured experiment removed."
+  },
+  "appendix_synchronized": true,
+  "chapter_count": 6,
+  "revision_language_in_main": []
+}

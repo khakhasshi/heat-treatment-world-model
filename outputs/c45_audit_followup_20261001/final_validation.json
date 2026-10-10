@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "validated_at_utc": "2026-10-02T14:14:59.971466+00:00",
+  "tests": {
+    "passed": 71,
+    "seconds": 4.79,
+    "record": "tests.log",
+    "note": "Full-suite result for experiment source before the long 3D run; subsequent manuscript and postprocessing changes were checked through result verification, source checks and document builds."
+  },
+  "numerical_verification": {
+    "fair_boundary": "fair_boundary/verification.json",
+    "sparse_control": "sparse_control/validation.json",
+    "three_dimensional": "three_dimensional/validation.json",
+    "historical_artifacts": "historical_artifact_check.json"
+  },
+  "historical_outputs_verified_unchanged": 235,
+  "chapters_abstracts_appendix_synchronized": true,
+  "pdf_exports_match_compiled_files": true,
+  "both_builds_exit_code": 0,
+  "undefined_references": false,
+  "overfull_boxes": false,
+  "pdfs": {
+    "generic": {
+      "pages": 51,
+      "changed_pages_after_ratio_wording": [
+        29,
+        44
+      ],
+      "sha256": "f092c185c728c6405bdd28ed0905c33dcbd5c426340b235dc463cb8c82636986"
+    },
+    "school": {
+      "pages": 54,
+      "changed_pages_after_ratio_wording": [
+        31,
+        46
+      ],
+      "sha256": "870437b97ab4e408557106af14f8b2162cd9b9c76faff46db57196cd72a34b24"
+    }
+  },
+  "visual_review": {
+    "all_pages_rendered_and_contact_sheets_reviewed": true,
+    "school_pages": 54,
+    "generic_pages": 51,
+    "new_tables_figures_abstracts_and_appendix_readable": true,
+    "orphan_pages_fixed": true,
+    "final_timing_wording_changed_pages_reviewed": true,
+    "render_directory": "tmp/pdfs/audit-delivery",
+    "note": "Generic all-page and detail review independently completed by control reviewer; school review and final changed-page review by root."
+  },
+  "git_diff_check_passed": true,
+  "limitations": [
+    "Numerical heat-transfer environments only; no real-furnace validation.",
+    "Three-dimensional accuracy pairing intervals include zero.",
+    "Four-sensor closed-loop performance and uncertainty coverage deteriorate.",
+    "No efficiency advantage established against the simple 1D numerical baseline."
+  ]
+}

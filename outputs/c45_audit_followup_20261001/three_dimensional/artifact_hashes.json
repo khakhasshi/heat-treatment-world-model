@@ -1,0 +1,421 @@
+{
+  "protocol_sha256": "bd65af0b5d2b7c7887440118839387774988390d198fb6f9081fc729e169ac1d",
+  "artifacts": {
+    "__pycache__/build_zoh_cutaway.cpython-311.pyc": {
+      "bytes": 22296,
+      "sha256": "650313211f8ab131fad881300fd414df012de6ab151e0533584577aeb1f3ccc4"
+    },
+    "action_difference_base.json": {
+      "bytes": 61136,
+      "sha256": "d80b8cea721238c0baf310fcd789de6ac65d3169701f390496abef7dad812831"
+    },
+    "base/dataset_audit.json": {
+      "bytes": 346,
+      "sha256": "f69225f3a8080a47c88af72cf42b03f6295d1869e836a1dd1ef1f1ae4c8b5a2a"
+    },
+    "base/seed_123/data_only.pt": {
+      "bytes": 197462,
+      "sha256": "a5ba751c53d445c831ec8a7f1d3d6ece27e87ba396f4b07bb28fb1c923489787"
+    },
+    "base/seed_123/data_only_control_ood_predictions.npy": {
+      "bytes": 6068288,
+      "sha256": "6d453473e5d58d5c2176f4c2e1b9677f43ee834143d0d2ad78fe1bfc9387ae6a"
+    },
+    "base/seed_123/data_only_history.csv": {
+      "bytes": 582,
+      "sha256": "34ed6eee4ec10f5a9e4e8413bbff0d10400a887e564696ce990eec2fdc530fca"
+    },
+    "base/seed_123/data_only_id_test_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "915c3e0c7ac60638518cca9f402cd4ac73bf35cf01e919755fd32f2ae3a7997d"
+    },
+    "base/seed_123/data_only_validation_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "88531cab5fd0c157f4a4fdd10a1ae191b1dcdf77ab79ae85fe503152b490c48f"
+    },
+    "base/seed_123/physics_constrained.pt": {
+      "bytes": 197772,
+      "sha256": "8b813b419e732b4dd0ba34f3490c2489392c6b31dbde7de326aa5e02cabd4d93"
+    },
+    "base/seed_123/physics_constrained_control_ood_predictions.npy": {
+      "bytes": 6068288,
+      "sha256": "4b775dd111c2a8038166142b950b1ee692b9c3bb1eb122f3684be1eb236acd1c"
+    },
+    "base/seed_123/physics_constrained_history.csv": {
+      "bytes": 729,
+      "sha256": "e427482651bb6367bf5360245bb47bd5033d17342c99fab07b84ece2af6bd65a"
+    },
+    "base/seed_123/physics_constrained_id_test_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "bdc5117437b7e3bf84f9eb4db585d34211e093a9629e1b588055c6a59b0f2636"
+    },
+    "base/seed_123/physics_constrained_validation_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "d12ceee66144b8ee828143fb0438f625d666e4d55a9da0d0d6ca6bd5dbfb8f65"
+    },
+    "base/seed_123/three_dimensional_metrics.json": {
+      "bytes": 3566,
+      "sha256": "f7e1ef83d73312b4ff2566f328f84d88646e4ae3bc2ef8de6da756d1dba5875b"
+    },
+    "base/seed_42/data_only.pt": {
+      "bytes": 197462,
+      "sha256": "d2424cc8bf4324638a62f7cd7f3c1cb38c3ac1c1734ce01477e9155d40cc3d86"
+    },
+    "base/seed_42/data_only_control_ood_predictions.npy": {
+      "bytes": 6068288,
+      "sha256": "016db6d9d7cc78ea093260c828cd9083acc12f40d03447029abccedc8daf8122"
+    },
+    "base/seed_42/data_only_history.csv": {
+      "bytes": 580,
+      "sha256": "1d116e9448eec18de2a9fca8409fc11a5eaeeec7bee43156ceca7ce8dc1f5689"
+    },
+    "base/seed_42/data_only_id_test_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "0f466c94ee9836895692b976821922cc1429e13d4d1204399875c5facb61c112"
+    },
+    "base/seed_42/data_only_validation_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "328efee9cdd221d7a53057c6db133f68010bcc06b4c8970cdb9d49212456c087"
+    },
+    "base/seed_42/physics_constrained.pt": {
+      "bytes": 197772,
+      "sha256": "411004ce273bea983ce7e1def15e650e99e941b9fb2a9de19d4004632d3f233a"
+    },
+    "base/seed_42/physics_constrained_control_ood_predictions.npy": {
+      "bytes": 6068288,
+      "sha256": "52f921170179a819816bce3d1e3fc7110794354380202b5d2aa261f71d8e489d"
+    },
+    "base/seed_42/physics_constrained_history.csv": {
+      "bytes": 733,
+      "sha256": "8b8868008b605f4180b96a1cd3c9227bd5a525884198f74cd43555670b528a88"
+    },
+    "base/seed_42/physics_constrained_id_test_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "f89dd5a46a8b231fdcc2c2569a48cb11ab1ea3f5fe19030b04b18e113d3af0d4"
+    },
+    "base/seed_42/physics_constrained_validation_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "e7dd978e29fd0482984a2ce0adccf5f03520e5632104e85d782fc2d22b0637b9"
+    },
+    "base/seed_42/three_dimensional_metrics.json": {
+      "bytes": 3562,
+      "sha256": "47aa2123439477bc132f0a68187f8ef00de6f11558c4fd8944dd1459ae2d284a"
+    },
+    "base/seed_7/data_only.pt": {
+      "bytes": 197462,
+      "sha256": "af08467555c427c6a67a312c6614c64ead12d30cd91b695b95e5d6d95446fbe2"
+    },
+    "base/seed_7/data_only_control_ood_predictions.npy": {
+      "bytes": 6068288,
+      "sha256": "97edcf3f5bbb6daa907708b0caa3bbb54b81c132781474c3d7587ef446f56891"
+    },
+    "base/seed_7/data_only_history.csv": {
+      "bytes": 580,
+      "sha256": "63d15c43a092754af1e1a47133efc8f7464fc15bff7e2a5182858799d9ab6ca2"
+    },
+    "base/seed_7/data_only_id_test_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "33ab2247d12d29b389d189e02cb05e7682fe1f3836d6c0f4fb2ac62f81d23793"
+    },
+    "base/seed_7/data_only_validation_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "4cb50a897b64e2b50d405cf32e4fa92f49f24d5320983ef0782018d456855cfd"
+    },
+    "base/seed_7/physics_constrained.pt": {
+      "bytes": 197772,
+      "sha256": "bbceec69eccfd8ff95781bc5c3aa55b37ab87b69c774f136d9da08c71ea09c84"
+    },
+    "base/seed_7/physics_constrained_control_ood_predictions.npy": {
+      "bytes": 6068288,
+      "sha256": "fe11a941b59afdab7ffb4965bbc03f36b56a10bea3b7e58076966e40ce3201e4"
+    },
+    "base/seed_7/physics_constrained_history.csv": {
+      "bytes": 733,
+      "sha256": "202bf15c0086624f1199fb21e62c3a16d3e5232875108cb49edd4f80a6357a33"
+    },
+    "base/seed_7/physics_constrained_id_test_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "120cbc6fd1371290f4a539aa3f3b00da3e4ea0a36521864f5f904c9c32896495"
+    },
+    "base/seed_7/physics_constrained_validation_predictions.npy": {
+      "bytes": 4551248,
+      "sha256": "9bc62f7bc40a2597add06cd21e360cec29bee59c1abad7e183c9a585c7163311"
+    },
+    "base/seed_7/three_dimensional_metrics.json": {
+      "bytes": 3548,
+      "sha256": "f80f77c83f5e784e4aa1c2e52eefdce43d7daf46009ac2109f4ff96c04352b40"
+    },
+    "base/three_dimensional_action_audit_metrics.json": {
+      "bytes": 10430,
+      "sha256": "f54597a08570d1cc62daaa5f2b68ab80c6532c48ff1aa38e6ce69f01a57b40a9"
+    },
+    "base/three_dimensional_dataset.json": {
+      "bytes": 899,
+      "sha256": "0f02076e48177ca070f2f6b23c3060230c2b1c38e53e4ad6e47f1ad06c049ed6"
+    },
+    "base/three_dimensional_dataset.npz": {
+      "bytes": 8250418,
+      "sha256": "7e8cc5770705db43946d3ca4969d59d395cf892e5faf02d76b7399665761162f"
+    },
+    "build_zoh_cutaway.py": {
+      "bytes": 11592,
+      "sha256": "983596ccaf04daed324bfa87dc42ad374f1823b16628dbd335bf95efa218333c"
+    },
+    "comparison_render_verification.json": {
+      "bytes": 604,
+      "sha256": "db2b462f6ae6469b5a219c1f7f35230248b0bcc00227c2c68fd12e96584ab478"
+    },
+    "cutaway_zoh/artifact_manifest.json": {
+      "bytes": 898,
+      "sha256": "885a6e9306ecf268ed5fb596f985e2a91766a5ecfc8cb05b7da2f273afb3ea87"
+    },
+    "cutaway_zoh/figure_metrics.json": {
+      "bytes": 1739,
+      "sha256": "ce9df26cd7b897ab040249298fa7038aa59ab8038be09a4f84b71a88a6a98635"
+    },
+    "cutaway_zoh/protocol.json": {
+      "bytes": 9849,
+      "sha256": "8825efc48838911d0121f00179cbed2b8e1561a709f1702fccc9c62c79057f5f"
+    },
+    "cutaway_zoh/reference.log": {
+      "bytes": 186,
+      "sha256": "5af0887327f76af2694b2c14baca29c80a9330a9c8f30693106755fe01c4c63e"
+    },
+    "cutaway_zoh/reference_fields.npz": {
+      "bytes": 3714068,
+      "sha256": "11fdc34ebd49c1094dcf67ed81e43a2120de2131c1888817242ff7c8d7c8714a"
+    },
+    "cutaway_zoh/reference_results.json": {
+      "bytes": 957,
+      "sha256": "b1bc0a325c2b35e410ea8ed668bdbc574c51be3450c0b2f378457559562383dc"
+    },
+    "cutaway_zoh/reference_verification.json": {
+      "bytes": 656,
+      "sha256": "544ecb31263f270c550f3d65b610facbe10418ac1bf83f6fdf216ddc07ab7d96"
+    },
+    "cutaway_zoh/render.log": {
+      "bytes": 275,
+      "sha256": "dbd21bfa353c7ab4050ca7a8da00c632680247c7d2078d6390b34a724e5a5683"
+    },
+    "cutaway_zoh/render_verification.json": {
+      "bytes": 1663,
+      "sha256": "76afa26c06d0513f581df82e14919656712464553470c77297c242d3774e501b"
+    },
+    "cutaway_zoh/three_dimensional_temperature_cutaway_zoh.png": {
+      "bytes": 235707,
+      "sha256": "6ee246922d803afa49031caf3feb7bd9a13bea2ec00e9dbfa4bcc9757897a193"
+    },
+    "environment.json": {
+      "bytes": 1073,
+      "sha256": "f5074e22c0cb83cd23dc581088e0e450b9149f82ba32aa72450f9edd22dd3dfd"
+    },
+    "finalize_audit.py": {
+      "bytes": 12942,
+      "sha256": "a516779b859784b8d931a81c5cfe236e1a5f53f76d803cb0bc85dd475ed79499"
+    },
+    "paper_tables_summary.json": {
+      "bytes": 11616,
+      "sha256": "44a79d9216c3f60f8dc53ac5c743354abe0e6084d94af042838be7133934f230"
+    },
+    "protocol.json": {
+      "bytes": 2729,
+      "sha256": "bd65af0b5d2b7c7887440118839387774988390d198fb6f9081fc729e169ac1d"
+    },
+    "protocol.sha256": {
+      "bytes": 80,
+      "sha256": "c1f1339c7e98f51f903c1541207b1ba6dd5d002b9826b0c42e407075ad3387cd"
+    },
+    "refined/dataset_audit.json": {
+      "bytes": 346,
+      "sha256": "cc3460004cd23ffa3c7c04c7da24a5e733efd0376b6226ebaecca436282bcc55"
+    },
+    "refined/seed_123/data_only.pt": {
+      "bytes": 230934,
+      "sha256": "f377b4c824b2bd23fb636f5e514b0bbffe54f668d11529a22d1bfd3d18abc448"
+    },
+    "refined/seed_123/data_only_control_ood_predictions.npy": {
+      "bytes": 38316224,
+      "sha256": "062fe14d9221510c89ea6287d379d95fd4a5576dbd411642d4f62587a2d8f0b6"
+    },
+    "refined/seed_123/data_only_history.csv": {
+      "bytes": 466,
+      "sha256": "becb32391c55fc45825566105cd4ac5ce2907aa2311783b65b54c9afb2ac351f"
+    },
+    "refined/seed_123/data_only_id_test_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "e035d2db2e2a7fd4fde3b5376a5ad29167d94f191895bcd512ce4cd0b2e76719"
+    },
+    "refined/seed_123/data_only_validation_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "0dd8b5d225a6804f425f85501b4e14df5bc261cbb61dc383cfb5db9829203481"
+    },
+    "refined/seed_123/physics_constrained.pt": {
+      "bytes": 231308,
+      "sha256": "b95e717a2f0141f7017cccd0e9ae2c198689cfb88550c5d1a56fcb4b2f868bf7"
+    },
+    "refined/seed_123/physics_constrained_control_ood_predictions.npy": {
+      "bytes": 38316224,
+      "sha256": "2b80226d86aba92eadaa0ac90ae31e40a3e100418c24be5bc517ada7d7ec20cd"
+    },
+    "refined/seed_123/physics_constrained_history.csv": {
+      "bytes": 581,
+      "sha256": "1ed600a9f05771383c181eab6cb479943dc393a4aa8e391b86754e11031df08f"
+    },
+    "refined/seed_123/physics_constrained_id_test_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "ae3155b9c01ca48a61c93bdc6de4a9d84f184f1a045d4dffae09cd9c51e39f71"
+    },
+    "refined/seed_123/physics_constrained_validation_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "4082a91a1880f32d400435268e9cd1ae5625fb937bf6a7c427bb96f086007f9e"
+    },
+    "refined/seed_123/three_dimensional_metrics.json": {
+      "bytes": 3871,
+      "sha256": "77861419254ec1bd903e55212121090fa0485ac6810deb7d60c5aa59d9f7ec67"
+    },
+    "refined/seed_42/data_only.pt": {
+      "bytes": 230934,
+      "sha256": "43d193f747a88308b3c8924ee607e6fdebe329a35fb7e785cae400f9ac431e9f"
+    },
+    "refined/seed_42/data_only_control_ood_predictions.npy": {
+      "bytes": 38316224,
+      "sha256": "8e7a6e62ad6f30f59668f3eb3b194a342f3b66b3f4e9f26b0dcf994f25f72146"
+    },
+    "refined/seed_42/data_only_history.csv": {
+      "bytes": 468,
+      "sha256": "9f7433d1104e1cf733635a86c7e8b0d69ea13b442bce10b68324f1646106dec1"
+    },
+    "refined/seed_42/data_only_id_test_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "491b49a21a9beb4c02650b9a779f67f50357face33f08f3220e5bb068c676683"
+    },
+    "refined/seed_42/data_only_validation_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "189c9e499817a0860a449edee219ddb88b88b0074d6513e586f8e1a0146a8de2"
+    },
+    "refined/seed_42/physics_constrained.pt": {
+      "bytes": 231308,
+      "sha256": "3377e0f7254cbab09b22e9f2f9b2ea9f48fb63dc9552a7bba4dfafea8e327943"
+    },
+    "refined/seed_42/physics_constrained_control_ood_predictions.npy": {
+      "bytes": 38316224,
+      "sha256": "0c31325f8bc51507da19971fb2bbf53a5726193ac8daff81e0470d098007ea84"
+    },
+    "refined/seed_42/physics_constrained_history.csv": {
+      "bytes": 585,
+      "sha256": "de00394a987468a9af3fc964b1b14c8bed9f12ecd1cc71553ced4cefc7632114"
+    },
+    "refined/seed_42/physics_constrained_id_test_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "b68936c7996e93afed6d23e5e18a2c566106131f491be8cdf3137b5c9122d8f0"
+    },
+    "refined/seed_42/physics_constrained_validation_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "c54941e3c8cc303c9d9089aafdfbfcbcde2c144b4f6ad636b7ca0092868ddae0"
+    },
+    "refined/seed_42/three_dimensional_metrics.json": {
+      "bytes": 3867,
+      "sha256": "25f9c2a35fd9d50ebef60015404c5022b769d6341323b9d257e51cf8dfcd2bc2"
+    },
+    "refined/seed_7/data_only.pt": {
+      "bytes": 230934,
+      "sha256": "4651a8a384f1ec9b72671593cd410e6d7002500caa3a1130a3c6301517dacd72"
+    },
+    "refined/seed_7/data_only_control_ood_predictions.npy": {
+      "bytes": 38316224,
+      "sha256": "8386d60b6cabd5d1916cd9680766e41caaf6545c32084fe5d4f8b1dfa7aaaf33"
+    },
+    "refined/seed_7/data_only_history.csv": {
+      "bytes": 468,
+      "sha256": "1a2c3e5c59780c5a2f7fbf6901b68cab919f697c26df80828207dc7e10407645"
+    },
+    "refined/seed_7/data_only_id_test_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "0c330d9ed990036727a79ee6441d29f836ca111e5592f968c7ca33217deb6eec"
+    },
+    "refined/seed_7/data_only_validation_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "9e69b8233779962bd34c9986f3495e5b736da0acf41487fff09ed47c59e71f18"
+    },
+    "refined/seed_7/physics_constrained.pt": {
+      "bytes": 231308,
+      "sha256": "3a0e39aca005152f4abc6201aff39d20d1323a3430607a6f65fad5d309108042"
+    },
+    "refined/seed_7/physics_constrained_control_ood_predictions.npy": {
+      "bytes": 38316224,
+      "sha256": "9db97d225a08f424a8a463ee045855c7ce2e2e86c2e0b0851664bdf0b865f3f6"
+    },
+    "refined/seed_7/physics_constrained_history.csv": {
+      "bytes": 583,
+      "sha256": "ba188483c378a227943ef0892d285bb1911c1e25ed085b8d8ffbb254d7cbd64b"
+    },
+    "refined/seed_7/physics_constrained_id_test_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "cd9a19da186400fad4f3ae4bd41cd01901dccc4e57d320ff349bad86791e1c0d"
+    },
+    "refined/seed_7/physics_constrained_validation_predictions.npy": {
+      "bytes": 28737200,
+      "sha256": "9e4287419e87a7e6dbae9e02d4ea87688de09e007ea5fa057a9a91d3d1fc2d10"
+    },
+    "refined/seed_7/three_dimensional_metrics.json": {
+      "bytes": 3857,
+      "sha256": "2b94d42928cbd7b02f0aa774b5786ec35b0d798be14ea006d39cbbf14c945635"
+    },
+    "refined/three_dimensional_action_audit_metrics.json": {
+      "bytes": 10452,
+      "sha256": "3eee9dcd6461756a1bdfaff8d43293e3e0c836ee8e16155aec7217dae3af0bc6"
+    },
+    "refined/three_dimensional_dataset.json": {
+      "bytes": 901,
+      "sha256": "75d165725dd3c2247c84cc7cc47362d44979a97394478a591cfc092fe61390b0"
+    },
+    "refined/three_dimensional_dataset.npz": {
+      "bytes": 43641633,
+      "sha256": "f85ef6a9a759497c3da51c5b9bc6e015c27fa27eb2127961e3e398ff6efceb94"
+    },
+    "render_paper_tables.py": {
+      "bytes": 8939,
+      "sha256": "db12aaecb689ec3dafe159c6dfa30f13bfa6487caf8ca531f14e48407c0b70bf"
+    },
+    "resume_audit_20261002.json": {
+      "bytes": 2065,
+      "sha256": "fc4e1c417d16943a1c8296ee31c87cb83939c2d78ba07df454d467622d8a7d12"
+    },
+    "resume_environment_20261002.json": {
+      "bytes": 517,
+      "sha256": "649db4ec7995f1e84c49f86409b1842c033e44469b44726f79e6068d37e91dbc"
+    },
+    "resume_record.json": {
+      "bytes": 1169,
+      "sha256": "6fae86cdc02fdad4364d11f19b47c142d343225c2c1923885af78a7a31a9a77f"
+    },
+    "run.log": {
+      "bytes": 1322,
+      "sha256": "7fe15f3dd92d17dcec06296487b7fec9a3de29678304e9dcee95791f6a373964"
+    },
+    "run_resumed_20261002.log": {
+      "bytes": 7404,
+      "sha256": "ca6e96168b46734cc659015b9671d5a4adea70275986070dca6485f44f8a3c4a"
+    },
+    "smoke.json": {
+      "bytes": 2206,
+      "sha256": "28f0d3eb96c5bd0267b75861930f36b3fb37554f28b49c38e03527f29a1f11c1"
+    },
+    "three_dimensional_base_table.tex": {
+      "bytes": 1007,
+      "sha256": "35e53cf31ad6f63f6e4554e9993cf73ce88268a90a6936ca848beb84593db355"
+    },
+    "three_dimensional_refined_table.tex": {
+      "bytes": 1012,
+      "sha256": "73fd92968c574276f67d2648ce838fa220213e0c55c99a6755873773af18dc8a"
+    },
+    "three_dimensional_zoh_comparison.png": {
+      "bytes": 253044,
+      "sha256": "019c7613c752728b1949119eba6de27fde5a436551db3bcd140b5f262cc4a0e5"
+    },
+    "validation.json": {
+      "bytes": 3113,
+      "sha256": "1470b6daf513abd4e1e1fabc392df7c686dc1c1b0d3fd1119a3b7e111f58a397"
+    }
+  }
+}

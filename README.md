@@ -14,7 +14,7 @@
 
 网络可递归推演完整温度轨迹，并供状态估计和滚动时域控制调用。训练目标同时包含数据误差和离散热传导残差。动态对流与辐射边界通过有效换热系数 \(H_{\mathrm{eff}}\) 表示，以处理本文瞬时观测模型下的局部不可辨识性。
 
-![三维试块温度场剖面](paper/figures/three_dimensional_temperature_cutaway.png)
+![三维试块温度场剖面](paper/figures/three_dimensional_temperature_cutaway_zoh.png)
 
 ## 研究内容
 
@@ -26,21 +26,30 @@
 - BDF 交叉求解器数值验证与在线推理计时
 - \(17\times13\times9\) 三维温度场世界模型，共 1,989 个状态量
 
+## 本科论文当前修订
+
+当前论文对应 `thesis-scientific-style-20261010` 修订。两版论文的摘要、六章正文和附录已完成科研行文润色，减少步骤导读、刻意对比与重复解释，采用研究对象、方法、结果和条件的直接陈述。实验数值、公式、图表、引用及结论的适用条件保留。修订记录见 [`docs/thesis-scientific-style-20261010.md`](docs/thesis-scientific-style-20261010.md)，前一版结构与证据映射见 [`docs/thesis-integrated-revision-20261010.md`](docs/thesis-integrated-revision-20261010.md)，实验详情见 [`docs/thesis-audit-followup-20261001.md`](docs/thesis-audit-followup-20261001.md)。本次 Git 同步包含论文源文件、计算实现、测试、正式轻量结果与修订记录。各历史文档中的本地快照及发布状态描述保留其生成时的含义。
+
+最新本地导出为 `output/pdf/heat-treatment-world-model-thesis-csust.pdf`（学校版59页）与 `output/pdf/heat-treatment-world-model-thesis-draft.pdf`（通用版56页）。两版已编译并检查排版，正文、摘要和附录同步。PDF、模型权重、二进制数据和备份目录按现有忽略规则保留在本地；仓库提供论文源文件及构建入口。`docs/thesis-scientific-style-20261010-manifest.json` 记录润色完成时的本地快照，包含未纳入 Git 的输入和历史 README 内容，完整核验需要对应本地归档；新克隆仓库的发布内容以 Git 提交为准。历史快照及润色前两版 PDF 独立保留。
+
 ## 主要结果
 
-下表列出论文主张所依赖的代表性结果。完整统计量和适用边界见 `docs/` 与论文正文。
+下表列出当前已有证据。三维数字采用动作定义统一后的两网格、三随机种子重复。完整统计量和适用边界见 `docs/` 与论文正文。
 
 | 研究问题 | 代表性结果 |
 | --- | --- |
 | 控制轨迹 OOD 的物理一致性 | 物理约束模型的离散残差降低 44.8% |
 | 四参数联合 OOD 的尾部风险 | 最大绝对误差由 121.76 °C 降至 61.69 °C |
-| 动态边界状态估计 | 引入 \(H_{\mathrm{eff}}\) 后 rollout RMSE 由 \(2.285\pm0.108\) °C 降至 \(1.409\pm0.068\) °C |
-| 交叉求解器在线计算 | 相对 BDF 数值推演获得 55.4 倍在线加速 |
-| 五传感器稀疏观测 | 未观测节点 RMSE 为 1.073 °C |
-| 严格参数 OOD 风险控制 | 配对目标函数平均下降 1.737，bootstrap 95% CI 为 [-3.291, -0.226] |
-| 三维 ID 物理一致性 | 隐式能量残差由 4.758 °C 降至 3.259 °C |
+| 已知动态边界的同信息推演 | 自主重算 \(H_{\mathrm{eff}}\) 后 RMSE 由 \(2.285\pm0.108\) °C 降至 \(1.494\pm0.082\) °C |
+| 相同100场景完整推演计时 | 自主H相对81节点BDF快44.0倍；与41节点数值模型仅差1.06倍，后者误差更低 |
+| 无中心测点的四传感器开环观测 | 未观测节点 RMSE 为 2.128 °C |
+| 删除中心测点的配对闭环 | ID后验均值控制中心误差由1.284增至7.445 °C，成功回合由30/30降至22/30 |
+| 传感器响应滞后 | 5 s 时间常数使未观测节点 RMSE 增至 4.894 °C |
+| 边界参数反事实分离 | 当前动作下等效的参数组合在改变炉温后最大热流差为 12.03 kW/m² |
+| 严格参数 OOD 风险控制 | 40 条新场景目标差为 -0.488，bootstrap 95% CI 为 [-2.802, 1.950] |
+| 三维 OOD 物理一致性 | 基础/加密网格三种子离散残差分别降低12.5%/25.6%；精度配对区间均跨零 |
 
-三维实验在 ID 能量一致性上给出正向证据。其控制 OOD 精度差异尚未形成统计优势，因此三维部分用于验证方法的空间扩展可行性，不承担超出证据范围的性能主张。
+三维重复实验中离散残差均下降，但该指标不能替代温度精度。基础网格OOD总体RMSE均值升高，加密网格仅降低0.9%；两者的轨迹配对区间均跨越零。新增 40 条严格参数 OOD 场景同样表明，风险分位控制的收益具有场景依赖性，不应解释为普遍性能优势。
 
 ## 目录结构
 
@@ -106,9 +115,25 @@ uv run --no-sync evaluate-cross-solver
 uv run --no-sync evaluate-closed-loop-control
 uv run --no-sync evaluate-partial-observability
 uv run --no-sync evaluate-ood-partial-observability
+uv run --no-sync analyze-counterfactual-identifiability
+uv run --no-sync evaluate-sensor-robustness
+uv run --no-sync analyze-ood-control-extension
+uv run --no-sync aggregate-three-dimensional-replicates
 ```
 
-三维模型的数据生成、训练和分析命令见 [`docs/three-dimensional-world-model.md`](docs/three-dimensional-world-model.md)。三维正式配置采用 \(17\times13\times9\) 网格。训练产物默认写入 `outputs/three_dimensional_world_model/`。
+本轮逻辑审查的四个补充入口如下，原模型与旧结果保持不变：
+
+```bash
+PYTHONPATH=src .venv/bin/python -m heat_world_model.fair_boundary_audit_cli --mode evaluate
+PYTHONPATH=src .venv/bin/python -m heat_world_model.fair_boundary_audit_cli --mode benchmark
+PYTHONPATH=src .venv/bin/python -m heat_world_model.scenario_success_audit_cli
+PYTHONPATH=src .venv/bin/python -m heat_world_model.sparse_control_audit_cli
+PYTHONPATH=src .venv/bin/python -m heat_world_model.three_dimensional_action_audit_cli
+```
+
+正式计时应在其他计算任务暂停后单独运行。三维完整重复包含两套网格、三个种子和两类模型，预计需要数小时。冻结协议及逐项结果见 [`docs/thesis-audit-followup-20261001.md`](docs/thesis-audit-followup-20261001.md)。
+
+此前四组补充实验的协议和结果见 [`docs/supplementary-numerical-experiments.md`](docs/supplementary-numerical-experiments.md)。三维模型的数据生成、训练和分析命令见 [`docs/three-dimensional-world-model.md`](docs/three-dimensional-world-model.md)。三维正式配置采用 \(17\times13\times9\) 网格。
 
 不同脚本的详细参数可通过 `--help` 查看。正式结果对应的配置、随机种子和文件哈希记录在 [`docs/experiment-freeze.md`](docs/experiment-freeze.md) 及各专题文档中。
 
@@ -126,9 +151,11 @@ make -C paper
 make -C paper-csust thesis
 ```
 
-编译结果分别写入 `paper/build/main.pdf` 和 `paper-csust/build/thesis.pdf`。学校模板中的学号、班级和指导教师字段仍需在 `paper-csust/baseinfo.tex` 中填写。
+编译结果分别写入 `paper/build/main.pdf` 和 `paper-csust/build/thesis.pdf`。学号已填写；学校模板中的班级和指导教师字段仍需在 `paper-csust/baseinfo.tex` 中填写。
 
 ## 查看答辩幻灯片
+
+现有演示文稿是较早版本，尚未同步40场景扩展、传感器补偿及本轮逻辑审查补充结论；正式答辩应先依据当前论文更新。
 
 ```bash
 python3 -m http.server 9187 --directory defense-slides

@@ -1,0 +1,26 @@
+{
+  "trajectory_id": 74,
+  "snapshot_time_s": 192.0,
+  "action_interpolation": "zero_order_hold",
+  "fine_bdf_seconds": 65.66563300000053,
+  "explicit_euler_seconds": 0.41941066600156773,
+  "fine_bdf_diagnostics": {
+    "method": "BDF",
+    "action_interpolation": "zero_order_hold",
+    "rhs_evaluations": 5480.0,
+    "jacobian_evaluations": 160.0,
+    "linear_decompositions": 1088.0,
+    "integration_segments": 160.0
+  },
+  "explicit_euler_diagnostics": {
+    "method": "EXPLICIT_EULER",
+    "action_interpolation": "zero_order_hold",
+    "rhs_evaluations": 3840.0,
+    "jacobian_evaluations": 0.0,
+    "linear_decompositions": 0.0,
+    "integration_segments": 160.0
+  },
+  "protocol_sha256": "8825efc48838911d0121f00179cbed2b8e1561a709f1702fccc9c62c79057f5f",
+  "reference_fields_sha256": "11fdc34ebd49c1094dcf67ed81e43a2120de2131c1888817242ff7c8d7c8714a",
+  "interpretation": "Fixed-case numerical visualization; not aggregate performance evidence"
+}

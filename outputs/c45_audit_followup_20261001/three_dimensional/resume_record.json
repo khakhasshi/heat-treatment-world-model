@@ -1,0 +1,22 @@
+{
+  "pid": 10057,
+  "started_utc": "2026-10-02T10:20:57.039927+00:00",
+  "status": "completed",
+  "prior_pid": 94213,
+  "prior_process_absent": true,
+  "input_verification_file": "resume_audit_20261002.json",
+  "input_verification_passed": true,
+  "original_protocol_sha256": "bd65af0b5d2b7c7887440118839387774988390d198fb6f9081fc729e169ac1d",
+  "resume_behavior": "Skipped completed base seed42 data_only. Restarted unsaved base seed42 physics_constrained from original seed42 and full40-epoch budget; all remaining base/refined runs unchanged.",
+  "lost_unsaved_progress": "Prior physical model last logged epoch35; its in-memory best state and optimizer were lost when old process exited. No partial metrics used.",
+  "command": "OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=src .venv/bin/python -u -m heat_world_model.three_dimensional_action_audit_cli --stage all --grid both --device mps",
+  "log": "run_resumed_20261002.log",
+  "completed_utc": "2026-10-02T13:56:53.866869+00:00",
+  "runner_exit_code": 0,
+  "completed_model_count": 12,
+  "completed_grid_aggregates": [
+    "base",
+    "refined"
+  ],
+  "bound_caffeinate_exit_code": 0
+}

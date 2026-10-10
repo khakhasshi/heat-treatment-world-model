@@ -27,6 +27,11 @@ from heat_world_model.three_dimensional_world_model import (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train controlled 3D heat world models")
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/c45_three_dimensional"))
+    parser.add_argument(
+        "--dataset",
+        type=Path,
+        help="reuse an existing dataset instead of reading it from the output directory",
+    )
     parser.add_argument("--trajectories", type=int, default=96)
     parser.add_argument("--steps", type=int, default=300)
     parser.add_argument("--shape", type=int, nargs=3, default=(9, 7, 5))
@@ -65,19 +70,39 @@ def write_history(path: Path, history: list[dict[str, float]]) -> None:
 def main() -> None:
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    dataset_path = args.output_dir / "three_dimensional_dataset.npz"
-    dataset_config = ThreeDimensionalDatasetConfig(
-        trajectories=args.trajectories,
-        steps=args.steps,
-        shape=tuple(args.shape),
-        seed=args.seed,
+    dataset_path = (
+        args.dataset
+        if args.dataset is not None
+        else args.output_dir / "three_dimensional_dataset.npz"
     )
-    if args.regenerate or not dataset_path.exists():
+    if args.dataset is not None:
+        if args.regenerate:
+            raise ValueError("--regenerate cannot be combined with --dataset")
+        manifest = json.loads(dataset_path.with_suffix(".json").read_text(encoding="utf-8"))
+        config_values = manifest["config"]
+        dataset_config = ThreeDimensionalDatasetConfig(
+            trajectories=int(config_values["trajectories"]),
+            steps=int(config_values["steps"]),
+            shape=tuple(config_values["shape"]),
+            dimensions_m=tuple(config_values["dimensions_m"]),
+            dt_s=float(config_values["dt_s"]),
+            seed=int(config_values["seed"]),
+        )
+        with np.load(dataset_path) as archive:
+            dataset = {key: archive[key] for key in archive.files}
+    else:
+        dataset_config = ThreeDimensionalDatasetConfig(
+            trajectories=args.trajectories,
+            steps=args.steps,
+            shape=tuple(args.shape),
+            seed=args.seed,
+        )
+    if args.dataset is None and (args.regenerate or not dataset_path.exists()):
         started = time.perf_counter()
         dataset = generate_three_dimensional_dataset(dataset_config)
         save_three_dimensional_dataset(dataset_path, dataset_config, dataset)
         print(f"generated dataset in {time.perf_counter() - started:.1f}s")
-    else:
+    elif args.dataset is None:
         with np.load(dataset_path) as archive:
             dataset = {key: archive[key] for key in archive.files}
 
@@ -98,6 +123,7 @@ def main() -> None:
     else:
         all_metrics = {
             "dataset_config": asdict(dataset_config),
+            "dataset_path": str(dataset_path),
             "device": str(device),
             "models": {},
         }

@@ -1,0 +1,83 @@
+{
+  "mps_available": true,
+  "records": [
+    {
+      "grid": "base",
+      "training_index": 1,
+      "seconds": 0.8624505000188947,
+      "diagnostics": {
+        "method": "BDF",
+        "action_interpolation": "zero_order_hold",
+        "rhs_evaluations": 4049.0,
+        "jacobian_evaluations": 132.0,
+        "linear_decompositions": 736.0,
+        "integration_segments": 132.0
+      }
+    },
+    {
+      "grid": "base",
+      "training_index": 3,
+      "seconds": 1.5182433750014752,
+      "diagnostics": {
+        "method": "BDF",
+        "action_interpolation": "zero_order_hold",
+        "rhs_evaluations": 6076.0,
+        "jacobian_evaluations": 276.0,
+        "linear_decompositions": 1390.0,
+        "integration_segments": 276.0
+      }
+    },
+    {
+      "grid": "base",
+      "training_index": 5,
+      "seconds": 1.519795083993813,
+      "diagnostics": {
+        "method": "BDF",
+        "action_interpolation": "zero_order_hold",
+        "rhs_evaluations": 5854.0,
+        "jacobian_evaluations": 263.0,
+        "linear_decompositions": 1330.0,
+        "integration_segments": 263.0
+      }
+    },
+    {
+      "grid": "refined",
+      "training_index": 1,
+      "seconds": 8.606710207997821,
+      "diagnostics": {
+        "method": "BDF",
+        "action_interpolation": "zero_order_hold",
+        "rhs_evaluations": 4801.0,
+        "jacobian_evaluations": 132.0,
+        "linear_decompositions": 858.0,
+        "integration_segments": 132.0
+      }
+    },
+    {
+      "grid": "refined",
+      "training_index": 3,
+      "seconds": 13.899940000002971,
+      "diagnostics": {
+        "method": "BDF",
+        "action_interpolation": "zero_order_hold",
+        "rhs_evaluations": 6704.0,
+        "jacobian_evaluations": 276.0,
+        "linear_decompositions": 1459.0,
+        "integration_segments": 276.0
+      }
+    },
+    {
+      "grid": "refined",
+      "training_index": 5,
+      "seconds": 13.121440832997905,
+      "diagnostics": {
+        "method": "BDF",
+        "action_interpolation": "zero_order_hold",
+        "rhs_evaluations": 6562.0,
+        "jacobian_evaluations": 263.0,
+        "linear_decompositions": 1377.0,
+        "integration_segments": 263.0
+      }
+    }
+  ]
+}

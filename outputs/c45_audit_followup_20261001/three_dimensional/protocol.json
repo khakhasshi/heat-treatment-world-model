@@ -1,0 +1,76 @@
+{
+  "audit": "2026-10-01 three-dimensional action semantics correction",
+  "version": 1,
+  "action": "a_n is constant on [n,n+1); BDF restarts at every action change",
+  "legacy": "Legacy linear interpolation and all existing artifacts remain unchanged.",
+  "scenario_seed": 42,
+  "trajectories": 96,
+  "steps": 300,
+  "split_counts": {
+    "train": 56,
+    "validation": 12,
+    "id_test": 12,
+    "control_ood": 16
+  },
+  "training_seeds": [
+    42,
+    7,
+    123
+  ],
+  "grids": {
+    "base": {
+      "shape": [
+        9,
+        7,
+        5
+      ],
+      "epochs_per_model": 40,
+      "batch_size": 256,
+      "evaluate_every": 5,
+      "warm_start": null
+    },
+    "refined": {
+      "shape": [
+        17,
+        13,
+        9
+      ],
+      "epochs_per_model": 12,
+      "batch_size": 64,
+      "evaluate_every": 2,
+      "warm_start": "corresponding corrected base model and seed"
+    }
+  },
+  "models": {
+    "data_only": 0.0,
+    "physics_constrained": 0.1
+  },
+  "architecture": {
+    "hidden_channels": 16,
+    "residual_blocks": 3,
+    "rollout_horizon": 3
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 0.0008,
+    "weight_decay": 1e-06
+  },
+  "selection": "Minimum validation 300-step rollout RMSE only; all hyperparameters fixed before test evaluation.",
+  "statistics": "Three-seed mean and sample SD; paired trajectory RMSE averaged over seeds, 100000 bootstrap draws.",
+  "limitations": [
+    "Fixed geometry and one frozen scenario sample; no real-furnace validation.",
+    "Training residual is a first-order semi-implicit discretization; BDF uses smaller adaptive steps.",
+    "Residual reduction is consistency with that discrete equation, not independent conservation validation.",
+    "No hyperparameter selection or extension decision based on held-out test accuracy."
+  ],
+  "cpu_threads": 2,
+  "source_sha256": {
+    "src/heat_world_model/three_dimensional.py": "d2017a127a1774d41206a1809fc9835b1831065055f12e696c9fe71775615a25",
+    "src/heat_world_model/three_dimensional_dataset.py": "840519a2f2a4710d1753e3b5e5ca23975c2cfade540716c182c4394c6e42f96f",
+    "src/heat_world_model/three_dimensional_training.py": "351e37bd2bdcb35f18fae29eb8a04f0da925117cb92348d163c404fec06cc628",
+    "src/heat_world_model/three_dimensional_world_model.py": "21832238835f5ae4f68654287eb8b4a489d09f27521815fd70f488e5c19b526e",
+    "src/heat_world_model/three_dimensional_replicates_cli.py": "64647d63990ed7913a23becb1c0e12babb8cdadc99f0c26a20c932d84b4dd656",
+    "src/heat_world_model/three_dimensional_action_audit_cli.py": "5bd8d2bccb74f288986957c87e2e0cc98a4e5d39ddc510dd4c3f15de83ea7c72"
+  },
+  "legacy_scenarios_sha256": "45ef79941605242fd5089f2c43a065188c3863ee5cca725998282f341f5004f4"
+}

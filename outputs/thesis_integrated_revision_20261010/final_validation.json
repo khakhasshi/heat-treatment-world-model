@@ -1,0 +1,60 @@
+{
+  "revision": "thesis-integrated-revision-20261010",
+  "new_numerical_experiments": 0,
+  "chapter_count": 6,
+  "two_versions_synchronized": true,
+  "evidence_check": "evidence_validation.json",
+  "structure_check": "structural_validation.json",
+  "pdfs": {
+    "school": {
+      "pages": 61,
+      "pdf": "output/pdf/heat-treatment-world-model-thesis-csust.pdf",
+      "sha256": "c2ed363d720e8c619e8f8bd3b7860d356a17e1222e367981a2bb144c58e00821",
+      "build_returncode": 0,
+      "overfull_undefined_or_missing_glyph_warnings": [],
+      "english_abstract_and_keywords_on_one_page": true,
+      "build_log_sha256": "8bc491d727d9090c5fd0dbfb42ecbc279bdc3a62aa9bb873ef534c45421df439"
+    },
+    "generic": {
+      "pages": 57,
+      "pdf": "output/pdf/heat-treatment-world-model-thesis-draft.pdf",
+      "sha256": "f87db33cfa9341da8940d326e482cafdd42e0d302e1244ed38b1b2ba394b0af0",
+      "build_returncode": 0,
+      "overfull_undefined_or_missing_glyph_warnings": [],
+      "english_abstract_and_keywords_on_one_page": true,
+      "build_log_sha256": "4daaaf41d1dbf545803a631c0f437e420bb592385b62a94e15331236ee9004be"
+    }
+  },
+  "visual_review": {
+    "all_page_contact_sheets": "reviewed for both versions",
+    "generic_detail_pages": [
+      3,
+      4,
+      5,
+      28,
+      29,
+      30,
+      31,
+      43,
+      56
+    ],
+    "school_detail_pages": [
+      4,
+      5,
+      30,
+      31,
+      32,
+      33,
+      46,
+      48,
+      49,
+      59,
+      60,
+      61
+    ],
+    "final_changes_checked": "abstract wording, three-dimensional table captions, chapter-four ending and appendix command spaces",
+    "result": "pass"
+  },
+  "build_environment_note": "Installed universal Biber failed architecture extraction. Built with a task-local arm64 thin copy of the same installed Biber 2.21; no system executable changed.",
+  "tests": "No experiment or implementation changes; did not rerun training or numerical test suite."
+}

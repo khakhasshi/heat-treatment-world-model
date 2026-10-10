@@ -1,0 +1,102 @@
+{
+  "study": "ood_40",
+  "scenario_index": 98,
+  "seed": 42,
+  "controller": "sparse_risk_aware",
+  "layout": "near_surface_4",
+  "category": "combined",
+  "protocol_sha256": "e5315a28e01bc85e3e2b543ac381f538a15693c33f9712e5610e1b3706c10e3f",
+  "wall_seconds": 0.4268132080032956,
+  "result": {
+    "metrics": {
+      "final_center_c": 356.0826721191406,
+      "final_center_abs_error_c": 6.082672119140625,
+      "final_nonuniformity_c": 6.060455322265625,
+      "peak_surface_c": 362.14312744140625,
+      "overtemperature_c": 2.14312744140625,
+      "normalized_energy": 0.7455196976661682,
+      "mean_step_slew_c": 2.0066890716552734,
+      "total_command_variation_c": 800.0,
+      "objective": 30.041021645069122,
+      "success": false,
+      "planning_seconds": 0.24573683203198016
+    },
+    "assimilation_metrics": {
+      "field_rmse_c": 6.5991803865613505,
+      "unobserved_field_rmse_c": 6.942722359981621,
+      "center_rmse_c": 4.9092395768036,
+      "convection_mae_w_m2k": 1.6968393597176097,
+      "emissivity_mae": 0.06104012898920111,
+      "state_90_coverage": 0.20738738738738738,
+      "state_90_width_c": 7.191599499179809,
+      "convection_90_coverage": 0.9166666666666666,
+      "emissivity_90_coverage": 0.02666666666666667,
+      "innovation_rmse_c": 0.9054742380861729,
+      "common_unobserved_field_rmse_c": 6.990769581275906,
+      "common_state_90_coverage": 0.20074074074074075,
+      "common_state_90_width_c": 7.0278662374516125
+    },
+    "decisions": [
+      {
+        "step": 0,
+        "action_c": 500.0
+      },
+      {
+        "step": 20,
+        "action_c": 700.0
+      },
+      {
+        "step": 40,
+        "action_c": 700.0
+      },
+      {
+        "step": 60,
+        "action_c": 700.0
+      },
+      {
+        "step": 80,
+        "action_c": 700.0
+      },
+      {
+        "step": 100,
+        "action_c": 700.0
+      },
+      {
+        "step": 120,
+        "action_c": 700.0
+      },
+      {
+        "step": 140,
+        "action_c": 700.0
+      },
+      {
+        "step": 160,
+        "action_c": 700.0
+      },
+      {
+        "step": 180,
+        "action_c": 700.0
+      },
+      {
+        "step": 200,
+        "action_c": 700.0
+      },
+      {
+        "step": 220,
+        "action_c": 800.0
+      },
+      {
+        "step": 240,
+        "action_c": 700.0
+      },
+      {
+        "step": 260,
+        "action_c": 800.0
+      },
+      {
+        "step": 280,
+        "action_c": 900.0
+      }
+    ]
+  }
+}

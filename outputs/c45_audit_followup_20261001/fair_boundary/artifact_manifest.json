@@ -1,0 +1,16 @@
+{
+  "sha256": {
+    "benchmark.json": "f6e9cf48d19aec164803401a765a4919faa1e8c243a5641cb57f2b68235d0cc1",
+    "benchmark.log": "5269d7839707bcb2908eb8ea0ce368bf6e3fb5f9235b0c6b91993dadf74cda80",
+    "benchmark_raw.csv": "7fd41aa21079a379bcfd5a5e2c7ef674c2f3a0db6e0ac2303d57a54cfb7e31bf",
+    "evaluate.log": "2996715364df873902b03fdc4c9bf4e81b3eb683a207a7317268113995bd233c",
+    "evaluation.json": "4dd7bc7387af630020e1f735580d437c93537adc9ac404271114343fbfcdc37c",
+    "fair_boundary_comparison.png": "a483ced106f4a160952d92cbf1ef28c60e2233d17fb5e2bc57909b10679dce54",
+    "input_manifest.json": "c27d5e4b60b678f64d950fa812881070a400dc23cb1f7393957518c30c8103c3",
+    "paired_trajectory_differences.csv": "5ff211885335b4feaab1e2ede12eaf8e49351a7f46604dec06e0d036e1badad5",
+    "protocol.json": "ca3438719efd6d4f5863b7071df820d9dffcf0372c623b8dbf3b44c544b64eee",
+    "seed_metrics.csv": "18d210c8dc7f86afd4e3cd06507d537404d68e4d1674c56940f26e1118c7d891",
+    "trajectory_metrics.csv": "b65d251c75d50f77cb1ab411eeb8621baebcb25e67ec6f46b2f4f0e25ea172fa",
+    "verification.json": "f5d05e88d008d090e1cb5fa5295ef3ee81d1dd5f98cdfdd49c541ce4d04148d3"
+  }
+}

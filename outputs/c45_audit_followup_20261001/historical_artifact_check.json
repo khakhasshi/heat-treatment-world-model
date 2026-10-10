@@ -1,0 +1,8 @@
+{
+  "historical_manifest": "docs/thesis-revision-v2-manifest.json",
+  "checked_output_count": 235,
+  "missing": [],
+  "changed": [],
+  "verified_unchanged": true,
+  "note": "Only historical numerical outputs and input artifacts are checked here; paper/source edits are intentional."
+}

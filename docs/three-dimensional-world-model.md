@@ -1,5 +1,7 @@
 # Three-dimensional heat world model experiments
 
+> Historical record: the tables and commands below use the original linearly interpolated furnace actions. The corrected zero-order-hold audit, with matched 40-epoch base budgets and three seeds on both grids, is recorded in [the follow-up report](thesis-audit-followup-20261001.md). Use that report for the revised thesis; the historical artifacts below are retained.
+
 ## Scope
 
 - Specimen: C45 cuboid, 60 x 40 x 20 mm.
@@ -12,7 +14,7 @@
 
 ## Learned dynamics
 
-The model is a controlled residual 3D convolutional network. Inputs are the current field, furnace command, four thermal parameters, and three coordinate channels. Both comparisons use 16 hidden channels, three residual blocks, three-step closed-loop training, and seed 42. The checkpoint is selected by validation-set 300-step rollout RMSE.
+The model is a controlled residual 3D convolutional network. Inputs are the current field, furnace command, four thermal parameters, and three coordinate channels. All comparisons use 16 hidden channels, three residual blocks, and three-step closed-loop training. The checkpoint is selected by validation-set 300-step rollout RMSE. The formal repeat study uses seeds 42, 7, and 123 on the same frozen operating conditions.
 
 The data-only model uses zero physics weight. The physics-constrained model uses a semi-implicit six-face finite-volume residual with weight 0.1. The stronger three-dimensional weight was used because the numerical scale of this residual differs from the one-dimensional experiment.
 
@@ -58,9 +60,27 @@ Control-OOD rollout RMSE on the refined grid was 17.014 degC for the data-only m
 
 The paper figure uses the ID-test trajectory whose data-only rollout RMSE is nearest the 75th percentile. At 192 s, a 25 x 19 x 13 BDF reference is compared with the 17 x 13 x 9 explicit Euler and learned fields. The snapshot RMSE values are 0.344, 5.150, and 4.530 degC for explicit Euler, data-only, and physics-constrained fields. Display interpolation is not used for the learned fields.
 
+## Three-seed repeat study
+
+Seeds 7 and 123 repeat the complete base-to-refined training protocol. Each seed first trains its own base-grid data and physics models. The corresponding convolutional weights are then transferred to the refined grid. The frozen seed-42 datasets are shared across seeds so that the reported standard deviation isolates training randomness rather than scenario sampling.
+
+```bash
+uv run --no-sync aggregate-three-dimensional-replicates
+```
+
+The refined-grid aggregate is:
+
+| Split | Data RMSE | Physics RMSE | Data residual | Physics residual |
+| --- | ---: | ---: | ---: | ---: |
+| Validation | 3.922 +/- 0.698 | 3.990 +/- 0.359 | 4.863 +/- 0.150 | 3.402 +/- 0.152 |
+| ID test | 3.695 +/- 0.594 | 3.804 +/- 0.276 | 4.836 +/- 0.228 | 3.348 +/- 0.242 |
+| Control OOD | 16.588 +/- 5.062 | 15.877 +/- 3.233 | 6.992 +/- 0.523 | 5.766 +/- 0.418 |
+
+Values are mean +/- sample standard deviation over three training seeds. Physics regularization reduces the discrete energy residual by 30.0%, 30.8%, and 17.5% on validation, ID, and control-OOD trajectories. On the 16 OOD trajectories, the seed-averaged paired RMSE difference is -0.492 degC with a 95% bootstrap interval of [-1.079, 0.023] degC; 11 trajectories improve and 5 worsen.
+
 ## Evidence boundary
 
-This is a fixed-geometry, single-seed numerical extension. It demonstrates that the controlled recursive formulation can operate on a genuine three-dimensional field with 1,989 temperature states. It does not establish cross-geometry generalization, cross-grid inference, or real-furnace validity. The paired 95% interval for refined-grid control-OOD trajectory RMSE includes zero. The refined run therefore supports spatial-resolution feasibility and an ID energy-consistency result, not a universal OOD accuracy claim.
+This is a fixed-geometry, three-seed numerical extension. It demonstrates that the controlled recursive formulation can operate on a genuine three-dimensional field with 1,989 temperature states and that the energy-residual reduction persists across training seeds. It does not establish cross-geometry generalization, cross-grid inference, or real-furnace validity. The paired 95% interval for refined-grid control-OOD trajectory RMSE still includes zero. The repeat study therefore supports spatial-resolution feasibility and energy consistency, not a universal OOD accuracy claim.
 
 ## Frozen artifact hashes
 

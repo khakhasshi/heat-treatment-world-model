@@ -1,0 +1,66 @@
+{
+  "created_at_utc": "2026-10-01T08:49:30.255467+00:00",
+  "purpose": "Frozen-weight same-information audit, without retraining or test-based selection",
+  "model_seeds": [
+    42,
+    7,
+    123
+  ],
+  "physics_weights": [
+    0.0,
+    0.001
+  ],
+  "datasets": {
+    "dynamic_holdout": "outputs/c45_effective_boundary/dynamic_boundary_holdout_dataset.npz",
+    "cross_solver": "outputs/c45_cross_solver/cross_solver_dataset.npz"
+  },
+  "expected_shape": [
+    100,
+    301,
+    41
+  ],
+  "methods": [
+    "separate_h_epsilon",
+    "effective_autonomous",
+    "effective_oracle"
+  ],
+  "autonomous_information": "Only true initial field, exogenous furnace actions, h/epsilon histories and material/geometry parameters; no future temperature truth",
+  "effective_autonomous": "Recompute H each step from arithmetic mean of the two predicted surface temperatures, following the existing symmetric control interface",
+  "effective_oracle": "Diagnostic reproduction of old evaluation; H computed from the full reference temperature trajectory",
+  "physics_residual": "All methods use original h/epsilon with their own predicted states, through c45_radiative_heat_residual",
+  "paired_statistics": "Per-trajectory RMSE, max error, residual RMSE differences; average three training seeds per trajectory before percentile bootstrap over 100 trajectories",
+  "bootstrap_replicates": 100000,
+  "bootstrap_seed": 20261001,
+  "primary_comparison": "effective_autonomous minus separate_h_epsilon, physics weight 0.001; negative is better",
+  "secondary_comparisons": [
+    "effective_autonomous minus effective_oracle",
+    "effective_oracle minus separate_h_epsilon",
+    "same comparisons with weight 0"
+  ],
+  "no_retraining": true,
+  "torch_cpu_threads": 1,
+  "benchmark": {
+    "dataset": "cross_solver, all 100 trajectories",
+    "seed": 42,
+    "physics_weight": 0.001,
+    "methods": [
+      "separate_h_epsilon",
+      "effective_autonomous",
+      "source_solver_41",
+      "bdf_solver_81"
+    ],
+    "warmup_sweeps": 1,
+    "measured_sweeps": 3,
+    "method_order": "fixed-seed randomized order within each trajectory and sweep",
+    "timer_scope": "single 300-step trajectory including input conversion, H recomputation, output allocation, and BDF projection; model loading and solver construction excluded for all",
+    "bdf": {
+      "nx": 81,
+      "rtol": 1e-06,
+      "atol": 1e-07,
+      "max_step_s": 0.25
+    },
+    "source_solver": "existing 41-node semi-implicit implementation; no optimization or accuracy matching",
+    "caveat": "Deployment configuration comparison, not same-accuracy evidence or a comparison with optimized numerical methods",
+    "execution": "separate benchmark command only after other experiments stop"
+  }
+}

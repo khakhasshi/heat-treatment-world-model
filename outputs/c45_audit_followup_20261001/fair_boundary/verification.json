@@ -1,0 +1,13 @@
+{
+  "input_sha256_still_match": true,
+  "dataset_controls_identical": true,
+  "dataset_parameter_histories_identical": true,
+  "dataset_initial_states_identical": true,
+  "number_of_seed_records": 36,
+  "input_manifest_sha256": "c27d5e4b60b678f64d950fa812881070a400dc23cb1f7393957518c30c8103c3",
+  "protocol_sha256": "ca3438719efd6d4f5863b7071df820d9dffcf0372c623b8dbf3b44c544b64eee",
+  "input_sha256_still_match_after_benchmark": true,
+  "benchmark_measured_rows": 1200,
+  "benchmark_unique_scenario_method_pairs": 400,
+  "benchmark_repeats_per_pair_all_three": true
+}

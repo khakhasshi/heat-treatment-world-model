@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-02T10:31:50.705372+00:00",
+  "python": "3.11.15 (main, Mar  3 2026, 00:52:57) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "executable": "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/.venv/bin/python",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "torch": "2.14.0",
+  "mps_available": true,
+  "training_pid": 10057,
+  "training_cpu_threads": 2,
+  "training_interop_threads": 1,
+  "software_versions_match_prior_run": true
+}

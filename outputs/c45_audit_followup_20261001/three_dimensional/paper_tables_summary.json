@@ -1,0 +1,288 @@
+{
+  "protocol_sha256": "bd65af0b5d2b7c7887440118839387774988390d198fb6f9081fc729e169ac1d",
+  "seeds": [
+    42,
+    7,
+    123
+  ],
+  "temperature_error_unit": "degrees Celsius",
+  "table_statistics": "Across three seeds: mean plus/minus sample standard deviation (ddof=1), rounded to 3 decimals only in LaTeX.",
+  "paired_definition": "Physics minus data per-trajectory rollout RMSE, averaged over seeds before pairing; negative means improvement. Trajectories, not seeds, are bootstrap units; 100000 draws, seed 20260905. This differs from pooled rollout RMSE in the tables.",
+  "reduction_definition": "100 * (data mean - physics mean) / data mean; positive means lower error, negative means higher error; null if data mean is zero. These are descriptive reductions, not confidence intervals.",
+  "grids": {
+    "base": {
+      "shape": [
+        9,
+        7,
+        5
+      ],
+      "input": "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_audit_followup_20261001/three_dimensional/base/three_dimensional_action_audit_metrics.json",
+      "input_sha256": "f54597a08570d1cc62daaa5f2b68ab80c6532c48ff1aa38e6ce69f01a57b40a9",
+      "dataset_sha256": "7e8cc5770705db43946d3ca4969d59d395cf892e5faf02d76b7399665761162f",
+      "control_ood_paired": {
+        "trajectory_count": 16,
+        "mean_difference_c": 0.7977888584136963,
+        "bootstrap_95_interval_c": [
+          -0.3149900473654269,
+          1.8913957357406614
+        ],
+        "improved_trajectories": 6,
+        "worsened_trajectories": 10,
+        "tied_trajectories": 0
+      },
+      "metric_comparisons": {
+        "validation": {
+          "rollout_rmse_c": {
+            "data_mean": 4.963459809621175,
+            "physics_mean": 4.706636746724446,
+            "physics_minus_data": -0.2568230628967285,
+            "reduction_percent": 5.17427505706609
+          },
+          "trajectory_rmse_mean_c": {
+            "data_mean": 4.4896120230356855,
+            "physics_mean": 4.123252948125203,
+            "physics_minus_data": -0.36635907491048236,
+            "reduction_percent": 8.16014998691949
+          },
+          "trajectory_rmse_p95_c": {
+            "data_mean": 8.327748775482178,
+            "physics_mean": 8.194772720336914,
+            "physics_minus_data": -0.13297605514526367,
+            "reduction_percent": 1.5967827408141806
+          },
+          "final_rmse_mean_c": {
+            "data_mean": 7.566094716389974,
+            "physics_mean": 6.5146199862162275,
+            "physics_minus_data": -1.0514747301737462,
+            "reduction_percent": 13.897192271410507
+          },
+          "maximum_error_mean_c": {
+            "data_mean": 23.581214269002277,
+            "physics_mean": 21.55375862121582,
+            "physics_minus_data": -2.027455647786457,
+            "reduction_percent": 8.597757624600215
+          },
+          "implicit_physics_residual_rmse_c": {
+            "data_mean": 2.318176078314001,
+            "physics_mean": 1.7762852344334499,
+            "physics_minus_data": -0.541890843880551,
+            "reduction_percent": 23.375741340350032
+          }
+        },
+        "id_test": {
+          "rollout_rmse_c": {
+            "data_mean": 4.423067490259807,
+            "physics_mean": 4.465036789576213,
+            "physics_minus_data": 0.04196929931640625,
+            "reduction_percent": -0.9488731385815009
+          },
+          "trajectory_rmse_mean_c": {
+            "data_mean": 3.884042819341024,
+            "physics_mean": 3.6407573223114014,
+            "physics_minus_data": -0.24328549702962254,
+            "reduction_percent": 6.263718201513004
+          },
+          "trajectory_rmse_p95_c": {
+            "data_mean": 7.336734930674235,
+            "physics_mean": 7.677266279856364,
+            "physics_minus_data": 0.3405313491821289,
+            "reduction_percent": -4.641456348087453
+          },
+          "final_rmse_mean_c": {
+            "data_mean": 6.570976734161377,
+            "physics_mean": 5.888628005981445,
+            "physics_minus_data": -0.6823487281799316,
+            "reduction_percent": 10.384281603563107
+          },
+          "maximum_error_mean_c": {
+            "data_mean": 20.48297119140625,
+            "physics_mean": 19.030078887939453,
+            "physics_minus_data": -1.4528923034667969,
+            "reduction_percent": 7.093171639456127
+          },
+          "implicit_physics_residual_rmse_c": {
+            "data_mean": 2.216080033004246,
+            "physics_mean": 1.7583079177538679,
+            "physics_minus_data": -0.457772115250378,
+            "reduction_percent": 20.656840386301198
+          }
+        },
+        "control_ood": {
+          "rollout_rmse_c": {
+            "data_mean": 14.792184829711914,
+            "physics_mean": 16.3676970799764,
+            "physics_minus_data": 1.5755122502644845,
+            "reduction_percent": -10.650977312694708
+          },
+          "trajectory_rmse_mean_c": {
+            "data_mean": 12.900790850321451,
+            "physics_mean": 13.698579788208008,
+            "physics_minus_data": 0.7977889378865566,
+            "reduction_percent": -6.184031251593216
+          },
+          "trajectory_rmse_p95_c": {
+            "data_mean": 26.599485397338867,
+            "physics_mean": 30.146230697631836,
+            "physics_minus_data": 3.5467453002929688,
+            "reduction_percent": -13.333886905375248
+          },
+          "final_rmse_mean_c": {
+            "data_mean": 23.476215998331707,
+            "physics_mean": 25.309232076009113,
+            "physics_minus_data": 1.8330160776774065,
+            "reduction_percent": -7.807970747107056
+          },
+          "maximum_error_mean_c": {
+            "data_mean": 59.82168706258138,
+            "physics_mean": 60.65375645955404,
+            "physics_minus_data": 0.8320693969726562,
+            "reduction_percent": -1.3909159668168531
+          },
+          "implicit_physics_residual_rmse_c": {
+            "data_mean": 3.6770049901201225,
+            "physics_mean": 3.2181985792638113,
+            "physics_minus_data": -0.45880641085631124,
+            "reduction_percent": 12.477720647350079
+          }
+        }
+      }
+    },
+    "refined": {
+      "shape": [
+        17,
+        13,
+        9
+      ],
+      "input": "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_audit_followup_20261001/three_dimensional/refined/three_dimensional_action_audit_metrics.json",
+      "input_sha256": "3eee9dcd6461756a1bdfaff8d43293e3e0c836ee8e16155aec7217dae3af0bc6",
+      "dataset_sha256": "f85ef6a9a759497c3da51c5b9bc6e015c27fa27eb2127961e3e398ff6efceb94",
+      "control_ood_paired": {
+        "trajectory_count": 16,
+        "mean_difference_c": -0.10308128595352173,
+        "bootstrap_95_interval_c": [
+          -0.41090635135769843,
+          0.20357663109898558
+        ],
+        "improved_trajectories": 8,
+        "worsened_trajectories": 8,
+        "tied_trajectories": 0
+      },
+      "metric_comparisons": {
+        "validation": {
+          "rollout_rmse_c": {
+            "data_mean": 4.465508778889974,
+            "physics_mean": 4.011685371398926,
+            "physics_minus_data": -0.4538234074910479,
+            "reduction_percent": 10.162860044894106
+          },
+          "trajectory_rmse_mean_c": {
+            "data_mean": 4.109080870946248,
+            "physics_mean": 3.7279165585835776,
+            "physics_minus_data": -0.38116431236267045,
+            "reduction_percent": 9.276145306794488
+          },
+          "trajectory_rmse_p95_c": {
+            "data_mean": 7.55307674407959,
+            "physics_mean": 6.3078789710998535,
+            "physics_minus_data": -1.2451977729797363,
+            "reduction_percent": 16.48596744307905
+          },
+          "final_rmse_mean_c": {
+            "data_mean": 6.474021911621094,
+            "physics_mean": 5.5860951741536455,
+            "physics_minus_data": -0.8879267374674482,
+            "reduction_percent": 13.71522601543237
+          },
+          "maximum_error_mean_c": {
+            "data_mean": 24.77419598897298,
+            "physics_mean": 21.58877944946289,
+            "physics_minus_data": -3.18541653951009,
+            "reduction_percent": 12.857799869379907
+          },
+          "implicit_physics_residual_rmse_c": {
+            "data_mean": 5.042394530325956,
+            "physics_mean": 3.2403014252693034,
+            "physics_minus_data": -1.8020931050566529,
+            "reduction_percent": 35.738835868921186
+          }
+        },
+        "id_test": {
+          "rollout_rmse_c": {
+            "data_mean": 3.9232560793558755,
+            "physics_mean": 3.8589769204457602,
+            "physics_minus_data": -0.06427915891011526,
+            "reduction_percent": 1.6384135424743593
+          },
+          "trajectory_rmse_mean_c": {
+            "data_mean": 3.6701316038767495,
+            "physics_mean": 3.5027523040771484,
+            "physics_minus_data": -0.1673792997996011,
+            "reduction_percent": 4.560580324225943
+          },
+          "trajectory_rmse_p95_c": {
+            "data_mean": 6.013790607452393,
+            "physics_mean": 6.2412590980529785,
+            "physics_minus_data": 0.22746849060058594,
+            "reduction_percent": -3.782447801203838
+          },
+          "final_rmse_mean_c": {
+            "data_mean": 5.857559521993001,
+            "physics_mean": 5.562204678853353,
+            "physics_minus_data": -0.29535484313964844,
+            "reduction_percent": 5.042284965789911
+          },
+          "maximum_error_mean_c": {
+            "data_mean": 22.165913899739582,
+            "physics_mean": 20.074130376180012,
+            "physics_minus_data": -2.0917835235595703,
+            "reduction_percent": 9.436937872361517
+          },
+          "implicit_physics_residual_rmse_c": {
+            "data_mean": 4.888863835381291,
+            "physics_mean": 3.0909635870931353,
+            "physics_minus_data": -1.7979002482881556,
+            "reduction_percent": 36.77542080997505
+          }
+        },
+        "control_ood": {
+          "rollout_rmse_c": {
+            "data_mean": 16.115469296773274,
+            "physics_mean": 15.972058296203613,
+            "physics_minus_data": -0.14341100056966027,
+            "reduction_percent": 0.8898965207198453
+          },
+          "trajectory_rmse_mean_c": {
+            "data_mean": 13.047669728597006,
+            "physics_mean": 12.944588979085287,
+            "physics_minus_data": -0.10308074951171875,
+            "reduction_percent": 0.7900318727856308
+          },
+          "trajectory_rmse_p95_c": {
+            "data_mean": 30.58812141418457,
+            "physics_mean": 30.153581619262695,
+            "physics_minus_data": -0.434539794921875,
+            "reduction_percent": 1.4206161569646663
+          },
+          "final_rmse_mean_c": {
+            "data_mean": 25.269095102945965,
+            "physics_mean": 25.116220474243164,
+            "physics_minus_data": -0.15287462870280066,
+            "reduction_percent": 0.604986558006891
+          },
+          "maximum_error_mean_c": {
+            "data_mean": 67.96640141805013,
+            "physics_mean": 63.229897816975914,
+            "physics_minus_data": -4.736503601074212,
+            "reduction_percent": 6.968889778260819
+          },
+          "implicit_physics_residual_rmse_c": {
+            "data_mean": 7.415732108467762,
+            "physics_mean": 5.518189411803014,
+            "physics_minus_data": -1.8975426966647477,
+            "reduction_percent": 25.588069645854805
+          }
+        }
+      }
+    }
+  }
+}

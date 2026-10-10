@@ -1,0 +1,119 @@
+{
+  "validated_at": "2026-10-02T21:57:05.169345+08:00",
+  "status": "passed",
+  "checkpoint_count": 12,
+  "prediction_file_count": 36,
+  "source_and_protocol_hashes_match": true,
+  "all_legacy_conditions_and_initial_temperatures_match": true,
+  "aggregate_means_standard_deviations_and_paired_bootstrap_recomputed": true,
+  "datasets": "96 trajectories per grid; 56/12/12/16 complete-trajectory splits; 300 steps",
+  "checks": [
+    {
+      "grid": "base",
+      "seed": 42,
+      "model": "data_only",
+      "best_epoch": 25.0,
+      "epochs": 40,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "base",
+      "seed": 42,
+      "model": "physics_constrained",
+      "best_epoch": 25.0,
+      "epochs": 40,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "base",
+      "seed": 7,
+      "model": "data_only",
+      "best_epoch": 10.0,
+      "epochs": 40,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "base",
+      "seed": 7,
+      "model": "physics_constrained",
+      "best_epoch": 20.0,
+      "epochs": 40,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "base",
+      "seed": 123,
+      "model": "data_only",
+      "best_epoch": 15.0,
+      "epochs": 40,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "base",
+      "seed": 123,
+      "model": "physics_constrained",
+      "best_epoch": 20.0,
+      "epochs": 40,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "refined",
+      "seed": 42,
+      "model": "data_only",
+      "best_epoch": 6.0,
+      "epochs": 12,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "refined",
+      "seed": 42,
+      "model": "physics_constrained",
+      "best_epoch": 12.0,
+      "epochs": 12,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "refined",
+      "seed": 7,
+      "model": "data_only",
+      "best_epoch": 4.0,
+      "epochs": 12,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "refined",
+      "seed": 7,
+      "model": "physics_constrained",
+      "best_epoch": 4.0,
+      "epochs": 12,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "refined",
+      "seed": 123,
+      "model": "data_only",
+      "best_epoch": 6.0,
+      "epochs": 12,
+      "finite_checkpoint_and_predictions": true
+    },
+    {
+      "grid": "refined",
+      "seed": 123,
+      "model": "physics_constrained",
+      "best_epoch": 10.0,
+      "epochs": 12,
+      "finite_checkpoint_and_predictions": true
+    }
+  ],
+  "figure": "three_dimensional_zoh_comparison.png",
+  "cutaway_artifact_and_input_hashes_match": true,
+  "cutaway_fixed_example": {
+    "trajectory_id": 74,
+    "snapshot_time_s": 192.0,
+    "model_seed": 42
+  },
+  "paper_tables_aggregate_and_protocol_hashes_match": true,
+  "note": "This post-run verification does not change training, selection, or the frozen protocol.",
+  "comparison_figure_visual_check_passed": true,
+  "comparison_figure_visual_check_record": "comparison_render_verification.json"
+}

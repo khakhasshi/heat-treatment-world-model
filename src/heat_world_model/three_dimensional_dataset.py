@@ -21,6 +21,7 @@ class ThreeDimensionalDatasetConfig:
     dimensions_m: tuple[float, float, float] = (0.06, 0.04, 0.02)
     dt_s: float = 1.0
     seed: int = 42
+    action_interpolation: str = "linear"
 
 
 def generate_three_dimensional_dataset(
@@ -85,7 +86,8 @@ def generate_three_dimensional_dataset(
         )
         solver_controls = np.concatenate(([initial], schedule))
         states[trajectory], _ = model.rollout(
-            initial, times, solver_controls, method="BDF"
+            initial, times, solver_controls, method="BDF",
+            action_interpolation=config.action_interpolation,
         )
         controls[trajectory] = schedule
         parameters[trajectory] = np.array(
@@ -118,6 +120,7 @@ def save_three_dimensional_dataset(
         "config": asdict(config),
         "model": "three_dimensional_c45_convection_radiation",
         "solver": "BDF method of lines on a node-centered finite-volume grid",
+        "action_interpolation": config.action_interpolation,
         "parameter_columns": [
             "convection_w_m2k",
             "emissivity",

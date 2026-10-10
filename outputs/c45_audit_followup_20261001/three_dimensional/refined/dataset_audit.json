@@ -1,0 +1,12 @@
+{
+  "dataset_sha256": "f85ef6a9a759497c3da51c5b9bc6e015c27fa27eb2127961e3e398ff6efceb94",
+  "generation_seconds": 863.3169286669981,
+  "all_controls_parameters_splits_schedule_types_initial_temperatures_match_legacy": true,
+  "action_interpolation": "zero_order_hold",
+  "split_counts": {
+    "0": 56,
+    "1": 12,
+    "2": 12,
+    "3": 16
+  }
+}

@@ -180,6 +180,7 @@ class C45CuboidThermalModel:
         environment_temperatures_c: np.ndarray,
         *,
         method: str = "BDF",
+        action_interpolation: str = "linear",
     ) -> tuple[np.ndarray, dict[str, float | str]]:
         times = np.asarray(evaluation_times_s, dtype=np.float64)
         controls = np.asarray(environment_temperatures_c, dtype=np.float64)
@@ -187,12 +188,17 @@ class C45CuboidThermalModel:
             raise ValueError("evaluation_times_s must be a strictly increasing vector")
         if controls.shape != times.shape:
             raise ValueError("environment_temperatures_c must match evaluation times")
+        if action_interpolation not in ("linear", "zero_order_hold"):
+            raise ValueError("action_interpolation must be linear or zero_order_hold")
         if np.isscalar(initial_temperature_c):
             initial = np.full(self.shape, float(initial_temperature_c))
         else:
             initial = np.asarray(initial_temperature_c, dtype=np.float64)
             if initial.shape != self.shape:
                 raise ValueError(f"initial temperature must have shape {self.shape}")
+
+        if action_interpolation == "zero_order_hold":
+            return self._rollout_zero_order_hold(initial, times, controls, method)
 
         if method.upper() == "EXPLICIT_EULER":
             state = initial.ravel().copy()
@@ -244,4 +250,77 @@ class C45CuboidThermalModel:
             "jacobian_evaluations": float(solution.njev),
             "linear_decompositions": float(solution.nlu),
         }
+        return states, diagnostics
+
+    def _rollout_zero_order_hold(
+        self,
+        initial: np.ndarray,
+        times: np.ndarray,
+        controls: np.ndarray,
+        method: str,
+    ) -> tuple[np.ndarray, dict[str, float | str]]:
+        """Hold controls[n+1] on [times[n], times[n+1]).
+
+        controls[0] records the preceding furnace value and does not influence
+        a held-action transition. Integration restarts at every action change;
+        adaptive solver steps never straddle a boundary discontinuity. Adjacent
+        identical actions share one solve, without changing the held input.
+        """
+        states = np.empty((times.size, *self.shape), dtype=np.float64)
+        states[0] = initial
+        state = initial.ravel().copy()
+        diagnostics: dict[str, float | str] = {
+            "method": method,
+            "action_interpolation": "zero_order_hold",
+            "rhs_evaluations": 0.0,
+            "jacobian_evaluations": 0.0,
+            "linear_decompositions": 0.0,
+            "integration_segments": 0.0,
+        }
+        solver_options = {}
+        if method.upper() == "BDF":
+            solver_options["jac_sparsity"] = self.jacobian_sparsity()
+        first = 1
+        while first < times.size:
+            last = first
+            while last + 1 < times.size and controls[last + 1] == controls[first]:
+                last += 1
+            constant_times = times[[first - 1, last]]
+            constant_controls = np.full(2, controls[first], dtype=np.float64)
+            diagnostics["integration_segments"] += 1.0
+            if method.upper() == "EXPLICIT_EULER":
+                current_time = float(times[first - 1])
+                for output_index in range(first, last + 1):
+                    output_time = float(times[output_index])
+                    while current_time < output_time - 1e-12:
+                        step_s = min(self.max_step_s, output_time - current_time)
+                        state += step_s * self.rhs(
+                            current_time, state, constant_times, constant_controls
+                        )
+                        current_time += step_s
+                        diagnostics["rhs_evaluations"] += 1.0
+                    states[output_index] = state.reshape(self.shape)
+            else:
+                solution = solve_ivp(
+                    self.rhs,
+                    (float(times[first - 1]), float(times[last])),
+                    state,
+                    method=method,
+                    t_eval=times[first : last + 1],
+                    args=(constant_times, constant_controls),
+                    rtol=self.rtol,
+                    atol=self.atol_c,
+                    max_step=self.max_step_s,
+                    **solver_options,
+                )
+                if not solution.success:
+                    raise RuntimeError(f"3D held-action integration failed: {solution.message}")
+                states[first : last + 1] = solution.y.T.reshape(
+                    (last - first + 1, *self.shape)
+                )
+                state = solution.y[:, -1].copy()
+                diagnostics["rhs_evaluations"] += float(solution.nfev)
+                diagnostics["jacobian_evaluations"] += float(solution.njev)
+                diagnostics["linear_decompositions"] += float(solution.nlu)
+            first = last + 1
         return states, diagnostics

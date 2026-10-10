@@ -1,0 +1,27 @@
+{
+  "client_date": "2026-10-01",
+  "client_timezone": "Asia/Shanghai",
+  "python": "3.11.15 (main, Mar  3 2026, 00:52:57) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "executable": "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/.venv/bin/python",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "hardware": [
+    "Mac17,2",
+    "25769803776",
+    "Apple M5"
+  ],
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "torch": "2.14.0",
+  "training_device": "mps",
+  "mps_available": true,
+  "configured_torch_cpu_threads": 2,
+  "configured_interop_threads": 1,
+  "blas_thread_environment": {
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2"
+  },
+  "test_command": ".venv/bin/python -m pytest -q tests/test_three_dimensional.py tests/test_three_dimensional_action_audit.py",
+  "test_result": "11 passed in 64.05s; exit 0",
+  "timing_note": "Base generation elapsed_seconds includes an intentional SIGSTOP pause for a separate formal timing experiment. This is not pure dataset computation time. Training began after resume."
+}

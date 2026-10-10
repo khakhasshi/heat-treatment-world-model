@@ -1,0 +1,103 @@
+{
+  "action_interpolation": "zero_order_hold",
+  "dataset_sha256": "7e8cc5770705db43946d3ca4969d59d395cf892e5faf02d76b7399665761162f",
+  "device": "mps",
+  "models": {
+    "data_only": {
+      "training": {
+        "best_epoch": 10.0,
+        "best_validation_rollout_rmse_c": 5.264064788818359,
+        "elapsed_seconds": 696.0614273749998,
+        "parameter_count": 45489.0,
+        "device": "mps",
+        "warm_start_path": null,
+        "warm_start_tensors": 0.0,
+        "config": {
+          "epochs": 40,
+          "batch_size": 256,
+          "learning_rate": 0.0008,
+          "weight_decay": 1e-06,
+          "hidden_channels": 16,
+          "residual_blocks": 3,
+          "rollout_horizon": 3,
+          "physics_weight": 0.0,
+          "evaluate_every": 5,
+          "seed": 7
+        }
+      },
+      "checkpoint_sha256": "af08467555c427c6a67a312c6614c64ead12d30cd91b695b95e5d6d95446fbe2",
+      "validation": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 5.264064788818359,
+        "trajectory_rmse_mean_c": 5.023776054382324,
+        "trajectory_rmse_p95_c": 7.371310710906982,
+        "final_rmse_mean_c": 8.88613510131836,
+        "maximum_error_mean_c": 24.405258178710938
+      },
+      "id_test": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 4.99623441696167,
+        "trajectory_rmse_mean_c": 4.656521797180176,
+        "trajectory_rmse_p95_c": 8.007023811340332,
+        "final_rmse_mean_c": 8.196698188781738,
+        "maximum_error_mean_c": 22.679365158081055
+      },
+      "control_ood": {
+        "trajectory_count": 16.0,
+        "rollout_rmse_c": 16.777530670166016,
+        "trajectory_rmse_mean_c": 14.690767288208008,
+        "trajectory_rmse_p95_c": 29.725255966186523,
+        "final_rmse_mean_c": 27.674259185791016,
+        "maximum_error_mean_c": 67.380615234375
+      }
+    },
+    "physics_constrained": {
+      "training": {
+        "best_epoch": 20.0,
+        "best_validation_rollout_rmse_c": 5.0034685134887695,
+        "elapsed_seconds": 722.0340869580014,
+        "parameter_count": 45489.0,
+        "device": "mps",
+        "warm_start_path": null,
+        "warm_start_tensors": 0.0,
+        "config": {
+          "epochs": 40,
+          "batch_size": 256,
+          "learning_rate": 0.0008,
+          "weight_decay": 1e-06,
+          "hidden_channels": 16,
+          "residual_blocks": 3,
+          "rollout_horizon": 3,
+          "physics_weight": 0.1,
+          "evaluate_every": 5,
+          "seed": 7
+        }
+      },
+      "checkpoint_sha256": "bbceec69eccfd8ff95781bc5c3aa55b37ab87b69c774f136d9da08c71ea09c84",
+      "validation": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 5.0034685134887695,
+        "trajectory_rmse_mean_c": 4.336855411529541,
+        "trajectory_rmse_p95_c": 8.411482810974121,
+        "final_rmse_mean_c": 7.13775634765625,
+        "maximum_error_mean_c": 22.77349281311035
+      },
+      "id_test": {
+        "trajectory_count": 12.0,
+        "rollout_rmse_c": 5.037344932556152,
+        "trajectory_rmse_mean_c": 3.8481853008270264,
+        "trajectory_rmse_p95_c": 8.904090881347656,
+        "final_rmse_mean_c": 6.3006205558776855,
+        "maximum_error_mean_c": 20.42699432373047
+      },
+      "control_ood": {
+        "trajectory_count": 16.0,
+        "rollout_rmse_c": 21.54432487487793,
+        "trajectory_rmse_mean_c": 17.091331481933594,
+        "trajectory_rmse_p95_c": 41.291015625,
+        "final_rmse_mean_c": 34.30574035644531,
+        "maximum_error_mean_c": 74.68746948242188
+      }
+    }
+  }
+}

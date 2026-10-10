@@ -1,0 +1,1806 @@
+{
+  "protocol": "protocol.json",
+  "input_manifest": "input_manifest.json",
+  "records": [
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 42,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.513417444698745,
+      "rollout_max_abs_c": 25.176666259765625,
+      "center_rmse_c": 1.9462624789860992,
+      "surface_rmse_c": 3.9669304532416323,
+      "final_state_rmse_c": 4.78704335965075,
+      "physics_residual_rmse_c": 49.684404029812306,
+      "trajectory_rmse_median_c": 1.498183309311806,
+      "trajectory_rmse_p95_c": 4.1921744542720605,
+      "maximum_principle_violation_fraction": 0.0010536585365853658
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 42,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.5539654046586193,
+      "rollout_max_abs_c": 12.287933349609375,
+      "center_rmse_c": 1.6675956934018272,
+      "surface_rmse_c": 2.560059457255568,
+      "final_state_rmse_c": 2.324697692665472,
+      "physics_residual_rmse_c": 43.217682901117016,
+      "trajectory_rmse_median_c": 1.148234811367511,
+      "trajectory_rmse_p95_c": 2.7004207536646607,
+      "maximum_principle_violation_fraction": 0.0019016260162601625
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 42,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.472676893252179,
+      "rollout_max_abs_c": 12.532623291015625,
+      "center_rmse_c": 1.709968189597264,
+      "surface_rmse_c": 2.357445792920187,
+      "final_state_rmse_c": 2.215198052468143,
+      "physics_residual_rmse_c": 43.1959868421026,
+      "trajectory_rmse_median_c": 1.1440674063794263,
+      "trajectory_rmse_p95_c": 2.7424626875889833,
+      "maximum_principle_violation_fraction": 0.0019016260162601625
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 7,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.460523096333357,
+      "rollout_max_abs_c": 24.250335693359375,
+      "center_rmse_c": 1.9498057122601724,
+      "surface_rmse_c": 3.8250287012287996,
+      "final_state_rmse_c": 4.384679063538012,
+      "physics_residual_rmse_c": 45.013613082196095,
+      "trajectory_rmse_median_c": 1.2907640365397488,
+      "trajectory_rmse_p95_c": 3.726620922571515,
+      "maximum_principle_violation_fraction": 0.0018154471544715447
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 7,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.5474356495838404,
+      "rollout_max_abs_c": 20.38470458984375,
+      "center_rmse_c": 1.610637041499299,
+      "surface_rmse_c": 2.532256690856436,
+      "final_state_rmse_c": 2.565899876608545,
+      "physics_residual_rmse_c": 45.26316607515377,
+      "trajectory_rmse_median_c": 1.1335244633137838,
+      "trajectory_rmse_p95_c": 2.7730721988463674,
+      "maximum_principle_violation_fraction": 0.0024016260162601625
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 7,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.5320571441364301,
+      "rollout_max_abs_c": 19.65838623046875,
+      "center_rmse_c": 1.715697484068015,
+      "surface_rmse_c": 2.350748898439833,
+      "final_state_rmse_c": 2.5715591090195957,
+      "physics_residual_rmse_c": 45.187750532916866,
+      "trajectory_rmse_median_c": 1.1093002763914397,
+      "trajectory_rmse_p95_c": 2.6936542599628965,
+      "maximum_principle_violation_fraction": 0.0024016260162601625
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 123,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.4623497998932073,
+      "rollout_max_abs_c": 24.775390625,
+      "center_rmse_c": 2.1281778895377306,
+      "surface_rmse_c": 3.421931585244413,
+      "final_state_rmse_c": 4.730783833710268,
+      "physics_residual_rmse_c": 47.25804962150598,
+      "trajectory_rmse_median_c": 1.1051194727913765,
+      "trajectory_rmse_p95_c": 4.434022692106947,
+      "maximum_principle_violation_fraction": 0.002478048780487805
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 123,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.473196085723096,
+      "rollout_max_abs_c": 12.21759033203125,
+      "center_rmse_c": 1.4167238991621012,
+      "surface_rmse_c": 2.618686867527772,
+      "final_state_rmse_c": 2.2050256811311555,
+      "physics_residual_rmse_c": 51.84783266186138,
+      "trajectory_rmse_median_c": 1.118024375819537,
+      "trajectory_rmse_p95_c": 2.7542671531660456,
+      "maximum_principle_violation_fraction": 0.0014097560975609756
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "seed": 123,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.4087907331203426,
+      "rollout_max_abs_c": 12.73046875,
+      "center_rmse_c": 1.5136708669704804,
+      "surface_rmse_c": 2.433530472015865,
+      "final_state_rmse_c": 2.0726244761250308,
+      "physics_residual_rmse_c": 51.81856513568378,
+      "trajectory_rmse_median_c": 1.0716824698502996,
+      "trajectory_rmse_p95_c": 2.2854312742583502,
+      "maximum_principle_violation_fraction": 0.0014097560975609756
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 42,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.2819214323589634,
+      "rollout_max_abs_c": 22.0933837890625,
+      "center_rmse_c": 1.8346350981756223,
+      "surface_rmse_c": 3.5077225115819366,
+      "final_state_rmse_c": 4.134631246792748,
+      "physics_residual_rmse_c": 16.07528098082055,
+      "trajectory_rmse_median_c": 1.2307824790103667,
+      "trajectory_rmse_p95_c": 3.4622309988860143,
+      "maximum_principle_violation_fraction": 0.0023252032520325204
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 42,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.41120735379257,
+      "rollout_max_abs_c": 10.384033203125,
+      "center_rmse_c": 1.596924607528428,
+      "surface_rmse_c": 2.352576198378774,
+      "final_state_rmse_c": 2.3702258867823445,
+      "physics_residual_rmse_c": 15.477487867040418,
+      "trajectory_rmse_median_c": 1.1268597447890785,
+      "trajectory_rmse_p95_c": 2.6435268473693623,
+      "maximum_principle_violation_fraction": 0.002424390243902439
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 42,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.3544608075228257,
+      "rollout_max_abs_c": 9.87359619140625,
+      "center_rmse_c": 1.6513030714565162,
+      "surface_rmse_c": 2.1881975748388895,
+      "final_state_rmse_c": 2.2629791725126935,
+      "physics_residual_rmse_c": 15.475457504861025,
+      "trajectory_rmse_median_c": 1.1096933491340357,
+      "trajectory_rmse_p95_c": 2.5268660504975395,
+      "maximum_principle_violation_fraction": 0.002423577235772358
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 7,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.39519946388239,
+      "rollout_max_abs_c": 18.479949951171875,
+      "center_rmse_c": 2.098473674170623,
+      "surface_rmse_c": 3.4597753126399047,
+      "final_state_rmse_c": 4.4367627099952465,
+      "physics_residual_rmse_c": 19.220644186237397,
+      "trajectory_rmse_median_c": 1.4602709172390451,
+      "trajectory_rmse_p95_c": 5.0716096667529404,
+      "maximum_principle_violation_fraction": 0.0025902439024390244
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 7,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.5759908105240483,
+      "rollout_max_abs_c": 10.77764892578125,
+      "center_rmse_c": 1.6283333848354646,
+      "surface_rmse_c": 2.681552814735908,
+      "final_state_rmse_c": 2.4347211273997984,
+      "physics_residual_rmse_c": 16.06055223993429,
+      "trajectory_rmse_median_c": 1.208970738744634,
+      "trajectory_rmse_p95_c": 2.8659174272437347,
+      "maximum_principle_violation_fraction": 0.002334959349593496
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 7,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.485211909273236,
+      "rollout_max_abs_c": 9.66265869140625,
+      "center_rmse_c": 1.6623866765358417,
+      "surface_rmse_c": 2.467097671433964,
+      "final_state_rmse_c": 2.2985044744551515,
+      "physics_residual_rmse_c": 16.04221449956176,
+      "trajectory_rmse_median_c": 1.2029750036025049,
+      "trajectory_rmse_p95_c": 2.85158965753867,
+      "maximum_principle_violation_fraction": 0.002334959349593496
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 123,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.178387605886055,
+      "rollout_max_abs_c": 22.9083251953125,
+      "center_rmse_c": 1.7739620666339393,
+      "surface_rmse_c": 3.4190063246306623,
+      "final_state_rmse_c": 3.9954302758674856,
+      "physics_residual_rmse_c": 18.086144642209987,
+      "trajectory_rmse_median_c": 1.3298986569479634,
+      "trajectory_rmse_p95_c": 3.64549205168769,
+      "maximum_principle_violation_fraction": 0.0028170731707317072
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 123,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.4956213043881001,
+      "rollout_max_abs_c": 11.79925537109375,
+      "center_rmse_c": 1.4240730233218493,
+      "surface_rmse_c": 2.550106210393834,
+      "final_state_rmse_c": 2.162629766861145,
+      "physics_residual_rmse_c": 20.568037660809562,
+      "trajectory_rmse_median_c": 1.1643474654705162,
+      "trajectory_rmse_p95_c": 2.491725468988342,
+      "maximum_principle_violation_fraction": 0.0016861788617886179
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "seed": 123,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.3880869130383746,
+      "rollout_max_abs_c": 10.367279052734375,
+      "center_rmse_c": 1.4486949764710155,
+      "surface_rmse_c": 2.35038105976254,
+      "final_state_rmse_c": 2.0152868656283793,
+      "physics_residual_rmse_c": 20.609525014634038,
+      "trajectory_rmse_median_c": 1.131325900377373,
+      "trajectory_rmse_p95_c": 2.253313446932685,
+      "maximum_principle_violation_fraction": 0.0016861788617886179
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 42,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.559035691991645,
+      "rollout_max_abs_c": 25.974334716796875,
+      "center_rmse_c": 2.0135965857556486,
+      "surface_rmse_c": 3.995123107180686,
+      "final_state_rmse_c": 4.870402991081622,
+      "physics_residual_rmse_c": 49.684404029812306,
+      "trajectory_rmse_median_c": 1.5104773361337933,
+      "trajectory_rmse_p95_c": 4.046667560698001,
+      "maximum_principle_violation_fraction": 0.0010536585365853658
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 42,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.5847195504455616,
+      "rollout_max_abs_c": 12.2010498046875,
+      "center_rmse_c": 1.7130598259303604,
+      "surface_rmse_c": 2.566105615424316,
+      "final_state_rmse_c": 2.384336105887125,
+      "physics_residual_rmse_c": 43.217682901117016,
+      "trajectory_rmse_median_c": 1.1379540386689038,
+      "trajectory_rmse_p95_c": 2.7100320903975805,
+      "maximum_principle_violation_fraction": 0.0019016260162601625
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 42,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.4951961220216523,
+      "rollout_max_abs_c": 11.834136962890625,
+      "center_rmse_c": 1.7445898402289397,
+      "surface_rmse_c": 2.3589071110197293,
+      "final_state_rmse_c": 2.2599157822543186,
+      "physics_residual_rmse_c": 43.19743702616285,
+      "trajectory_rmse_median_c": 1.1394546969396744,
+      "trajectory_rmse_p95_c": 2.7248062015012473,
+      "maximum_principle_violation_fraction": 0.0019016260162601625
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 7,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.5248312710088476,
+      "rollout_max_abs_c": 25.12408447265625,
+      "center_rmse_c": 2.045246272654481,
+      "surface_rmse_c": 3.8598246719152542,
+      "final_state_rmse_c": 4.514976761343055,
+      "physics_residual_rmse_c": 45.013613082196095,
+      "trajectory_rmse_median_c": 1.3031895610880362,
+      "trajectory_rmse_p95_c": 3.687059669448367,
+      "maximum_principle_violation_fraction": 0.0018154471544715447
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 7,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.5748451613413963,
+      "rollout_max_abs_c": 19.45086669921875,
+      "center_rmse_c": 1.6478817908931442,
+      "surface_rmse_c": 2.5298219030689024,
+      "final_state_rmse_c": 2.5714816159345726,
+      "physics_residual_rmse_c": 45.26316607515377,
+      "trajectory_rmse_median_c": 1.1644640400738486,
+      "trajectory_rmse_p95_c": 2.806552777939975,
+      "maximum_principle_violation_fraction": 0.0024016260162601625
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 7,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.5528134298136864,
+      "rollout_max_abs_c": 18.93585205078125,
+      "center_rmse_c": 1.744330593550908,
+      "surface_rmse_c": 2.3448313211366694,
+      "final_state_rmse_c": 2.5765788899476094,
+      "physics_residual_rmse_c": 45.18693878544066,
+      "trajectory_rmse_median_c": 1.1600654096808865,
+      "trajectory_rmse_p95_c": 2.7674019660835762,
+      "maximum_principle_violation_fraction": 0.0024016260162601625
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 123,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.5326700314338795,
+      "rollout_max_abs_c": 25.57305908203125,
+      "center_rmse_c": 2.20525747794844,
+      "surface_rmse_c": 3.464874646560706,
+      "final_state_rmse_c": 4.871837757058046,
+      "physics_residual_rmse_c": 47.25804962150598,
+      "trajectory_rmse_median_c": 1.1083870713561805,
+      "trajectory_rmse_p95_c": 4.378848811913667,
+      "maximum_principle_violation_fraction": 0.002478048780487805
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 123,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.4928661222885868,
+      "rollout_max_abs_c": 11.33349609375,
+      "center_rmse_c": 1.4535883989637657,
+      "surface_rmse_c": 2.603172964551321,
+      "final_state_rmse_c": 2.1711409012500282,
+      "physics_residual_rmse_c": 51.84783266186138,
+      "trajectory_rmse_median_c": 1.1107075745801014,
+      "trajectory_rmse_p95_c": 2.76969504525712,
+      "maximum_principle_violation_fraction": 0.0014097560975609756
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "seed": 123,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.423637431700311,
+      "rollout_max_abs_c": 12.025421142578125,
+      "center_rmse_c": 1.5421954972133043,
+      "surface_rmse_c": 2.416401566425801,
+      "final_state_rmse_c": 2.042227063363173,
+      "physics_residual_rmse_c": 51.82379559028153,
+      "trajectory_rmse_median_c": 1.0609888782499461,
+      "trajectory_rmse_p95_c": 2.4824935765725664,
+      "maximum_principle_violation_fraction": 0.0014097560975609756
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 42,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.3451338805878135,
+      "rollout_max_abs_c": 22.96661376953125,
+      "center_rmse_c": 1.9190795801515779,
+      "surface_rmse_c": 3.546674020460961,
+      "final_state_rmse_c": 4.2451007860115375,
+      "physics_residual_rmse_c": 16.07528098082055,
+      "trajectory_rmse_median_c": 1.286593747164972,
+      "trajectory_rmse_p95_c": 3.318823033377784,
+      "maximum_principle_violation_fraction": 0.0023252032520325204
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 42,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.4735799294381018,
+      "rollout_max_abs_c": 11.17242431640625,
+      "center_rmse_c": 1.6773794963210984,
+      "surface_rmse_c": 2.369049045100494,
+      "final_state_rmse_c": 2.52686406630122,
+      "physics_residual_rmse_c": 15.477487867040418,
+      "trajectory_rmse_median_c": 1.1869078932464912,
+      "trajectory_rmse_p95_c": 2.3947554613201487,
+      "maximum_principle_violation_fraction": 0.002424390243902439
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 42,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.4047356687804213,
+      "rollout_max_abs_c": 9.75250244140625,
+      "center_rmse_c": 1.7151423148981988,
+      "surface_rmse_c": 2.198665557599313,
+      "final_state_rmse_c": 2.387321568157495,
+      "physics_residual_rmse_c": 15.4767294258688,
+      "trajectory_rmse_median_c": 1.1431836880159842,
+      "trajectory_rmse_p95_c": 2.62460063421259,
+      "maximum_principle_violation_fraction": 0.002423577235772358
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 7,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.389660905363482,
+      "rollout_max_abs_c": 18.78558349609375,
+      "center_rmse_c": 2.0999836610468607,
+      "surface_rmse_c": 3.456908335200209,
+      "final_state_rmse_c": 4.330912375202535,
+      "physics_residual_rmse_c": 19.220644186237397,
+      "trajectory_rmse_median_c": 1.4558000831451312,
+      "trajectory_rmse_p95_c": 4.9564832351031285,
+      "maximum_principle_violation_fraction": 0.0025902439024390244
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 7,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.656824886994139,
+      "rollout_max_abs_c": 11.57843017578125,
+      "center_rmse_c": 1.727359108549504,
+      "surface_rmse_c": 2.7122401207661078,
+      "final_state_rmse_c": 2.593125833003234,
+      "physics_residual_rmse_c": 16.06055223993429,
+      "trajectory_rmse_median_c": 1.2275198880077558,
+      "trajectory_rmse_p95_c": 2.8493473317810856,
+      "maximum_principle_violation_fraction": 0.002334959349593496
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 7,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.5491349753635453,
+      "rollout_max_abs_c": 9.541641235351562,
+      "center_rmse_c": 1.7386851064615536,
+      "surface_rmse_c": 2.488116327471289,
+      "final_state_rmse_c": 2.416702834465342,
+      "physics_residual_rmse_c": 16.04338131715743,
+      "trajectory_rmse_median_c": 1.2231749580216558,
+      "trajectory_rmse_p95_c": 2.8616781799097084,
+      "maximum_principle_violation_fraction": 0.002334959349593496
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 123,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": 2.212693693624724,
+      "rollout_max_abs_c": 23.8643798828125,
+      "center_rmse_c": 1.830999657190721,
+      "surface_rmse_c": 3.425424326693467,
+      "final_state_rmse_c": 4.034066763332579,
+      "physics_residual_rmse_c": 18.086144642209987,
+      "trajectory_rmse_median_c": 1.3093861098553232,
+      "trajectory_rmse_p95_c": 3.525292628441417,
+      "maximum_principle_violation_fraction": 0.0028170731707317072
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 123,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": 1.5490024507869256,
+      "rollout_max_abs_c": 12.60003662109375,
+      "center_rmse_c": 1.4935605882636127,
+      "surface_rmse_c": 2.5778063723960316,
+      "final_state_rmse_c": 2.26791013421595,
+      "physics_residual_rmse_c": 20.568037660809562,
+      "trajectory_rmse_median_c": 1.158282271844254,
+      "trajectory_rmse_p95_c": 2.5772699653745015,
+      "maximum_principle_violation_fraction": 0.0016861788617886179
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "seed": 123,
+      "method": "effective_oracle",
+      "rollout_rmse_c": 1.426783983460475,
+      "rollout_max_abs_c": 9.9483642578125,
+      "center_rmse_c": 1.4987164280884406,
+      "surface_rmse_c": 2.3688578616164593,
+      "final_state_rmse_c": 2.0862741145558577,
+      "physics_residual_rmse_c": 20.61804166203471,
+      "trajectory_rmse_median_c": 1.1184413816224468,
+      "trajectory_rmse_p95_c": 2.4607090482703393,
+      "maximum_principle_violation_fraction": 0.0016861788617886179
+    }
+  ],
+  "aggregate": [
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": {
+        "mean": 2.478763446975103,
+        "sample_std": 0.030025137470901308
+      },
+      "rollout_max_abs_c": {
+        "mean": 24.734130859375,
+        "sample_std": 0.46454155439444106
+      },
+      "center_rmse_c": {
+        "mean": 2.0080820269280006,
+        "sample_std": 0.10402115548045963
+      },
+      "surface_rmse_c": {
+        "mean": 3.737963579904948,
+        "sample_std": 0.2827387363678972
+      },
+      "final_state_rmse_c": {
+        "mean": 4.634168752299677,
+        "sample_std": 0.21788784308344514
+      },
+      "physics_residual_rmse_c": {
+        "mean": 47.318688911171456,
+        "sample_std": 2.335985843636844
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.2980222728809772,
+        "sample_std": 0.19663241439581772
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 4.117606022983508,
+        "sample_std": 0.35954784673822215
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0017823848238482387,
+        "sample_std": 0.0007127704609555563
+      }
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": {
+        "mean": 1.5248657133218517,
+        "sample_std": 0.04486615915676027
+      },
+      "rollout_max_abs_c": {
+        "mean": 14.963409423828125,
+        "sample_std": 4.6951110735347665
+      },
+      "center_rmse_c": {
+        "mean": 1.5649855446877423,
+        "sample_std": 0.1315188528581227
+      },
+      "surface_rmse_c": {
+        "mean": 2.570334338546592,
+        "sample_std": 0.04412169249947327
+      },
+      "final_state_rmse_c": {
+        "mean": 2.3652077501350575,
+        "sample_std": 0.1838160624306404
+      },
+      "physics_residual_rmse_c": {
+        "mean": 46.77622721271072,
+        "sample_std": 4.509643747316174
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1332612168336105,
+        "sample_std": 0.015106938075982344
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.742586701892358,
+        "sample_std": 0.037707861623478146
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0019043360433604337,
+        "sample_std": 0.0004959405126527234
+      }
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "method": "effective_oracle",
+      "rollout_rmse_c": {
+        "mean": 1.4711749235029838,
+        "sample_std": 0.06164692981846198
+      },
+      "rollout_max_abs_c": {
+        "mean": 14.973826090494791,
+        "sample_std": 4.058153950404643
+      },
+      "center_rmse_c": {
+        "mean": 1.6464455135452531,
+        "sample_std": 0.11502189480083785
+      },
+      "surface_rmse_c": {
+        "mean": 2.3805750544586286,
+        "sample_std": 0.04598281510973641
+      },
+      "final_state_rmse_c": {
+        "mean": 2.286460545870923,
+        "sample_std": 0.2569877413416728
+      },
+      "physics_residual_rmse_c": {
+        "mean": 46.734100836901085,
+        "sample_std": 4.514489290518738
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1083500508737218,
+        "sample_std": 0.03620182254365541
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.573849407270077,
+        "sample_std": 0.2509667911085253
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0019043360433604337,
+        "sample_std": 0.0004959405126527234
+      }
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": {
+        "mean": 2.285169500709136,
+        "sample_std": 0.1084424174525877
+      },
+      "rollout_max_abs_c": {
+        "mean": 21.160552978515625,
+        "sample_std": 2.3569592309920298
+      },
+      "center_rmse_c": {
+        "mean": 1.9023569463267282,
+        "sample_std": 0.17253009127181776
+      },
+      "surface_rmse_c": {
+        "mean": 3.462168049617501,
+        "sample_std": 0.044406467428476336
+      },
+      "final_state_rmse_c": {
+        "mean": 4.1889414108851595,
+        "sample_std": 0.2256230812574196
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.79402326975598,
+        "sample_std": 1.592899430497997
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.340317351065792,
+        "sample_std": 0.11509842618602627
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 4.059777572442215,
+        "sample_std": 0.8810501084935047
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0025775067750677507,
+        "sample_std": 0.0002461822090252263
+      }
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": {
+        "mean": 1.4942731562349063,
+        "sample_std": 0.08240000018614058
+      },
+      "rollout_max_abs_c": {
+        "mean": 10.986979166666666,
+        "sample_std": 0.7304641048603293
+      },
+      "center_rmse_c": {
+        "mean": 1.5497770052285806,
+        "sample_std": 0.10998975462917736
+      },
+      "surface_rmse_c": {
+        "mean": 2.528078407836172,
+        "sample_std": 0.1655908258074304
+      },
+      "final_state_rmse_c": {
+        "mean": 2.322525593681096,
+        "sample_std": 0.1421791672201051
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.368692589261425,
+        "sample_std": 2.7860092750857914
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1667259830014094,
+        "sample_std": 0.04110713856893831
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.66705658120048,
+        "sample_std": 0.18820239553835064
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.002148509485094851,
+        "sample_std": 0.0004028792314692726
+      }
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "method": "effective_oracle",
+      "rollout_rmse_c": {
+        "mean": 1.409253209944812,
+        "sample_std": 0.06789677271995438
+      },
+      "rollout_max_abs_c": {
+        "mean": 9.967844645182291,
+        "sample_std": 0.3616414545913194
+      },
+      "center_rmse_c": {
+        "mean": 1.5874615748211245,
+        "sample_std": 0.12030310963825483
+      },
+      "surface_rmse_c": {
+        "mean": 2.3352254353451314,
+        "sample_std": 0.1400663617139983
+      },
+      "final_state_rmse_c": {
+        "mean": 2.192256837532075,
+        "sample_std": 0.15428638950413537
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.37573233968561,
+        "sample_std": 2.81484718433757
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1479980843713047,
+        "sample_std": 0.048824564047611804
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.5439230516562983,
+        "sample_std": 0.2995026076859125
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0021482384823848237,
+        "sample_std": 0.00040260104592118834
+      }
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": {
+        "mean": 2.5388456648114572,
+        "sample_std": 0.017918968703661456
+      },
+      "rollout_max_abs_c": {
+        "mean": 25.557159423828125,
+        "sample_std": 0.425348056024158
+      },
+      "center_rmse_c": {
+        "mean": 2.088033445452856,
+        "sample_std": 0.10274498049098427
+      },
+      "surface_rmse_c": {
+        "mean": 3.773274141885549,
+        "sample_std": 0.2755160670156677
+      },
+      "final_state_rmse_c": {
+        "mean": 4.7524058364942405,
+        "sample_std": 0.2056208621072101
+      },
+      "physics_residual_rmse_c": {
+        "mean": 47.318688911171456,
+        "sample_std": 2.335985843636844
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.3073513228593368,
+        "sample_std": 0.20107743645922455
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 4.037525347353345,
+        "sample_std": 0.3459851723077855
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0017823848238482387,
+        "sample_std": 0.0007127704609555563
+      }
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": {
+        "mean": 1.5508102780251816,
+        "sample_std": 0.05042340506218489
+      },
+      "rollout_max_abs_c": {
+        "mean": 14.328470865885416,
+        "sample_std": 4.4572824305122705
+      },
+      "center_rmse_c": {
+        "mean": 1.6048433385957568,
+        "sample_std": 0.13498365321451372
+      },
+      "surface_rmse_c": {
+        "mean": 2.566366827681513,
+        "sample_std": 0.03667622839158717
+      },
+      "final_state_rmse_c": {
+        "mean": 2.375652874357242,
+        "sample_std": 0.20031155942901574
+      },
+      "physics_residual_rmse_c": {
+        "mean": 46.77622721271072,
+        "sample_std": 4.509643747316174
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.137708551107618,
+        "sample_std": 0.02687907352760078
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.7620933045315588,
+        "sample_std": 0.04870729542335657
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0019043360433604337,
+        "sample_std": 0.0004959405126527234
+      }
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "method": "effective_oracle",
+      "rollout_rmse_c": {
+        "mean": 1.4905489945118833,
+        "sample_std": 0.06471326346055903
+      },
+      "rollout_max_abs_c": {
+        "mean": 14.26513671875,
+        "sample_std": 4.046088690822721
+      },
+      "center_rmse_c": {
+        "mean": 1.6770386436643843,
+        "sample_std": 0.1167776622939101
+      },
+      "surface_rmse_c": {
+        "mean": 2.3733799995274,
+        "sample_std": 0.03791666360590305
+      },
+      "final_state_rmse_c": {
+        "mean": 2.292907245188367,
+        "sample_std": 0.26869926705040975
+      },
+      "physics_residual_rmse_c": {
+        "mean": 46.73605713396168,
+        "sample_std": 4.517005785083662
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1201696616235022,
+        "sample_std": 0.05227785583261835
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.6582339147191303,
+        "sample_std": 0.15367855943165812
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0019043360433604337,
+        "sample_std": 0.0004959405126527234
+      }
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "method": "separate_h_epsilon",
+      "rollout_rmse_c": {
+        "mean": 2.3158294931920067,
+        "sample_std": 0.0920511208412491
+      },
+      "rollout_max_abs_c": {
+        "mean": 21.8721923828125,
+        "sample_std": 2.7105095117371203
+      },
+      "center_rmse_c": {
+        "mean": 1.9500209661297196,
+        "sample_std": 0.13713542798017667
+      },
+      "surface_rmse_c": {
+        "mean": 3.4763355607848787,
+        "sample_std": 0.0629160939674103
+      },
+      "final_state_rmse_c": {
+        "mean": 4.203359974848884,
+        "sample_std": 0.15276141793332335
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.79402326975598,
+        "sample_std": 1.592899430497997
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.3505933133884753,
+        "sample_std": 0.09182168181439833
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 3.9335329656407763,
+        "sample_std": 0.8918956574433239
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0025775067750677507,
+        "sample_std": 0.0002461822090252263
+      }
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "method": "effective_autonomous",
+      "rollout_rmse_c": {
+        "mean": 1.5598024224063887,
+        "sample_std": 0.09209863276761707
+      },
+      "rollout_max_abs_c": {
+        "mean": 11.78363037109375,
+        "sample_std": 0.735594700389423
+      },
+      "center_rmse_c": {
+        "mean": 1.632766397711405,
+        "sample_std": 0.1231185747466106
+      },
+      "surface_rmse_c": {
+        "mean": 2.5530318460875443,
+        "sample_std": 0.17293166705230048
+      },
+      "final_state_rmse_c": {
+        "mean": 2.462633344506801,
+        "sample_std": 0.1718589593274071
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.368692589261425,
+        "sample_std": 2.7860092750857914
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.1909033510328337,
+        "sample_std": 0.03479130114256916
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.6071242528252454,
+        "sample_std": 0.2287616686241098
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.002148509485094851,
+        "sample_std": 0.0004028792314692726
+      }
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "method": "effective_oracle",
+      "rollout_rmse_c": {
+        "mean": 1.4602182092014806,
+        "sample_std": 0.07778930211537538
+      },
+      "rollout_max_abs_c": {
+        "mean": 9.747502644856771,
+        "sample_std": 0.2034076024245215
+      },
+      "center_rmse_c": {
+        "mean": 1.6508479498160644,
+        "sample_std": 0.13227458442958998
+      },
+      "surface_rmse_c": {
+        "mean": 2.3518799155623538,
+        "sample_std": 0.14547035792226531
+      },
+      "final_state_rmse_c": {
+        "mean": 2.296766172392898,
+        "sample_std": 0.1828824609190755
+      },
+      "physics_residual_rmse_c": {
+        "mean": 17.379384135020313,
+        "sample_std": 2.8190336153441837
+      },
+      "trajectory_rmse_median_c": {
+        "mean": 1.161600009220029,
+        "sample_std": 0.05474167673135475
+      },
+      "trajectory_rmse_p95_c": {
+        "mean": 2.6489959541308794,
+        "sample_std": 0.20159466723438937
+      },
+      "maximum_principle_violation_fraction": {
+        "mean": 0.0021482384823848237,
+        "sample_std": 0.00040260104592118834
+      }
+    }
+  ],
+  "paired_statistics": [
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.3010086449126572,
+      "right_mean_trajectory_metric": 1.76451077759991,
+      "mean_difference": -0.46350213268725277,
+      "confidence_interval_95": [
+        -0.720773869627665,
+        -0.250358130427342
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.658628578186035,
+      "right_mean_trajectory_metric": 6.1436784489949545,
+      "mean_difference": -1.4850498708089193,
+      "confidence_interval_95": [
+        -2.113038732528686,
+        -0.9381766757965091
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 71,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 29,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 27.421493060470457,
+      "right_mean_trajectory_metric": 31.30555797881575,
+      "mean_difference": -3.8840649183452904,
+      "confidence_interval_95": [
+        -5.673363873009672,
+        -2.0747186142505716
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 89,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 11,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.3010086449126572,
+      "right_mean_trajectory_metric": 1.2670194580144758,
+      "mean_difference": 0.03398918689818138,
+      "confidence_interval_95": [
+        0.015053906640445727,
+        0.05895728210075111
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 29,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 71,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.658628578186035,
+      "right_mean_trajectory_metric": 4.470404459635417,
+      "mean_difference": 0.18822411855061852,
+      "confidence_interval_95": [
+        0.1483207572301229,
+        0.2313358729680379
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 14,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 86,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 27.421493060470457,
+      "right_mean_trajectory_metric": 27.40827714093667,
+      "mean_difference": 0.013215919533786364,
+      "confidence_interval_95": [
+        4.632041318852102e-05,
+        0.029826533256105004
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 42,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 58,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.2670194580144758,
+      "right_mean_trajectory_metric": 1.76451077759991,
+      "mean_difference": -0.49749131958543413,
+      "confidence_interval_95": [
+        -0.7737740208969601,
+        -0.2714532470231864
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 72,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 28,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.470404459635417,
+      "right_mean_trajectory_metric": 6.1436784489949545,
+      "mean_difference": -1.6732739893595376,
+      "confidence_interval_95": [
+        -2.321968329747518,
+        -1.1105472224553428
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 78,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 22,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.0,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 27.40827714093667,
+      "right_mean_trajectory_metric": 31.30555797881575,
+      "mean_difference": -3.8972808378790766,
+      "confidence_interval_95": [
+        -5.682280395734485,
+        -2.0954097524877024
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 89,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 11,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.2932751212517926,
+      "right_mean_trajectory_metric": 1.751842801474943,
+      "mean_difference": -0.45856768022315014,
+      "confidence_interval_95": [
+        -0.6383657454492344,
+        -0.30457022084619234
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 82,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 18,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.566597658793132,
+      "right_mean_trajectory_metric": 6.0104781341552735,
+      "mean_difference": -1.4438804753621417,
+      "confidence_interval_95": [
+        -1.906205706278483,
+        -1.0273869934082032
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 77,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 23,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 12.312383087813192,
+      "right_mean_trajectory_metric": 13.178254215100324,
+      "mean_difference": -0.8658711272871312,
+      "confidence_interval_95": [
+        -1.3295856351263187,
+        -0.3941536761363001
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.2932751212517926,
+      "right_mean_trajectory_metric": 1.2454224364159157,
+      "mean_difference": 0.047852684835877166,
+      "confidence_interval_95": [
+        0.02189198535169625,
+        0.08014987263759271
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 24,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 76,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.566597658793132,
+      "right_mean_trajectory_metric": 4.367405484517415,
+      "mean_difference": 0.19919217427571614,
+      "confidence_interval_95": [
+        0.13495767974853518,
+        0.27253146362304687
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 10,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 90,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 12.312383087813192,
+      "right_mean_trajectory_metric": 12.311818985932854,
+      "mean_difference": 0.0005641018803382972,
+      "confidence_interval_95": [
+        -0.00855376410630718,
+        0.008065364679503148
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 48,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 52,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.2454224364159157,
+      "right_mean_trajectory_metric": 1.751842801474943,
+      "mean_difference": -0.5064203650590274,
+      "confidence_interval_95": [
+        -0.7067628735792258,
+        -0.3385858092023897
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 84,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 16,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.367405484517415,
+      "right_mean_trajectory_metric": 6.0104781341552735,
+      "mean_difference": -1.6430726496378583,
+      "confidence_interval_95": [
+        -2.1266985896428428,
+        -1.2076948359807331
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 84,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 16,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "dynamic_holdout",
+      "physics_weight": 0.001,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 12.311818985932854,
+      "right_mean_trajectory_metric": 13.178254215100324,
+      "mean_difference": -0.8664352291674693,
+      "confidence_interval_95": [
+        -1.328770568017382,
+        -0.3964480152461379
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.3211096669725648,
+      "right_mean_trajectory_metric": 1.7770135452962117,
+      "mean_difference": -0.4559038783236469,
+      "confidence_interval_95": [
+        -0.7214245319686102,
+        -0.23473985491208207
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.6879891077677405,
+      "right_mean_trajectory_metric": 6.180737393697103,
+      "mean_difference": -1.4927482859293622,
+      "confidence_interval_95": [
+        -2.141077439943949,
+        -0.9273724457422897
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 70,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 30,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 27.421493060470457,
+      "right_mean_trajectory_metric": 31.30555797881575,
+      "mean_difference": -3.8840649183452904,
+      "confidence_interval_95": [
+        -5.673363873009672,
+        -2.0747186142505716
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 89,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 11,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.3211096669725648,
+      "right_mean_trajectory_metric": 1.2847829928430907,
+      "mean_difference": 0.03632667412947399,
+      "confidence_interval_95": [
+        0.01465570735097385,
+        0.06436865994161442
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 33,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 67,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.6879891077677405,
+      "right_mean_trajectory_metric": 4.5116633097330725,
+      "mean_difference": 0.17632579803466794,
+      "confidence_interval_95": [
+        0.12852615547180174,
+        0.22786288515726724
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 17,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 83,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 27.421493060470457,
+      "right_mean_trajectory_metric": 27.409576662113018,
+      "mean_difference": 0.011916398357430252,
+      "confidence_interval_95": [
+        -0.002261877445273994,
+        0.02958388433741857
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 43,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 57,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.2847829928430907,
+      "right_mean_trajectory_metric": 1.7770135452962117,
+      "mean_difference": -0.4922305524531208,
+      "confidence_interval_95": [
+        -0.7788194779134949,
+        -0.25698695808947986
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.5116633097330725,
+      "right_mean_trajectory_metric": 6.180737393697103,
+      "mean_difference": -1.6690740839640301,
+      "confidence_interval_95": [
+        -2.344969618797302,
+        -1.0836769135793056
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 77,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 23,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.0,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 27.409576662113018,
+      "right_mean_trajectory_metric": 31.30555797881575,
+      "mean_difference": -3.89598131670272,
+      "confidence_interval_95": [
+        -5.6810383670652405,
+        -2.095264563639131
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 89,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 11,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.3377389223958012,
+      "right_mean_trajectory_metric": 1.7529920247263082,
+      "mean_difference": -0.41525310233050683,
+      "confidence_interval_95": [
+        -0.5980105305536898,
+        -0.26025919636838124
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 80,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 20,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.668684616088867,
+      "right_mean_trajectory_metric": 6.001239916483561,
+      "mean_difference": -1.3325553003946942,
+      "confidence_interval_95": [
+        -1.8049676806132,
+        -0.9152830092112224
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 78,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 22,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 12.312383087813192,
+      "right_mean_trajectory_metric": 13.178254215100324,
+      "mean_difference": -0.8658711272871312,
+      "confidence_interval_95": [
+        -1.3295856351263187,
+        -0.3941536761363001
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.3377389223958012,
+      "right_mean_trajectory_metric": 1.2840089474774543,
+      "mean_difference": 0.05372997491834701,
+      "confidence_interval_95": [
+        0.025125132074831233,
+        0.08907091837630511
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 25,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 75,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.668684616088867,
+      "right_mean_trajectory_metric": 4.466853663126628,
+      "mean_difference": 0.20183095296223957,
+      "confidence_interval_95": [
+        0.13397374153137206,
+        0.27987229983011874
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 13,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 87,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_autonomous minus effective_oracle",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 12.312383087813192,
+      "right_mean_trajectory_metric": 12.31316543365266,
+      "mean_difference": -0.0007823458394665862,
+      "confidence_interval_95": [
+        -0.011528720781791263,
+        0.007636067166327736
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 47,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 53,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "rmse_c",
+      "left_mean_trajectory_metric": 1.2840089474774543,
+      "right_mean_trajectory_metric": 1.7529920247263082,
+      "mean_difference": -0.4689830772488538,
+      "confidence_interval_95": [
+        -0.6742586473086544,
+        -0.2981448471823867
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 80,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 20,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "max_abs_c",
+      "left_mean_trajectory_metric": 4.466853663126628,
+      "right_mean_trajectory_metric": 6.001239916483561,
+      "mean_difference": -1.534386253356934,
+      "confidence_interval_95": [
+        -2.0336330006917316,
+        -1.0940100183486945
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 81,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 19,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    },
+    {
+      "dataset": "cross_solver",
+      "physics_weight": 0.001,
+      "comparison": "effective_oracle minus separate_h_epsilon",
+      "metric": "physics_residual_rmse_c",
+      "left_mean_trajectory_metric": 12.31316543365266,
+      "right_mean_trajectory_metric": 13.178254215100324,
+      "mean_difference": -0.8650887814476645,
+      "confidence_interval_95": [
+        -1.3271689798701356,
+        -0.39552612097476675
+      ],
+      "scenario_count": 100,
+      "model_seed_count": 3,
+      "improved_scenarios": 68,
+      "tied_scenarios": 0,
+      "worsened_scenarios": 32,
+      "bootstrap_replicates": 100000,
+      "bootstrap_seed": 20261001,
+      "unit": "independent trajectory; training seeds averaged before resampling"
+    }
+  ],
+  "evaluation_wall_seconds": 5.369019542005844,
+  "timing_is_not_benchmark": true,
+  "limitations": [
+    "No retraining: H checkpoints were trained and selected with reference-derived H inputs",
+    "Both datasets are synthetic and share governing equations",
+    "The two datasets reuse related physical scenarios and are analyzed separately, never pooled as 200 independent samples",
+    "Known exogenous h and epsilon trajectories are supplied equally to autonomous comparators"
+  ]
+}

@@ -25,8 +25,11 @@ class EnKFConfig:
     convection_bounds_w_m2k: tuple[float, float] = (10.0, 60.0)
     emissivity_bounds: tuple[float, float] = (0.65, 0.90)
     enforce_symmetry: bool = True
+    sensor_response_time_constant_s: float = 0.0
 
     def __post_init__(self) -> None:
+        if not np.isfinite(self.sensor_response_time_constant_s) or self.sensor_response_time_constant_s < 0:
+            raise ValueError("sensor response time constant must be finite and nonnegative")
         if self.ensemble_size < 4:
             raise ValueError("ensemble_size must be at least four")
         if not self.sensor_nodes:
@@ -71,7 +74,11 @@ class AugmentedTemperatureEnKF:
         if initial.shape != (self.nx,):
             raise ValueError(f"initial temperature must have shape ({self.nx},)")
 
-        self.ensemble = np.empty((config.ensemble_size, self.nx + 2))
+        self.has_sensor_response = config.sensor_response_time_constant_s > 0.0
+        if self.has_sensor_response and (not np.isfinite(material[-1]) or material[-1] <= 0):
+            raise ValueError("sensor response requires a positive material time step")
+        extra_sensors = self.sensor_nodes.size if self.has_sensor_response else 0
+        self.ensemble = np.empty((config.ensemble_size, self.nx + 2 + extra_sensors))
         self.ensemble[:, : self.nx] = initial + self._smooth_state_noise(
             config.initial_state_std_c
         )
@@ -86,6 +93,14 @@ class AugmentedTemperatureEnKF:
             config.ensemble_size,
         )
         self._constrain()
+        if self.has_sensor_response:
+            self.ensemble[:, self.nx + 2 :] = self.temperature_ensemble_c[:, self.sensor_nodes]
+
+    @property
+    def predicted_observation_ensemble_c(self) -> np.ndarray:
+        if self.has_sensor_response:
+            return self.ensemble[:, self.nx + 2 :]
+        return self.temperature_ensemble_c[:, self.sensor_nodes]
 
     @property
     def temperature_ensemble_c(self) -> np.ndarray:
@@ -160,13 +175,17 @@ class AugmentedTemperatureEnKF:
         predicted += self._smooth_state_noise(config.state_process_std_c)
         self.ensemble[:, : self.nx] = predicted
         self._constrain()
+        if self.has_sensor_response:
+            decay = np.exp(-float(self.material_parameters[-1]) / config.sensor_response_time_constant_s)
+            response = self.ensemble[:, self.nx + 2 :]
+            response[:] = decay * response + (1.0 - decay) * self.temperature_ensemble_c[:, self.sensor_nodes]
 
     def assimilate(self, observations_c: np.ndarray) -> dict[str, float]:
         observations = np.asarray(observations_c, dtype=np.float64)
         if observations.shape != (self.sensor_nodes.size,):
             raise ValueError("observations must match the configured sensors")
         forecast = self.ensemble
-        predicted_observations = forecast[:, self.sensor_nodes]
+        predicted_observations = self.predicted_observation_ensemble_c
         state_mean = forecast.mean(axis=0)
         observation_mean = predicted_observations.mean(axis=0)
         state_anomalies = forecast - state_mean
@@ -182,6 +201,10 @@ class AugmentedTemperatureEnKF:
             augmented_localization = np.vstack(
                 [localization, np.ones((2, self.sensor_nodes.size))]
             )
+            if self.has_sensor_response:
+                augmented_localization = np.vstack(
+                    [augmented_localization, localization[self.sensor_nodes]]
+                )
             cross_covariance *= augmented_localization
         observation_covariance = (
             observation_anomalies.T @ observation_anomalies / denominator
@@ -217,11 +240,20 @@ def assimilate_trajectory(
     material_parameters: np.ndarray,
     config: EnKFConfig,
     seed: int,
+    *,
+    sensor_time_constant_s: float = 0.0,
+    time_step_s: float = 1.0,
 ) -> dict[str, np.ndarray]:
     states = np.asarray(states_c)
     controls = np.asarray(controls_c)
     if states.shape != (controls.size + 1, model.config.nx):
         raise ValueError("states must contain one more row than controls")
+    if sensor_time_constant_s < 0.0:
+        raise ValueError("sensor time constant cannot be negative")
+    if time_step_s <= 0.0:
+        raise ValueError("time step must be positive")
+    if config.sensor_response_time_constant_s > 0 and not np.isclose(time_step_s, material_parameters[-1]):
+        raise ValueError("observation and model time steps must agree")
     estimator = AugmentedTemperatureEnKF(
         model,
         material_parameters,
@@ -240,24 +272,32 @@ def assimilate_trajectory(
     emissivity_low = np.empty(controls.size)
     emissivity_high = np.empty(controls.size)
     innovations = np.empty(controls.size + 1)
+    sensor_response = states[0, estimator.sensor_nodes].astype(np.float64).copy()
+    response_decay = (
+        np.exp(-time_step_s / sensor_time_constant_s)
+        if sensor_time_constant_s > 0.0
+        else 0.0
+    )
+
+    def observe(index: int) -> np.ndarray:
+        nonlocal sensor_response
+        target = states[index, estimator.sensor_nodes]
+        sensor_response = response_decay * sensor_response + (1.0 - response_decay) * target
+        return sensor_response + observation_rng.normal(
+            0.0, config.measurement_noise_std_c, estimator.sensor_nodes.size
+        )
 
     def record_state(index: int) -> None:
         field = estimator.temperature_ensemble_c
         state_mean[index] = field.mean(axis=0)
         state_low[index], state_high[index] = np.quantile(field, [0.05, 0.95], axis=0)
 
-    initial_observations = states[0, estimator.sensor_nodes] + observation_rng.normal(
-        0.0, config.measurement_noise_std_c, estimator.sensor_nodes.size
-    )
+    initial_observations = observe(0)
     innovations[0] = estimator.assimilate(initial_observations)["innovation_rmse_c"]
     record_state(0)
     for step, control in enumerate(controls):
         estimator.predict(float(control))
-        observations = states[
-            step + 1, estimator.sensor_nodes
-        ] + observation_rng.normal(
-            0.0, config.measurement_noise_std_c, estimator.sensor_nodes.size
-        )
+        observations = observe(step + 1)
         innovations[step + 1] = estimator.assimilate(observations)["innovation_rmse_c"]
         record_state(step + 1)
         h_ensemble = estimator.convection_ensemble_w_m2k
@@ -317,6 +357,9 @@ def assimilation_metrics(
         "convection_mae_w_m2k": float(np.mean(np.abs(h_error))),
         "emissivity_mae": float(np.mean(np.abs(epsilon_error))),
         "state_90_coverage": float(np.mean(state_covered[1:, unobserved])),
+        "state_90_width_c": float(np.mean(
+            (estimate["state_high_90_c"] - estimate["state_low_90_c"])[1:, unobserved]
+        )),
         "convection_90_coverage": float(np.mean(h_covered)),
         "emissivity_90_coverage": float(np.mean(epsilon_covered)),
         "innovation_rmse_c": float(

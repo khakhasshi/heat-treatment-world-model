@@ -1,0 +1,11 @@
+{
+  "verified_utc": "2026-10-02T13:58:35.488897+00:00",
+  "figure": "three_dimensional_zoh_comparison.png",
+  "sha256": "019c7613c752728b1949119eba6de27fde5a436551db3bcd140b5f262cc4a0e5",
+  "dimensions_pixels": [
+    2445,
+    1653
+  ],
+  "visual_inspection": "All four panels, Chinese labels, units, legends, three seed dots and sample-standard-deviation bars are readable; no clipped text observed. Each grid is labeled as zero-order-hold actions.",
+  "statistical_display": "Bars are three-seed means; error bars are sample SD, not confidence intervals. Individual seed values are shown as points."
+}

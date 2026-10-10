@@ -1,0 +1,26 @@
+{
+  "created_at_utc": "2026-10-01T08:49:30.255467+00:00",
+  "sha256": {
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/dynamic_boundary_holdout_dataset.npz": "a79be46d68a1a38dba01fb1e89b4fadd2edc12a2653e051ed56f5604545bd0c2",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_cross_solver/cross_solver_dataset.npz": "d73c057a694bdd871ecbe7f29049939425575dd14b192fa3cf29ce82f52dfbfc",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_physics_weight_sweep/weight_0.pt": "2c54af214e2d93bf15de4acb049052fc85f744740cc0577701eb1a778ad31c04",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/seed_42/weight_0.pt": "eeec270cb6bc8c534fc86e57090a0ab4f6ca26a2a772c85e6e8d90e0b7dc729d",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_physics_weight_sweep/weight_0p001.pt": "73802b99e5f126eefc96f2aa314031e7e528a17758684674081b155fe7aea560",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/seed_42/weight_0p001.pt": "bd85c10a1e2822d6b7b1eab90df859eeeb6903ca608a38ea15ef2a787d5ac337",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_physics_weight_seed7/weight_0.pt": "6e05bb711740ab4b62de40880e01bb02d2d930c65cd4f5b87f981eaa5b6c1f25",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/seed_7/weight_0.pt": "65fc410ac88a1ff2484810ee87999b328c5ef5d40555536cc5042a717dfd71ac",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_physics_weight_seed7/weight_0p001.pt": "6767f59d19c9e93c5723c96cd885033daf69de3033ad9d1692241b54c2ccb734",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/seed_7/weight_0p001.pt": "0664185f9b29320165f42fb9e288009a9540d70bab30956d5f22ef375d56d105",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_physics_weight_seed123/weight_0.pt": "2ba0fb456a19b1c5d115c5ca44d1ec96efbe1e2e18375d3c29d2d5e2f6292a42",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/seed_123/weight_0.pt": "11fa5787b55f1454865d5a6525d584a4e56ff63229d43f4b29ad6fa86dc58034",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_physics_weight_seed123/weight_0p001.pt": "0123d10bf6cf1fb684386f23b0637e695d6667b12be4e0302cffacabf7f9ca1b",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/outputs/c45_effective_boundary/seed_123/weight_0p001.pt": "33ead3421158fd25c841eba79a762c31cc6c06d731194a7d9514ca70c5cf6cd1",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/fair_boundary_audit_cli.py": "eabd399088e4f7bf1bd932836630d68e1ea6db539d020607f7fc67cd65685a85",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/model.py": "5df5e5e1756b3dde8c3d66a35fadfa0ae0da7f51f08292d0c2b5c3bd328f576c",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/physics.py": "6d8eed47b9b3117d995d810f6388ddd0966cdcfc42377af84a3744c66c9b7dab",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/evaluate.py": "d144936dc83a941654f2d84d8632a9b1cd40f11202b60b0fd51c035a356189c9",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/simulator.py": "ba7f6f912f0b03728864d9e25d572fdf6e9f3c96deaedfd3de9379a760f61a70",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/materials.py": "f62bb4b771a38c7ff679c418bb585ebe86f43c5320dacf24673b0a47f33c113e",
+    "/Users/jiangjingzhe/Documents/ChatGPT/PINN/heat-treatment-world-model/src/heat_world_model/reference_solver.py": "f87d1838dcb157afd82bc3e1ea4b7d0670a20fe5c69cacc973b499826cbb2496"
+  }
+}

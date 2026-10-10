@@ -1,0 +1,37 @@
+{
+  "paused_at_utc": "2026-10-01T09:26:51.166443+00:00",
+  "reason": "User explicitly requested pausing all current experiment computation before leaving.",
+  "status": "completed",
+  "training_pid": null,
+  "process_state_verified": "Resumed training exited normally with code 0.",
+  "completed_models": 12,
+  "total_planned_models": 12,
+  "active_model": null,
+  "finished_studies": [
+    "fair_boundary_evaluation",
+    "fair_boundary_benchmark",
+    "scenario_success_statistics",
+    "sparse_control_600_episodes"
+  ],
+  "resume_policy": "Do not resume until the user explicitly asks. Verify PID command identity before sending SIGCONT; if process is gone, inspect saved protocol and artifacts before using the frozen runner resume path.",
+  "notes": [
+    "In-memory current epoch is retained while the machine and process stay alive.",
+    "Training caffeinate has been terminated; log tail has been terminated.",
+    "New paper source and intermediate builds exist; final PDF exports and new content freeze remain pending full 3D completion.",
+    "All 12 models completed after explicit resume; saved pause fields above retain the Oct 1 history. Final paper export and snapshot handled separately."
+  ],
+  "resumed_record": "three_dimensional/resume_record.json",
+  "original_paused_process_no_longer_exists": true,
+  "active_training_pid": null,
+  "resume_authorization": "User explicitly said 继续 on 2026-10-02.",
+  "completed_at_utc": "2026-10-02T14:01:49.246357+00:00",
+  "final_completed_models": 12,
+  "training_exit_code": 0,
+  "completion_validation": "three_dimensional/validation.json",
+  "paused_snapshot": {
+    "training_pid": 94213,
+    "process_state_verified": "Ts; CPU 0.0 percent",
+    "completed_models": 1,
+    "active_model": "base seed42 physics_constrained; last logged epoch35 of40"
+  }
+}
