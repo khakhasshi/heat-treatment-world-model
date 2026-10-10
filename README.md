@@ -68,11 +68,13 @@
 ## 代码与模型权重
 
 - 源代码仓库：<https://github.com/khakhasshi/heat-treatment-world-model>
-- 公开版本标签：`thesis-open-release-v1`
+- 初次公开版本标签：`thesis-open-release-v1`；本轮实验代码提交：[`1525ff4`](https://github.com/khakhasshi/heat-treatment-world-model/commit/1525ff41947218cf9b4e47b8360d394152c39285)
 - 模型权重：<https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model>
+- 本轮权重发布：[`697f56b`](https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model/commit/697f56bf0b752e01fc804b669e57c227575e1828)
 - 权重清单：[`docs/huggingface-weights-manifest.csv`](docs/huggingface-weights-manifest.csv)
+- 发布核验记录：[`docs/huggingface-publication-20261010.json`](docs/huggingface-publication-20261010.json)
 
-GitHub 仓库用于保存训练、评价、状态估计、控制与绘图代码，同时保存论文源文件和可直接核对的轻量实验结果。Hugging Face 发布包包含论文使用的 14 个正式检查点、模型卡和 SHA-256 清单。模型权重单独托管，避免二进制文件进入 Git 历史。两处发布内容使用同一文件清单和哈希值建立对应关系。
+GitHub 仓库用于保存训练、评价、状态估计、控制与绘图代码，同时保存论文源文件和可直接核对的轻量实验结果。Hugging Face 发布包包含最新版论文使用的 24 个正式检查点、模型卡和 SHA-256 清单：12 个一维检查点及 12 个采用零阶保持控制输入的三维检查点。三维模型覆盖 9×7×5 和 17×13×9 网格、三个随机种子及两种训练方法，位于 `three_dimensional/zoh/`。旧版 2 个三维检查点仍保留在原路径，原始 14 项清单存档于 [`docs/huggingface-weights-manifest-20260904.csv`](docs/huggingface-weights-manifest-20260904.csv)，在 Hugging Face 上对应 `legacy/weights-manifest-20260904.csv`。模型权重单独托管，避免二进制文件进入 Git 历史。两处发布内容使用同一文件清单和哈希值建立对应关系。
 
 ## 环境安装
 

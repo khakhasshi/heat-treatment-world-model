@@ -10,6 +10,9 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = PROJECT_ROOT / "docs" / "huggingface-weights-manifest.csv"
+LEGACY_MANIFEST_PATH = (
+    PROJECT_ROOT / "docs" / "huggingface-weights-manifest-20260904.csv"
+)
 MODEL_CARD_PATH = PROJECT_ROOT / "docs" / "huggingface-model-card.md"
 NOTICE_PATH = PROJECT_ROOT / "ACADEMIC_USE_NOTICE.md"
 
@@ -22,8 +25,8 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def validated_entries() -> list[dict[str, str]]:
-    with MANIFEST_PATH.open(newline="", encoding="utf-8") as handle:
+def validated_entries(path: Path = MANIFEST_PATH) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as handle:
         entries = list(csv.DictReader(handle))
 
     if not entries:
@@ -57,7 +60,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--private",
         action="store_true",
-        help="Create or update a private model repository instead of a public one.",
+        help="Create a private model repository; an existing repository keeps its visibility.",
     )
     parser.add_argument(
         "--dry-run",
@@ -70,8 +73,22 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     entries = validated_entries()
-    total_bytes = sum(int(entry["size_bytes"]) for entry in entries)
-    print(f"Validated {len(entries)} checkpoints ({total_bytes} bytes).")
+    legacy_entries = validated_entries(LEGACY_MANIFEST_PATH)
+    upload_entries = {entry["repository_path"]: entry for entry in entries}
+    for entry in legacy_entries:
+        existing = upload_entries.get(entry["repository_path"])
+        if existing is not None and (
+            existing["sha256"] != entry["sha256"]
+            or existing["size_bytes"] != entry["size_bytes"]
+        ):
+            raise ValueError(f"Conflicting historical checkpoint: {entry['repository_path']}")
+        upload_entries.setdefault(entry["repository_path"], entry)
+    total_bytes = sum(int(entry["size_bytes"]) for entry in upload_entries.values())
+    print(
+        f"Validated {len(entries)} current and "
+        f"{len(upload_entries) - len(entries)} historical checkpoints ({total_bytes} bytes).",
+        flush=True,
+    )
     if args.dry_run:
         return
 
@@ -91,10 +108,15 @@ def main() -> None:
         private=args.private,
         exist_ok=True,
     )
+    parent_commit = api.model_info(args.repo_id).sha
     operations = [
         CommitOperationAdd(path_in_repo="README.md", path_or_fileobj=MODEL_CARD_PATH),
         CommitOperationAdd(
             path_in_repo="weights-manifest.csv", path_or_fileobj=MANIFEST_PATH
+        ),
+        CommitOperationAdd(
+            path_in_repo="legacy/weights-manifest-20260904.csv",
+            path_or_fileobj=LEGACY_MANIFEST_PATH,
         ),
         CommitOperationAdd(
             path_in_repo="ACADEMIC_USE_NOTICE.md", path_or_fileobj=NOTICE_PATH
@@ -105,13 +127,14 @@ def main() -> None:
             path_in_repo=entry["repository_path"],
             path_or_fileobj=PROJECT_ROOT / entry["source_path"],
         )
-        for entry in entries
+        for entry in upload_entries.values()
     )
     commit = api.create_commit(
         repo_id=args.repo_id,
         repo_type="model",
         operations=operations,
-        commit_message="Publish frozen thesis model checkpoints",
+        commit_message="Publish validated ZOH checkpoints and revised thesis model card",
+        parent_commit=parent_commit,
     )
     print(commit.commit_url)
 

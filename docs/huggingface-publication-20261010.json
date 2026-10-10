@@ -1,0 +1,233 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-10T09:43:11.990847+00:00",
+  "repository": "JIANGJINGZHE/heat-treatment-world-model",
+  "repository_url": "https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model",
+  "previous_revision": "cd67b7c4066a93cc14309974eb652874f45200f4",
+  "revision": "697f56bf0b752e01fc804b669e57c227575e1828",
+  "commit_url": "https://huggingface.co/JIANGJINGZHE/heat-treatment-world-model/commit/697f56bf0b752e01fc804b669e57c227575e1828",
+  "experiment_code_commit": "1525ff41947218cf9b4e47b8360d394152c39285",
+  "current_checkpoint_count": 24,
+  "historical_only_checkpoint_count": 2,
+  "added_checkpoint_count": 12,
+  "added_checkpoint_bytes": 2572428,
+  "existing_14_checkpoints_unchanged": true,
+  "repository_visibility_unchanged": true,
+  "metadata_checks": [
+    {
+      "repository_path": "one_dimensional/standard/seed_42/data_only.pt",
+      "size_bytes": 185161,
+      "sha256": "2c54af214e2d93bf15de4acb049052fc85f744740cc0577701eb1a778ad31c04"
+    },
+    {
+      "repository_path": "one_dimensional/standard/seed_42/physics_constrained.pt",
+      "size_bytes": 185249,
+      "sha256": "73802b99e5f126eefc96f2aa314031e7e528a17758684674081b155fe7aea560"
+    },
+    {
+      "repository_path": "one_dimensional/standard/seed_7/data_only.pt",
+      "size_bytes": 185161,
+      "sha256": "6e05bb711740ab4b62de40880e01bb02d2d930c65cd4f5b87f981eaa5b6c1f25"
+    },
+    {
+      "repository_path": "one_dimensional/standard/seed_7/physics_constrained.pt",
+      "size_bytes": 185249,
+      "sha256": "6767f59d19c9e93c5723c96cd885033daf69de3033ad9d1692241b54c2ccb734"
+    },
+    {
+      "repository_path": "one_dimensional/standard/seed_123/data_only.pt",
+      "size_bytes": 185161,
+      "sha256": "2ba0fb456a19b1c5d115c5ca44d1ec96efbe1e2e18375d3c29d2d5e2f6292a42"
+    },
+    {
+      "repository_path": "one_dimensional/standard/seed_123/physics_constrained.pt",
+      "size_bytes": 185249,
+      "sha256": "0123d10bf6cf1fb684386f23b0637e695d6667b12be4e0302cffacabf7f9ca1b"
+    },
+    {
+      "repository_path": "one_dimensional/effective_boundary/seed_42/data_only.pt",
+      "size_bytes": 184713,
+      "sha256": "eeec270cb6bc8c534fc86e57090a0ab4f6ca26a2a772c85e6e8d90e0b7dc729d"
+    },
+    {
+      "repository_path": "one_dimensional/effective_boundary/seed_42/physics_constrained.pt",
+      "size_bytes": 184801,
+      "sha256": "bd85c10a1e2822d6b7b1eab90df859eeeb6903ca608a38ea15ef2a787d5ac337"
+    },
+    {
+      "repository_path": "one_dimensional/effective_boundary/seed_7/data_only.pt",
+      "size_bytes": 184713,
+      "sha256": "65fc410ac88a1ff2484810ee87999b328c5ef5d40555536cc5042a717dfd71ac"
+    },
+    {
+      "repository_path": "one_dimensional/effective_boundary/seed_7/physics_constrained.pt",
+      "size_bytes": 184801,
+      "sha256": "0664185f9b29320165f42fb9e288009a9540d70bab30956d5f22ef375d56d105"
+    },
+    {
+      "repository_path": "one_dimensional/effective_boundary/seed_123/data_only.pt",
+      "size_bytes": 184713,
+      "sha256": "11fa5787b55f1454865d5a6525d584a4e56ff63229d43f4b29ad6fa86dc58034"
+    },
+    {
+      "repository_path": "one_dimensional/effective_boundary/seed_123/physics_constrained.pt",
+      "size_bytes": 184801,
+      "sha256": "33ead3421158fd25c841eba79a762c31cc6c06d731194a7d9514ca70c5cf6cd1"
+    },
+    {
+      "repository_path": "three_dimensional/17x13x9/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "02a8adb52357ca5be2d000035f8fd61cf1dfed9c3454d2edac10d90f42b2b9c9"
+    },
+    {
+      "repository_path": "three_dimensional/17x13x9/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "797e7634cc89566752d6a118735f699712489eb198b493f259ed6d13895f5900"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_42/data_only.pt",
+      "size_bytes": 197462,
+      "sha256": "d2424cc8bf4324638a62f7cd7f3c1cb38c3ac1c1734ce01477e9155d40cc3d86"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_42/physics_constrained.pt",
+      "size_bytes": 197772,
+      "sha256": "411004ce273bea983ce7e1def15e650e99e941b9fb2a9de19d4004632d3f233a"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_7/data_only.pt",
+      "size_bytes": 197462,
+      "sha256": "af08467555c427c6a67a312c6614c64ead12d30cd91b695b95e5d6d95446fbe2"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_7/physics_constrained.pt",
+      "size_bytes": 197772,
+      "sha256": "bbceec69eccfd8ff95781bc5c3aa55b37ab87b69c774f136d9da08c71ea09c84"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_123/data_only.pt",
+      "size_bytes": 197462,
+      "sha256": "a5ba751c53d445c831ec8a7f1d3d6ece27e87ba396f4b07bb28fb1c923489787"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_123/physics_constrained.pt",
+      "size_bytes": 197772,
+      "sha256": "8b813b419e732b4dd0ba34f3490c2489392c6b31dbde7de326aa5e02cabd4d93"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_42/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "43d193f747a88308b3c8924ee607e6fdebe329a35fb7e785cae400f9ac431e9f"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_42/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "3377e0f7254cbab09b22e9f2f9b2ea9f48fb63dc9552a7bba4dfafea8e327943"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_7/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "4651a8a384f1ec9b72671593cd410e6d7002500caa3a1130a3c6301517dacd72"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_7/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "3a0e39aca005152f4abc6201aff39d20d1323a3430607a6f65fad5d309108042"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_123/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "f377b4c824b2bd23fb636f5e514b0bbffe54f668d11529a22d1bfd3d18abc448"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_123/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "b95e717a2f0141f7017cccd0e9ae2c198689cfb88550c5d1a56fcb4b2f868bf7"
+    }
+  ],
+  "publication_document_checks": [
+    {
+      "repository_path": "README.md",
+      "sha256": "0da57e5bf21e4ad8b96609ae7dbdeed4bcd64be12b4dda05c2316592eae4934c",
+      "byte_identical": true
+    },
+    {
+      "repository_path": "weights-manifest.csv",
+      "sha256": "094ffc9efa5b10c7f37ed47473b20735408f50f78c255fb4dd345074bc3bfd7b",
+      "byte_identical": true
+    },
+    {
+      "repository_path": "legacy/weights-manifest-20260904.csv",
+      "sha256": "7de36f8bf895478fe8f3cf0027a9184e7cd803fa32e1d9e584a8c894477a9d0a",
+      "byte_identical": true
+    },
+    {
+      "repository_path": "ACADEMIC_USE_NOTICE.md",
+      "sha256": "74499b5a0b4e9c79e19fe3991518b5b0657f769b47899a418d0d232bc766a7e0",
+      "byte_identical": true
+    }
+  ],
+  "downloaded_new_checkpoint_checks": [
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_42/data_only.pt",
+      "size_bytes": 197462,
+      "sha256": "d2424cc8bf4324638a62f7cd7f3c1cb38c3ac1c1734ce01477e9155d40cc3d86"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_42/physics_constrained.pt",
+      "size_bytes": 197772,
+      "sha256": "411004ce273bea983ce7e1def15e650e99e941b9fb2a9de19d4004632d3f233a"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_7/data_only.pt",
+      "size_bytes": 197462,
+      "sha256": "af08467555c427c6a67a312c6614c64ead12d30cd91b695b95e5d6d95446fbe2"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_7/physics_constrained.pt",
+      "size_bytes": 197772,
+      "sha256": "bbceec69eccfd8ff95781bc5c3aa55b37ab87b69c774f136d9da08c71ea09c84"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_123/data_only.pt",
+      "size_bytes": 197462,
+      "sha256": "a5ba751c53d445c831ec8a7f1d3d6ece27e87ba396f4b07bb28fb1c923489787"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/9x7x5/seed_123/physics_constrained.pt",
+      "size_bytes": 197772,
+      "sha256": "8b813b419e732b4dd0ba34f3490c2489392c6b31dbde7de326aa5e02cabd4d93"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_42/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "43d193f747a88308b3c8924ee607e6fdebe329a35fb7e785cae400f9ac431e9f"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_42/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "3377e0f7254cbab09b22e9f2f9b2ea9f48fb63dc9552a7bba4dfafea8e327943"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_7/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "4651a8a384f1ec9b72671593cd410e6d7002500caa3a1130a3c6301517dacd72"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_7/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "3a0e39aca005152f4abc6201aff39d20d1323a3430607a6f65fad5d309108042"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_123/data_only.pt",
+      "size_bytes": 230934,
+      "sha256": "f377b4c824b2bd23fb636f5e514b0bbffe54f668d11529a22d1bfd3d18abc448"
+    },
+    {
+      "repository_path": "three_dimensional/zoh/17x13x9/seed_123/physics_constrained.pt",
+      "size_bytes": 231308,
+      "sha256": "b95e717a2f0141f7017cccd0e9ae2c198689cfb88550c5d1a56fcb4b2f868bf7"
+    }
+  ],
+  "verification_scope": "SHA-256 and size verification against frozen local checkpoints, remote LFS metadata, and independent downloads of all 12 new weights. No training or PyTorch inference was run."
+}
